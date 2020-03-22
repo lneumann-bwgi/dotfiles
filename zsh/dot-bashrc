@@ -1,0 +1,37 @@
+[[ $- != *i* ]] && return
+
+export TERM=rxvt-unicode-256color
+export PS1="\[\e[33m\][\[\e[m\]\[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\]\[\e[31m\] -> \[\e[m\]\[\e[37m\]\w\[\e[m\]\[\e[33m\]]\[\e[m\]\$ "
+
+# Load aliases and shortcuts if existent.
+[ -f $HOME/.zsh_functions ] && source $HOME/.zsh_functions
+[ -f $HOME/.zsh_aliases ] && source $HOME/.zsh_aliases
+[ -f $HOME/.env_cluster ] && source $HOME/.env_cluster
+[ -f $HOME/.env_pc ] && source $HOME/.env_pc
+
+# Keybord repeat
+xset -r 43
+xset -r 44
+xset -r 45
+xset -r 46
+xset r rate 180 50
+
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.bash_history
+export HISTIGNORE="ls:cd:vi:vim:nvim"
+export HISTTIMEFORMAT="%h %d %H:%M:%S "
+
+stty -ixon
+shopt -s histappend
+shopt -s checkwinsize
+shopt -s globstar
+
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi

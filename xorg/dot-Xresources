@@ -1,0 +1,104 @@
+! Xft settings
+
+Xft.dpi: 96
+Xft.antialias: true
+Xft.rgba: rgb
+Xft.hinting: true
+Xft.hintstyle: hintfull
+
+! Rofi
+
+rofi.font: hack 12
+rofi.padding: 20
+rofi.line-padding: 2
+rofi.color-enabled: true
+rofi.hide-scrollbar: true
+rofi.separator-style: solid
+rofi.color-window: #282828, #1d2021, #282828
+rofi.color-normal: #282828, #ebdbb2, #282828, #282828, #458588
+
+! URxvt settings
+
+URxvt.depth: 32
+URxvt.fading: 12
+URxvt.intensityStyles: false
+URxvt.internalBorder: 8
+URxvt.letterSpace: -1
+URxvt.lineSpace: 0
+URxvt.saveLines: 200
+URxvt.scrolWthBuffer: true
+URxvt.scrollBar: false
+URxvt.termName: rxvt-unicode-256color
+
+URxvt.font: xft:hack:pixelsize=16:antialias=true:hinting=true
+URxvt.boldFont: xft:hack:bold:pixelsize=16:antialias=true:hinting=true
+
+! Colored man pages
+
+URxvt.colorIT:      #87af5f
+URxvt.colorBD:      #d7d7d7
+URxvt.colorUL:      #87afd7
+
+! Perl extensions
+
+URxvt.perl-ext:default,clipboard,font-size,url-select,keyboard-select
+URxvt.perl-ext-common:default,clipboard,font-size,url-select,keyboard-select
+
+URxvt.clipboard.autocopy: true
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-v: perl:clipboard:paste
+
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: /usr/bin/xdg-open
+URxvt.url-select.underline: true
+
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keysym.M-s: perl:keyboard-select:search
+URxvt.keyboard-select.clipboard: true
+
+! Seoul256 theme
+
+URxvt.background: [95]#3a3a3a
+URxvt.foreground: [95]#d0d0d0
+
+URxvt.cursorColor: #d0d0d0
+URxvt.cursorColor2: #3a3a3a
+
+URxvt.color0: #4e4e4e
+URxvt.color1: #d68787
+URxvt.color2: #5f865f
+URxvt.color3: #d8af5f
+URxvt.color4: #85add4
+URxvt.color5: #d7afaf
+URxvt.color6: #87afaf
+URxvt.color7: #d0d0d0
+URxvt.color8: #626262
+URxvt.color9: #d75f87
+URxvt.color10: #87af87
+URxvt.color11: #ffd787
+URxvt.color12: #add4fb
+URxvt.color13: #ffafaf
+URxvt.color14: #87d7d7
+URxvt.color15: #e4e4e4
+
+! Deus theme
+
+!URxvt.background: [90]#2c323b
+!URxvt.foreground: [90]#ebdbb2
+
+!URxvt.color0:  #000000
+!URxvt.color1:  #d54e53
+!URxvt.color2:  #98c379
+!URxvt.color3:  #e5c07b
+!URxvt.color4:  #4c6886
+!URxvt.color5:  #c678dd
+!URxvt.color6:  #83a598
+!URxvt.color7:  #eaeaea
+!URxvt.color8:  #666666
+!URxvt.color9:  #ec3e45
+!URxvt.color10: #90c966
+!URxvt.color11: #d47f21
+!URxvt.color12: #396886
+!URxvt.color13: #c858e9
+!URxvt.color14: #70c0ba
+!URxvt.color15: #eaeaea

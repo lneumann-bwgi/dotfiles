@@ -1,0 +1,34 @@
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -v'
+alias mkdir='mkdir -pv'
+
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+
+alias ls=' ls -hN --group-directories-first --color=auto'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+alias pm='sudo pacman'
+alias py='python'
+alias ipy='ipython'
+
+alias pytohn='python'
+alias ipytohn='ipython'
+
+alias gs='git status'
+alias gd='git diff'
+alias gh='history ~/.zsh_history | fzf --tac'
+
+alias kahuna='ssh -YC neumann@kahuna.iqm.unicamp.br'
+alias galileu='ssh -YC neumann@177.220.13.33'
+alias unicamp='ssh -p 2022 lucas_newmann@rj.iqm.unicamp.br'
+
+alias vi='nvim'
+alias vu='nvim'
+alias vim='nvim'
+alias vsp='nvim -O'
+alias vdiff='nvim -d'
+alias fvim='nvim -n -u NONE -i NONE -N'

@@ -1,0 +1,110 @@
+# Set terminal
+export TERM=rxvt-unicode-256color
+
+# Enable colors and change prompt:
+autoload -U colors && colors
+BASE_PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[yellow]%}@%{$fg[yellow]%}%M %b%{$fg[magenta]%}%(3~|.../%2~|%~)%{$fg[red]%}%B]%b"
+PS1="$BASE_PS1%{$fg[blue]%}[I]%{$reset_color%}$%b "
+
+# Load aliases and shortcuts if existent.
+[ -f $HOME/.zsh_functions ] && source $HOME/.zsh_functions
+[ -f $HOME/.zsh_aliases ] && source $HOME/.zsh_aliases
+[ -f $HOME/.env_cluster ] && source $HOME/.env_cluster
+[ -f $HOME/.env_pc ] && source $HOME/.env_pc
+
+# Keyboard repeat
+xset -r 43
+xset -r 44
+xset -r 45
+xset -r 46
+xset r rate 180 50
+
+# History in cache directory
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+SAVEHIST=10000
+HISTFILE=~/.zsh_history
+export HISTIGNORE="ls:cd:vi:vim:nvim"
+export HISTTIMEFORMAT="%h %d %H:%M:%S "
+
+# Git branch in prompt
+autoload -Uz vcs_info
+precmd_vcs_info() { vcs_info }
+precmd_functions+=( precmd_vcs_info )
+setopt prompt_subst
+RPROMPT=%F{red}\$vcs_info_msg_0_
+zstyle ':vcs_info:git:*' formats '%b'
+
+# Basic tab complete
+autoload -U compinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit
+_comp_options+=(globdots)
+
+# History search
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
+
+# vi mode
+bindkey -v
+export KEYTIMEOUT=1
+
+bindkey -M vicmd H beginning-of-line
+bindkey -M vicmd L end-of-line
+
+# Use vim keys in tab complete menu
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
+
+# Change PS1 for different vi modes
+function zle-keymap-select {
+  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+    echo -ne '\e[1 q'
+    PS1="$BASE_PS1%{$fg[green]%}%B[N]%b%{$reset_color%}$%b "
+    zle reset-prompt
+  elif [[ ${KEYMAP} == main ]] ||
+       [[ ${KEYMAP} == viins ]] ||
+       [[ ${KEYMAP} = '' ]] ||
+       [[ $1 = 'beam' ]]; then
+    echo -ne '\e[1 q'
+    PS1="$BASE_PS1%{$fg[blue]%}%B[I]%b%{$reset_color%}$%b "
+    zle reset-prompt
+  fi
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins
+}
+zle -N zle-line-init
+
+# Use beam shape cursor on startup.
+echo -ne '\e[5 q'
+# Use beam shape cursor for each new prompt.
+preexec() { echo -ne '\e[5 q' ;}
+
+# Change in quotes (vim like)
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+  for c in {a,i}{\',\",\`}; do
+    bindkey -M $m $c select-quoted
+  done
+done
+
+# ci{, ci(, di{ etc..
+autoload -U select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+  for c in {a,i}${(s..)^:-"()[]{}<>"}; do
+    bindkey -M $m $c select-bracketed
+  done
+done
+
+# Ranger file navigation
+bindkey -s '^r' 'rangercd\n'
+
+# Load zsh-syntax-highlighting; should be last.
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

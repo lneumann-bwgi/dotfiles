@@ -1,0 +1,77 @@
+cgalileu() {
+    scp -r "neumann@177.220.13.33:/home/neumann/$1" "."
+}
+tgalileu() {
+    scp -r "$1" "neumann@177.220.13.33:/home/neumann/"
+}
+
+ckahuna() {
+    scp -r "neumann@kahuna.iqm.unicamp.br:/home/neumann/$1" "."
+}
+tkahuna() {
+    scp -r "$1" "neumann@kahuna.iqm.unicamp.br:/home/neumann/$2"
+}
+
+cunicamp() {
+    scp -r -P 2022 "lucas_newmann@rj.iqm.unicamp.br/$1" "."
+}
+cunicamp() {
+    scp -r -P 2022 "$1" "lucas_newmann@rj.iqm.unicamp.br/$2"
+}
+
+
+ex () {
+    if [ -f $1 ]; then
+        case $1 in
+            *.tar.bz2)   tar xjf $1   ;;
+            *.tar.gz)    tar xzf $1   ;;
+            *.bz2)       bunzip2 $1   ;;
+            *.rar)       unrar x $1     ;;
+            *.gz)        gunzip $1    ;;
+            *.tar)       tar xf $1    ;;
+            *.tbz2)      tar xjf $1   ;;
+            *.tgz)       tar xzf $1   ;;
+            *.zip)       unzip $1     ;;
+            *.Z)         uncompress $1;;
+            *.7z)        7z x $1      ;;
+            *)           echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+
+getdoi() {
+    if [ -f "$1" ]; then
+        doi=$(pdfinfo "$1" | grep -io "doi:.*") ||
+        doi=$(pdftotext "$1" 2>/dev/null - | grep -io "doi:.*" -m 1) ||
+        exit 1
+    else
+        doi="$1"
+    fi
+    echo $doi
+}
+
+
+getbib() {
+    if [ -f "$1" ]; then
+        doi=$(pdfinfo "$1" | grep -io "doi:.*") ||
+        doi=$(pdftotext "$1" 2>/dev/null - | grep -io "doi:.*" -m 1) ||
+        exit 1
+    else
+        doi="$1"
+    fi
+    curl -s "http:/api.crossref.org/works/${doi#"DOI: "}/transform/application/x-bibtex" -w "\\n"
+}
+
+
+rangercd () {
+    tmp="$(mktemp)"
+    ranger --choosedir="$tmp" "$@"
+    if [ -f "$tmp" ]; then
+        dir="$(cat "$tmp")"
+        rm -f "$tmp" &> /dev/null
+        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
+    fi
+}

@@ -1,0 +1,113 @@
+# set modifier
+set $super mod4
+set $alt mod1
+
+# set gaps
+gaps inner 6
+gaps outer 12
+
+for_window [class=".*"] border pixel 6
+for_window [class="URxvt"] border pixel 4
+for_window [class="firefox"] border pixel 2
+
+# set font
+font pango: Hack 12
+
+# no floating windows
+focus_follows_mouse no
+no_focus [window_role="pop-up"]
+popup_during_fullscreen smart
+
+# autostart
+exec --no-startup-id xrdb ~/.Xresources
+exec --no-startup-id setxkbmap -model thinkpad -layout br -variant abnt
+exec --no-startup-id xmodmap ~/.Xmodmap
+exec --no-startup-id picom -b
+exec --no-startup-id unclutter
+exec_always --no-startup-id sxhkd
+exec_always --no-startup-id feh --randomize --bg-fill ~/dropbox/wallpapers/
+
+# common apps keybinds
+bindsym $super+f fullscreen toggle
+bindsym $super+q kill
+bindsym $super+s layout toggle split
+bindsym $super+t layout tabbed
+
+bindsym $super+shift+r restart
+bindsym $super+shift+q exec i3lock -u -c 000000
+
+# change focus
+bindsym $super+h focus left
+bindsym $super+j focus down
+bindsym $super+k focus up
+bindsym $super+l focus right
+
+# move focused window
+bindsym $super+shift+h move left
+bindsym $super+shift+j move down
+bindsym $super+shift+k move up
+bindsym $super+shift+l move right
+
+# split screen mode
+bindsym $super+Up split v
+bindsym $super+Down split v
+bindsym $super+Left split h
+bindsym $super+Right split h
+
+# switch to workspace
+bindsym $super+1 workspace 1
+bindsym $super+2 workspace 2
+bindsym $super+3 workspace 3
+bindsym $super+4 workspace 4
+bindsym $super+5 workspace 5
+bindsym $super+6 workspace 6
+bindsym $super+7 workspace 7
+bindsym $super+8 workspace 8
+
+# move focused container to workspace
+bindsym $super+shift+1 move container to workspace 1
+bindsym $super+shift+2 move container to workspace 2
+bindsym $super+shift+3 move container to workspace 3
+bindsym $super+shift+4 move container to workspace 4
+bindsym $super+shift+5 move container to workspace 5
+bindsym $super+shift+6 move container to workspace 6
+bindsym $super+shift+7 move container to workspace 7
+bindsym $super+shift+8 move container to workspace 8
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym Down resize shrink height 5 px or 5 ppt
+        bindsym Left resize grow width 5 px or 5 ppt
+        bindsym Right resize shrink width 5 px or 5 ppt
+        bindsym Up resize grow height 5 px or 5 ppt
+
+        bindsym Escape mode "default"
+        bindsym Return mode "default"
+        bindsym $alr+r mode "default"
+}
+bindsym $alt+r mode "resize"
+
+# i3status bar
+bar {
+    font pango: Hack 10
+    status_command i3status
+    position top
+    colors {
+        background #2F343F
+        statusline #F2F3F4
+        separator  #B2BEB5
+
+        # colour of border, background, and text
+        focused_workspace       #2F343F #E52B50 #F2F3F4
+        active_workspace        #2F343F #2F343F #F2F3F4
+        inactive_workspace      #2F343F #2F343F #F2F3F4
+        urgent_workspacei       #2F343F #E52B50 #F2F3F4
+    }
+}
+# colour of border, background, text, indicator, and child_border
+client.focused              #2F343F #E52B50 #F2F3F4 #FF6633 #E52B50
+client.focused_inactive     #2F343F #2F343F #F2F3F4 #B2BEB5 #B2BEB5
+client.unfocused            #2F343F #2F343F #F2F3F4 #B2BEB5 #B2BEB5
+client.urgent               #2F343F #E52B50 #F2F3F4 #B2BEB5 #B2BEB5
+client.placeholder          #2F343F #2F343F #F2F3F4 #B2BEB5 #B2BEB5
+client.background           #2f343f

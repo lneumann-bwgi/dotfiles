@@ -27,6 +27,8 @@ HISTFILE=~/.zsh_history
 export HISTIGNORE="ls:cd:vi:vim:nvim"
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
 
+stty -ixon
+
 # Git branch in prompt
 autoload -Uz vcs_info
 precmd_vcs_info() { vcs_info }
@@ -61,22 +63,22 @@ bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Change PS1 for different vi modes
 function zle-keymap-select {
-  if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
-    echo -ne '\e[1 q'
-    PS1="$BASE_PS1%{$fg[green]%}%B[N]%b%{$reset_color%}$%b "
-    zle reset-prompt
-  elif [[ ${KEYMAP} == main ]] ||
-       [[ ${KEYMAP} == viins ]] ||
-       [[ ${KEYMAP} = '' ]] ||
-       [[ $1 = 'beam' ]]; then
-    echo -ne '\e[1 q'
-    PS1="$BASE_PS1%{$fg[blue]%}%B[I]%b%{$reset_color%}$%b "
-    zle reset-prompt
-  fi
+    if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+        echo -ne '\e[1 q'
+        PS1="$BASE_PS1%{$fg[green]%}%B[N]%b%{$reset_color%}$%b "
+        zle reset-prompt
+    elif [[ ${KEYMAP} == main ]] ||
+        [[ ${KEYMAP} == viins ]] ||
+        [[ ${KEYMAP} = '' ]] ||
+        [[ $1 = 'beam' ]]; then
+            echo -ne '\e[1 q'
+            PS1="$BASE_PS1%{$fg[blue]%}%B[I]%b%{$reset_color%}$%b "
+            zle reset-prompt
+    fi
 }
 zle -N zle-keymap-select
 zle-line-init() {
-    zle -K viins
+zle -K viins
 }
 zle -N zle-line-init
 
@@ -89,18 +91,18 @@ preexec() { echo -ne '\e[5 q' ;}
 autoload -U select-quoted
 zle -N select-quoted
 for m in visual viopp; do
-  for c in {a,i}{\',\",\`}; do
-    bindkey -M $m $c select-quoted
-  done
+    for c in {a,i}{\',\",\`}; do
+        bindkey -M $m $c select-quoted
+    done
 done
 
 # ci{, ci(, di{ etc..
 autoload -U select-bracketed
 zle -N select-bracketed
 for m in visual viopp; do
-  for c in {a,i}${(s..)^:-"()[]{}<>"}; do
-    bindkey -M $m $c select-bracketed
-  done
+    for c in {a,i}${(s..)^:-"()[]{}<>"}; do
+        bindkey -M $m $c select-bracketed
+    done
 done
 
 # Ranger file navigation

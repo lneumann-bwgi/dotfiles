@@ -12,6 +12,8 @@ super + n
     newsboat
 super + m
     urxvt -e spt
+super + p
+    urxvt -e gone
 super + r
     urxvt -e ranger
 

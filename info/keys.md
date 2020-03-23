@@ -5,13 +5,13 @@
 
 ## Ctrl
 
+> C + c       kill process
+> C + d       kill terminal
+> C + l       clear
+> C + n       next history
+> C + p       prev history
 > C + r       rangercd
 > C + u       clear line
-> C + p       prev history
-> C + n       next history
-> C + d       kill terminal
-> C + c       kill process
-> C + l       clear
 
 ## Alt
 
@@ -46,6 +46,7 @@
 > W + l       focus (i3wm)
 > W + m       spotify (sxhkd)
 > W + n       newsboat (sxhkd)
+> W + p       pomodoro (sxhkd)
 > W + q       quit (i3wm)
 > W + r       ranger (sxhkd)
 > W + s       split mode (i3wm)

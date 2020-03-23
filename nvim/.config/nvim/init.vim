@@ -23,25 +23,23 @@
     " install vim-plug
     if empty(glob('~/.vim/autoload/plug.vim'))
         silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+                    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
-    " neovim
+    " for neovim
     if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
         silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
-            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+                    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
         autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
     endif
 
     call plug#begin('~/.vim/plugged')
 
-    " Plug 'rhysd/vim-grammarous' # needs Java8+
-
+    Plug 'Chiel92/vim-autoformat'
     Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
     Plug 'Yggdroot/indentLine'
-    Plug 'ambv/black', { 'on': 'Black' }
     Plug 'dense-analysis/ale'
-    Plug 'godlygeek/tabular', { 'on' : 'Tabularize' }
+    Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
     Plug 'itchyny/lightline.vim'
     Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
     Plug 'luochen1990/rainbow'
@@ -50,6 +48,7 @@
     Plug 'preservim/nerdtree'
     Plug 'reedes/vim-wordy', { 'on': 'Wordy' }
     Plug 'rhysd/clever-f.vim'
+    " Plug 'rhysd/vim-grammarous' # needs Java8+
     Plug 'ron89/thesaurus_query.vim', { 'on': 'Goyo' }
     Plug 'sheerun/vim-polyglot'
     Plug 'terryma/vim-smooth-scroll'
@@ -57,7 +56,7 @@
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
 
-" Color schemes
+    " Color schemes
     Plug 'joshdick/onedark.vim'
     Plug 'junegunn/seoul256.vim'
     Plug 'morhetz/gruvbox'
@@ -68,11 +67,7 @@
 
 " COLOR  {{{
 
-    " if has('termguicolors')
-    "     set termguicolors
-    " endif
-
-    " workaround for urxvt
+    " URxvt doesn't support termguicolors
     set t_Co=256
 
     set background=dark
@@ -83,7 +78,7 @@
     let g:lightline = {'colorscheme' : 'seoul256'}
 "}}}
 
-" SET DEFAULTS {{{
+    " SET DEFAULTS {{{
 
     filetype plugin indent on
 
@@ -91,7 +86,7 @@
     set backspace=indent,eol,start
     set cursorline
     set encoding=utf8
-    set foldcolumn=2
+    " set foldcolumn=2
     set foldlevel=99
     set foldmethod=indent
     set hlsearch
@@ -112,16 +107,16 @@
     set undolevels=100
     set virtualedit=block
 
-" No Swap file
+    " No Swap file
     set noswapfile
     set nobackup
     set nowb
 
-" Go to normal mode quicker
+    " Go to normal mode quicker
     set ttimeout
     set ttimeoutlen=100
 
-" Following python.org
+    " Following python.org
     syntax on
     set encoding=utf-8
     set expandtab
@@ -132,38 +127,38 @@
 
     let python_highlight_all=1
 
-" Provides tab-completion for all file-related tasks
+    " Provides tab-completion for all file-related tasks
     set path+=**
     set wildmenu
+    set wildmode=list:longest,full
+    set wildignore=*.o,*.jpg,*.png,*.gz,*.zip
 "}}}
 
 " KEY MAPS {{{
 
-    let mapleader=','
+    let mapleader=' '
 
-" Better
+    " Better
     nnoremap Y y$
     nnoremap H ^
     nnoremap L g_
     vnoremap H ^
     vnoremap L g_
-
-    " substituted by Smooth Scroll
-    " nnoremap <C-d> <C-d>zz
-    " nnoremap <C-u> <C-u>zz
-
-    " redo
     nnoremap U <C-r>
-    " match ( [ {
-    nnoremap <Tab> v%
-    nnoremap <S-Tab> %
-    " save (similar to ZZ)
+
+    " Save (similar to ZZ)
     nnoremap ZS :w<CR>
-    " visual selection in fold
+
+    " Visual selection in fold
     nnoremap viz v[zo]z$
-    " visual selection in last modified object
+
+    " Visual selection in last modified object
     nnoremap gV gv
     nnoremap gv `[v`]
+
+    " Testing: match ( [ {
+    nnoremap <Tab> %
+    nnoremap <S-Tab> v%
 
     nnoremap <Leader>/ :nohlsearch<CR>
     nnoremap <Leader>G :set wrap linebreak nolist ignorecase<CR>:Goyo<CR>
@@ -178,61 +173,59 @@
     nnoremap <Leader>ss :call ToggleSpell_EN()<CR>
     nnoremap <Leader>sp :call ToggleSpell_PT()<CR>
 
-" Git
+    " Git
     nnoremap <Leader>gs :Gstatus<CR>
     nnoremap <Leader>gd :Gvdiffsplit<CR>
-    nnoremap <Leader>gc :Gcommit % -m "vim commit" <CR>
+    nnoremap <Leader>gc :Gcommit % -m "vim commit"<CR>
 
-" Navigation in buffers ( similar to gt, gT )
+    " Navigation in buffers ( similar to gt, gT )
     nnoremap gb :w\|bn<CR>
     nnoremap gB :w\|bp<CR>
     nnoremap ]b :w\|bn<CR>
     nnoremap [b :w\|bp<CR>
 
-" Test
+    " Testing
     nnoremap gn *
     nnoremap gN #
 
-" Terminal mode
-    if has('nvim')
-        tnoremap <Esc> <C-\><C-n>
-        tnoremap <expr> <A-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
-        nnoremap <Leader>T :vsp term://zsh<CR>
-    endif
+    " Terminal mode
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap <expr> <A-r> '<C-\><C-N>"'.nr2char(getchar()).'pi'
+    nnoremap <Leader>T :vsp term://zsh<CR>
 
-" Swap colon and semicolon
+    " Swap colon and semicolon
     noremap ; :
     noremap : ;
     cnoremap ; :
     cnoremap : ;
 
-" Better navigation in jump list
+    " Better navigation in jump list
     nnoremap '  `
     nnoremap `  '
 
-" Swap v and CTRL-V
+    " Swap v and CTRL-V
     nnoremap    v   <C-V>
     nnoremap <C-V>     v
     vnoremap    v   <C-V>
     vnoremap <C-V>     v
 
-" Completion ( file, keyword, dictionary, thesaurus )
+    " Completion ( file, keyword, dictionary, thesaurus )
     inoremap <C-f> <C-x><C-f>
     inoremap <C-p> <C-x><C-p>
     inoremap <C-n> <C-x>s
 
-" Past from + register in insert mode
+    " Past from + register in insert mode
     inoremap <C-r> <C-r>+
 
-" Keep selection after indenting
+    " Keep selection after indenting
     xnoremap <silent> < <gv
     xnoremap <silent> > >gv
 
-" Bash like in ex mode
+    " Bash like in ex mode
     cnoremap <C-a> <home>
     cnoremap <C-e> <end>
 
-" Slip windows
+    " Slip windows
     nnoremap <Up> <C-w><Up>
     nnoremap <Down> <C-w><Down>
     nnoremap <Left> <C-w><Left>
@@ -248,7 +241,7 @@
     nnoremap <C-Left> <C-w><
     nnoremap <C-Right> <C-w>>
 
-" Useless keys
+    " Useless keys
     nnoremap s <NOP>
     nnoremap S <NOP>
     nnoremap K <NOP>
@@ -263,11 +256,11 @@
     nnoremap <Del> <NOP>
     inoremap <Del> <NOP>
 
-    " ssh
-    cnoremap kahuna :e scp://neumann@kahuna.iqm.unicamp.br/
-    cnoremap galileu :e scp://neumann@177.220.13.33/
+    " SSH
+    " cnoremap kahuna :e scp://neumann@kahuna.iqm.unicamp.br/
+    " cnoremap galileu :e scp://neumann@177.220.13.33/
 
-" Abbreviations
+    " Abbreviations
     abbr funciton function
     abbr teh the
     abbr tempalte template
@@ -279,30 +272,30 @@
 
 " MISC {{{
 
-" Change default vim register
+    " Change default vim register
     set clipboard=unnamed
     if has('unnamedplus')
-      set clipboard=unnamed,unnamedplus
+        set clipboard=unnamed,unnamedplus
     endif
 
-" Highlight Column
+    " Highlight Column
     highlight ColorColumn ctermbg=magenta
     call matchadd('ColorColumn', '\%81v', 100)
 
-" Disables automatic commenting on newline
+    " Disables automatic commenting on newline
     autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
-" Automatically deletes all trailing whitespace on save
-    autocmd BufWritePre * %s/\s\+$//e
+    " Automatically deletes all trailing whitespace on save
+    " autocmd BufWritePre * %s/\s\+$//e
 
-" Shows cursor only on focus window
+    " Shows cursor only on focus window
     autocmd InsertLeave,WinEnter * set cursorline
     autocmd InsertEnter,WinLeave * set nocursorline
 "}}}
 
 " FUNCTIONS {{{
 
-" Highlight the match in red
+    " Highlight the match in red
     function! HLNext (blinktime)
         highlight WhiteOnRed ctermfg=white ctermbg=red
         let [bufnum, lnum, col, off] = getpos('.')
@@ -317,67 +310,63 @@
 
     nnoremap <silent> n   n:call HLNext(0.6)<CR>
     nnoremap <silent> N   N:call HLNext(0.6)<CR>
-    nnoremap <silent> *   *:call HLNext(0.6)<CR>
-    nnoremap <silent> #   #:call HLNext(0.6)<CR>
-    nnoremap <silent> gn gn:call HLNext(0.6)<CR>
-    nnoremap <silent> gN gN:call HLNext(0.6)<CR>
 
-" Toggle between number and relativenumber
+    " Toggle between number and relativenumber
     function! ToggleNumber()
-         if(&relativenumber == 1)
-             set norelativenumber
-             set number
-         else
-             set relativenumber
-    endif
+        if(&relativenumber == 1)
+            set norelativenumber
+            set number
+        else
+            set relativenumber
+        endif
     endfunction
 
-" Toggle spellcheck (EN)
+    " Toggle spellcheck (EN)
     function! ToggleSpell_EN()
-         if(&spell == 1)
-             set nospell
-         else
+        if(&spell == 1)
+            set nospell
+        else
             set spell spelllang=en_us
             highlight SpellBad ctermbg=Blue
-    endif
+        endif
     endfunction
 
-" Toggle spellcheck (PT)
+    " Toggle spellcheck (PT)
     function! ToggleSpell_PT()
-         if(&spell == 1)
-             set nospell
-         else
+        if(&spell == 1)
+            set nospell
+        else
             set spell spelllang=pt
             highlight SpellBad ctermbg=Blue
-    endif
+        endif
     endfunction
 
     set nospell
     set complete+=kspell
 
-" Toggle wrap line
+    " Toggle wrap line
     function! ToggleWrap()
-         if(&wrap == 1)
-             set nowrap
-         else
-             set wrap linebreak nolist
-    endif
+        if(&wrap == 1)
+            set nowrap
+        else
+            set wrap linebreak nolist
+        endif
     endfunction
 
-" Count unique words in visual selection
+    " Count unique words in visual selection
     function! UniqueWords()
         silent '<,'>w !tr -cd "[:alpha:][:space:]-/'" |
-        \ tr ' [:upper:]' '\n[:lower:]' |
-        \ tr -s '\n' |
-        \ sed "s/^['-]*//;s/['-]$//" | sort |
-        \ uniq -c | sort -nr > /tmp/unique_vim
+                    \ tr ' [:upper:]' '\n[:lower:]' |
+                    \ tr -s '\n' |
+                    \ sed "s/^['-]*//;s/['-]$//" | sort |
+                    \ uniq -c | sort -nr > /tmp/unique_vim
     endfunction
     vnoremap <Leader>c :call UniqueWords()<CR>:vsp /tmp/unique_vim \| vertical resize 30 \| w<CR> \| normal zR
 "}}}
 
 " PLUGINS {{{
 
-" Ale
+    " Ale
     let g:ale_set_highlights = 0
     let g:ale_lint_on_text_changed='never'
     let g:ale_lint_on_insert_leave=0
@@ -391,26 +380,34 @@
     let g:ale_set_loclist = 0
     let g:ale_set_quickfix = 1
 
-    nnoremap <silent> <C-j> :ALENextWrap<CR>
-    nnoremap <silent> <C-k> :ALEPreviousWrap<CR>
-
     nnoremap <silent> [e :ALENextWrap<CR>
     nnoremap <silent> ]e :ALEPreviousWrap<CR>
 
-" Black
-    let g:black_skip_string_normalization=1
+    " Autoformat
+    autocmd BufWrite * execute ':Autoformat'
+    autocmd Filetype vim,tex,md,conf let b:autoformat_autoindent=0
+    let g:autoformat_remove_trailing_spaces = 1
 
-" Leader-F
+    " Leader-F
     let g:Lf_WindowPosition = 'popup'
     let g:Lf_PreviewInPopup = 1
     let g:Lf_HideHelp = 1
 
-" NERDTree
-    let g:NERDTreeShowHidden=1
-" Rainbow parentheses
+    " NERDTree
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+
+    let g:NERDTreeShowHidden=0
+
+    " Rainbow parentheses
     let g:rainbow_active = 1
 
-" Smooth scroll
+    " Smooth scroll
     noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 4, 1)<CR>
     noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 4, 1)<CR>
     noremap <silent> <A-=> :call smooth_scroll#up(&scroll, 4, 1)<CR>
@@ -421,14 +418,14 @@
 
 " FILES {{{
 
-" Workaround
+    " Workaround
     autocmd BufWinEnter * normal zR
     autocmd BufWinEnter *.vim,*vimrc,*.md,*.txt normal zM
 
-" Vim
+    " Vim
     autocmd FileType vim set foldmethod=marker
 
-" Python
+    " Python
     autocmd FileType python set autoindent
 
     autocmd FileType python nnoremap <Leader>e :w<CR> :!python %<CR>
@@ -437,11 +434,10 @@
     autocmd FileType python inoremap ; :
     autocmd FileType python inoremap : ;
 
-    if has('nvim')
-        autocmd BufWritePre *.py execute ':Black'
-    endif
+    " Latex and Markdown Files
 
-" Latex and Markdown Files
+    autocmd FileType tex <Leader>e :w! \| :!pdflatex -interaction=nonstopmode %<CR><CR>
+    autocmd FileType tex,plaintex,markdown set foldmethod=marker
 
     autocmd FileType tex,plaintex,markdown nnoremap j gjzz
     autocmd FileType tex,plaintex,markdown nnoremap k gkzz
@@ -450,7 +446,4 @@
 
     autocmd FileType tex,plaintex,markdown nnoremap W w*#
     autocmd FileType tex,plaintex,markdown nnoremap <silent> Z z=1<CR><CR>
-    autocmd FileType tex,plaintex nnoremap <Leader>e :w! \| :!pdflatex -interaction=nonstopmode %<CR><CR>
-
-    autocmd FileType tex,plaintex,markdown set foldmethod=marker
 "}}}

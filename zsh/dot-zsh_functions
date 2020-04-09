@@ -13,10 +13,10 @@ tkahuna() {
 }
 
 cunicamp() {
-    scp -r -P 2022 "lucas_newmann@rj.iqm.unicamp.br/$1" "."
+    scp -r -P 2022 "lucas_newmann@rj.iqm.unicamp.br:/home/lucas_newmann/$1" "."
 }
-cunicamp() {
-    scp -r -P 2022 "$1" "lucas_newmann@rj.iqm.unicamp.br/$2"
+tunicamp() {
+    scp -r -P 2022 "$1" "lucas_newmann@rj.iqm.unicamp.br:/home/lucas_newmann/$2"
 }
 
 
@@ -46,7 +46,7 @@ getdoi() {
     if [ -f "$1" ]; then
         doi=$(pdfinfo "$1" | grep -io "doi:.*") ||
         doi=$(pdftotext "$1" 2>/dev/null - | grep -io "doi:.*" -m 1) ||
-        exit 1
+        # exit 1
     else
         doi="$1"
     fi
@@ -58,7 +58,7 @@ getbib() {
     if [ -f "$1" ]; then
         doi=$(pdfinfo "$1" | grep -io "doi:.*") ||
         doi=$(pdftotext "$1" 2>/dev/null - | grep -io "doi:.*" -m 1) ||
-        exit 1
+        # exit 1
     else
         doi="$1"
     fi

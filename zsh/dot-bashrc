@@ -1,6 +1,8 @@
 [[ $- != *i* ]] && return
 
+# Set terminal
 export TERM=rxvt-unicode-256color
+# Set prompt
 export PS1="\[\e[33m\][\[\e[m\]\[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\]\[\e[31m\] -> \[\e[m\]\[\e[37m\]\w\[\e[m\]\[\e[33m\]]\[\e[m\]\$ "
 
 # Load aliases and shortcuts if existent.
@@ -29,9 +31,9 @@ shopt -s checkwinsize
 shopt -s globstar
 
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+    if [ -f /usr/share/bash-completion/bash_completion ]; then
+        . /usr/share/bash-completion/bash_completion
+    elif [ -f /etc/bash_completion ]; then
+        . /etc/bash_completion
+    fi
 fi

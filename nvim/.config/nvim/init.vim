@@ -78,7 +78,7 @@
     let g:lightline = {'colorscheme' : 'seoul256'}
 "}}}
 
-    " SET DEFAULTS {{{
+" SET DEFAULTS {{{
 
     filetype plugin indent on
 
@@ -90,6 +90,7 @@
     set foldlevel=99
     set foldmethod=indent
     set hlsearch
+    set iskeyword-=_
     set lazyredraw
     set list
     set listchars=eol:¬
@@ -118,6 +119,7 @@
 
     " Following python.org
     syntax on
+
     set encoding=utf-8
     set expandtab
     set fileformat=unix
@@ -130,8 +132,8 @@
     " Provides tab-completion for all file-related tasks
     set path+=**
     set wildmenu
-    set wildmode=list:longest,full
-    set wildignore=*.o,*.jpg,*.png,*.gz,*.zip
+    set wildignore=*.o,*.jpg,*.png,*.gif,*.gz,*.zip
+    " set wildmode=list:longest,full
 "}}}
 
 " KEY MAPS {{{
@@ -178,11 +180,12 @@
     nnoremap <Leader>gd :Gvdiffsplit<CR>
     nnoremap <Leader>gc :Gcommit % -m "vim commit"<CR>
 
-    " Navigation in buffers ( similar to gt, gT )
-    nnoremap gb :w\|bn<CR>
-    nnoremap gB :w\|bp<CR>
+    " Navigation in buffers & tabs
     nnoremap ]b :w\|bn<CR>
     nnoremap [b :w\|bp<CR>
+
+    nnoremap ]t :w\|:tabNext<CR>
+    nnoremap [T :w\|:tabPrevius<CR>
 
     " Testing
     nnoremap gn *
@@ -199,6 +202,12 @@
     cnoremap ; :
     cnoremap : ;
 
+    " Better jumping
+    nnoremap { {zz
+    nnoremap } }zz
+    nnoremap [[ [[zz
+    nnoremap ]] ]]zz
+
     " Better navigation in jump list
     nnoremap '  `
     nnoremap `  '
@@ -212,7 +221,8 @@
     " Completion ( file, keyword, dictionary, thesaurus )
     inoremap <C-f> <C-x><C-f>
     inoremap <C-p> <C-x><C-p>
-    inoremap <C-n> <C-x>s
+    inoremap <C-n> <C-x><C-n>
+    inoremap <C-s> <C-x>s
 
     " Past from + register in insert mode
     inoremap <C-r> <C-r>+
@@ -226,10 +236,11 @@
     cnoremap <C-e> <end>
 
     " Slip windows
-    nnoremap <Up> <C-w><Up>
-    nnoremap <Down> <C-w><Down>
-    nnoremap <Left> <C-w><Left>
-    nnoremap <Right> <C-w><Right>
+
+    " nnoremap <Up> <C-w><Up>
+    " nnoremap <Down> <C-w><Down>
+    " nnoremap <Left> <C-w><Left>
+    " nnoremap <Right> <C-w><Right>
 
     nnoremap <A-j> <C-w><Up>
     nnoremap <A-k> <C-w><Down>
@@ -261,13 +272,15 @@
     " cnoremap galileu :e scp://neumann@177.220.13.33/
 
     " Abbreviations
-    abbr funciton function
-    abbr teh the
-    abbr tempalte template
-    abbr fitler filter
-    abbr cosnt const
     abbr attribtue attribute
     abbr attribuet attribute
+    abbr cosnt const
+    abbr fitler filter
+    abbr funciton function
+    abbr ragne range
+    abbr rnage range
+    abbr teh the
+    abbr tempalte template
 "}}}
 
 " MISC {{{
@@ -277,6 +290,11 @@
     if has('unnamedplus')
         set clipboard=unnamed,unnamedplus
     endif
+
+    " Retain indent Level on Folds
+    let indent_level = indent(v:foldstart)
+    let indent = repeat(' ',indent_level)
+    set foldtext=NeatFoldText()
 
     " Highlight Column
     highlight ColorColumn ctermbg=magenta
@@ -353,6 +371,19 @@
         endif
     endfunction
 
+    function! NeatFoldText()
+        let indent_level = indent(v:foldstart)
+        let indent = repeat(' ',indent_level)
+        let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+        let lines_count = v:foldend - v:foldstart + 1
+        let lines_count_text = '-' . printf("%10s", lines_count . ' lines') . ' '
+        let foldchar = matchstr(&fillchars, 'fold:\zs.')
+        let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+        let foldtextend = lines_count_text . repeat(foldchar, 8)
+        let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+        return indent . foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+    endfunction
+
     " Count unique words in visual selection
     function! UniqueWords()
         silent '<,'>w !tr -cd "[:alpha:][:space:]-/'" |
@@ -364,7 +395,7 @@
     vnoremap <Leader>c :call UniqueWords()<CR>:vsp /tmp/unique_vim \| vertical resize 30 \| w<CR> \| normal zR
 "}}}
 
-" PLUGINS {{{
+" PLUGINS CONFIG {{{
 
     " Ale
     let g:ale_set_highlights = 0
@@ -372,6 +403,10 @@
     let g:ale_lint_on_insert_leave=0
     let g:ale_lint_on_enter=0
     let g:ale_lint_on_save=1
+
+    let g:ale_fix_on_save=0
+    let g:ale_fixers=[]
+    let g:ale_completion_enabled=0
 
     let g:ale_echo_msg_error_str = 'E'
     let g:ale_echo_msg_warning_str = 'W'
@@ -385,8 +420,9 @@
 
     " Autoformat
     autocmd BufWrite * execute ':Autoformat'
-    autocmd Filetype vim,tex,md,conf let b:autoformat_autoindent=0
+    let g:autoformat_autoindent=0
     let g:autoformat_remove_trailing_spaces = 1
+    autocmd Filetype c,sh,zsh,julia,python let b:autoformat_autoindent=1
 
     " Leader-F
     let g:Lf_WindowPosition = 'popup'

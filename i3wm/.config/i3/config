@@ -3,12 +3,12 @@ set $super mod4
 set $alt mod1
 
 # set gaps
-gaps inner 6
-gaps outer 12
+gaps inner 4
+gaps outer 8
 
-for_window [class=".*"] border pixel 6
+for_window [class=".*"] border pixel 4
 for_window [class="URxvt"] border pixel 4
-for_window [class="firefox"] border pixel 2
+for_window [class="firefox"] border pixel 4
 
 # set font
 font pango: Hack 12
@@ -19,14 +19,17 @@ no_focus [window_role="pop-up"]
 popup_during_fullscreen smart
 
 # autostart
+exec --no-startup-id xrandr --output eDP1 --primary --mode 1366x768 --pos 0x132 --rotate normal --output DP1 --off --output DP2 --off --output HDMI1 --off --output HDMI2 --mode 1440x900 --pos 1366x0 --rotate normal --output VIRTUAL1 --off
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id setxkbmap -model thinkpad -layout br -variant abnt
-exec --no-startup-id xmodmap ~/.Xmodmap
 exec --no-startup-id picom -b
 exec --no-startup-id unclutter
+exec --no-startup-id redshift-gtk
 exec --no-startup-id megasync
 exec_always --no-startup-id sxhkd
 exec_always --no-startup-id feh --randomize --bg-fill ~/MEGA/wallpapers/
+
+exec --no-startup-id xmodmap ~/.Xmodmap
 
 # common apps keybinds
 bindsym $super+f fullscreen toggle

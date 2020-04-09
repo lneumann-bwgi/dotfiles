@@ -5,22 +5,25 @@ alias mkdir='mkdir -pv'
 
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
+alias fzf="fzf --preview='bat {} --color=always'"
 
 alias ls=' ls -hN --group-directories-first --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias gone="gone -w 25 -p 'wswswswl' -e 'i3-nagbar -m ' > TIME'S UP ! < ''"
 alias pm='sudo pacman'
 alias py='python'
 alias ipy='ipython'
+alias sr='xsel | tspreed -i -f -b -p line'
+alias fh='history 0 | fzf --tac --no-sort'
 
 alias pytohn='python'
 alias ipytohn='ipython'
 
 alias gs='git status'
 alias gd='git diff'
-alias gh='history ~/.zsh_history | fzf --tac'
 
 alias kahuna='ssh -YC neumann@kahuna.iqm.unicamp.br'
 alias galileu='ssh -YC neumann@177.220.13.33'

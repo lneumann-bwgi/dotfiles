@@ -1,8 +1,10 @@
 # Set terminal
-export TERM=rxvt-unicode-256color
+# export TERM=rxvt-unicode-256color
 
 # Enable colors and change prompt:
 autoload -U colors && colors
+
+# Set prompt
 BASE_PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[yellow]%}@%{$fg[yellow]%}%M %b%{$fg[magenta]%}%(3~|.../%2~|%~)%{$fg[red]%}%B]%b"
 PS1="$BASE_PS1%{$fg[blue]%}[I]%{$reset_color%}$%b "
 
@@ -28,6 +30,9 @@ export HISTIGNORE="ls:cd:vi:vim:nvim"
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
 
 stty -ixon
+
+# Colored man pages
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Git branch in prompt
 autoload -Uz vcs_info
@@ -61,7 +66,7 @@ bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
-# Change PS1 for different vi modes
+# Change PS1 when in different vi modes
 function zle-keymap-select {
     if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
         echo -ne '\e[1 q'
@@ -76,10 +81,11 @@ function zle-keymap-select {
             zle reset-prompt
     fi
 }
-zle -N zle-keymap-select
-zle-line-init() {
-zle -K viins
+function zle-line-init() {
+    zle -K viins
 }
+
+zle -N zle-keymap-select
 zle -N zle-line-init
 
 # Use beam shape cursor on startup.

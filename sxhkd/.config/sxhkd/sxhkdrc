@@ -3,17 +3,20 @@ super + Return
 super + a
     anki
 super + b
-    firefox
+    firefox --new-window https://duckduckgo.com/
+super + shift + b
+    firefox --new-window
 super + d
     rofi -lines 16 -padding 16 -width 30 -location 0 -show drun -sidebar-mode -columns 1
 super + shift + d
     dmenu_run
 super + n
-    newsboat
-super + m
-    urxvt -e spt
-super + p
-    urxvt -e gone
+    urxvt -e newsboat
+# super + m
+#    spotifyd --no-daemon & && urxvt -e spt
+#    pkill spotifyd && spotifyd --no-daemon & && urxvt -e spt
+# super + p
+#    i3-msg workspace 8; i3-sensible-terminal -e "gone -w 25 -p 'wswswswl' -e 'i3-msg workspace 8'"
 super + r
     urxvt -e ranger
 
@@ -47,4 +50,4 @@ XF86Favorites
     echo "print b"
 
 Print
-    echo "print a"
+    import -window root /home/neumann/Pictures/`data`.jpg

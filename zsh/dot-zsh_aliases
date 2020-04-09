@@ -1,7 +1,9 @@
+alias cat='bat'
 alias cp='cp -iv'
+alias find='fd'
+alias mkdir='mkdir -pv'
 alias mv='mv -iv'
 alias rm='rm -v'
-alias mkdir='mkdir -pv'
 
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'

@@ -1,3 +1,4 @@
+stow -R --dotfiles conky
 stow -R --dotfiles git
 stow -R --dotfiles i3wm
 stow -R --dotfiles newsboat

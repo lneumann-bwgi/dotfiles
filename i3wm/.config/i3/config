@@ -8,6 +8,7 @@ gaps outer 8
 
 for_window [class=".*"] border pixel 4
 for_window [class="URxvt"] border pixel 4
+for_window [class="Conky"] border pixel 0
 for_window [class="firefox"] border pixel 4
 
 # set font
@@ -27,6 +28,7 @@ exec --no-startup-id unclutter
 exec --no-startup-id redshift-gtk
 exec --no-startup-id megasync
 exec_always --no-startup-id sxhkd
+exec_always --no-startup-id conky --daemonize --pause=5
 exec_always --no-startup-id feh --randomize --bg-fill ~/MEGA/wallpapers/
 
 exec --no-startup-id xmodmap ~/.Xmodmap

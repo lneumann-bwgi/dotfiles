@@ -1,6 +1,3 @@
-# Set terminal
-# export TERM=rxvt-unicode-256color
-
 # Enable colors and change prompt:
 autoload -U colors && colors
 
@@ -20,6 +17,9 @@ xset -r 44
 xset -r 45
 xset -r 46
 xset r rate 180 50
+
+xrdb ~/.Xresources
+xmodmap ~/.Xmodmap 2> /dev/null
 
 # History in cache directory
 HISTCONTROL=ignoreboth
@@ -113,6 +113,14 @@ done
 
 # Ranger file navigation
 bindkey -s '^r' 'rangercd\n'
+
+# Load z
+source /usr/share/z/z.sh
+
+# fzf settings
+source /usr/share/fzf/completion.zsh
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+export FZF_DEFAULT_OPTS="-m --height 60% --layout=reverse --border --preview='bat {} --color=always'"
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null

@@ -7,17 +7,21 @@ alias rm='rm -v'
 
 alias grep='grep --color=auto'
 alias diff='diff --color=auto'
-alias fzf="fzf --preview='bat {} --color=always'"
+
+# alias -g G='| grep'
+# alias -g L='| less'
 
 alias ls=' ls -hN --group-directories-first --color=auto'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias gone="gone -w 25 -p 'wswswswl' -e 'i3-nagbar -m ' > TIME'S UP ! < ''"
+alias ranger='rangercd'
+alias gone="gone -w 25 -p 'wswswswl' -e 'feh -F ~/MEGA/time.png'"
+
 alias pm='sudo pacman'
-alias py='python'
-alias ipy='ipython'
+alias py='pipenv run python'
+alias ipy='pipenv run ipython'
 alias sr='xsel | tspreed -i -f -b -p line'
 alias fh='history 0 | fzf --tac --no-sort'
 

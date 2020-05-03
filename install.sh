@@ -8,6 +8,3 @@ stow -R --dotfiles ranger
 stow -R --dotfiles sxhkd
 stow -R --dotfiles xorg
 stow -R --dotfiles zsh
-
-pacman -Qe > info/pacman.txt
-tree -a > info/tree.txt

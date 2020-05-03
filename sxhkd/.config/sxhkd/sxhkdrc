@@ -6,17 +6,25 @@ super + b
     firefox --new-window https://duckduckgo.com/
 super + shift + b
     firefox --new-window
+super + c
+    urxvt -bg 0 -name _scratchpad -e python
+super + shift + c
+    python /home/neumann/Desktop/speedread/main.py
+#    urxvt -bg 0 -fn 'xft:hack:pixelsize=48' -fb 'xft:hack:bold:pixelsize=48' -name _scratchpad
 super + d
     rofi -lines 16 -padding 16 -width 30 -location 0 -show drun -sidebar-mode -columns 1
 super + shift + d
     dmenu_run
+super + g
+    urxvt -bg 0 -e 'gone'
 super + n
     urxvt -e newsboat
-# super + m
-#    spotifyd --no-daemon & && urxvt -e spt
-#    pkill spotifyd && spotifyd --no-daemon & && urxvt -e spt
-# super + p
-#    i3-msg workspace 8; i3-sensible-terminal -e "gone -w 25 -p 'wswswswl' -e 'i3-msg workspace 8'"
+super + m
+    urxvt -e spt
+super + p
+    scrot -u '%Y-%m-%d-%s.jpg' -e 'mv $f /home/neumann/Pictures'
+super + shift + p
+    scrot '%Y-%m-%d-%s.jpg' -e 'mv $f /home/neumann/Pictures'
 super + r
     urxvt -e ranger
 
@@ -43,11 +51,6 @@ XF86MonBrightnessUp
 XF86Tools
     sh -c "setxkbmap -model thinkpad -layout br -variant abnt && xmodmap ~/.Xmodmap"
 
-XF86Bluetooth
+XF86Favorites
     sh -c "setxkbmap -model thinkpad -layout us && xmodmap ~/.Xmodmap"
 
-XF86Favorites
-    echo "print b"
-
-Print
-    import -window root /home/neumann/Pictures/`data`.jpg

@@ -1,17 +1,22 @@
 # data science
 http://alpopkes.com/feed "data science"
-https://blog.cerebralab.com/feed.xml "data science"
 http://datascience.blog.wzb.eu/feed/ "data science"
+http://feeds.feedburner.com/michaelnielsen/wmna?format=xml "data science"
 http://kevinzakka.github.io/feed "data science"
 http://rickwierenga.com/feed "data science"
 http://www.degeneratestate.org/feeds/all.rss.xml "data science"
 http://www.oranlooney.com/index.xml "~Oran Looney" "data science"
+https://blog.cerebralab.com/feed.xml "data science"
+
+# economy
+http://feeds.feedburner.com/marginalrevolution/feed?format=xml
 
 # python
 http://jakevdp.github.io/feeds/all.atom.xml "python"
 http://nedbatchelder.com/blog/rss.xml "python"
 http://pbpython.com/feeds/all.atom.xml "python"
 http://realpython.com/atom.xml "python"
+http://rednafi.github.io/digressions/feed "python"
 http://treyhunner.com/atom.xml "python"
 
 # tech
@@ -19,6 +24,7 @@ http://chrispenner.ca/atom.xml "tech"
 http://martinheinz.dev/rss/ "tech"
 http://opensourc.es/blog.rss "tech"
 http://www.archlinux.org/feeds/news/ "tech"
+http://www.petecorey.com/feed.xml "tech"
 http://www.philipzucker.com/feed "tech"
 https://bytes.yingw787.com/index.xml "tech"
 https://ruslanspivak.com/feeds/all.atom.xml "tech"

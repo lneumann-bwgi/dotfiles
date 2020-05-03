@@ -10,7 +10,7 @@ order += "battery 0"
 order += "tztime local"
 
 wireless wlp3s0 {
-        format_up = " ❮ Wi-Fi:%quality at %essid, %bitrate ❯ "
+        format_up = " ❮ %essid:%quality - %bitrate ❯ "
         format_down = " ❮ Wi-Fi: DOWN ❯ "
 }
 
@@ -37,5 +37,5 @@ battery 0 {
 }
 
 tztime local {
-        format = " Ⓓ %Y-%m-%d  Ⓣ %H:%M  "
+        format = " Ⓓ %Y-%m-%d  Ⓣ %H:%M  | "
 }

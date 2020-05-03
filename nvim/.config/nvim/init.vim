@@ -42,6 +42,7 @@
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
     Plug 'itchyny/lightline.vim'
     Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+    Plug 'junegunn/limelight.vim', { 'on' : 'Limelight'}
     Plug 'luochen1990/rainbow'
     Plug 'majutsushi/tagbar'
     Plug 'mhinz/vim-signify'
@@ -52,11 +53,14 @@
     Plug 'ron89/thesaurus_query.vim', { 'on': 'Goyo' }
     Plug 'sheerun/vim-polyglot'
     Plug 'terryma/vim-smooth-scroll'
+    Plug 'tmsvg/pear-tree'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
 
     " Color schemes
+    Plug 'ajmwagar/vim-deus'
+    Plug 'cocopon/iceberg.vim'
     Plug 'joshdick/onedark.vim'
     Plug 'junegunn/seoul256.vim'
     Plug 'morhetz/gruvbox'
@@ -74,8 +78,8 @@
     set laststatus=2
     set noruler
 
-    colorscheme seoul256
-    let g:lightline = {'colorscheme' : 'seoul256'}
+    colorscheme deus
+    let g:lightline = {'colorscheme' : 'deus'}
 "}}}
 
 " SET DEFAULTS {{{
@@ -90,7 +94,7 @@
     set foldlevel=99
     set foldmethod=indent
     set hlsearch
-    set iskeyword-=_
+    " set iskeyword-=_
     set lazyredraw
     set list
     set listchars=eol:¬
@@ -132,7 +136,7 @@
     " Provides tab-completion for all file-related tasks
     set path+=**
     set wildmenu
-    set wildignore=*.o,*.jpg,*.png,*.gif,*.gz,*.zip
+    set wildignore=*.o,*.jpg,*.png,*.gif,*.gz,*.tar,*.zip
     " set wildmode=list:longest,full
 "}}}
 
@@ -158,9 +162,9 @@
     nnoremap gV gv
     nnoremap gv `[v`]
 
-    " Testing: match ( [ {
+    " match ( [ {
     nnoremap <Tab> %
-    nnoremap <S-Tab> v%
+    vnoremap <Tab> %
 
     nnoremap <Leader>/ :nohlsearch<CR>
     nnoremap <Leader>G :set wrap linebreak nolist ignorecase<CR>:Goyo<CR>
@@ -180,16 +184,16 @@
     nnoremap <Leader>gd :Gvdiffsplit<CR>
     nnoremap <Leader>gc :Gcommit % -m "vim commit"<CR>
 
-    " Navigation in buffers & tabs
+    " Navigation in buffers
     nnoremap ]b :w\|bn<CR>
     nnoremap [b :w\|bp<CR>
 
+    " Navigation in tabs
     nnoremap ]t :w\|:tabNext<CR>
     nnoremap [T :w\|:tabPrevius<CR>
 
-    " Testing
-    nnoremap gn *
-    nnoremap gN #
+    " Goes bad to last buffer
+    nnoremap <S-Tab> <C-^>
 
     " Terminal mode
     tnoremap <Esc> <C-\><C-n>
@@ -205,8 +209,17 @@
     " Better jumping
     nnoremap { {zz
     nnoremap } }zz
-    nnoremap [[ [[zz
-    nnoremap ]] ]]zz
+
+    nnoremap '] g;
+    nnoremap '[ g,
+
+    nnoremap [[ [[z.
+    nnoremap ]] ]]z.
+
+    nnoremap gn *
+    nnoremap gN #
+    nnoremap ]n *
+    nnoremap [n #
 
     " Better navigation in jump list
     nnoremap '  `
@@ -236,21 +249,21 @@
     cnoremap <C-e> <end>
 
     " Slip windows
+    nnoremap <A-j> <C-w><Up>
+    nnoremap <A-k> <C-w><Down>
+    nnoremap <A-h> <C-w><Left>
+    nnoremap <A-l> <C-w><Right>
 
     " nnoremap <Up> <C-w><Up>
     " nnoremap <Down> <C-w><Down>
     " nnoremap <Left> <C-w><Left>
     " nnoremap <Right> <C-w><Right>
 
-    nnoremap <A-j> <C-w><Up>
-    nnoremap <A-k> <C-w><Down>
-    nnoremap <A-h> <C-w><Left>
-    nnoremap <A-l> <C-w><Right>
-
-    nnoremap <C-Up> <C-w>+
-    nnoremap <C-Down> <C-w>-
-    nnoremap <C-Left> <C-w><
-    nnoremap <C-Right> <C-w>>
+    " Resize windows
+    nnoremap <Up> <C-w>+
+    nnoremap <Down> <C-w>-
+    nnoremap <Left> <C-w><
+    nnoremap <Right> <C-w>>
 
     " Useless keys
     nnoremap s <NOP>
@@ -259,13 +272,14 @@
     nnoremap M <NOP>
     nnoremap Q <NOP>
     nnoremap gQ <NOP>
-    nnoremap ^ <NOP>
-    nnoremap _ <NOP>
-    nnoremap g_ <NOP>
+    " nnoremap ^ <NOP>
+    " nnoremap _ <NOP>
+    " nnoremap g_ <NOP>
     nnoremap <Space> <NOP>
     nnoremap <Backspace> <NOP>
     nnoremap <Del> <NOP>
     inoremap <Del> <NOP>
+
 
     " SSH
     " cnoremap kahuna :e scp://neumann@kahuna.iqm.unicamp.br/
@@ -424,6 +438,12 @@
     let g:autoformat_remove_trailing_spaces = 1
     autocmd Filetype c,sh,zsh,julia,python let b:autoformat_autoindent=1
 
+    " Goyo
+    let g:limelight_conceal_ctermfg = 240
+
+    autocmd! User GoyoEnter Limelight
+    autocmd! User GoyoLeave Limelight!
+
     " Leader-F
     let g:Lf_WindowPosition = 'popup'
     let g:Lf_PreviewInPopup = 1
@@ -477,8 +497,8 @@
 
     autocmd FileType tex,plaintex,markdown nnoremap j gjzz
     autocmd FileType tex,plaintex,markdown nnoremap k gkzz
-    autocmd FileType tex,plaintex,markdown nnoremap { {zz
-    autocmd FileType tex,plaintex,markdown nnoremap } }zz
+    autocmd FileType tex,plaintex,markdown nnoremap L g$
+    autocmd FileType tex,plaintex,markdown nnoremap H g_
 
     autocmd FileType tex,plaintex,markdown nnoremap W w*#
     autocmd FileType tex,plaintex,markdown nnoremap <silent> Z z=1<CR><CR>

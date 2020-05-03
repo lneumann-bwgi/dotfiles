@@ -1,7 +1,5 @@
 [[ $- != *i* ]] && return
 
-# Set terminal
-export TERM=rxvt-unicode-256color
 # Set prompt
 export PS1="\[\e[33m\][\[\e[m\]\[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\]\[\e[31m\] -> \[\e[m\]\[\e[37m\]\w\[\e[m\]\[\e[33m\]]\[\e[m\]\$ "
 
@@ -37,3 +35,6 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
+
+# Load z
+. /usr/share/z/z.sh

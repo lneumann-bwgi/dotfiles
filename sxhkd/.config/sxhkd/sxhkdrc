@@ -7,16 +7,13 @@ super + b
 super + shift + b
     firefox --new-window
 super + c
-    urxvt -bg 0 -name _scratchpad -e python
+    urxvt -bg 0 -name _scratchpad -e ipython
 super + shift + c
-    python /home/neumann/Desktop/speedread/main.py
-#    urxvt -bg 0 -fn 'xft:hack:pixelsize=48' -fb 'xft:hack:bold:pixelsize=48' -name _scratchpad
+    urxvt -bg 0 -e "gone -e 'feh -F ~/MEGA/time.png'"
 super + d
     rofi -lines 16 -padding 16 -width 30 -location 0 -show drun -sidebar-mode -columns 1
 super + shift + d
     dmenu_run
-super + g
-    urxvt -bg 0 -e 'gone'
 super + n
     urxvt -e newsboat
 super + m
@@ -27,6 +24,8 @@ super + shift + p
     scrot '%Y-%m-%d-%s.jpg' -e 'mv $f /home/neumann/Pictures'
 super + r
     urxvt -e ranger
+super + s
+    python -m speedread &> /dev/null
 
 # Media keys
 

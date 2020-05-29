@@ -429,8 +429,8 @@
     let g:ale_set_loclist = 0
     let g:ale_set_quickfix = 1
 
-    nnoremap <silent> [e :ALENextWrap<CR>
-    nnoremap <silent> ]e :ALEPreviousWrap<CR>
+    nnoremap <silent> ]e :ALENextWrap<CR>
+    nnoremap <silent> [e :ALEPreviousWrap<CR>
 
     " Autoformat
     autocmd BufWrite * execute ':Autoformat'

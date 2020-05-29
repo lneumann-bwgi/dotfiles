@@ -7,4 +7,5 @@ stow -R --dotfiles picom
 stow -R --dotfiles ranger
 stow -R --dotfiles sxhkd
 stow -R --dotfiles xorg
+stow -R --dotfiles zathura
 stow -R --dotfiles zsh

@@ -1,0 +1,18 @@
+set selection-clipboard clipboard
+set recolor true
+
+map i zoom in
+map o zoom out
+
+map I recolor
+
+unmap <C-f>
+unmap <C-t>
+unmap <C-u>
+unmap <C-y>
+
+unmap f
+unmap t
+unmap u
+unmap y
+

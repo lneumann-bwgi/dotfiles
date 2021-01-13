@@ -1,15 +1,16 @@
 super + Return
     urxvt
 super + a
-    anki
+    /home/neumann/Downloads/anki-2.1.35-linux-amd64/bin/anki
 super + b
-    firefox --new-window https://duckduckgo.com/
+    brave
 super + shift + b
     firefox --new-window
+    # firefox --new-window https://duckduckgo.com/
 super + c
     urxvt -bg 0 -name _scratchpad -e ipython
 super + shift + c
-    urxvt -bg 0 -e "gone -e 'feh -F ~/MEGA/time.png'"
+    urxvt -bg 0 -name _scratchpad
 super + d
     rofi -lines 16 -padding 16 -width 30 -location 0 -show drun -sidebar-mode -columns 1
 super + shift + d

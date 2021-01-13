@@ -127,3 +127,26 @@ export FZF_DEFAULT_OPTS="-m --height 60% --layout=reverse --border --preview='ba
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
+export PATH=/home/neumann/.local/bin:$PATH
+
+# cat $HOME/le_roche | grep -E '^[[:digit:]]' | shuf | head -n 1 | cowsay
+# cat $HOME/laws | tr '\n' '$' | sed 's/END/\n/g' | shuf | head -n 1 | tr '$' '\n' | cowsay
+cat $HOME/laws | grep 'Law' | shuf | head -n 1 | cowsay
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+
+# __conda_setup="$('/home/neumann/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+# if [ $? -eq 0 ]; then
+#     eval "$__conda_setup"
+# else
+#     if [ -f "/home/neumann/miniconda3/etc/profile.d/conda.sh" ]; then
+#         . "/home/neumann/miniconda3/etc/profile.d/conda.sh"
+#     else
+#         export PATH="/home/neumann/miniconda3/bin:$PATH"
+#     fi
+# fi
+# unset __conda_setup
+
+# <<< conda initialize <<<
+

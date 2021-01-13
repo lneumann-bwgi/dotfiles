@@ -476,8 +476,8 @@
   autocmd! User GoyoLeave Limelight!
 
   " Vim-polyglot
-  let g:polyglot_disabled = ['markdown','python']
-  let g:polyglot_disabled = ['autoindent']
+  " let g:polyglot_disabled = ['markdown.plugin','python.plugin']
+  " let g:polyglot_disabled = ['autoindent']
 
   " NERDTree
   autocmd StdinReadPre * let s:std_in=1

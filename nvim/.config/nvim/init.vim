@@ -36,11 +36,13 @@
     call plug#begin('~/.vim/plugged')
 
     Plug 'Chiel92/vim-autoformat'
-    Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+    " Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
     Plug 'Yggdroot/indentLine'
     Plug 'dense-analysis/ale'
     Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
     Plug 'itchyny/lightline.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
     Plug 'junegunn/limelight.vim', { 'on' : 'Limelight'}
     Plug 'luochen1990/rainbow'
@@ -53,7 +55,7 @@
     Plug 'ron89/thesaurus_query.vim', { 'on': 'Goyo' }
     Plug 'sheerun/vim-polyglot'
     Plug 'terryma/vim-smooth-scroll'
-    Plug 'tmsvg/pear-tree'
+    " Plug 'tmsvg/pear-tree'
     Plug 'tpope/vim-commentary'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-surround'
@@ -86,18 +88,16 @@
 
     filetype plugin indent on
 
+    set inccommand=split
+
     set autoread
     set backspace=indent,eol,start
     set cursorline
-    set encoding=utf8
-    " set foldcolumn=2
-    set foldlevel=99
     set foldmethod=indent
     set hlsearch
-    " set iskeyword-=_
-    set lazyredraw
     set list
     set listchars=eol:¬
+    set nocompatible
     set noincsearch
     set nowrap
     set number relativenumber
@@ -105,7 +105,7 @@
     set shiftround
     set showcmd
     set showmatch
-    set shortmess+=c
+    set smartcase
     set smarttab
     set splitright splitbelow
     set title
@@ -152,7 +152,7 @@
     vnoremap L g_
     nnoremap U <C-r>
 
-    " Save (similar to ZZ)
+    " Save (similar to ZZ, ZQ)
     nnoremap ZS :w<CR>
 
     " Visual selection in fold
@@ -201,23 +201,32 @@
     nnoremap <Leader>T :vsp term://zsh<CR>
 
     " Swap colon and semicolon
-    noremap ; :
-    noremap : ;
-    cnoremap ; :
     cnoremap : ;
+    cnoremap ; :
+    nnoremap : ;
+    nnoremap ; :
+    vnoremap : ;
+    vnoremap ; :
+    " inoremap : ;
+    " inoremap ; :
 
     " Better jumping
-    nnoremap { {zz
-    nnoremap } }zz
+
+    " nnoremap { {zz
+    " nnoremap } }zz
+
+    " nnoremap [[ [[z.
+    " nnoremap ]] ]]z.
 
     nnoremap '] g;
     nnoremap '[ g,
 
-    nnoremap [[ [[z.
-    nnoremap ]] ]]z.
+    nnoremap ]e :cnext<CR>
+    nnoremap [e :cprev<CR>
 
     nnoremap gn *
     nnoremap gN #
+
     nnoremap ]n *
     nnoremap [n #
 
@@ -233,9 +242,9 @@
 
     " Completion ( file, keyword, dictionary, thesaurus )
     inoremap <C-f> <C-x><C-f>
-    inoremap <C-p> <C-x><C-p>
-    inoremap <C-n> <C-x><C-n>
-    inoremap <C-s> <C-x>s
+    inoremap <C-s> <C-s>
+    " inoremap <C-p> <C-x><C-p>
+    " inoremap <C-n> <C-x><C-n>
 
     " Past from + register in insert mode
     inoremap <C-r> <C-r>+
@@ -244,13 +253,17 @@
     xnoremap <silent> < <gv
     xnoremap <silent> > >gv
 
+    " Move visual selection up/down
+    vnoremap J :m '>+1<CR>gv=gv
+    vnoremap K :m '<-2<CR>gv=gv
+
     " Bash like in ex mode
     cnoremap <C-a> <home>
     cnoremap <C-e> <end>
 
     " Slip windows
-    nnoremap <A-j> <C-w><Up>
-    nnoremap <A-k> <C-w><Down>
+    nnoremap <A-k> <C-w><Up>
+    nnoremap <A-j> <C-w><Down>
     nnoremap <A-h> <C-w><Left>
     nnoremap <A-l> <C-w><Right>
 
@@ -275,11 +288,11 @@
     " nnoremap ^ <NOP>
     " nnoremap _ <NOP>
     " nnoremap g_ <NOP>
+    nnoremap , <NOP>
     nnoremap <Space> <NOP>
     nnoremap <Backspace> <NOP>
     nnoremap <Del> <NOP>
     inoremap <Del> <NOP>
-
 
     " SSH
     " cnoremap kahuna :e scp://neumann@kahuna.iqm.unicamp.br/
@@ -291,6 +304,7 @@
     abbr cosnt const
     abbr fitler filter
     abbr funciton function
+    abbr lenght length
     abbr ragne range
     abbr rnage range
     abbr teh the
@@ -323,6 +337,12 @@
     " Shows cursor only on focus window
     autocmd InsertLeave,WinEnter * set cursorline
     autocmd InsertEnter,WinLeave * set nocursorline
+
+    " Highlight yanked text
+    augroup LuaHighlight
+        autocmd!
+        autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
+    augroup END
 "}}}
 
 " FUNCTIONS {{{
@@ -436,7 +456,7 @@
     autocmd BufWrite * execute ':Autoformat'
     let g:autoformat_autoindent=0
     let g:autoformat_remove_trailing_spaces = 1
-    autocmd Filetype c,sh,zsh,julia,python let b:autoformat_autoindent=1
+    autocmd Filetype c,python let b:autoformat_autoindent=1
 
     " Goyo
     let g:limelight_conceal_ctermfg = 240
@@ -466,10 +486,13 @@
     " Smooth scroll
     noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 4, 1)<CR>
     noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 4, 1)<CR>
-    noremap <silent> <A-=> :call smooth_scroll#up(&scroll, 4, 1)<CR>
-    noremap <silent> <C--> :call smooth_scroll#down(&scroll, 4, 1)<CR>
     noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 8, 2)<CR>
     noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 8, 2)<CR>
+
+    noremap <silent> <Leader>k :call smooth_scroll#up(&scroll, 4, 1)<CR>
+    noremap <silent> <Leader>j :call smooth_scroll#down(&scroll, 4, 1)<CR>
+    noremap <silent> <Leader><Leader> :call smooth_scroll#down(&scroll, 4, 1)<CR>
+
 "}}}
 
 " FILES {{{
@@ -481,10 +504,21 @@
     " Vim
     autocmd FileType vim set foldmethod=marker
 
+    "Julia
+    autocmd FileType julia nnoremap <Leader>e :w<CR>:!julia %<CR>
+
+    "Haskell
+    autocmd FileType haskell nnoremap <Leader>e :w<CR>:!runghc %<CR>
+
+    autocmd FileType haskell,julia set shiftwidth=2
+    autocmd FileType haskell,julia set softtabstop=2
+    autocmd FileType haskell,julia set tabstop=2
+
     " Python
     autocmd FileType python set autoindent
+    autocmd FileType python set foldmethod=indent
 
-    autocmd FileType python nnoremap <Leader>e :w<CR> :!python %<CR>
+    autocmd FileType python nnoremap <Leader>e :w<CR>:!python %<CR>
     autocmd FileType python nnoremap <Leader>b obreakpoint()<Esc>
     autocmd FileType python nnoremap <Leader>B !!bash<CR>
     autocmd FileType python inoremap ; :
@@ -492,13 +526,13 @@
 
     " Latex and Markdown Files
 
-    autocmd FileType tex <Leader>e :w! \| :!pdflatex -interaction=nonstopmode %<CR><CR>
+    " autocmd FileType tex <Leader>e :w! \| :!pdflatex -interaction=nonstopmode %<CR><CR>
     autocmd FileType tex,plaintex,markdown set foldmethod=marker
 
     autocmd FileType tex,plaintex,markdown nnoremap j gjzz
     autocmd FileType tex,plaintex,markdown nnoremap k gkzz
     autocmd FileType tex,plaintex,markdown nnoremap L g$
-    autocmd FileType tex,plaintex,markdown nnoremap H g_
+    autocmd FileType tex,plaintex,markdown nnoremap H g^
 
     autocmd FileType tex,plaintex,markdown nnoremap W w*#
     autocmd FileType tex,plaintex,markdown nnoremap <silent> Z z=1<CR><CR>

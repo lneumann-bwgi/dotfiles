@@ -17,7 +17,9 @@ alias la='ls -A'
 alias l='ls -CF'
 
 alias ranger='rangercd'
-alias gone="gone -w 25 -p 'wswswswl' -e 'feh -F ~/MEGA/time.png'"
+alias gone="gone -w 25 -p 'wswswswl' -e 'feh -F /home/neumann/MEGA/time.png' "
+alias anki="~/Downloads/anki-2.1.35-linux-amd64/bin/anki"
+alias youtube-dl="PYTHONPATH=$(dirname $0) $(dirname $0)/bin/youtube-dl"
 
 alias pm='sudo pacman'
 alias py='pipenv run python'
@@ -25,8 +27,8 @@ alias ipy='pipenv run ipython'
 alias sr='xsel | tspreed -i -f -b -p line'
 alias fh='history 0 | fzf --tac --no-sort'
 
-alias pytohn='python'
-alias ipytohn='ipython'
+# alias pytohn='/bin/python'
+alias ipytohn='~/miniconda3/bin/ipython'
 
 alias gs='git status'
 alias gd='git diff'

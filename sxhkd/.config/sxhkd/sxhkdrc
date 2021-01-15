@@ -27,6 +27,8 @@ super + r
     urxvt -e ranger
 super + s
     python -m speedread &> /dev/null
+super + y
+    clipmenu
 
 # Media keys
 

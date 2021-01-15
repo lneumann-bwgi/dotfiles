@@ -20,9 +20,9 @@ rofi.color-normal: #282828, #ebdbb2, #282828, #282828, #458588
 ! URxvt settings
 
 URxvt.depth: 32
-URxvt.fading: 12
+URxvt.fading: 0
 URxvt.intensityStyles: false
-URxvt.internalBorder: 8
+URxvt.internalBorder: 16
 URxvt.letterSpace: -1
 URxvt.lineSpace: 0
 URxvt.saveLines: 200
@@ -30,8 +30,8 @@ URxvt.scrolWthBuffer: true
 URxvt.scrollBar: false
 URxvt.termName: rxvt-unicode-256color
 
-URxvt.font: xft:hack:pixelsize=16:antialias=true:hinting=true
-URxvt.boldFont: xft:hack:bold:pixelsize=16:antialias=true:hinting=true
+URxvt.font: xft:Hack Nerd Font Mono:size=16:antialias=true:hinting=true
+URxvt.boldFont: xft:Hack Nerd Font Mono:bold:size=16:antialias=true:hinting=true
 
 ! Colored man pages
 

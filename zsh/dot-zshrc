@@ -119,6 +119,13 @@ bindkey -s '^r' 'rangercd\n'
 # Load z
 source /usr/share/z/z.sh
 
+# clipmenu
+export CM_SELECTIONS="clipboard"
+export CM_DEBUG=0
+export CM_OUTPUT_CLIP=1
+export CM_MAX_CLIPS=10
+export CM_LAUNCHER="rofi"
+
 # fzf settings
 source /usr/share/fzf/completion.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
@@ -128,10 +135,6 @@ export FZF_DEFAULT_OPTS="-m --height 60% --layout=reverse --border --preview='ba
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 export PATH=/home/neumann/.local/bin:$PATH
-
-# cat $HOME/le_roche | grep -E '^[[:digit:]]' | shuf | head -n 1 | cowsay
-# cat $HOME/laws | tr '\n' '$' | sed 's/END/\n/g' | shuf | head -n 1 | tr '$' '\n' | cowsay
-cat $HOME/laws | grep 'Law' | shuf | head -n 1 | cowsay
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -149,4 +152,3 @@ cat $HOME/laws | grep 'Law' | shuf | head -n 1 | cowsay
 # unset __conda_setup
 
 # <<< conda initialize <<<
-

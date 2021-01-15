@@ -1,19 +1,20 @@
-
 # set modifier
 set $super mod4
 set $alt mod1
 
 # set gaps
-gaps inner 4
-gaps outer 8
+gaps inner 6
+gaps outer 10
 
-for_window [class=".*"] border pixel 4
+for_window [class=".*"] border pixel 1
 
 assign [class="Conky"] 1
 for_window [class="Conky"] border pixel 0
 
-for_window [class="URxvt"] border pixel 4
 for_window [class="firefox"] border pixel 2
+for_window [class="Brave"] border pixel 0
+
+for_window [class="URxvt"] border pixel 6
 
 for_window [class="Speedread"] floating enable
 for_window [instance="_scratchpad"] move scratchpad; scratchpad show; resize set 800 400; move position center
@@ -32,13 +33,16 @@ workspace_auto_back_and_forth yes
 # autostart
 exec --no-startup-id conky --daemonize --pause=5
 exec --no-startup-id megasync
-exec --no-startup-id picom
+exec --no-startup-id picom --experimental-backends
 exec --no-startup-id redshift-gtk
+exec --no-startup-id clipmenud
 exec --no-startup-id setxkbmap -model thinkpad -layout br -variant abnt
 exec --no-startup-id unclutter
-exec --no-startup-id xrandr --output eDP1 --primary --mode 1366x768 --pos 0x132 --rotate normal --output DP1 --off --output DP2 --off --output HDMI1 --off --output HDMI2 --mode 1440x900 --pos 1366x0 --rotate normal --output VIRTUAL1 --off
+exec --no-startup-id xrandr --output eDP1 --mode 1366x768 --pos 0x132 --rotate normal --output DP1 --off --output DP2 --off --output HDMI1 --off --output HDMI2 --primary --mode 1440x900 --pos 1366x0 --rotate normal --output VIRTUAL1 --off
+
 exec_always --no-startup-id feh --randomize --bg-fill ~/MEGA/wallpapers/
 exec_always --no-startup-id sxhkd
+exec_always --no-startup-id ~/.config/polybar/launch.sh --blocks &
 
 # common apps keybinds
 bindsym $super+f fullscreen toggle
@@ -105,30 +109,31 @@ mode "resize" {
 bindsym $alt+r mode "resize"
 
 # i3status bar
-bar {
-    font pango: Hack 9
-    position top
-    status_command i3status
+# bar {
+#     font pango: Hack 9
+#     position top
+#     status_command i3status
 
-    mode dock
-    output HDMI2
+#     mode dock
+#     output HDMI2
 
     # hidden_state hide
     # modifier $super
 
-    colors {
+    # colors {
 
-        background #2F343F
-        statusline #F2F3F4
-        separator  #B2BEB5
+    #     background #2F343F
+    #     statusline #F2F3F4
+    #     separator  #B2BEB5
 
-        # colour of border, background, and text
-        focused_workspace       #2F343F #E52B50 #F2F3F4
-        active_workspace        #2F343F #2F343F #F2F3F4
-        inactive_workspace      #2F343F #2F343F #F2F3F4
-        urgent_workspacei       #2F343F #E52B50 #F2F3F4
-    }
-}
+    #     # colour of border, background, and text
+    #     focused_workspace       #2F343F #E52B50 #F2F3F4
+    #     active_workspace        #2F343F #2F343F #F2F3F4
+    #     inactive_workspace      #2F343F #2F343F #F2F3F4
+    #     urgent_workspacei       #2F343F #E52B50 #F2F3F4
+    # }
+# }
+
 # colour of border, background, text, indicator, and child_border
 client.focused              #2F343F #E52B50 #F2F3F4 #FF6633 #E52B50
 client.focused_inactive     #2F343F #2F343F #F2F3F4 #B2BEB5 #B2BEB5

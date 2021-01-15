@@ -20,6 +20,7 @@
 "|                                                                             |
 "|                                   DOTO:                                     |
 "|                  > Substitute vim-autoformat for ALEFix                     |
+"|                  > Vim-polyglot is slow                                     |
 "|                  > Integrate ALE and COC                                    |
 "|                  > Markdown preview                                         |
 "|                  > asyncrun commands                                        |
@@ -43,10 +44,13 @@
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
 
+  " Testing
+  let g:polyglot_disabled = ['python']
+
   call plug#begin('~/.vim/plugged')
 
   " Testing
-  Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} " semantic highlighting for Python
+  Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'} " semantic highlighting for Python
 
   Plug 'Chiel92/vim-autoformat'                       " format code with one button press
   Plug 'Yggdroot/indentLine'                          " displaying thin vertical lines at each indentation level for code
@@ -117,7 +121,7 @@
   set number relativenumber
 
   " Other Stuff
-  set cmdheight=2           " number of screen lines to use for the command-line
+  set cmdheight=1           " number of screen lines to use for the command-line
   set cursorline            " highlight the screen line of the cursor
   set hidden                " buffer is not unloaded when it is abandoned
   set laststatus=2          " alwyas show status line
@@ -137,7 +141,7 @@
 
   " Search Options
   set ignorecase
-  set nohlsearch
+  set hlsearch
   set noincsearch
   set showmatch
   set smartcase
@@ -476,8 +480,9 @@
   autocmd! User GoyoLeave Limelight!
 
   " Vim-polyglot
-  " let g:polyglot_disabled = ['markdown.plugin','python.plugin']
-  " let g:polyglot_disabled = ['autoindent']
+  let g:polyglot_disabled = ['autoindent']
+  let g:polyglot_disabled = ['ftdetect']
+  let g:polyglot_disabled = ['sensible']
 
   " NERDTree
   autocmd StdinReadPre * let s:std_in=1

@@ -1,7 +1,7 @@
 super + Return
     urxvt
 super + a
-    /home/neumann/Downloads/anki-2.1.35-linux-amd64/bin/anki
+    /home/neumann/Documents/Anki/anki-2.1.35-linux-amd64/bin/anki
 super + b
     brave
 super + shift + b
@@ -26,6 +26,8 @@ super + shift + p
 super + r
     urxvt -e ranger
 super + s
+    flite -voice slt --setf duration_stretch=0.5 "$(xclip -o)"
+super + shift + s
     python -m speedread &> /dev/null
 super + y
     clipmenu
@@ -55,4 +57,3 @@ XF86Tools
 
 XF86Favorites
     sh -c "setxkbmap -model thinkpad -layout us && xmodmap ~/.Xmodmap"
-

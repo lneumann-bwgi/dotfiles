@@ -11,8 +11,8 @@ for_window [class=".*"] border pixel 1
 assign [class="Conky"] 1
 for_window [class="Conky"] border pixel 0
 
-for_window [class="firefox"] border pixel 2
-for_window [class="Brave"] border pixel 0
+for_window [class="firefox"] border pixel 3
+for_window [class="Brave"] border pixel 3
 
 for_window [class="URxvt"] border pixel 6
 
@@ -31,14 +31,13 @@ popup_during_fullscreen smart
 workspace_auto_back_and_forth yes
 
 # autostart
+exec --no-startup-id clipmenud
 exec --no-startup-id conky --daemonize --pause=5
 exec --no-startup-id megasync
 exec --no-startup-id picom --experimental-backends
 exec --no-startup-id redshift-gtk
-exec --no-startup-id clipmenud
 exec --no-startup-id setxkbmap -model thinkpad -layout br -variant abnt
 exec --no-startup-id unclutter
-exec --no-startup-id xrandr --output eDP1 --mode 1366x768 --pos 0x132 --rotate normal --output DP1 --off --output DP2 --off --output HDMI1 --off --output HDMI2 --primary --mode 1440x900 --pos 1366x0 --rotate normal --output VIRTUAL1 --off
 
 exec_always --no-startup-id feh --randomize --bg-fill ~/MEGA/wallpapers/
 exec_always --no-startup-id sxhkd
@@ -48,8 +47,7 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh --blocks &
 bindsym $super+f fullscreen toggle
 bindsym $super+q kill
 
-bindsym $super+shift+s layout toggle split
-bindsym $super+shift+t layout tabbed
+bindsym $super+shift+t layout toggle all
 
 bindsym $super+shift+r restart
 bindsym $super+shift+q exec i3lock -u -c 000000

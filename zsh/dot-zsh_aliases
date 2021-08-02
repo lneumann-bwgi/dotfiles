@@ -11,27 +11,35 @@ alias diff='diff --color=auto'
 # alias -g G='| grep'
 # alias -g L='| less'
 
-alias ls=' ls -hN --group-directories-first --color=auto'
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+alias l='ls'
+alias ls='exa --color=always --group-directories-first' # my preferred listing
+alias la='ls -al'  # all files and dirs
+alias ll='ls -l'   # long format
+alias lt='ls -aT | bat'  # tree listing
+alias l.='ls -a | egrep "^\."'
+
+# alias ls=' ls -hN --group-directories-first --color=auto'
+# alias ll='ls -alF'
+# alias la='ls -A'
+# alias l='ls -CF'
 
 alias ranger='rangercd'
 alias gone="gone -w 25 -p 'wswswswl' -e 'feh -F /home/neumann/MEGA/time.png' "
 alias anki="~/Downloads/anki-2.1.35-linux-amd64/bin/anki"
-alias youtube-dl="PYTHONPATH=$(dirname $0) $(dirname $0)/bin/youtube-dl"
+alias ydl="python -m youtube_dl"
 
 alias pm='sudo pacman'
 alias py='pipenv run python'
 alias ipy='pipenv run ipython'
-alias sr='xsel | tspreed -i -f -b -p line'
-alias fh='history 0 | fzf --tac --no-sort'
+alias fzh='history 0 | fzf --tac --no-sort --preview= | cat | cut -d\  -f2- | tr -d '\n' | xclip -sel clip'
 
-# alias pytohn='/bin/python'
+alias pytohn='python'
 alias ipytohn='~/miniconda3/bin/ipython'
 
+alias gc='git commit'
+alias gd='git diff -w --word-diff --color-words'
+alias gl='git log --graph --decorate --oneline --abbrev-commit'
 alias gs='git status'
-alias gd='git diff'
 
 alias kahuna='ssh -YC neumann@kahuna.iqm.unicamp.br'
 alias galileu='ssh -YC neumann@177.220.13.33'

@@ -7,3 +7,4 @@ nnoremap <buffer> H g^
 
 nnoremap <buffer> W w*#
 nnoremap <buffer> <silent> Z z=1<CR><CR>
+nnoremap <buffer> <silent> <leader>e :LivedownToggle<CR>

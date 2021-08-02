@@ -11,6 +11,9 @@ PS1="$BASE_PS1%{$fg[blue]%}[I]%{$reset_color%}$%b "
 [ -f $HOME/.env_cluster ] && source $HOME/.env_cluster
 [ -f $HOME/.env_pc ] && source $HOME/.env_pc
 
+# Keyboard model
+setxkbmap -model thinkpad -layout br -variant abnt
+
 # Keyboard repeat
 xset -r 43
 xset -r 44

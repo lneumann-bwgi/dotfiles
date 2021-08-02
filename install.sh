@@ -6,6 +6,8 @@ stow -R --dotfiles newsboat
 stow -R --dotfiles nvim
 stow -R --dotfiles picom
 stow -R --dotfiles ranger
+stow -R --dotfiles redshift
+stow -R --dotfiles rg
 stow -R --dotfiles sxhkd
 stow -R --dotfiles xorg
 stow -R --dotfiles zathura

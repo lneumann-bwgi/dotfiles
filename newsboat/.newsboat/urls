@@ -4,10 +4,9 @@ http://feeds.feedburner.com/michaelnielsen/wmna?format=xml "data science"
 http://kevinzakka.github.io/feed "data science"
 http://www.degeneratestate.org/feeds/all.rss.xml "data science"
 http://www.oranlooney.com/index.xml "~Oran Looney" "data science"
-https://blog.cerebralab.com/feed.xml "data science"
 
 # economy
-http://feeds.feedburner.com/marginalrevolution/feed?format=xml
+# http://feeds.feedburner.com/marginalrevolution/feed?format=xml "econ"
 
 # python
 http://hynek.me/index.xml "python"
@@ -19,33 +18,43 @@ http://rednafi.github.io/digressions/feed "python"
 http://treyhunner.com/atom.xml "python"
 
 # tech
+http://anarute.com/feed "tech"
+http://blog.codinghorror.com/rss/ "tech"
+http://blog.miguelgrinberg.com/feed "~Miguel Grinberg" "tech"
 http://chrispenner.ca/atom.xml "tech"
+http://codeinthehole.com/index.xml "tech"
 http://julialang.org/feed.xml "~JuliaLang" "tech"
 http://martinheinz.dev/rss/ "tech"
-http://neovim.io/news.xml
+http://neovim.io/news.xml "tech"
 http://opensourc.es/blog.rss "tech"
 http://ruslanspivak.com/feeds/all.atom.xml "tech"
 http://sobolevn.me/feed.xml "tech"
-http://vimtricks.com/feed/
+http://vimtricks.com/feed/ "tech"
 http://www.archlinux.org/feeds/news/ "tech"
+http://www.joelonsoftware.com/feed/ "tech"
 http://www.petecorey.com/feed.xml "tech"
 http://www.philipzucker.com/feed "tech"
+http://www.taniarascia.com/rss.xml "tech"
+http://death.andgravity.com/_feed/index.xml "tech"
+https://www.hhyu.org/index.xml "tech"
 
 # math
-http://algorithmist.wordpress.com/feed/ "maths"
-http://jeremykun.com/feed/ "maths"
-http://statisticalbiophysicsblog.org/?feed=rss2 "maths"
+http://algorithmist.wordpress.com/feed/ "math"
+http://jeremykun.com/feed/ "math"
+http://statisticalbiophysicsblog.org/?feed=rss2 "math"
 
 # science
-# http://chemistry-europe.onlinelibrary.wiley.com/feed/15213765/most-cited "~Eur. J. Chem - most cited" "science"
+http://chemistry-europe.onlinelibrary.wiley.com/feed/15213765/most-cited "~Eur. J. Chem - most cited" "science"
+http://eukaryotewritesblog.com/feed/
 http://feeds.aps.org/rss/allsuggestions.xml "~PhyRev - editor's suggestions" "science"
-# http://feeds.aps.org/rss/recent/prlsuggestions.xml "~PhyRev - PRL suggestions" "science"
 http://feeds.feedburner.com/ProcNatlAcadSciUsaMost-readFull-textArticles?format=xml "~PNAS - most read" "science"
 http://feeds.feedburner.com/acs/chreay?format=xml "~ACS - Chemistry Review latest articles" "science"
-http://feeds.feedburner.com/acs/jcisd8?format=xml "~ACS - J. Chem. Inf. Mol. latest articles" "science"
-http://feeds.feedburner.com/acs/jctcce?format=xml "~ACS - J. Chem The. Comp. latest articles" "science"
+http://feeds.nature.com/natrevchem/rss/current?format=xml "science"
+http://pdb101.rcsb.org/motm/rss.xml "~PDB" "science"
+# http://feeds.aps.org/rss/recent/prlsuggestions.xml "~PhyRev - PRL suggestions" "science"
+# http://feeds.feedburner.com/acs/jcisd8?format=xml "~ACS - J. Chem. Inf. Mol. latest articles" "science"
+# http://feeds.feedburner.com/acs/jctcce?format=xml "~ACS - J. Chem The. Comp. latest articles" "science"
 # http://feeds.feedburner.com/pnas/SMZM?format=xml "~PNAS - latest articles" "science"
-# http://feeds.nature.com/natrevchem/rss/current?format=xml "science"
 # http://feeds.nature.com/srep/rss/current?format?xml "science"
 # http://feeds.rsc.org/rss/cc?format=xml "science"
 # http://feeds.rsc.org/rss/cs?format=xml "science"

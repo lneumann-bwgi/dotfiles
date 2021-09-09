@@ -64,15 +64,6 @@ handle_extension() {
                     7z l -p -- "${FILE_PATH}" && exit 5
                     exit 1;;
 
-        ## PDF
-        # pdf)
-        # pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - | \
-        #     fmt -w "${PV_WIDTH}" && exit 5
-        #             mutool draw -F txt -i -- "${FILE_PATH}" 1-10 | \
-        #                 fmt -w "${PV_WIDTH}" && exit 5
-        #                                     exiftool "${FILE_PATH}" && exit 5
-        #                                     exit 1;;
-
         ## BitTorrent
         torrent)
         transmission-show -- "${FILE_PATH}" && exit 5
@@ -108,12 +99,17 @@ handle_extension() {
         python -m json.tool -- "${FILE_PATH}" && exit 5
         ;;
 
+        mp3)
+        id3info "${FILE_PATH}" && exit 5
+        ;;
+
         ## Direct Stream Digital/Transfer (DSDIFF) and wavpack aren't detected
         ## by file(1).
         dff|dsf|wv|wvc)
         mediainfo "${FILE_PATH}" && exit 5
         exiftool "${FILE_PATH}" && exit 5
         ;; # Continue with next handler on failure
+
 esac
 }
 

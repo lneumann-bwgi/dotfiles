@@ -19,10 +19,7 @@
 "|                                                                             |
 "|                                                                             |
 "|                                   DOTO:                                     |
-"|                  > Substitute vim-autoformat for ALEFix                     |
-"|                  > Vim-polyglot is slow                                     |
 "|                  > Integrate ALE and COC                                    |
-"|                  > Markdown preview                                         |
 "|                  > asyncrun commands                                        |
 "|                  > nvim-gdb                                                 |
 "|                  > nvim-ipy                                                 |
@@ -50,9 +47,9 @@
   call plug#begin('~/.vim/plugged')
 
   " Testing
-  Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins', 'for': 'python'} " semantic highlighting for Python
+  Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python'} " semantic highlighting for Python
+  Plug 'shime/vim-livedown', { 'on': 'LivedownToggle' } " markdown preview
 
-  Plug 'Chiel92/vim-autoformat'                       " format code with one button press
   Plug 'Yggdroot/indentLine'                          " displaying thin vertical lines at each indentation level for code
   Plug 'dense-analysis/ale'                           " a plugin providing linting in NeoVim
   Plug 'godlygeek/tabular', { 'on': 'Tabularize' }    " line up text.
@@ -85,6 +82,7 @@
   Plug 'joshdick/onedark.vim'
   Plug 'junegunn/seoul256.vim'
   Plug 'morhetz/gruvbox'
+  Plug 'pineapplegiant/spaceduck'
   Plug 'sainnhe/gruvbox-material'
 
   call plug#end()
@@ -95,8 +93,8 @@
   set t_Co=256 " URxvt doesn't support termguicolors
   set background=dark
 
-  colorscheme onedark
-  let g:lightline = {'colorscheme' : 'onedark'}
+  colorscheme spaceduck
+  let g:lightline = {'colorscheme' : 'spaceduck'}
 "}}}
 
 " SET DEFAULTS {{{
@@ -106,8 +104,8 @@
   syntax on
 
   " Testing
-  set inccommand=split "better substitution behavior
-  set exrc             "source directory specific vimrc
+  " set inccommand=split "better substitution behavior
+  " set exrc             "source directory specific vimrc
 
   " Basic Stuff
   set backspace=indent,eol,start
@@ -178,7 +176,6 @@
   set smarttab
   set softtabstop=4
   set tabstop=4
-
 "}}}
 
 " KEY MAPS {{{
@@ -186,6 +183,8 @@
   let mapleader=' '
 
   " Testing
+
+  " cgn –> Changes the next match of my pattern and . to repeat
 
   " Common Sense
   nnoremap Y y$
@@ -210,16 +209,19 @@
   nnoremap <Leader>ss :call ToggleSpell_EN()<CR>
   nnoremap <Leader>sp :call ToggleSpell_PT()<CR>
 
-  " Splits navigation
-  nnoremap <Leader>k <C-w><Up>
-  nnoremap <Leader>j <C-w><Down>
-  nnoremap <Leader>h <C-w><Left>
-  nnoremap <Leader>l <C-w><Right>
+  vnoremap <Leader>c :call UniqueWords()<CR>:vsp /tmp/unique_vim \| vertical resize 30 \| w<CR> \| normal zR
+  nnoremap <Leader>x :call OpenURLUnderCursor()<CR>
 
   " Git
   nnoremap <Leader>gs :Gstatus<CR>
   nnoremap <Leader>gd :Gvdiffsplit<CR>
   nnoremap <Leader>gc :Gcommit % -m "vim commit"<CR>
+
+  " Splits navigation
+  nnoremap <Leader>k <C-w><Up>
+  nnoremap <Leader>j <C-w><Down>
+  nnoremap <Leader>h <C-w><Left>
+  nnoremap <Leader>l <C-w><Right>
 
   " Visual selection in fold
   nnoremap viz v[zo]z$
@@ -228,29 +230,63 @@
   nnoremap gV gv
   nnoremap gv `[v`]
 
-  " Goes to last jump (and gi to last edit)
+  " Goes to last jump / insert
   nnoremap gj ''
+  nnoremap gi gi<Esc>
 
   " Better jumping
-  nnoremap ]' g;
-  nnoremap [' g,
+  nnoremap ]c g;
+  nnoremap [c g,
 
-  nnoremap ]e :cnext<CR>
-  nnoremap [e :cprev<CR>
+  nnoremap ]q :cnext<CR>
+  nnoremap [q :cprev<CR>
 
-  nnoremap gn *
-  nnoremap gN #
+  nnoremap ]a :ALENextWrap<CR>
+  nnoremap [a :ALEPreviousWrap<CR>
+
+  nnoremap ]A :ALELast
+  nnoremap [A :ALEFirst
 
   nnoremap ]n *
   nnoremap [n #
+
+  nnoremap gn *
+  nnoremap gN #
 
   " Navigation in buffers
   nnoremap ]b :w\|bn<CR>
   nnoremap [b :w\|bp<CR>
 
   " Navigation in tabs
-  nnoremap ]t :w\|:tabNext<CR>
-  nnoremap [T :w\|:tabPrevius<CR>
+  nnoremap <Tab> :w\|:tabnext<CR>
+  nnoremap <S-Tab> :w\|:tabprevious<CR>
+
+  " nnoremap ]t :w\|:tabnext<CR>
+  " nnoremap [T :w\|:tabprevious<CR>
+
+  " Keep cursor in the center
+  nnoremap } }zzzv
+  nnoremap { {zzzv
+  nnoremap <C-u> <C-u>zzzv
+  nnoremap <C-d> <C-d>zzzv
+  nnoremap <C-f> <C-f>zzzv
+  nnoremap <C-b> <C-b>zzzv
+
+  " Undo break points
+  inoremap , ,<C-g>u
+  inoremap . .<C-g>u
+
+  " More ergonomic
+  nnoremap vib vi(
+  nnoremap cib ci(
+  nnoremap dib di(
+
+  nnoremap viq vi"
+  nnoremap ciq ci"
+  nnoremap ciq di"
+
+  nnoremap cs csiw
+  nnoremap ds dsiw
 
   " Save (similar to ZZ, ZQ)
   nnoremap ZS :w<CR>
@@ -262,6 +298,9 @@
 
   " Past from + register in insert mode
   inoremap <C-r> <C-r>+
+
+  " pasting multiple times
+  nnoremap gp "0p
 
   " Keep selection after indenting
   xnoremap <silent> < <gv
@@ -276,10 +315,10 @@
   cnoremap <C-e> <end>
 
   " Resize windows
-  nnoremap <A-k> <C-w>+
-  nnoremap <A-j> <C-w>-
-  nnoremap <A-h> <C-w><
-  nnoremap <A-l> <C-w>>
+  nnoremap <A-Up> <C-w>+
+  nnoremap <A-Down> <C-w>-
+  nnoremap <A-Left> <C-w><
+  nnoremap <A-Right> <C-w>>
 
   " Terminal mode
   tnoremap <Esc> <C-\><C-n>
@@ -325,6 +364,7 @@
   abbr fodl fold
   abbr funciton function
   abbr lenght length
+  abbr rigth right
   abbr mpa map
   abbr ragne range
   abbr rnage range
@@ -379,8 +419,8 @@
     redraw
   endfunction
 
-  nnoremap <silent> n   n:call HLNext(0.6)<CR>
-  nnoremap <silent> N   N:call HLNext(0.6)<CR>
+  nnoremap <silent> n   n:call HLNext(0.6)<CR>zz
+  nnoremap <silent> N   N:call HLNext(0.6)<CR>zz
 
   " Toggle between number and relativenumber
   function! ToggleNumber()
@@ -442,33 +482,59 @@
                 \ sed "s/^['-]*//;s/['-]$//" | sort |
                 \ uniq -c | sort -nr > /tmp/unique_vim
   endfunction
-  vnoremap <Leader>c :call UniqueWords()<CR>:vsp /tmp/unique_vim \| vertical resize 30 \| w<CR> \| normal zR
+
+  " Open url under cursor
+  function! OpenURLUnderCursor()
+    let s:uri = expand('<cWORD>')
+    let s:uri = substitute(s:uri, '?', '\\?', '')
+    let s:uri = shellescape(s:uri, 1)
+    if s:uri != ''
+      silent exec "!open '".s:uri."'"
+      :redraw!
+    endif
+  endfunction
 "}}}
 
 " PLUGINS CONFIG {{{
 
   " Ale
-  let g:ale_set_highlights = 0
-  let g:ale_lint_on_text_changed='never'
-  let g:ale_lint_on_insert_leave=0
   let g:ale_lint_on_enter=0
+  let g:ale_lint_on_insert_leave=0
   let g:ale_lint_on_save=1
+  let g:ale_lint_on_text_changed='never'
 
-  let g:ale_fix_on_save=0
-  let g:ale_fixers=[]
+  let g:ale_linters = {
+  \   'python': ['flake8'],
+  \   'javascript': ['flow', 'eslint', 'standard'],
+  \}
+
+  let g:ale_fix_on_save=1
+  let g:ale_fixers = {
+  \   '*': ['remove_trailing_lines', 'trim_whitespace'],
+  \   'javascript': ['prettier', 'eslint', 'standard'],
+  \   'python': ['black', 'isort'],
+  \}
+
+  let g:ale_javascript_flow_executable='npx flow'
+  let g:ale_javascript_eslint_executable='npx eslint'
+  let g:ale_javascript_prettier_executable='npx prettier'
+  " let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-comma none'
+
   let g:ale_completion_enabled=0
 
   let g:ale_echo_msg_error_str = 'E'
   let g:ale_echo_msg_warning_str = 'W'
   let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
+  let g:ale_sign_error = '✘'
+  let g:ale_sign_warning = '⚠'
+
   let g:ale_set_loclist = 0
   let g:ale_set_quickfix = 1
 
-  " Autoformat
-  autocmd BufWrite * execute ':Autoformat'
-  let g:autoformat_autoindent=0
-  let g:autoformat_remove_trailing_spaces = 1
+  let g:ale_set_highlights = 0
+  " highlight ALEErrorSign ctermbg=NONE ctermfg=red
+  " highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
   " Indent Line
   let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -480,9 +546,8 @@
   autocmd! User GoyoLeave Limelight!
 
   " Vim-polyglot
-  let g:polyglot_disabled = ['autoindent']
-  let g:polyglot_disabled = ['ftdetect']
   let g:polyglot_disabled = ['sensible']
+  " let g:polyglot_disabled = ['autoindent','ftdetect', 'sensible']
 
   " NERDTree
   autocmd StdinReadPre * let s:std_in=1

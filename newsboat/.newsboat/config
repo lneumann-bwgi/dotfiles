@@ -22,7 +22,7 @@ bind-key ^u pageup
 
 # -- display -------------------------------------------------------------------
 
-show-read-feeds no
+show-read-feeds yes
 feed-sort-order unreadarticlecount-asc
 text-width 80
 

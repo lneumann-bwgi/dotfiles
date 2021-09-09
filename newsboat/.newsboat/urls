@@ -7,6 +7,7 @@ http://www.oranlooney.com/index.xml "~Oran Looney" "data science"
 
 # economy
 # http://feeds.feedburner.com/marginalrevolution/feed?format=xml "econ"
+https://bonifacio.net.br/feed/
 
 # python
 http://hynek.me/index.xml "python"
@@ -26,7 +27,7 @@ http://codeinthehole.com/index.xml "tech"
 http://julialang.org/feed.xml "~JuliaLang" "tech"
 http://martinheinz.dev/rss/ "tech"
 http://neovim.io/news.xml "tech"
-http://opensourc.es/blog.rss "tech"
+http://opensourc.es/feed.xml "tech"
 http://ruslanspivak.com/feeds/all.atom.xml "tech"
 http://sobolevn.me/feed.xml "tech"
 http://vimtricks.com/feed/ "tech"

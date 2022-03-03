@@ -11,6 +11,10 @@ PS1="$BASE_PS1%{$fg[blue]%}[I]%{$reset_color%}$%b "
 [ -f $HOME/.env_cluster ] && source $HOME/.env_cluster
 [ -f $HOME/.env_pc ] && source $HOME/.env_pc
 
+[ -f $HOME/.config/nnn/config.sh ] && source $HOME/.config/nnn/config.sh
+
+[ -f /usr/share/nnn/quitcd/quitcd.bash_zsh ] && source /usr/share/nnn/quitcd/quitcd.bash_zsh
+
 # Keyboard model
 setxkbmap -model thinkpad -layout br -variant abnt
 
@@ -21,8 +25,8 @@ xset -r 45
 xset -r 46
 xset r rate 180 50
 
-xrdb ~/.Xresources
-xmodmap ~/.Xmodmap 2> /dev/null
+ # xrdb ~/.Xresources
+# xmodmap ~/.Xmodmap 2> /dev/null
 
 # History in cache directory
 HISTCONTROL=ignoreboth
@@ -31,6 +35,13 @@ SAVEHIST=10000
 HISTFILE=~/.zsh_history
 export HISTIGNORE="ls:cd:vi:vim:nvim"
 export HISTTIMEFORMAT="%h %d %H:%M:%S "
+
+# The meaning of these options can be found in man page of `zshoptions`.
+setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
+setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
+setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
+setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
+setopt EXTENDED_HISTORY  # record command start time
 
 stty -ixon
 

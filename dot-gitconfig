@@ -2,4 +2,6 @@
     name = Lucas Neumann
     email = neumannlucas@gmail.com
 [core]
-    editor = vim
+    editor = nvim
+[credential]
+    helper = store

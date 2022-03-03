@@ -24,6 +24,7 @@ http://blog.codinghorror.com/rss/ "tech"
 http://blog.miguelgrinberg.com/feed "~Miguel Grinberg" "tech"
 http://chrispenner.ca/atom.xml "tech"
 http://codeinthehole.com/index.xml "tech"
+http://jdhao.github.io/index.xml "tech"
 http://julialang.org/feed.xml "~JuliaLang" "tech"
 http://martinheinz.dev/rss/ "tech"
 http://neovim.io/news.xml "tech"
@@ -60,3 +61,5 @@ http://pdb101.rcsb.org/motm/rss.xml "~PDB" "science"
 # http://feeds.rsc.org/rss/cc?format=xml "science"
 # http://feeds.rsc.org/rss/cs?format=xml "science"
 # http://science.sciencemag.org/rss/current.xml "~Science - current issue" "science"
+
+https://www.exurbe.com/feed/

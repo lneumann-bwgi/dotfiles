@@ -1,3 +1,4 @@
+stow -R --dotfiles bspwm
 stow -R --dotfiles conky
 stow -R --dotfiles dunst
 stow -R --dotfiles git

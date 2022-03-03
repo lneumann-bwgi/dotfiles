@@ -6,10 +6,8 @@ BASE_PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[yellow]%}@%{$fg[yellow]%}%M %b%{
 PS1="$BASE_PS1%{$fg[blue]%}[I]%{$reset_color%}$%b "
 
 # Load aliases and shortcuts if existent.
-[ -f $HOME/.zsh_functions ] && source $HOME/.zsh_functions
-[ -f $HOME/.zsh_aliases ] && source $HOME/.zsh_aliases
-[ -f $HOME/.env_cluster ] && source $HOME/.env_cluster
-[ -f $HOME/.env_pc ] && source $HOME/.env_pc
+[ -f $HOME/.functions ] && source $HOME/.functions
+[ -f $HOME/.aliases ] && source $HOME/.aliases
 
 [ -f $HOME/.config/nnn/config.sh ] && source $HOME/.config/nnn/config.sh
 

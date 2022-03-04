@@ -1,25 +1,3 @@
-cgalileu() {
-    scp -r "neumann@177.220.13.33:/home/neumann/$1" "."
-}
-tgalileu() {
-    scp -r "$1" "neumann@177.220.13.33:/home/neumann/"
-}
-
-ckahuna() {
-    scp -r "neumann@kahuna.iqm.unicamp.br:/home/neumann/$1" "."
-}
-tkahuna() {
-    scp -r "$1" "neumann@kahuna.iqm.unicamp.br:/home/neumann/$2"
-}
-
-cunicamp() {
-    scp -r -P 2022 "lucas_newmann@rj.iqm.unicamp.br:/home/lucas_newmann/$1" "."
-}
-tunicamp() {
-    scp -r -P 2022 "$1" "lucas_newmann@rj.iqm.unicamp.br:/home/lucas_newmann/$2"
-}
-
-
 ex () {
     if [ -f $1 ]; then
         case $1 in

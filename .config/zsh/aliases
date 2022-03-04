@@ -9,19 +9,15 @@ alias vi='nvim'
 alias vim='nvim'
 
 # dangerous
-alias ps='procs'
-alias grep='rg'
 alias cut='choose'
+alias grep='rg'
+alias ps='procs'
 
 # safety first
 alias mkdir='mkdir -pv'
 alias mv='mv -iv'
 alias rm='rm -v'
 alias cp='cp -iv'
-
-# color
-alias grep='grep --color=auto'
-alias diff='diff --color=auto'
 
 # ls options
 alias ls='ls --color=always --group-directories-first'

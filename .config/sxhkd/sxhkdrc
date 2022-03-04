@@ -1,7 +1,7 @@
 # Launch Aplications
 
 super + Return
-    urxvt
+    alacritty
 super + b
     brave
 super + d
@@ -11,8 +11,7 @@ super + p
 super + shift + p
     scrot --focused -e 'mv $f ~/Pictures'
 super + r
-    flite -voice slt "$(xclip -o)"
-    # flite -voice slt --setf duration_stretch=0.8 "$(xclip -o)"
+    flite -voice slt --setf duration_stretch=0.8 "$(xclip -o)"
 super + shift + r
     python -m speedread &> /dev/null
 super + y
@@ -63,7 +62,7 @@ super + g
     bspc node -s biggest.window
 
 # set the window state
-super + shift + {t,shift + t,f,shift + f}
+super + {t,shift + t,f,shift + f}
     bspc node -t {tiled,pseudo_tiled,fullscreen,floating}
 
 #

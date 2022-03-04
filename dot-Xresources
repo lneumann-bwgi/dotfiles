@@ -104,8 +104,8 @@ URxvt.cursorColor2: #3a3a3a
 !URxvt.color15: #eaeaea
 
 ! Dracula Theme
-URxvt.foreground: #F8F8F2
-URxvt.background: #282A36
+URxvt.foreground: [95]#F8F8F2
+URxvt.background: [95]#282A36
 
 URxvt.color0:     #000000
 URxvt.color8:     #4D4D4D

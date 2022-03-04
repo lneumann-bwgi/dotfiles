@@ -1,12 +1,14 @@
 #! /bin/sh
 
 # start daemons
-pgrep -x sxhkd > /dev/null || sxhkd &
 pgrep -x clipmenud > /dev/null || clipmenud &
-pgrep -x picom > /dev/null || picom --experimental-backends &
-pgrep -x polybar > /dev/null || polybar &
-pgrep -x redshift > /dev/null || redshift &
 pgrep -x unclutter > /dev/null || unclutter &
+pgrep -x redshift > /dev/null || redshift &
+
+# restart daemons
+pkill sxhkd; sxhkd &
+pkill picom; sleep 0.1; picom --experimental-backends &
+pkill polybar; polybar &
 
 setxkbmap -model thinkpad -layout br -variant abnt
 feh --randomize --bg-fill ~/MEGA/wallpapers/

@@ -3,12 +3,6 @@
 # Set prompt
 export PS1="\[\e[33m\][\[\e[m\]\[\e[33m\]\u\[\e[m\]\[\e[33m\]@\[\e[m\]\[\e[33m\]\h\[\e[m\]\[\e[31m\] -> \[\e[m\]\[\e[37m\]\w\[\e[m\]\[\e[33m\]]\[\e[m\]\$ "
 
-# Load aliases and shortcuts if existent.
-[ -f $HOME/.zsh_functions ] && source $HOME/.zsh_functions
-[ -f $HOME/.zsh_aliases ] && source $HOME/.zsh_aliases
-[ -f $HOME/.env_cluster ] && source $HOME/.env_cluster
-[ -f $HOME/.env_pc ] && source $HOME/.env_pc
-
 # Keybord repeat
 xset -r 43
 xset -r 44
@@ -35,6 +29,3 @@ if ! shopt -oq posix; then
         . /etc/bash_completion
     fi
 fi
-
-# Load z
-. /usr/share/z/z.sh

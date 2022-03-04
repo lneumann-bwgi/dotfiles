@@ -1,3 +1,4 @@
+alacritty
 arandr
 bat
 blueman
@@ -36,9 +37,11 @@ megasync-bin
 mplayer
 neovim
 nerd-fonts-hack
+nerd-fonts-noto
 newsboat
 nnn
 openssh
+otf-nerd-fonts-fira-code
 pass
 picom-ibhagwan-git
 polybar-git
@@ -61,12 +64,12 @@ sxhkd
 tealdeer
 thermald
 transmission-gtk
-ttf-dejavu
-ttf-hack
+ttf-iosevka-nerd
 typespeed
 ufw
 unclutter
 unzip
+urxvt-perls
 vlc
 wget
 zathura

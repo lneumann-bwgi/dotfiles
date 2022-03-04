@@ -1,0 +1,56 @@
+# welcome to the 21th century
+alias cat='bat'
+alias diff='delta'
+alias df='duf'
+alias du='dust'
+alias find='fd'
+alias ls='exa'
+alias vi='nvim'
+alias vim='nvim'
+
+# dangerous
+alias ps='procs'
+alias grep='rg'
+alias cut='choose'
+
+# safety first
+alias mkdir='mkdir -pv'
+alias mv='mv -iv'
+alias rm='rm -v'
+alias cp='cp -iv'
+
+# color
+alias grep='grep --color=auto'
+alias diff='diff --color=auto'
+
+# ls options
+alias ls='ls --color=always --group-directories-first'
+alias la='ls -al'  # all files and dirs
+alias lh='ls -a | egrep "^\."' # only hidden
+alias ll='ls -l'   # long format
+alias lt='ls -aT | bat'  # tree listing
+
+# correct typos
+alias ipytohn='~/miniconda3/bin/ipython'
+alias ipython='~/miniconda3/bin/ipython'
+alias pytohn='python'
+alias vu='nvim'
+
+# pipenv stuff
+alias py='pipenv run python'
+alias ipy='pipenv run ipython'
+
+# git stuff
+alias gc='git commit'
+alias gd='git diff -w --word-diff --color-words'
+alias gl='git log --graph --decorate --oneline --abbrev-commit'
+alias gs='git status'
+
+# vim stuff
+alias vsp='nvim -O'
+alias vtd='nvim -d'
+alias fvim='nvim -n -u NONE -i NONE -N' # bare bones vim
+
+# misc
+alias ranger='rangercd'
+alias anki="~/Downloads/anki-2.1.35-linux-amd64/bin/anki"

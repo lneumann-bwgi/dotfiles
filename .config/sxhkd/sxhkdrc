@@ -11,7 +11,8 @@ super + p
 super + shift + p
     scrot --focused -e 'mv $f ~/Pictures'
 super + r
-    flite -voice slt --setf duration_stretch=0.5 "$(xclip -o)"
+    flite -voice slt "$(xclip -o)"
+    # flite -voice slt --setf duration_stretch=0.8 "$(xclip -o)"
 super + shift + r
     python -m speedread &> /dev/null
 super + y

@@ -22,6 +22,9 @@ if [ "$shellname" = "bash" ]; then
 elif [ "$shellname" = "fish" ]; then
     hist_file="$HOME/.local/share/fish/fish_history"
     entry="$(grep "\- cmd: " "$hist_file" | cut -c 8- | "$fuzzy")"
+elif [ "$shellname" = "zsh" ]; then
+    hist_file="${ZDOTDIR:-$HOME}/.zsh_history"
+    entry="$(cut -d';' -f2 "$hist_file"  | "$fuzzy")"
 fi
 
 if [ -n "$entry" ]; then

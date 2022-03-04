@@ -59,7 +59,7 @@ super + m
 
 # swap the current node and the biggest window
 super + g
-    bspc node -s biggest.window
+    bspc node -s biggest.local
 
 # set the window state
 super + {t,shift + t,f,shift + f}

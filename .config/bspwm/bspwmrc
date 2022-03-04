@@ -10,7 +10,6 @@ pkill sxhkd; sxhkd &
 pkill picom; sleep 0.1; picom --experimental-backends &
 pkill polybar; polybar &
 
-setxkbmap -model thinkpad -layout br -variant abnt
 feh --randomize --bg-fill ~/MEGA/wallpapers/
 
 # set wm config

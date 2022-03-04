@@ -40,6 +40,8 @@ nerd-fonts-hack
 nerd-fonts-noto
 newsboat
 nnn
+nsxiv-git
+nyxt
 openssh
 otf-nerd-fonts-fira-code
 pass
@@ -61,9 +63,12 @@ so-git
 starship
 stow
 sxhkd
+syncthing
 tealdeer
 thermald
+tokei
 transmission-gtk
+trash-cli
 ttf-iosevka-nerd
 typespeed
 ufw

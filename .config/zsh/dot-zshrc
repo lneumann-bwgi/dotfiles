@@ -22,7 +22,7 @@ export FZF_DEFAULT_OPTS="-m --height 60% --layout=reverse --border --preview='ba
 
 # Load NNN
 [ -f $HOME/.config/nnn/config.sh ] && source $HOME/.config/nnn/config.sh
-[ -f /usr/share/nnn/quitcd/quitcd.bash_zsh ] && source /usr/share/nnn/quitcd/quitcd.bash_zsh # cd to dir on nnn quit
+# [ -f /usr/share/nnn/quitcd/quitcd.bash_zsh ] && source /usr/share/nnn/quitcd/quitcd.bash_zsh # cd to dir on nnn quit
 
 # clipmenu
 export CM_SELECTIONS="clipboard"

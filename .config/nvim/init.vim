@@ -49,7 +49,6 @@
   " Testing
   Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python'} " semantic highlighting for Python
   Plug 'shime/vim-livedown', { 'on': 'LivedownToggle' } " markdown preview
-
   Plug 'Yggdroot/indentLine'                          " displaying thin vertical lines at each indentation level for code
   Plug 'dense-analysis/ale'                           " a plugin providing linting in NeoVim
   Plug 'godlygeek/tabular', { 'on': 'Tabularize' }    " line up text.
@@ -57,24 +56,17 @@
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fzf basic wrapper function for Vim
   Plug 'junegunn/fzf.vim'                             " fzf basic wrapper function for Vim
   Plug 'luochen1990/rainbow'                          " shows different levels of parentheses in different colors
+  Plug 'machakann/vim-sandwich'
   Plug 'majutsushi/tagbar'                            " easy way to browse the tags of the current file
   Plug 'mhinz/vim-signify'                            " uses the sign column to indicate added, modified and removed lines
-  Plug 'preservim/nerdtree'                           " file system explorer for the Vim
   Plug 'rhysd/clever-f.vim'                           " extends f, F, t and T mappings
   Plug 'sheerun/vim-polyglot'                         " a collection of language packs for Vim.
   Plug 'tpope/vim-commentary'                         " comment stuff out
   Plug 'tpope/vim-fugitive'                           " calls any arbitrary Git command
-  Plug 'tpope/vim-surround'                           " is all about surroundings: parentheses, brackets, quotes
-
-  " Plug 'terryma/vim-smooth-scroll'
-  " Plug 'tmsvg/pear-tree'
 
   " Writing
   Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }           " distraction-free writing in Vim.
   Plug 'junegunn/limelight.vim', { 'on' : 'Limelight'} " Goyo plugin
-  " Plug 'reedes/vim-wordy', { 'on': 'Wordy' }           " uncover usage problems in your writing
-  " Plug 'rhysd/vim-grammarous'                          " a powerful grammar checker for Vim
-  " Plug 'ron89/thesaurus_query.vim', { 'on': 'Goyo' }   " lookup synonyms of any word under cursor
 
   " Color schemes
   Plug 'ajmwagar/vim-deus'
@@ -200,14 +192,20 @@
   nnoremap <Leader>s !!bash<CR>
 
   nnoremap <Leader>T :vsp term://zsh<CR>
-  nnoremap <Leader>ta :TagbarToggle<CR>
-  nnoremap <Leader>tt :NERDTreeToggle<CR>
+  nnoremap <Leader>t :TagbarToggle<CR>
 
   nnoremap <Leader>w :call ToggleWrap()<CR>
   nnoremap <Leader>n :call ToggleNumber()<CR>
 
-  nnoremap <Leader>ss :call ToggleSpell_EN()<CR>
+  " Spelling
+  nnoremap <Leader>se :call ToggleSpell_EN()<CR>
   nnoremap <Leader>sp :call ToggleSpell_PT()<CR>
+
+  " Dictionaries
+  nnoremap <Leader>de :execute '!dict -d wn ' . shellescape(expand('<cword>')) . ' \| head -n 25'<Cr>
+  nnoremap <Leader>ds :execute '!dict -d moby-thesaurus ' . shellescape(expand('<cword>')) . ' \| head -n 25'<Cr>
+  nnoremap <Leader>dp :execute '!dict -d fd-por-eng ' . shellescape(expand('<cword>'))<Cr>
+  nnoremap <Leader>dd :execute '!dict -d fd-deu-eng ' . shellescape(expand('<cword>'))<Cr>
 
   vnoremap <Leader>c :call UniqueWords()<CR>:vsp /tmp/unique_vim \| vertical resize 30 \| w<CR> \| normal zR
   nnoremap <Leader>x :call OpenURLUnderCursor()<CR>
@@ -250,19 +248,19 @@
   nnoremap ]n *
   nnoremap [n #
 
-  nnoremap gn *
-  nnoremap gN #
+  nnoremap ]t :w\|:tabnext<CR>
+  nnoremap [T :w\|:tabprevious<CR>
 
   " Navigation in buffers
   nnoremap ]b :w\|bn<CR>
   nnoremap [b :w\|bp<CR>
 
+  nnoremap gn *
+  nnoremap gN #
+
   " Navigation in tabs
   nnoremap <Tab> :w\|:tabnext<CR>
   nnoremap <S-Tab> :w\|:tabprevious<CR>
-
-  " nnoremap ]t :w\|:tabnext<CR>
-  " nnoremap [T :w\|:tabprevious<CR>
 
   " Keep cursor in the center
   nnoremap } }zzzv
@@ -285,6 +283,7 @@
   nnoremap ciq ci"
   nnoremap ciq di"
 
+  " better surrounding -> change plugin
   nnoremap cs csiw
   nnoremap ds dsiw
 
@@ -301,6 +300,7 @@
 
   " pasting multiple times
   nnoremap gp "0p
+  nnoremap gP "0P
 
   " Keep selection after indenting
   xnoremap <silent> < <gv
@@ -385,9 +385,6 @@
 
   " Disables automatic commenting on newline
   autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-  "Automatically deletes all trailing whitespace on save
-  " autocmd BufWritePre * %s/\s\+$//e
 
   " Shows cursor only on focus window
   autocmd InsertLeave,WinEnter * set cursorline
@@ -518,7 +515,6 @@
   let g:ale_javascript_flow_executable='npx flow'
   let g:ale_javascript_eslint_executable='npx eslint'
   let g:ale_javascript_prettier_executable='npx prettier'
-  " let g:ale_javascript_prettier_options = '--no-semi --single-quote --trailing-comma none'
 
   let g:ale_completion_enabled=0
 
@@ -533,8 +529,8 @@
   let g:ale_set_quickfix = 1
 
   let g:ale_set_highlights = 0
-  " highlight ALEErrorSign ctermbg=NONE ctermfg=red
-  " highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+  highlight ALEErrorSign ctermbg=NONE ctermfg=red
+  highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
 
   " Indent Line
   let g:indentLine_char_list = ['|', '¦', '┆', '┊']
@@ -546,27 +542,8 @@
   autocmd! User GoyoLeave Limelight!
 
   " Vim-polyglot
-  let g:polyglot_disabled = ['sensible']
-  " let g:polyglot_disabled = ['autoindent','ftdetect', 'sensible']
-
-  " NERDTree
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-  let g:NERDTreeShowHidden=0
+  let g:polyglot_disabled = ['sensible', 'ftdetect']
 
   " Rainbow parentheses
   let g:rainbow_active = 1
-
-  " Smooth scroll
-  " noremap <silent> <C-u> :call smooth_scroll#up(&scroll, 4, 1)<CR>
-  " noremap <silent> <C-d> :call smooth_scroll#down(&scroll, 4, 1)<CR>
-  " noremap <silent> <C-b> :call smooth_scroll#up(&scroll*2, 8, 2)<CR>
-  " noremap <silent> <C-f> :call smooth_scroll#down(&scroll*2, 8, 2)<CR>
-  " noremap <silent> <Leader><Leader> :call smooth_scroll#down(&scroll, 4, 1)<CR>
 "}}}

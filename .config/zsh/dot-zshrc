@@ -11,18 +11,27 @@ eval "$(starship init zsh)"
 # Source zoxide
 eval "$(zoxide init zsh)"
 
-# source zsh-autoload
-source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# Source autosuggestions
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh #2>/dev/null
+
 
 # fzf settings
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="-m --height 60% --layout=reverse --border --preview='bat {} --color=always'"
+# remap ^R history search
+# remap ^R select file
+# remap alt-C cd
 
 # Load NNN
 [ -f $HOME/.config/nnn/config.sh ] && source $HOME/.config/nnn/config.sh
-# [ -f /usr/share/nnn/quitcd/quitcd.bash_zsh ] && source /usr/share/nnn/quitcd/quitcd.bash_zsh # cd to dir on nnn quit
+
+# Load syntax-highlighting; should be last.
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh #2>/dev/null
+
+# Source history completion; shoulb be after zsh-syntax-highlighting
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh #2>/dev/null
 
 # clipmenu
 export CM_SELECTIONS="clipboard"
@@ -69,15 +78,16 @@ setopt AUTO_CD
 # Disable Ctrl-S Ctrl-Q
 stty -ixon
 
-# no prompt in tab-completion
-zstyle ':completion:*' list-prompt   ''
-zstyle ':completion:*' select-prompt ''
+# Basic tab complete
+autoload -Uz compinit; compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zmodload zsh/complist
+_comp_options+=(globdots)
 
-# add delay for tab-completion
-zstyle ':autocomplete:*' min-delay 1.0
-
-# tab inserts a substring common to all listed completions
-zstyle ':autocomplete:*' insert-unambiguous yes
+# History search
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # VIM MODE
 
@@ -90,14 +100,14 @@ bindkey -M vicmd H beginning-of-line
 bindkey -M vicmd L end-of-line
 
 # Use vim keys in autocomplete
-bindkey -M main "^j" down-line-or-select
-bindkey -M main "^k" up-line-or-search
+bindkey '^k' history-substring-search-up
+bindkey '^j' history-substring-search-down
 
 # Use vim keys in tab complete menu
-bindkey -M menuselect '^h' vi-backward-char
-bindkey -M menuselect '^k' vi-up-line-or-history
-bindkey -M menuselect '^l' vi-forward-char
-bindkey -M menuselect '^j' vi-down-line-or-history
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Change in quotes (vim like)
 autoload -U select-quoted
@@ -117,5 +127,4 @@ for m in visual viopp; do
     done
 done
 
-# Load zsh-syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'

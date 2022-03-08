@@ -41,14 +41,9 @@
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
   endif
 
-  " Testing
-  let g:polyglot_disabled = ['python']
-
   call plug#begin('~/.vim/plugged')
 
-  " Testing
   Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python'} " semantic highlighting for Python
-  Plug 'shime/vim-livedown', { 'on': 'LivedownToggle' } " markdown preview
   Plug 'Yggdroot/indentLine'                          " displaying thin vertical lines at each indentation level for code
   Plug 'dense-analysis/ale'                           " a plugin providing linting in NeoVim
   Plug 'godlygeek/tabular', { 'on': 'Tabularize' }    " line up text.

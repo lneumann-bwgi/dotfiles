@@ -51,7 +51,7 @@ label-empty-padding = 1
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:120:...%
+label = %title:60:60:...%
 label-padding = 4
 
 

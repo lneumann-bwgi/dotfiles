@@ -10,7 +10,7 @@ pkill sxhkd; sxhkd &
 pkill picom; sleep 0.1; picom --experimental-backends &
 pkill polybar; polybar &
 
-feh --randomize --bg-fill ~/MEGA/wallpapers/
+feh --randomize --bg-fill ~/.wallpapers/
 
 # set wm config
 

@@ -54,7 +54,7 @@ xset -r 46
 # Keyboard repeat rate
 xset r rate 180 50
 
-# History in cache directory
+# History options
 HISTCONTROL=ignoreboth
 HISTSIZE=10000
 SAVEHIST=10000
@@ -99,9 +99,9 @@ export KEYTIMEOUT=1
 bindkey -M vicmd H beginning-of-line
 bindkey -M vicmd L end-of-line
 
-# Use vim keys in autocomplete
-bindkey '^k' history-substring-search-up
-bindkey '^j' history-substring-search-down
+# Use vim keys in history search
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
 
 # Use vim keys in tab complete menu
 bindkey -M menuselect 'h' vi-backward-char

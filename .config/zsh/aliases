@@ -20,33 +20,34 @@ alias rm='rm -v'
 alias cp='cp -iv'
 
 # ls options
-alias ls='ls --color=always --group-directories-first'
+alias ls='ls -h --color=always --group-directories-first'
 alias la='ls -al'  # all files and dirs
 alias lh='ls -a | egrep "^\."' # only hidden
 alias ll='ls -l'   # long format
 alias lt='ls -aT | bat'  # tree listing
 
 # correct typos
-alias ipytohn='~/miniconda3/bin/ipython'
-alias ipython='~/miniconda3/bin/ipython'
 alias pytohn='python'
 alias vu='nvim'
+alias vo='nvim'
 
 # pipenv stuff
 alias py='pipenv run python'
-alias ipy='pipenv run ipython'
+alias ipy='pipenv run ptpython'
+alias ppy='pipenv run ptpython'
+alias flask='pipenv run python -m flask'
 
 # git stuff
 alias gc='git commit'
-alias gd='git diff -w --word-diff --color-words'
+alias gd='git diff'
+# alias gd='git diff -w --word-diff --color-words'
 alias gl='git log --graph --decorate --oneline --abbrev-commit'
 alias gs='git status'
 
 # vim stuff
 alias vsp='nvim -O'
 alias vtd='nvim -d'
-alias fvim='nvim -n -u NONE -i NONE -N' # bare bones vim
+alias fastvim='nvim -n -u NONE -i NONE -N'
 
 # misc
-alias ranger='rangercd'
 alias anki="~/Downloads/anki-2.1.35-linux-amd64/bin/anki"

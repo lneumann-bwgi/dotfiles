@@ -62,6 +62,12 @@ http://pdb101.rcsb.org/motm/rss.xml "~PDB" "science"
 # http://feeds.rsc.org/rss/cs?format=xml "science"
 # http://science.sciencemag.org/rss/current.xml "~Science - current issue" "science"
 
-https://www.exurbe.com/feed/
 https://hnrss.org/frontpage
+https://hnrss.org/bestcomments
+https://hnrss.org/best
+
+https://www.exurbe.com/feed/
+https://thevaluable.dev/index.xml
+https://trickster.dev/index.xml
+https://lobste.rs/rss
 https://thevaluable.dev/index.xml

@@ -82,8 +82,8 @@
   set t_Co=256 " URxvt doesn't support termguicolors
   set background=dark
 
-  colorscheme spaceduck
-  let g:lightline = {'colorscheme' : 'spaceduck'}
+  colorscheme onedark
+  let g:lightline = {'colorscheme' : 'onedark'}
 "}}}
 
 " SET DEFAULTS {{{
@@ -186,7 +186,7 @@
   " Leader maps
   nnoremap <Leader>/ :nohlsearch<CR>
   nnoremap <Leader>G :set wrap linebreak nolist ignorecase<CR>:Goyo<CR>
-  nnoremap <Leader>s !!bash<CR>
+  nnoremap <Leader>S !!bash<CR>
 
   nnoremap <Leader>T :vsp term://zsh<CR>
   nnoremap <Leader>t :TagbarToggle<CR>
@@ -298,6 +298,8 @@
   " pasting multiple times
   nnoremap gp "0p
   nnoremap gP "0P
+  vnoremap gp "0p
+  vnoremap gP "0P
 
   " Keep selection after indenting
   xnoremap <silent> < <gv

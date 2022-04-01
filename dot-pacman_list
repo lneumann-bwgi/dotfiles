@@ -1,5 +1,3 @@
-zsh-autosuggestions
-zsh-history-substring-search
 alacritty
 arandr
 bat
@@ -75,10 +73,13 @@ unzip
 urxvt-perls
 vlc
 wget
+yank
 zathura
 zathura-djvu
 zathura-pdf-mupdf
 zoxide
 zsh
 zsh-autocomplete-git
+zsh-autosuggestions
+zsh-history-substring-search
 zsh-syntax-highlighting

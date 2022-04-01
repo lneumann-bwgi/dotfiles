@@ -1,6 +1,6 @@
 # -- feeds ---------------------------------------------------------------------
 
-browser brave
+browser nyxt
 
 auto-reload yes
 reload-time 120

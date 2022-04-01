@@ -45,6 +45,9 @@
 
   call plug#begin('~/.vim/plugged')
 
+  " TESTING
+  Plug 'kdheepak/JuliaFormatter.vim'
+
   Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } " semantic highlighting for Python
   Plug 'Yggdroot/indentLine'                          " displaying thin vertical lines at each indentation level for code
   Plug 'dense-analysis/ale'                           " a plugin providing linting in NeoVim

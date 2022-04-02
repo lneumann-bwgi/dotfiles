@@ -28,6 +28,8 @@
 
 " PLUGINS {{{
 
+  let g:polyglot_disabled = ['sensible', 'ftdetect', 'python']
+
   " install vim-plug
   if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -43,7 +45,10 @@
 
   call plug#begin('~/.vim/plugged')
 
-  Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for': 'python'} " semantic highlighting for Python
+  " TESTING
+  Plug 'kdheepak/JuliaFormatter.vim'
+
+  Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } " semantic highlighting for Python
   Plug 'Yggdroot/indentLine'                          " displaying thin vertical lines at each indentation level for code
   Plug 'dense-analysis/ale'                           " a plugin providing linting in NeoVim
   Plug 'godlygeek/tabular', { 'on': 'Tabularize' }    " line up text.
@@ -80,8 +85,8 @@
   set t_Co=256 " URxvt doesn't support termguicolors
   set background=dark
 
-  colorscheme spaceduck
-  let g:lightline = {'colorscheme' : 'spaceduck'}
+  colorscheme onedark
+  let g:lightline = {'colorscheme' : 'onedark'}
 "}}}
 
 " SET DEFAULTS {{{
@@ -184,7 +189,7 @@
   " Leader maps
   nnoremap <Leader>/ :nohlsearch<CR>
   nnoremap <Leader>G :set wrap linebreak nolist ignorecase<CR>:Goyo<CR>
-  nnoremap <Leader>s !!bash<CR>
+  nnoremap <Leader>S !!bash<CR>
 
   nnoremap <Leader>T :vsp term://zsh<CR>
   nnoremap <Leader>t :TagbarToggle<CR>
@@ -296,6 +301,8 @@
   " pasting multiple times
   nnoremap gp "0p
   nnoremap gP "0P
+  vnoremap gp "0p
+  vnoremap gP "0P
 
   " Keep selection after indenting
   xnoremap <silent> < <gv
@@ -507,6 +514,8 @@
   \   'python': ['black', 'isort'],
   \}
 
+  let g:ale_python_flake8_options = '--ignore=E501'
+
   let g:ale_javascript_flow_executable='npx flow'
   let g:ale_javascript_eslint_executable='npx eslint'
   let g:ale_javascript_prettier_executable='npx prettier'
@@ -537,7 +546,8 @@
   autocmd! User GoyoLeave Limelight!
 
   " Vim-polyglot
-  let g:polyglot_disabled = ['sensible', 'ftdetect']
+  " let g:polyglot_disabled = ['sensible']
+  " let g:polyglot_disabled = ['sensible', 'ftdetect']
 
   " Rainbow parentheses
   let g:rainbow_active = 1

@@ -12,3 +12,6 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="bat -p"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+export PIPENV_VENV_IN_PROJECT=1
+export PIPENV_MAX_DEPTH=10

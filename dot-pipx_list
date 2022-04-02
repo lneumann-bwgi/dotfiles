@@ -1,0 +1,7 @@
+black
+flake8
+isort
+pipenv
+pre-commit
+visidata
+pynvim

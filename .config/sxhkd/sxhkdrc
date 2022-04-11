@@ -3,6 +3,8 @@
 super + Return
     alacritty
 super + b
+    nyxt
+super + shift + b
     brave
 super + d
     dmenu_run

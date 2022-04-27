@@ -47,6 +47,7 @@
 
   " TESTING
   Plug 'kdheepak/JuliaFormatter.vim'
+  Plug 'wbthomason/packer.nvim'
 
   Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } " semantic highlighting for Python
   Plug 'Yggdroot/indentLine'                          " displaying thin vertical lines at each indentation level for code
@@ -431,8 +432,8 @@
     endif
   endfunction
 
-  " Toggle spellcheck (EN)
   function! ToggleSpell_EN()
+    " Toggle spellcheck (EN)
     if(&spell == 1)
       set nospell
     else

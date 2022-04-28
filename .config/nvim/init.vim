@@ -1,5 +1,4 @@
 " HEADER {{{
-
 "_______________________________________________________________________________
 "|                               _                                             |
 "|                        __   _(_)_ __ ___  _ __ ___                          |
@@ -30,7 +29,7 @@
 
   let g:polyglot_disabled = ['sensible', 'ftdetect', 'python']
 
-  " install vim-plug
+  " bootstrap vim-plug
   if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
           \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -45,38 +44,31 @@
 
   call plug#begin('~/.vim/plugged')
 
-  " TESTING
-  Plug 'kdheepak/JuliaFormatter.vim'
-  Plug 'wbthomason/packer.nvim'
-
-  Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } " semantic highlighting for Python
-  Plug 'Yggdroot/indentLine'                          " displaying thin vertical lines at each indentation level for code
-  Plug 'dense-analysis/ale'                           " a plugin providing linting in NeoVim
-  Plug 'godlygeek/tabular', { 'on': 'Tabularize' }    " line up text.
-  Plug 'itchyny/lightline.vim'                        " a light and configurable statusline
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " fzf basic wrapper function for Vim
-  Plug 'junegunn/fzf.vim'                             " fzf basic wrapper function for Vim
-  Plug 'luochen1990/rainbow'                          " shows different levels of parentheses in different colors
+  Plug 'dense-analysis/ale'                                " a plugin providing linting in NeoVim
+  Plug 'godlygeek/tabular', { 'on': 'Tabularize' }         " line up text.
+  Plug 'itchyny/lightline.vim'                             " a light and configurable statusline
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }      " fzf basic wrapper function for Vim
+  Plug 'junegunn/fzf.vim'                                  " fzf basic wrapper function for Vim
+  Plug 'luochen1990/rainbow'                               " shows different levels of parentheses in different colors
   Plug 'machakann/vim-sandwich'
-  Plug 'majutsushi/tagbar'                            " easy way to browse the tags of the current file
-  Plug 'mhinz/vim-signify'                            " uses the sign column to indicate added, modified and removed lines
-  Plug 'rhysd/clever-f.vim'                           " extends f, F, t and T mappings
-  Plug 'sheerun/vim-polyglot'                         " a collection of language packs for Vim.
-  Plug 'tpope/vim-commentary'                         " comment stuff out
-  Plug 'tpope/vim-fugitive'                           " calls any arbitrary Git command
+  Plug 'majutsushi/tagbar'                                 " easy way to browse the tags of the current file
+  Plug 'mhinz/vim-signify'                                 " uses the sign column to indicate added, modified and removed lines
+  Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' } " semantic highlighting for Python
+  Plug 'rhysd/clever-f.vim'                                " extends f, F, t and T mappings
+  Plug 'sheerun/vim-polyglot'                              " a collection of language packs for Vim.
+  Plug 'tpope/vim-commentary'                              " comment stuff out
+  Plug 'tpope/vim-fugitive'                                " calls any arbitrary Git command
+  Plug 'Yggdroot/indentLine'                               " displaying thin vertical lines at each indentation level for code
 
   " Writing
-  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }           " distraction-free writing in Vim.
-  Plug 'junegunn/limelight.vim', { 'on' : 'Limelight'} " Goyo plugin
+  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }               " distraction-free writing in Vim.
+  Plug 'junegunn/limelight.vim', { 'on' : 'Limelight'}     " Goyo plugin
 
   " Color schemes
   Plug 'ajmwagar/vim-deus'
   Plug 'cocopon/iceberg.vim'
-  Plug 'joshdick/onedark.vim'
   Plug 'junegunn/seoul256.vim'
   Plug 'morhetz/gruvbox'
-  Plug 'pineapplegiant/spaceduck'
-  Plug 'sainnhe/gruvbox-material'
 
   call plug#end()
 "}}}
@@ -86,8 +78,8 @@
   set t_Co=256 " URxvt doesn't support termguicolors
   set background=dark
 
-  colorscheme onedark
-  let g:lightline = {'colorscheme' : 'onedark'}
+  colorscheme gruvbox
+  let g:lightline = {'colorscheme' : 'gruvbox'}
 "}}}
 
 " SET DEFAULTS {{{
@@ -95,10 +87,6 @@
   " Common Sense
   filetype plugin indent on
   syntax on
-
-  " Testing
-  " set inccommand=split "better substitution behavior
-  " set exrc             "source directory specific vimrc
 
   " Basic Stuff
   set backspace=indent,eol,start
@@ -174,10 +162,6 @@
 " KEY MAPS {{{
 
   let mapleader=' '
-
-  " Testing
-
-  " cgn –> Changes the next match of my pattern and . to repeat
 
   " Common Sense
   nnoremap Y y$
@@ -256,9 +240,6 @@
   nnoremap ]b :w\|bn<CR>
   nnoremap [b :w\|bp<CR>
 
-  nnoremap gn *
-  nnoremap gN #
-
   " Navigation in tabs
   nnoremap <Tab> :w\|:tabnext<CR>
   nnoremap <S-Tab> :w\|:tabprevious<CR>
@@ -274,15 +255,6 @@
   " Undo break points
   inoremap , ,<C-g>u
   inoremap . .<C-g>u
-
-  " More ergonomic
-  nnoremap vib vi(
-  nnoremap cib ci(
-  nnoremap dib di(
-
-  nnoremap viq vi"
-  nnoremap ciq ci"
-  nnoremap ciq di"
 
   " better surrounding -> change plugin
   nnoremap cs csiw
@@ -542,13 +514,8 @@
 
   " Goyo
   let g:limelight_conceal_ctermfg = 240
-
   autocmd! User GoyoEnter Limelight
   autocmd! User GoyoLeave Limelight!
-
-  " Vim-polyglot
-  " let g:polyglot_disabled = ['sensible']
-  " let g:polyglot_disabled = ['sensible', 'ftdetect']
 
   " Rainbow parentheses
   let g:rainbow_active = 1

@@ -58,6 +58,7 @@ opt.wildignore =
 
 -- [[ misc ]] --
 opt.cursorline = true
+opt.updatetime = 500
 opt.hidden = true
 opt.scrolloff = 8
 opt.spell = false

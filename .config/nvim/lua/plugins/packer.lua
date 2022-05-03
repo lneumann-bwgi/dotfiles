@@ -24,7 +24,7 @@ return require("packer").startup(function()
 	})
 
 	-- nvim-cmp
-    use("L3MON4D3/LuaSnip")
+	use("L3MON4D3/LuaSnip")
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
@@ -47,6 +47,7 @@ return require("packer").startup(function()
 	use("nvim-telescope/telescope.nvim")
 	use("windwp/nvim-autopairs")
 	use("karb94/neoscroll.nvim")
+	use("chentau/marks.nvim")
 
 	-- cosmetic
 	use({

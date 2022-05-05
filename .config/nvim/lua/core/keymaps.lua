@@ -131,6 +131,7 @@ vmap("<c-v>", "v")
 
 -- useless keys
 nmap("Q", "<NOP>")
+nmap("K", "<NOP>")
 nmap("gQ", "<NOP>")
 nmap(",", "<NOP>")
 

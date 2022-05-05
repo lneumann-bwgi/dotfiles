@@ -56,7 +56,14 @@ opt.wildmenu = true -- bool: enables tab completion window
 opt.wildignore =
 	".git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc"
 
+-- [[ spelling ]]
+opt.spell = true
+opt.spelllang = {'en_us'}
+
 -- [[ misc ]] --
+opt.path = opt.path + ".,**" -- str:  this is a list of directories which will be searched
+opt.isfname = opt.isfname - "="
+opt.lazyredraw = true
 opt.cursorline = true
 opt.updatetime = 500
 opt.hidden = true

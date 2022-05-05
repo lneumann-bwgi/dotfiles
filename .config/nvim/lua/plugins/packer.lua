@@ -23,11 +23,18 @@ return require("packer").startup(function()
 		requires = { "nvim-lua/plenary.nvim" },
 	})
 
+	-- snips
+	use("L3MON4D3/LuaSnip")
+	use("rafamadriz/friendly-snippets")
+
 	-- nvim-cmp
-	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
+	use("hrsh7th/cmp-nvim-lsp")
+	use("hrsh7th/cmp-path")
+	use("f3fora/cmp-spell")
+	use("petertriho/cmp-git")
+	use("saadparwaiz1/cmp_luasnip")
 	use("hrsh7th/nvim-cmp")
 
 	-- treesitter
@@ -36,6 +43,14 @@ return require("packer").startup(function()
 	use("nvim-treesitter/nvim-treesitter-textobjects")
 	use("p00f/nvim-ts-rainbow")
 	use("windwp/nvim-ts-autotag")
+	use({
+		"lewis6991/spellsitter.nvim",
+		config = function()
+			require("spellsitter").setup()
+		end,
+	})
+	-- telescope
+	use("nvim-telescope/telescope.nvim")
 
 	-- misc
 	use("lewis6991/impatient.nvim")
@@ -43,21 +58,33 @@ return require("packer").startup(function()
 	use("rhysd/clever-f.vim")
 	use("lewis6991/gitsigns.nvim")
 	use("numToStr/Comment.nvim")
-	use("nvim-telescope/telescope.nvim")
 	use("windwp/nvim-autopairs")
 	use("karb94/neoscroll.nvim")
+	use("chentau/marks.nvim")
 
 	-- cosmetic
+	use("ellisonleao/gruvbox.nvim")
+	use("lukas-reineke/indent-blankline.nvim")
 	use({
 		"akinsho/bufferline.nvim",
 		tag = "*",
 		requires = "kyazdani42/nvim-web-devicons",
 	})
-	use("lukas-reineke/indent-blankline.nvim")
 	use({
 		"nvim-lualine/lualine.nvim",
 		tag = "*",
 		requires = "kyazdani42/nvim-web-devicons",
 	})
-	use("ellisonleao/gruvbox.nvim")
+	use({
+		"luukvbaal/stabilize.nvim",
+		config = function()
+			require("stabilize").setup()
+		end,
+	})
+	use({
+		"folke/zen-mode.nvim",
+		config = function()
+			require("zen-mode").setup({})
+		end,
+	})
 end)

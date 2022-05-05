@@ -1,3 +1,12 @@
+(nyxt::load-lisp "~/.config/nyxt/themes/kabouik-standard-dark.lisp")
+;; (nyxt::load-lisp "~/.config/nyxt/themes/drgn-dark.lisp")
+
+(setf (uiop/os:getenv "webkit_disable_compositing_mode") "1")
+
+;; only home row in hints
+(define-configuration nyxt/web-mode:web-mode
+    ((nyxt/web-mode:hints-alphabet "ASDFGHJKL")))
+
 ;; disable restore history prompt
 (define-configuration browser
   ((session-restore-prompt :never-restore)))
@@ -9,6 +18,10 @@
 ;; vi insert mode in prompt
 (define-configuration (buffer prompt-buffer)
      ((default-modes (append '(nyxt::vi-insert-mode) %slot-default%))))
+
+;; ???
+(define-configuration (buffer prompt-buffer)
+     ((hide-single-source-header-p t)))
 
 ;; add search engines
 (defvar *my-search-engines*
@@ -22,25 +35,18 @@
    '("wiki" "https://en.wikipedia.org/wiki/Special:Search?search=~a" "https://en.wikipedia.org/wiki")
    '("yt" "https://youtube.com/results?search_query=~a" "https://youtube.com/")
    '("ddg" "https://duckduckgo.com/?q=~a" "https://duckduckgo.com")))
-
-
 (define-configuration buffer
   ((search-engines (append %slot-default%
                            (mapcar (lambda (engine) (apply 'make-search-engine engine))
                                    *my-search-engines*)))))
 
-;;setting new buffer url and having nyxt start full screen
+;; setting new buffer url and having nyxt start full screen
 (defmethod nyxt::startup ((browser browser) urls)
   "Home"
   (window-make browser)
   (let ((window (current-window)))
-    (window-set-buffer window (make-buffer :url (quri:uri "https://www.duckduckgo.com/"))))
-    (toggle-fullscreen window))
+    (window-set-buffer window (make-buffer :url (quri:uri "https://www.duckduckgo.com/")))))
 
 ;; turn off follow mode for buffers: it screws the access-time order
 (define-configuration buffer-source
   ((prompter:follow-p nil)))
-
-;; set colorsheme
-;; (nyxt::load-lisp "~/.config/nyxt/statusline.lisp")
-;; (nyxt::load-lisp "~/.config/nyxt/stylesheet.lisp")

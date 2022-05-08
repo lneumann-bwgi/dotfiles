@@ -1,6 +1,6 @@
 [user]
-    name = Lucas Neumann
-    email = neumannlucas@gmail.com
+    name = neumann-mlucas
+    email = neumann.m.lucas@gmail.com
 [core]
     editor = nvim
     pager = delta
@@ -17,20 +17,12 @@
 [diff]
     colorMoved = default
 [alias]
-    br =  'branch'
-    cm =  'commit -m'
-    co =  'checkout'
-    df =  'diff'
-    ll = 'log --oneline --no-merges'
-    pl =  'pull'
-    ps =  'push'
-    st =  'status'
-    amend = 'commit --amend --no-edit'
-    branches = 'branch -a'
-    flog = 'log --follow --'
-    glog = 'log --all --decorate --oneline --graph'
-    last = 'log =1 HEAD --stat'
-    stashes = 'stash list'
-    tags = 'tag -n --list'
-    undo = 'reset --soft HEAD~1'
-    wdiff = 'diff --word-diff'
+    amend = commit --amend --no-edit
+    branches = branch -a
+    flog = log --follow --
+    glog = log --all --decorate --oneline --graph
+    last = log =1 HEAD --stat
+    stashes = stash list
+    tags = tag -n --list
+    undo = reset --soft HEAD~1
+    wdiff = diff --word-diff

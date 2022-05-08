@@ -1,5 +1,5 @@
 local function map(mode, shortcut, command)
-	vim.api.nvim_set_keymap(mode, shortcut, command, { noremap = true, silent = false })
+	vim.keymap.set(mode, shortcut, command, { noremap = true, silent = false })
 end
 
 local function nmap(shortcut, command)
@@ -22,15 +22,12 @@ end
 
 vim.g.mapleader = " "
 
-nmap("<leader>/", ":nohlsearch<cr>")
-
--- set spell language
--- nmap("<leader>se", ":lua ToggleEN()<cr>")
--- nmap("<leader>sp", ":lua TogglePT()<cr>")
+-- test
+-- nmap("<leader>/", ":nohlsearch<cr>")
+nmap("<esc>", ":nohlsearch<cr><esc>")
 
 -- write shell cmd to file
-nmap("<leader>S", "!!bash<CR>")
-vmap("<leader>S", "!!bash<CR>")
+map({ "n", "v" }, "<leader>S", ".!bash<CR>")
 
 -- dictionaries
 -- vim.cmd [[
@@ -43,17 +40,12 @@ vmap("<leader>S", "!!bash<CR>")
 -- MAJOR MAPPINGS
 
 -- common sense
-nmap("H", "^")
-nmap("L", "g_")
-vmap("H", "^")
-vmap("L", "g_")
+map({ "n", "v" }, "H", "^")
+map({ "n", "v" }, "L", "g_")
+map({ "n", "v" }, "H", "^")
+map({ "n", "v" }, "L", "g_")
 
-nmap("Y", "y$")
-nmap("U", "<c-r>")
-
--- test
-nmap("<tab>", "%")
-vmap("<tab>", "%")
+map("n", "U", "<c-r>")
 
 -- movement in splits
 nmap("<c-k>", "<c-w><up>")
@@ -114,26 +106,20 @@ vmap(">", ">gv")
 -- SWAPS
 
 -- swap colon and semicolon
-nmap(":", ";")
-nmap(";", ":")
-vmap(":", ";")
-vmap(";", ":")
-imap(":", ";")
-imap(";", ":")
-cmap(":", ";")
-cmap(";", ":")
+map({ "n", "v", "c" }, ":", ";")
+map({ "n", "v", "c" }, ";", ":")
 --
 -- swap v and ctrl-v
-nmap("v", "<c-v>")
-nmap("<c-v>", "v")
-vmap("v", "<c-v>")
-vmap("<c-v>", "v")
+map({ "n", "v" }, "v", "<c-v>")
+map({ "n", "v" }, "<c-v>", "v")
 
 -- useless keys
-nmap("Q", "<NOP>")
-nmap("K", "<NOP>")
-nmap("gQ", "<NOP>")
-nmap(",", "<NOP>")
+map({ "n", "v" }, "M", "<NOP>")
+map({ "n", "v" }, "K", "<NOP>")
+map({ "n", "v" }, "Q", "<NOP>")
+map({ "n", "v" }, "gQ", "<NOP>")
+map({ "n", "v" }, ",", "<NOP>")
+-- map({ "n", "v" }, ";", "<NOP>")
 
 -- ABBREVIATIONS
 vim.cmd("abbr attribtue attribute")
@@ -149,32 +135,3 @@ vim.cmd("abbr ragne range")
 vim.cmd("abbr rnage range")
 vim.cmd("abbr teh the")
 vim.cmd("abbr tempalte template")
-
--- FUNCTIONS
-
-function ToggleEN()
-	if vim.opt.spell.value then
-		vim.opt.spell = false
-	else
-		vim.opt.spell = true
-		vim.opt.spell.spelllang = "en_us"
-	end
-end
-
-function TogglePT()
-	if vim.opt.spell.value then
-		vim.opt.spell = false
-	else
-		vim.opt.spell = true
-		vim.opt.spell.spelllang = "pt"
-	end
-end
-
-function SetGoyo()
-	vim.opt.signcolumn = "no"
-	vim.opt.wrap = true
-	vim.opt.linebreak = true
-	vim.opt.list = false
-	vim.cmd("Goyo")
-	vim.cmd("Limelight 0.6")
-end

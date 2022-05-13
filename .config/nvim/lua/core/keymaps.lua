@@ -63,8 +63,8 @@ nmap("<left>", "<c-w>>")
 nmap("]t", ":w|:tabnext<cr>")
 nmap("[t", ":w|:tabprevious<cr>")
 
-nmap("]b", ":w|bnext<cr>")
-nmap("[b", ":w|bprevius<cr>")
+nmap("]b", ":BufferLineCycleNext<cr>")
+nmap("[b", ":BufferLineCyclePrev<cr>")
 
 nmap("]c", "g;")
 nmap("[c", "g,")
@@ -75,6 +75,11 @@ nmap("[j", "<c-o>")
 -- pasting multiple times
 vmap("gp", '"0p')
 vmap("gP", '"0P')
+
+-- close buffer
+nmap("<leader>x", function()
+	require("core.utils").close_buffer()
+end)
 
 -- MINOR MAPPINGS
 
@@ -95,6 +100,11 @@ cmap("<C-e>", "<end>")
 -- undo breaks on punctuation
 imap(",", ",<C-g>u")
 imap(".", ".<C-g>u")
+
+imap("<C-h>", "<Left>")
+imap("<C-j>", "<Down>")
+imap("<C-k>", "<Up>")
+imap("<C-l>", "<Right>")
 
 -- save (similar to ZZ, ZQ)
 nmap("ZS", ":w<CR>")

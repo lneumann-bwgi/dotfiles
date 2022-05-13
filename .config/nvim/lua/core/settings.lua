@@ -14,22 +14,22 @@ opt.fileencoding = "utf8"
 opt.fileformat = "unix"
 
 -- [[ search ]] --
-opt.ignorecase = true -- bool: ignore case in search patterns
-opt.smartcase = true -- bool: override ignorecase if search contains capitals
-opt.incsearch = false -- bool: use incremental search
-opt.hlsearch = true -- bool: highlight search matches
+opt.ignorecase = true
+opt.smartcase = true
+opt.incsearch = false
+opt.hlsearch = true
 
 -- [[ tabs ]] --
-opt.expandtab = true -- bool: use spaces instead of tabs
-opt.shiftround = true -- bool: round indent to multiple of 'shiftwidth'
-opt.shiftwidth = 4 -- num:  size of an indent
-opt.smarttab = true -- bool: <tab> in front of a line inserts blanks according to 'shiftwidth'
-opt.softtabstop = 4 -- num:  number of spaces tabs count for in insert mode
-opt.tabstop = 4 -- num:  number of spaces tabs count
+opt.expandtab = true
+opt.shiftround = true
+opt.shiftwidth = 4
+opt.smarttab = true
+opt.softtabstop = 4
+opt.tabstop = 4
 
 -- [[ splits ]] --
-opt.splitright = true -- bool: place new window to right of current one.
-opt.splitbelow = true -- bool: place new window below the current one.
+opt.splitright = true
+opt.splitbelow = true
 
 -- [[ folds ]] --
 opt.foldmethod = "expr"
@@ -43,29 +43,29 @@ opt.undofile = true
 opt.undodir = HOME .. "/.vim/undodir//"
 
 -- [[ display ]] --
-opt.background = "dark" -- str:  background color
-opt.termguicolors = true -- bool: if term supports ui color then enable
+opt.background = "dark"
+opt.termguicolors = true
 vim.cmd("colorscheme gruvbox")
 
 -- [[ clipboard ]] --
-opt.clipboard = "unnamed,unnamedplus" -- str: set clipboard registers
+opt.clipboard = "unnamed,unnamedplus"
 
 -- [[ wildmenu ]] --
-opt.path = opt.path + ".,**" -- str:  this is a list of directories which will be searched
-opt.wildmenu = true -- bool: enables tab completion window
+opt.path = opt.path + ".,**"
+opt.wildmenu = true
 opt.wildignore =
 	".git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc"
 
 -- [[ spelling ]]
 opt.spell = true
-opt.spelllang = {'en_us'}
+opt.spelllang = { "en_us" }
 
 -- [[ misc ]] --
-opt.path = opt.path + ".,**" -- str:  this is a list of directories which will be searched
+opt.path = opt.path + ".,**"
 opt.isfname = opt.isfname - "="
 opt.lazyredraw = true
 opt.cursorline = true
-opt.updatetime = 500
+opt.updatetime = 100
 opt.hidden = true
 opt.scrolloff = 8
 opt.spell = false

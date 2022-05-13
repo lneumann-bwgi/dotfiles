@@ -87,4 +87,10 @@ return require("packer").startup(function()
 			require("zen-mode").setup({})
 		end,
 	})
+	use({
+		"goolord/alpha-nvim",
+		config = function()
+			require("alpha").setup(require("alpha.themes.startify").config)
+		end,
+	})
 end)

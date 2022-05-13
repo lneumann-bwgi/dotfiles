@@ -61,3 +61,4 @@ alias fastvim='nvim -n -u NONE -i NONE -N'
 
 # misc
 alias anki="~/Downloads/anki-2.1.35-linux-amd64/bin/anki"
+alias stow_dot ='stow -v --no-folding --dotfiles -t ~ -d /home/neumann/.dotfiles .'

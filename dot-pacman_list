@@ -3,15 +3,12 @@ github-cli
 alacritty
 arandr
 bat
-blueman
-bluez
 brave-bin
 bspwm
 choose-rust-git
 clipmenu
 cronie
 ctags
-curlie
 direnv
 dmenu
 docker
@@ -35,7 +32,6 @@ julia
 keyd-git
 man-db
 man-pages
-megasync-bin
 mplayer
 neovim
 nerd-fonts-hack

@@ -5,3 +5,4 @@ pipenv
 pre-commit
 visidata
 pynvim
+pylsp

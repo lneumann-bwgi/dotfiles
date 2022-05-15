@@ -9,9 +9,9 @@ alias vi='nvim'
 alias vim='nvim'
 
 # dangerous
-alias cut='choose'
+# alias cut='choose'
 alias grep='rg'
-alias ps='procs'
+# alias ps='procs'
 
 # safety first
 alias mkdir='mkdir -pv'

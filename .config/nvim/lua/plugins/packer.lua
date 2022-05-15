@@ -60,7 +60,7 @@ return require("packer").startup(function()
 	use("numToStr/Comment.nvim")
 	use("windwp/nvim-autopairs")
 	use("karb94/neoscroll.nvim")
-	use("chentau/marks.nvim")
+	use("chentoast/marks.nvim")
 
 	-- cosmetic
 	use("ellisonleao/gruvbox.nvim")

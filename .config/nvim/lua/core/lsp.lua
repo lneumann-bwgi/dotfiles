@@ -23,7 +23,6 @@ local on_attach = function(client, bufnr)
 	-- vim.bo.ominifunc = "v:lua.vim.lsp.ominifunc"
 
 	if client.resolved_capabilities.document_highlight then
-		print("kjnskjsn")
 		api.nvim_command("autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()")
 		api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
 		api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()")

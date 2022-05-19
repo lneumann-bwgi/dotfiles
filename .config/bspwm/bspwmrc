@@ -13,6 +13,7 @@ sleep 0.1
 picom --experimental-backends &
 pkill polybar
 polybar &
+megasync &
 
 feh --randomize --bg-fill ~/.wallpapers/
 

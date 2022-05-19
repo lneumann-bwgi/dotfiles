@@ -40,16 +40,20 @@ XF86MonBrightnessUp
     xbacklight -inc 20
 
 XF86Tools
-    setxkbmap -model thinkpad -layout br -variant abnt
+    setxkbmap -model thinkpad -layout br -variant abnt2
 
 XF86Favorites
     setxkbmap -model thinkpad -layout us
 
 # Windom maneger commands
 
-# quit/restart bspwm
-super + alt + {q,r}
-    bspc {quit,wm -r}
+# power menu/quit
+super + alt + q
+    rofi -show power-menu -modi power-menu:rofi-power-menu
+
+# restart bspwm
+super + alt + r
+    bspc wm -r
 
 # close and kill
 super + {_,shift + }q

@@ -43,7 +43,7 @@ export CM_LAUNCHER="dmenu"
 # SETTINGS
 
 # Keyboard model
-setxkbmap -model thinkpad -layout br -variant abnt
+# setxkbmap -model thinkpad -layout br -variant abnt2
 
 # Disable h,j,k,l reapat
 xset -r 43

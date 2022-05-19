@@ -13,6 +13,8 @@ PKGS=(
 	"nnn-nerd"
 	"nyxt"
 	"picom-ibhagwan-git"
+	"rofi"
+	"rofi-power-menu"
 	"so-git"
 	# "urxvt-font-size-git"
 	"yank"

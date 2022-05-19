@@ -1,5 +1,5 @@
 -- better performance
-require('impatient')
+require("impatient")
 
 require("plugins.packer")
 

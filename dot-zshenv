@@ -1,4 +1,5 @@
-export PATH=/home/neumann/.local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="/var/lib/snapd/snap/bin:$PATH"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"

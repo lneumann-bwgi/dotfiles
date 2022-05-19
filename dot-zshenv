@@ -15,3 +15,5 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 export PIPENV_VENV_IN_PROJECT=1
 export PIPENV_MAX_DEPTH=10
+
+export GOPATH="$HOME/Documents/go"

@@ -3,9 +3,9 @@
 super + Return
     alacritty
 super + b
-    nyxt
+    chromium
 super + shift + b
-    brave
+    nyxt
 super + d
     dmenu_run
 super + p
@@ -22,13 +22,13 @@ super + y
 # Media keys
 
 XF86AudioMute
-    pactl set-sink-mute 0 toggle
+    change_volume.sh mute
 
 XF86AudioLowerVolume
     pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%
 
 XF86AudioRaiseVolume
-    pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%
+    change_volume.sh +5%
 
 XF86AudioMicMute
     pactl set-sink-mute 1 toggle
@@ -40,10 +40,13 @@ XF86MonBrightnessUp
     xbacklight -inc 20
 
 XF86Tools
-    setxkbmap -model thinkpad -layout br -variant abnt2
+    toggle_keybord_layout.sh
+
+XF86Bluetooth
+    connect_bluetooth.sh >/dev/null 
 
 XF86Favorites
-    setxkbmap -model thinkpad -layout us
+    toggle_keybord_layout.sh
 
 # Windom maneger commands
 

@@ -1,5 +1,5 @@
 local function map(mode, shortcut, command)
-	vim.keymap.set(mode, shortcut, command, { noremap = true, silent = false })
+	vim.keymap.set(mode, shortcut, command, { noremap = true, silent = true })
 end
 
 local function nmap(shortcut, command)
@@ -115,9 +115,9 @@ vmap(">", ">gv")
 
 -- SWAPS
 
--- swap colon and semicolon
-map({ "n", "v", "c" }, ":", ";")
-map({ "n", "v", "c" }, ";", ":")
+-- swap colon and semicolon (dont use silent)
+vim.keymap.set({ "n", "v", "c" }, ":", ";", { noremap = true, silent = false })
+vim.keymap.set({ "n", "v", "c" }, ";", ":", { noremap = true, silent = false })
 --
 -- swap v and ctrl-v
 map({ "n", "v" }, "v", "<c-v>")

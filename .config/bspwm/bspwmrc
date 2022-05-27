@@ -1,25 +1,7 @@
 #!/usr/bin/env sh
 
-# start daemons
-pgrep -x clipmenud >/dev/null || clipmenud &
-pgrep -x unclutter >/dev/null || unclutter &
-pgrep -x redshift >/dev/null || redshift &
-
-# restart daemons
-pkill sxhkd
-sxhkd &
-pkill picom
-sleep 0.1
-picom --experimental-backends &
-pkill polybar
-polybar &
-megasync &
-
-feh --randomize --bg-fill ~/.wallpapers/
-
-# set wm config
-
-bspc monitor -d I II III IV V VI VII VIII IX X
+# WM config
+bspc monitor eDP1 -d I II III IV V VI VII VIII IX X
 bspc config border_width 4
 bspc config window_gap 24
 
@@ -28,8 +10,25 @@ bspc config borderless_monocle true
 bspc config gapless_monocle true
 
 # App rules
-
-# bspc rule -a Gimp desktop='^8' state=floating follow=on
-# bspc rule -a Chromium desktop='^2'
+bspc rule -a MEGAsync desktop='^10'
 # bspc rule -a Kupfer.py focus=on
 # bspc rule -a Screenkey manage=off
+
+# start daemons
+pgrep -x clipmenud >/dev/null || clipmenud &
+pgrep -x megasync >/dev/null || megasync &
+pgrep -x redshift >/dev/null || redshift &
+pgrep -x unclutter >/dev/null || unclutter &
+
+# restart daemons
+pkill sxhkd
+sxhkd &
+
+pkill picom
+sleep 0.1
+picom --experimental-backends &
+
+pkill polybar
+polybar &
+
+feh --randomize --bg-fill ~/.wallpapers/

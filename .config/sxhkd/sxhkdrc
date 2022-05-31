@@ -3,7 +3,7 @@
 super + Return
     alacritty
 super + b
-    chromium
+    [[ "$(whoami)" == "neumann" ]] && brave || chromium
 super + shift + b
     nyxt
 super + d
@@ -25,7 +25,7 @@ XF86AudioMute
     change_volume.sh mute
 
 XF86AudioLowerVolume
-    pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%
+    change_volume.sh -5%
 
 XF86AudioRaiseVolume
     change_volume.sh +5%

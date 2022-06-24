@@ -66,8 +66,8 @@ nmap("[t", ":w|:tabprevious<cr>")
 nmap("]b", ":BufferLineCycleNext<cr>")
 nmap("[b", ":BufferLineCyclePrev<cr>")
 
-nmap("]c", "g;")
-nmap("[c", "g,")
+nmap("]e", "g;")
+nmap("[e", "g,")
 
 nmap("]j", "<c-i>")
 nmap("[j", "<c-o>")
@@ -118,7 +118,7 @@ vmap(">", ">gv")
 -- swap colon and semicolon (dont use silent)
 vim.keymap.set({ "n", "v", "c" }, ":", ";", { noremap = true, silent = false })
 vim.keymap.set({ "n", "v", "c" }, ";", ":", { noremap = true, silent = false })
---
+
 -- swap v and ctrl-v
 map({ "n", "v" }, "v", "<c-v>")
 map({ "n", "v" }, "<c-v>", "v")

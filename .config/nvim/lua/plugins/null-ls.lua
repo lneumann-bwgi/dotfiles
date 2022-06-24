@@ -10,7 +10,7 @@ require("null-ls").setup({
 		require("null-ls").builtins.formatting.shfmt,
 		require("null-ls").builtins.diagnostics.sqlfluff.with({
 			extra_args = { "--dialect", "mysql" }, -- change to your dialect
-		-- }),
+		}),
 		require("null-ls").builtins.formatting.sqlfluff.with({
 			extra_args = { "--dialect", "mysql" }, -- change to your dialect
 		}),

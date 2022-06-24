@@ -12,6 +12,9 @@ eval "$(starship init zsh)"
 # Source zoxide
 eval "$(zoxide init zsh)"
 
+# Source direnv
+eval "$(direnv hook zsh)"
+
 # Source autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh #2>/dev/null
 

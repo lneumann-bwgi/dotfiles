@@ -53,14 +53,15 @@ return require("packer").startup(function()
 	use("nvim-telescope/telescope.nvim")
 
 	-- misc
+	use("Olical/conjure")
+	use("chentoast/marks.nvim")
+	use("karb94/neoscroll.nvim")
+	use("lewis6991/gitsigns.nvim")
 	use("lewis6991/impatient.nvim")
 	use("machakann/vim-sandwich")
-	use("rhysd/clever-f.vim")
-	use("lewis6991/gitsigns.nvim")
 	use("numToStr/Comment.nvim")
+	use("rhysd/clever-f.vim")
 	use("windwp/nvim-autopairs")
-	use("karb94/neoscroll.nvim")
-	use("chentoast/marks.nvim")
 
 	-- cosmetic
 	use("ellisonleao/gruvbox.nvim")
@@ -89,6 +90,7 @@ return require("packer").startup(function()
 	})
 	use({
 		"goolord/alpha-nvim",
+		requires = { "kyazdani42/nvim-web-devicons" },
 		config = function()
 			require("alpha").setup(require("alpha.themes.startify").config)
 		end,

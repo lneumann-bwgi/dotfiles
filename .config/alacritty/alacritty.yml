@@ -1,68 +1,70 @@
 env:
-  TERM: alacritty
+    TERM: alacritty
 
 window:
-  padding:
-    x: 16
-    y: 16
+    padding:
+        x: 16
+        y: 16
 
-  decorations: none
-  opacity: 0.8
+    dynamic_padding: true
+    decorations: none
+    opacity: 1.0
 
 font:
-  normal:
-    family: FiraCode Nerd Font
-    style: Regular
+    normal:
+        family: FiraCode Nerd Font
+        style: Regular
 
-  bold:
-    family: FiraCode Nerd Font
-    style: Bold
+    bold:
+        family: FiraCode Nerd Font
+        style: Bold
 
-  italic:
-    family: FiraCode Nerd Font
-    style: Italic
+    italic:
+        family: FiraCode Nerd Font
+        style: Italic
 
-  bold_italic:
-    family: FiraCode Nerd Font
-    style: Bold Italic
+    bold_italic:
+        family: FiraCode Nerd Font
+        style: Bold Italic
 
-  size: 12
+    size: 12
 
 key_bindings:
-  - { key: P,         mods: Alt,       action: Paste                       }
-  - { key: Y,         mods: Alt,       action: Copy                        }
-  - { key: Key0,      mods: Alt,       action: ResetFontSize               }
-  - { key: Equals,    mods: Alt,       action: IncreaseFontSize            }
-  - { key: Plus,      mods: Alt,       action: IncreaseFontSize            }
-  - { key: Minus,     mods: Alt,       action: DecreaseFontSize            }
-  - { key: F,         mods: Alt, mode: ~Search,    action: SearchForward   }
-  - { key: B,         mods: Alt, mode: ~Search,    action: SearchBackward  }
+    - { key: Return, mods: Alt, action: SpawnNewInstance }
+    - { key: P, mods: Alt, action: Paste }
+    - { key: Y, mods: Alt, action: Copy }
+    - { key: Key0, mods: Alt, action: ResetFontSize }
+    - { key: Equals, mods: Alt, action: IncreaseFontSize }
+    - { key: Plus, mods: Alt, action: IncreaseFontSize }
+    - { key: Minus, mods: Alt, action: DecreaseFontSize }
+    - { key: F, mods: Alt, mode: ~Search, action: SearchForward }
+    - { key: B, mods: Alt, mode: ~Search, action: SearchBackward }
 
 # Colors (Nord)
 colors:
-   # Default colors
-   primary:
-     background: '#2E3440'
-     foreground: '#D8DEE9'
+    # Default colors
+    primary:
+        background: "#2E3440"
+        foreground: "#D8DEE9"
 
-   # Normal colors
-   normal:
-     black:   '#3B4252'
-     red:     '#BF616A'
-     green:   '#A3BE8C'
-     yellow:  '#EBCB8B'
-     blue:    '#81A1C1'
-     magenta: '#B48EAD'
-     cyan:    '#88C0D0'
-     white:   '#E5E9F0'
+    # Normal colors
+    normal:
+        black: "#3B4252"
+        red: "#BF616A"
+        green: "#A3BE8C"
+        yellow: "#EBCB8B"
+        blue: "#81A1C1"
+        magenta: "#B48EAD"
+        cyan: "#88C0D0"
+        white: "#E5E9F0"
 
-   # Bright colors
-   bright:
-     black:   '#4C566A'
-     red:     '#BF616A'
-     green:   '#A3BE8C'
-     yellow:  '#EBCB8B'
-     blue:    '#81A1C1'
-     magenta: '#B48EAD'
-     cyan:    '#8FBCBB'
-     white:   '#ECEFF4'
+    # Bright colors
+    bright:
+        black: "#4C566A"
+        red: "#BF616A"
+        green: "#A3BE8C"
+        yellow: "#EBCB8B"
+        blue: "#81A1C1"
+        magenta: "#B48EAD"
+        cyan: "#8FBCBB"
+        white: "#ECEFF4"

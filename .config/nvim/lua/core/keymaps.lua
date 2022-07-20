@@ -110,7 +110,7 @@ imap("<C-l>", "<Right>")
 nmap("ZS", ":w<CR>")
 
 -- keep selection after indenting
-vmap(">", ">gv")
+vmap("<", "<gv")
 vmap(">", ">gv")
 
 -- SWAPS

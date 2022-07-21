@@ -13,12 +13,12 @@
 #    - enable fstrim for ssd
 #    - enable ufw
 #    - enable thermald
+#    - enable tlp
 #    - enable reflector
 #    - enable and config keyd
 #    - enable docker
 #    - enable syncthing
 
-# TODO: power settings
 # TODO: security settings
 # TODO: change ssh port
 

@@ -1,74 +1,43 @@
-# data science
-https://alpopkes.com/feed "data science"
-https://feeds.feedburner.com/michaelnielsen/wmna?format=xml "data science"
-https://kevinzakka.github.io/feed "data science"
-https://www.degeneratestate.org/feeds/all.rss.xml "data science"
-https://www.oranlooney.com/index.xml "~Oran Looney" "data science"
+# aggregators
+https://changelog.com/master/feed "aggregators"
+https://haskellweekly.news/podcast.rss "aggregators"
+https://hnrss.org/best "aggregators"
+https://hnrss.org/bestcomments "aggregators"
+https://hnrss.org/frontpage "aggregators"
+https://lobste.rs/rss "aggregators"
+https://pycoders.com/feed "aggregators"
+https://this-week-in-neovim.org/rss "aggregators"
+ 
+# software
+https://julialang.org/feed.xml "~JuliaLang" "software"
+https://neovim.io/news.xml "software"
+https://archlinux.org/feeds/news/ "software"
 
-# economy
-https://feeds.feedburner.com/marginalrevolution/feed?format=xml "econ"
-https://bonifacio.net.br/feed/
-
-# python
-https://hynek.me/index.xml "python"
-https://jakevdp.github.io/feeds/all.atom.xml "python"
-https://nedbatchelder.com/blog/rss.xml "python"
-https://pbpython.com/feeds/all.atom.xml "python"
-https://realpython.com/atom.xml "python"
-https://rednafi.github.io/digressions/feed "python"
-https://treyhunner.com/atom.xml "python"
-
-# tech
-https://anarute.com/feed "tech"
-https://blog.codinghorror.com/rss/ "tech"
-https://blog.miguelgrinberg.com/feed "~Miguel Grinberg" "tech"
-https://chrispenner.ca/atom.xml "tech"
-https://codeinthehole.com/index.xml "tech"
-https://jdhao.github.io/index.xml "tech"
-https://julialang.org/feed.xml "~JuliaLang" "tech"
-https://martinheinz.dev/rss/ "tech"
-https://neovim.io/news.xml "tech"
-https://opensourc.es/feed.xml "tech"
-https://ruslanspivak.com/feeds/all.atom.xml "tech"
-https://sobolevn.me/feed.xml "tech"
-https://vimtricks.com/feed/ "tech"
-https://www.archlinux.org/feeds/news/ "tech"
-https://www.joelonsoftware.com/feed/ "tech"
-https://www.petecorey.com/feed.xml "tech"
-https://www.philipzucker.com/feed "tech"
-https://www.taniarascia.com/rss.xml "tech"
-https://death.andgravity.com/_feed/index.xml "tech"
-https://www.hhyu.org/index.xml "tech"
-
-# math
-https://algorithmist.wordpress.com/feed/ "math"
-https://jeremykun.com/feed/ "math"
-https://statisticalbiophysicsblog.org/?feed=rss2 "math"
+# tech blog
+https://anarute.com/feed "~Ana Root" "tech blog"
+https://blog.miguelgrinberg.com/feed "~Miguel Grinberg" "tech blog"
+https://codeinthehole.com/index.xml "tech blog"
+https://elvischidera.com/rss.xml "tech blog"
+https://jdhao.github.io/index.xml "tech blog"
+https://martinheinz.dev/rss/ "tech blog"
+https://pbpython.com/feeds/all.atom.xml "tech blog"
+https://realpython.com/atom.xml "tech blog"
+https://stackoverflow.blog/feed/ "tech blog"
+https://taniarascia.com/rss.xml "~Tania Rascia" "tech blog"
+https://thevaluable.dev/index.xml "tech blog"
+https://treyhunner.com/atom.xml "tech blog"
+https://trickster.dev/index.xml "tech blog"
+https://vimtricks.com/feed/ "tech blog"
 
 # science
 https://chemistry-europe.onlinelibrary.wiley.com/feed/15213765/most-cited "~Eur. J. Chem - most cited" "science"
-https://eukaryotewritesblog.com/feed/
 https://feeds.aps.org/rss/allsuggestions.xml "~PhyRev - editor's suggestions" "science"
 https://feeds.feedburner.com/ProcNatlAcadSciUsaMost-readFull-textArticles?format=xml "~PNAS - most read" "science"
 https://feeds.feedburner.com/acs/chreay?format=xml "~ACS - Chemistry Review latest articles" "science"
-https://feeds.nature.com/natrevchem/rss/current?format=xml "science"
 https://pdb101.rcsb.org/motm/rss.xml "~PDB" "science"
-# https://feeds.aps.org/rss/recent/prlsuggestions.xml "~PhyRev - PRL suggestions" "science"
-# https://feeds.feedburner.com/acs/jcisd8?format=xml "~ACS - J. Chem. Inf. Mol. latest articles" "science"
-# https://feeds.feedburner.com/acs/jctcce?format=xml "~ACS - J. Chem The. Comp. latest articles" "science"
-# https://feeds.feedburner.com/pnas/SMZM?format=xml "~PNAS - latest articles" "science"
-# https://feeds.nature.com/srep/rss/current?format?xml "science"
-# https://feeds.rsc.org/rss/cc?format=xml "science"
-# https://feeds.rsc.org/rss/cs?format=xml "science"
-# https://science.sciencemag.org/rss/current.xml "~Science - current issue" "science"
 
-https://hnrss.org/frontpage
-https://hnrss.org/bestcomments
-https://hnrss.org/best
+# misc
+https://www.exurbe.com/feed/ "misc"
 
-https://www.exurbe.com/feed/
-https://thevaluable.dev/index.xml
-https://trickster.dev/index.xml
-https://lobste.rs/rss
-https://thevaluable.dev/index.xml
-https://elvischidera.com/rss.xml
+# fp
+# https://chrispenner.ca/atom.xml "fp"

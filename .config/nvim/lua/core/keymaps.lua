@@ -27,7 +27,7 @@ vim.g.mapleader = " "
 nmap("<esc>", ":nohlsearch<cr><esc>")
 
 -- write shell cmd to file
-map({ "n", "v" }, "<leader>S", ".!bash<CR>")
+map({ "n", "v" }, "<leader>S", ":.!bash<CR>")
 
 -- dictionaries
 -- vim.cmd [[
@@ -78,7 +78,7 @@ vmap("gP", '"0P')
 
 -- close buffer
 nmap("<leader>x", function()
-	require("core.utils").close_buffer()
+	vim.cmd("bd")
 end)
 
 -- MINOR MAPPINGS
@@ -120,8 +120,8 @@ vim.keymap.set({ "n", "v", "c" }, ":", ";", { noremap = true, silent = false })
 vim.keymap.set({ "n", "v", "c" }, ";", ":", { noremap = true, silent = false })
 
 -- swap v and ctrl-v
-map({ "n", "v" }, "v", "<c-v>")
-map({ "n", "v" }, "<c-v>", "v")
+-- map({ "n", "v", "c"}, "v", "<c-v>")
+-- map({ "n", "v", "c"}, "<c-v>", "v")
 
 -- useless keys
 map({ "n", "v" }, "M", "<NOP>")
@@ -129,7 +129,6 @@ map({ "n", "v" }, "K", "<NOP>")
 map({ "n", "v" }, "Q", "<NOP>")
 map({ "n", "v" }, "gQ", "<NOP>")
 map({ "n", "v" }, ",", "<NOP>")
--- map({ "n", "v" }, ";", "<NOP>")
 
 -- ABBREVIATIONS
 vim.cmd("abbr attribtue attribute")
@@ -138,10 +137,12 @@ vim.cmd("abbr cosnt const")
 vim.cmd("abbr fitler filter")
 vim.cmd("abbr fodl fold")
 vim.cmd("abbr funciton function")
+vim.cmd("abbr heigth height")
 vim.cmd("abbr lenght length")
-vim.cmd("abbr rigth right")
 vim.cmd("abbr mpa map")
 vim.cmd("abbr ragne range")
+vim.cmd("abbr rigth right")
 vim.cmd("abbr rnage range")
 vim.cmd("abbr teh the")
 vim.cmd("abbr tempalte template")
+vim.cmd("abbr witdh width")

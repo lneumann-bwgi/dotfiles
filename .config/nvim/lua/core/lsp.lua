@@ -41,17 +41,18 @@ end)
 -- from: https://github.com/williamboman/nvim-lsp-installer/wiki/Advanced-Configuration#automatically-install-lsp-servers
 local servers = {
 	"bashls",
-	"slangd",
+	"clojure_lsp",
 	"dockerls",
 	"gopls",
 	"html",
 	"jsonls",
 	"julials",
+	"pyright",
+	"slangd",
 	"sqlls",
 	"sumneko_lua",
 	"tsserver",
 	"vimls",
-	"pyright",
 }
 for _, name in pairs(servers) do
 	local server_is_found, server = lsp_installer.get_server(name)

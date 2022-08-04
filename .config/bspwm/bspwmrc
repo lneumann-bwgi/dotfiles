@@ -33,19 +33,17 @@ bspc rule -a MEGAsync desktop='^10'
 pgrep -f clipmenud >/dev/null || { clipmenud & }
 pgrep -x picom >/dev/null || { picom --experimental-backends & }
 pgrep -x redshift >/dev/null || { redshift & }
+pgrep -x sxhkd >/dev/null || { sxhkd & }
 pgrep -x unclutter >/dev/null || { unclutter & }
 
 # pgrep -x megasync >/dev/null || { megasync & }
-
-# restart daemons
-pkill sxhkd || { sxhkd & }
 
 # launch polybar
 [ -f $HOME/.config/polybar/launch.sh ] && $HOME/.config/polybar/launch.sh
 
 feh --randomize --bg-fill ~/.wallpapers/
 
-# this ensures bspwm terminates correctly
+# this ensures bspwm terminates correctly (not working)
 
 # if no processes where started by this script, we are done
 [ -z "$(jobs -p)" ] && exit 0

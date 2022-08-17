@@ -77,9 +77,7 @@ vmap("gp", '"0p')
 vmap("gP", '"0P')
 
 -- close buffer
-nmap("<leader>x", function()
-	vim.cmd("bd")
-end)
+nmap("<leader>x", ":bd<CR>")
 
 -- MINOR MAPPINGS
 

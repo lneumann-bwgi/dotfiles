@@ -1,6 +1,6 @@
 # -- feeds ---------------------------------------------------------------------
 
-browser nyxt
+browser chromium
 
 auto-reload yes
 reload-time 120

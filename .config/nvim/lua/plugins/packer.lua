@@ -53,6 +53,7 @@ return require("packer").startup(function()
 	use("nvim-telescope/telescope.nvim")
 
 	-- misc
+	use("akinsho/toggleterm.nvim")
 	use("Olical/conjure")
 	use("chentoast/marks.nvim")
 	use("karb94/neoscroll.nvim")

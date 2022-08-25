@@ -2,6 +2,10 @@ env:
   TERM: alacritty
 
 window:
+  dimensions:
+    columns: 128
+    lines: 32
+
   padding:
     x: 16
     y: 16

@@ -8,6 +8,8 @@ https://lobste.rs/rss "aggregators"
 https://pycoders.com/feed "aggregators"
 https://pythonbytes.fm/episodes/rss "aggregators"
 https://this-week-in-neovim.org/rss "aggregators"
+https://golang1.substack.com/feed "aggregators"
+https://cprss.s3.amazonaws.com/golangweekly.com.xml "aggregators"
  
 # software
 https://julialang.org/feed.xml "~JuliaLang" "software"

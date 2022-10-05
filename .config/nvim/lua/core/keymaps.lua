@@ -73,6 +73,8 @@ nmap("]j", "<c-i>")
 nmap("[j", "<c-o>")
 
 -- pasting multiple times
+nmap("gp", '"0p')
+nmap("gP", '"0P')
 vmap("gp", '"0p')
 vmap("gP", '"0P')
 

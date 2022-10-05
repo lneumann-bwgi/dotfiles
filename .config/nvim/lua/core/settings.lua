@@ -68,7 +68,6 @@ opt.cursorline = true
 opt.updatetime = 100
 opt.hidden = true
 opt.scrolloff = 8
-opt.spell = false
 opt.title = true
 opt.ttimeoutlen = 100
 opt.virtualedit = "block"

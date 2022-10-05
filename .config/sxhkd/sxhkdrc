@@ -18,6 +18,8 @@ super + shift + r
     python -m speedread &> /dev/null
 super + y
     clipmenu
+super + z
+    zeal
 
 # Media keys
 

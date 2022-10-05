@@ -1,6 +1,6 @@
 [user]
-    name = neumann-mlucas
-    email = neumann.m.lucas@gmail.com
+    name = Lucas Neumann
+    email = neumann@devgrid.co.uk
 [core]
     editor = nvim
     pager = delta
@@ -16,6 +16,11 @@
     conflictstyle = diff3
 [diff]
     colorMoved = default
+    tool = difftastic
+[difftool]
+    prompt = false
+[difftool "difftastic"]
+    cmd = difft "$LOCAL" "$REMOTE"
 [alias]
     amend = commit --amend --no-edit
     branches = branch -a
@@ -26,3 +31,4 @@
     tags = tag -n --list
     undo = reset --soft HEAD~1
     wdiff = diff --word-diff
+    dft = difftool

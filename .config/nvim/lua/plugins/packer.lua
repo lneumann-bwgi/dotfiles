@@ -28,33 +28,29 @@ return require("packer").startup(function()
 	use("rafamadriz/friendly-snippets")
 
 	-- nvim-cmp
+	use("f3fora/cmp-spell")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-path")
-	use("f3fora/cmp-spell")
+	use("hrsh7th/nvim-cmp")
 	use("petertriho/cmp-git")
 	use("saadparwaiz1/cmp_luasnip")
-	use("hrsh7th/nvim-cmp")
 
 	-- treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	-- use("nvim-treesitter/nvim-treesitter-refactor")
 	use("nvim-treesitter/nvim-treesitter-textobjects")
+	-- use("nvim-treesitter/nvim-treesitter-refactor")
+
 	use("p00f/nvim-ts-rainbow")
 	use("windwp/nvim-ts-autotag")
-	use({
-		"lewis6991/spellsitter.nvim",
-		config = function()
-			require("spellsitter").setup()
-		end,
-	})
+
 	-- telescope
 	use("nvim-telescope/telescope.nvim")
 
 	-- misc
+	-- use("Olical/conjure")
 	use("akinsho/toggleterm.nvim")
-	use("Olical/conjure")
 	use("chentoast/marks.nvim")
 	use("karb94/neoscroll.nvim")
 	use("lewis6991/gitsigns.nvim")

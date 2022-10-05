@@ -1,6 +1,6 @@
 [user]
-    name = Lucas Neumann
-    email = neumann@devgrid.co.uk
+    name = neumann-mlucas
+    email = neumann.m.lucas@gmail.com
 [core]
     editor = nvim
     pager = delta

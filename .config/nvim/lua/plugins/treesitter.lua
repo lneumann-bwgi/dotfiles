@@ -1,6 +1,19 @@
 require("nvim-treesitter.configs").setup({
 	-- One of "all", "maintained" (parsers with maintainers), or a list of languages
-	ensure_installed = { "bash", "c", "clojure", "go", "haskell", "html", "javascript", "json", "julia", "lua", "python", "vim" },
+	ensure_installed = {
+		"bash",
+		"c",
+		"clojure",
+		"go",
+		"haskell",
+		"html",
+		"javascript",
+		"json",
+		"julia",
+		"lua",
+		"python",
+		"vim",
+	},
 	highlight = { enable = true, additional_vim_regex_highlightimg = false },
 	incremental_selection = { enable = false },
 	indent = { enable = true },
@@ -16,6 +29,13 @@ require("nvim-treesitter.configs").setup({
 				["if"] = "@function.inner",
 				["ac"] = "@class.outer",
 				["ic"] = "@class.inner",
+				["il"] = "@loop.inner",
+			},
+			selection_modes = {
+				["@function.outer"] = "V",
+				["@function.inner"] = "V",
+				["@class.outer"] = "V",
+				["@class.inner"] = "V",
 			},
 		},
 		move = {

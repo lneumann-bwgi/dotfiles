@@ -7,7 +7,14 @@ super + b
 super + shift + b
     nyxt
 super + d
-    dmenu_run
+	rofi -modi drun -show-icons -show
+super + shift + d
+	rofi -modi drun -show-icons -show window  
+super + z
+    zeal
+
+# Desktop Utils
+
 super + p
     scrot -e 'mv $f ~/Pictures'
 super + shift + p
@@ -18,8 +25,6 @@ super + shift + r
     python -m speedread &> /dev/null
 super + y
     clipmenu
-super + z
-    zeal
 
 # Media keys
 
@@ -41,16 +46,15 @@ XF86MonBrightnessDown
 XF86MonBrightnessUp
     xbacklight -inc 20
 
-XF86Tools
-    toggle_keybord_layout.sh
-
 XF86Bluetooth
     connect_bluetooth.sh >/dev/null 
 
 XF86Favorites
     toggle_keybord_layout.sh
 
-# Windom maneger commands
+#
+# WM related
+#
 
 # power menu/quit
 super + alt + q
@@ -64,13 +68,22 @@ super + alt + r
 super + {_,shift + }q
     bspc node -{c,k}
 
-# alternate between the tiled and monocle layout
-super + m
-    bspc desktop -l next
+
+#
+# layouts/state
+#
 
 # swap the current node and the biggest window
 super + g
     bspc node -s biggest.local
+
+# alternate between layouts
+super + a
+    bsp-layout next --layouts tall,wide,tiled
+
+# toggle between the tiled and monocle layout
+super + m
+    bspc desktop -l next
 
 # set the window state
 super + {t,shift + t,f,shift + f}
@@ -121,7 +134,7 @@ super + {Left,Down,Up,Right}
     bspc node -v {-20 0,0 20,0 -20,20 0}
 
 # Smarth resize
-super + ctrl + {Left,Down,Up,Right}
+super + ctrl + {h,j,k,l}
   n=10; \
   { d1=left;   d2=right;  dx=-$n; dy=0;   \
   , d1=bottom; d2=top;    dx=0;   dy=$n;  \

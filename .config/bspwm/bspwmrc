@@ -30,6 +30,7 @@ bspc desktop -f I
 # App rules
 bspc rule -a MEGAsync desktop='^10'
 bspc rule -a Alacritty state='pseudo_tiled'
+bspc rule -a Zathura state='tiled'
 
 # start daemons
 pgrep -f clipmenud >/dev/null || { clipmenud & }

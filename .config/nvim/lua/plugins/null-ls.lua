@@ -42,6 +42,7 @@ require("null-ls").setup({
 		require("null-ls").builtins.formatting.sqlfluff.with({
 			extra_args = { "--dialect", "mysql" }, -- change to your dialect
 		}),
+		require("null-ls").builtins.formatting.stylish_haskell,
 	},
 	on_attach = on_attach,
 })

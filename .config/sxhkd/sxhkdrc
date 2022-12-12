@@ -1,4 +1,4 @@
-# Launch Aplications
+# Launch Applications
 
 super + Return
     alacritty
@@ -13,7 +13,7 @@ super + shift + d
 super + z
     zeal
 
-# Desktop Utils
+# Desktop Utilities
 
 super + p
     scrot -e 'mv $f ~/Pictures'
@@ -60,7 +60,7 @@ XF86Favorites
 super + alt + q
     rofi -show power-menu -modi power-menu:rofi-power-menu
 
-# restart bspwm
+# restart BSPWM
 super + alt + r
     bspc wm -r
 

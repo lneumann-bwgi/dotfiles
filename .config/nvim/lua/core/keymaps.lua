@@ -22,20 +22,18 @@ end
 
 vim.g.mapleader = " "
 
--- test
--- nmap("<leader>/", ":nohlsearch<cr>")
+-- use esc to also clear the highlight
 nmap("<esc>", ":nohlsearch<cr><esc>")
 
 -- write shell cmd to file
 map({ "n", "v" }, "<leader>S", ":.!bash<CR>")
 
 -- dictionaries
--- vim.cmd [[
--- nnoremap <space>we :execute '!dict -d wn ' . shellescape(expand('<cword>')) . ' \| head -n 25'<Cr>
--- nnoremap <space>wt :execute '!dict -d moby-thesaurus ' . shellescape(expand('<cword>')) . ' \| head -n 25'<Cr>
--- nnoremap <space>wp :execute '!dict -d fd-por-eng ' . shellescape(expand('<cword>'))<Cr>
--- nnoremap <space>wd :execute '!dict -d fd-deu-eng ' . shellescape(expand('<cword>'))<Cr>
--- ]]
+--  TODO: write telescope plugin to do that
+nmap("<leader>we", ":execute '!dict -d wn ' . shellescape(expand('<cword>')) . ' | head -n 40'<CR>")
+nmap("<leader>wt", ":execute '!dict -d moby-thesaurus ' . shellescape(expand('<cword>')) . ' | head -n 40'<CR>")
+nmap("<leader>wp", ":execute '!dict -d fd-por-eng ' . shellescape(expand('<cword>')) . ' | head -n 40'<CR>")
+nmap("<leader>wd", ":execute '!dict -d fd-deu-eng ' . shellescape(expand('<cword>')) . ' | head -n 40'<CR>")
 
 -- MAJOR MAPPINGS
 
@@ -45,6 +43,7 @@ map({ "n", "v" }, "L", "g_")
 map({ "n", "v" }, "H", "^")
 map({ "n", "v" }, "L", "g_")
 
+-- u: undo, U: redo
 map("n", "U", "<c-r>")
 
 -- movement in splits
@@ -53,7 +52,7 @@ nmap("<c-j>", "<c-w><down>")
 nmap("<c-h>", "<c-w><left>")
 nmap("<c-l>", "<c-w><right>")
 
--- resize windows
+-- re-size windows
 nmap("<Up>", "<c-w>+")
 nmap("<Down>", "<c-w>-")
 nmap("<right>", "<c-w><")
@@ -72,14 +71,14 @@ nmap("[e", "g,")
 nmap("]j", "<c-i>")
 nmap("[j", "<c-o>")
 
+-- close buffer
+nmap("<leader>x", ":bd<CR>")
+
 -- pasting multiple times
 nmap("gp", '"0p')
 nmap("gP", '"0P')
 vmap("gp", '"0p')
 vmap("gP", '"0P')
-
--- close buffer
-nmap("<leader>x", ":bd<CR>")
 
 -- MINOR MAPPINGS
 
@@ -97,14 +96,12 @@ vmap("K", ":m '<-2<CR>gv=gv")
 cmap("<C-a>", "<home>")
 cmap("<C-e>", "<end>")
 
+-- don't move cursor when using J
+nmap("J", ",zJ`z")
+
 -- undo breaks on punctuation
 imap(",", ",<C-g>u")
 imap(".", ".<C-g>u")
-
-imap("<C-h>", "<Left>")
-imap("<C-j>", "<Down>")
-imap("<C-k>", "<Up>")
-imap("<C-l>", "<Right>")
 
 -- save (similar to ZZ, ZQ)
 nmap("ZS", ":w<CR>")
@@ -118,10 +115,6 @@ vmap(">", ">gv")
 -- swap colon and semicolon (dont use silent)
 vim.keymap.set({ "n", "v", "c" }, ":", ";", { noremap = true, silent = false })
 vim.keymap.set({ "n", "v", "c" }, ";", ":", { noremap = true, silent = false })
-
--- swap v and ctrl-v
--- map({ "n", "v", "c"}, "v", "<c-v>")
--- map({ "n", "v", "c"}, "<c-v>", "v")
 
 -- useless keys
 map({ "n", "v" }, "M", "<NOP>")

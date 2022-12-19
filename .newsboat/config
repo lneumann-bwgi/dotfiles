@@ -1,6 +1,6 @@
 # -- feeds ---------------------------------------------------------------------
 
-browser chromium
+browser brave
 
 auto-reload yes
 reload-time 120

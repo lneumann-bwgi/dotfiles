@@ -48,6 +48,7 @@ local servers = {
 	"jsonls",
 	"julials",
 	"pyright",
+	"hls",
 	"slangd",
 	"sqlls",
 	"sumneko_lua",

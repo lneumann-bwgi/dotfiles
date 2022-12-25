@@ -1,7 +1,6 @@
-local api = vim.api
 -- FROM: https://github.com/neovim/nvim-lspconfig
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
+
+local api = vim.api
 local opts = { noremap = true, silent = true }
 api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
@@ -20,9 +19,7 @@ local on_attach = function(client, bufnr)
 	api.nvim_buf_set_keymap(bufnr, "n", "<space>rn", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
 	api.nvim_buf_set_keymap(bufnr, "n", "<space>ca", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
 
-	-- vim.bo.ominifunc = "v:lua.vim.lsp.ominifunc"
-
-	if client.server_capabilities.document_highlight then
+	if client.server_capabilities.documentHighlightProvider then
 		api.nvim_command("autocmd CursorHold  <buffer> lua vim.lsp.buf.document_highlight()")
 		api.nvim_command("autocmd CursorHoldI <buffer> lua vim.lsp.buf.document_highlight()")
 		api.nvim_command("autocmd CursorMoved <buffer> lua vim.lsp.buf.clear_references()")
@@ -48,7 +45,7 @@ local servers = {
 	"jsonls",
 	"julials",
 	"pyright",
-	"hls",
+	-- "hls",
 	"slangd",
 	"sqlls",
 	"sumneko_lua",

@@ -23,8 +23,7 @@ source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="-m --height 60% --layout=reverse --border --preview='bat {} --color=always'"
-# export FZF_CTRL_T_COMMAND = ''
-# export FZF_CTRL_R_COMMAND = ''
+
 # export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200"
 
 # Load NNN
@@ -33,7 +32,7 @@ export FZF_DEFAULT_OPTS="-m --height 60% --layout=reverse --border --preview='ba
 # Load syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh #2>/dev/null
 
-# Source history completion; shoulb be after zsh-syntax-highlighting
+# Source history completion; should be after zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh #2>/dev/null
 
 # clipmenu
@@ -72,7 +71,7 @@ setopt SHARE_HISTORY # share history between sessions
 setopt APPEND_HISTORY # append to history
 setopt INC_APPEND_HISTORY # adds to histery as cmd are typed
 
-# You dont to type cd all the time
+# You don't to type cd all the time
 setopt AUTO_CD
 
 # Disable Ctrl-S Ctrl-Q

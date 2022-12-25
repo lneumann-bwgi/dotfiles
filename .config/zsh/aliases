@@ -3,14 +3,14 @@ alias cat='bat'
 alias diff='delta'
 alias df='duf'
 alias du='dust'
-alias find='fd'
 alias ls='exa'
 alias vi='nvim'
 alias vim='nvim'
 
 # dangerous
+# alias find='fd'
 # alias cut='choose'
-alias grep='rg'
+# alias grep='rg'
 # alias ps='procs'
 
 # safety first
@@ -32,22 +32,24 @@ alias lt='ls -aT | bat'  # tree listing
 alias l='ls'
 
 # correct typos
+alias py='python'
 alias pytohn='python'
 alias vu='nvim'
 alias vo='nvim'
 
 # pipenv stuff
-alias py='pipenv run python'
+alias ppy='pipenv run python'
 alias ipy='pipenv run ptpython'
-alias ppy='pipenv run ptpython'
+alias tpy='pipenv run ptpython'
 alias flask='pipenv run python -m flask'
 
 # git stuff
 alias g='git'
 alias gbr='git branch'
-alias gcm='git commit -m'
+alias gcm='git commit -a -m'
 alias gco='git checkout'
 alias gdf='git diff'
+alias gdt='git difftool'
 alias gll='git log --oneline --no-merges'
 alias gpl='git pull'
 alias gps='git push'

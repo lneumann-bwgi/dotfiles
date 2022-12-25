@@ -87,6 +87,7 @@ imap("<c-r>", "<c-r>+")
 
 -- visual selection in fold
 nmap("viz", "v[zo]z$")
+nmap("vaz", "v[zo]z$")
 
 -- move visual selection up/down
 vmap("J", ":m '>+1<CR>gv=gv")
@@ -97,7 +98,7 @@ cmap("<C-a>", "<home>")
 cmap("<C-e>", "<end>")
 
 -- don't move cursor when using J
-nmap("J", ",zJ`z")
+nmap("J", "mzJ`z")
 
 -- undo breaks on punctuation
 imap(",", ",<C-g>u")
@@ -110,10 +111,22 @@ nmap("ZS", ":w<CR>")
 vmap("<", "<gv")
 vmap(">", ">gv")
 
+-- FUNCTIONS
+
+vim.cmd([[
+  function! ToggleWrap()
+    if(&wrap == 1)
+      set nowrap
+    else
+      set wrap linebreak nolist
+    endif
+  endfunction
+  nnoremap <Leader>w :call ToggleWrap()<CR>
+]])
+
 -- SWAPS
 
--- swap colon and semicolon (dont use silent)
-vim.keymap.set({ "n", "v", "c" }, ":", ";", { noremap = true, silent = false })
+-- map semicolon to colon (don't use silent)
 vim.keymap.set({ "n", "v", "c" }, ";", ":", { noremap = true, silent = false })
 
 -- useless keys

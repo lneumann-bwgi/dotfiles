@@ -7,7 +7,6 @@ PKGS=(
 	"anki"
 	"brave-bin"
 	"choose-rust-git"
-	"hackernews_tui"
 	"keyd-git"
 	"megasync-bin"
 	"nnn-nerd"

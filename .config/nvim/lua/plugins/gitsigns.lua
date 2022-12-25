@@ -20,16 +20,13 @@ require("gitsigns").setup({
 
 		["n <leader>hp"] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
 		["n <leader>hr"] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-		['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-		-- ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-		-- ['n <leader>hl'] = '<cmd>lua require("user").githunk.publish_loclist(true)<CR>',
-		-- ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-		-- ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-		-- ['x <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-		-- ['x <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+		["n <leader>hR"] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+		["n <leader>hb"] = '<cmd>lua require"gitsigns".blame_line()<CR>',
+		["n <leader>hs"] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+		["n <leader>hu"] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
 
 		-- Text objects
-		['o ih'] = ':<C-U>Gitsigns select_hunk<CR>',
-		['x ih'] = ':<C-U>Gitsigns select_hunk<CR>'
+		["o ih"] = ":<C-U>Gitsigns select_hunk<CR>",
+		["x ih"] = ":<C-U>Gitsigns select_hunk<CR>",
 	},
 })

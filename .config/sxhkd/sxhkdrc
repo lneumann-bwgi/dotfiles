@@ -73,17 +73,25 @@ super + {_,shift + }q
 # layouts/state
 #
 
-# swap the current node and the biggest window
-super + g
-    bspc node -s biggest.local
+# swap last focus node
+super + s
+    bspc node -s last.local
 
-# alternate between layouts
-super + a
-    bsp-layout next --layouts tall,wide,tiled
+# swap the current node and the biggest window
+super + S
+    bspc node -s biggest.local
 
 # toggle between the tiled and monocle layout
 super + m
     bspc desktop -l next
+
+# toggle between the tall and tiled layouts
+super + alt + t
+    bsp-layout next --layouts tall,tiled
+
+# toggle between wide and tiled layouts
+super + alt + w
+    bsp-layout next --layouts wide,tiled
 
 # set the window state
 super + {t,shift + t,f,shift + f}
@@ -110,7 +118,7 @@ super + {_,shift + }{1-9,0}
 #
 
 # preselect the direction
-super + shift + {h,j,k,l}
+super + ctrl + shift + {h,j,k,l}
     bspc node -p {west,south,north,east}
 
 # preselect the ratio

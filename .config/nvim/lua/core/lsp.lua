@@ -4,7 +4,7 @@ local api = vim.api
 local opts = { noremap = true, silent = true }
 api.nvim_set_keymap("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
 api.nvim_set_keymap("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-api.nvim_set_keymap("n", "<space>d", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
+api.nvim_set_keymap("n", "<space>D", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer

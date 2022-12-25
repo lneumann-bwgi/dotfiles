@@ -16,14 +16,3 @@ getbib() {
     fi
     curl -s "http:/api.crossref.org/works/${doi#"DOI: "}/transform/application/x-bibtex" -w "\\n"
 }
-
-
-rangercd () {
-    tmp="$(mktemp)"
-    ranger --choosedir="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp" &> /dev/null
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}

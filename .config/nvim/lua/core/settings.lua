@@ -34,6 +34,7 @@ opt.splitbelow = true
 -- [[ folds ]] --
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevelstart = 99
 
 -- [[ backups ]] --
 opt.autoread = true
@@ -88,12 +89,9 @@ call matchadd('ColorColumn', '\%81v', 100)
 vim.cmd([[
 augroup LuaHighlight
     autocmd!
-    au TextYankPost * silent! lua vim.highlight.on_yank({higroup="Visual", timeout=250})
+    au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=500})
 augroup END
 ]])
-
--- open folds
-vim.cmd([[autocmd BufWinEnter * normal zR]])
 
 -- [[ Performanse ]] --
 

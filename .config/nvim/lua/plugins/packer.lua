@@ -62,6 +62,7 @@ return require("packer").startup(function()
 
 	-- cosmetic
 	use("ellisonleao/gruvbox.nvim")
+	use("shortcuts/no-neck-pain.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 	use({
 		"akinsho/bufferline.nvim",

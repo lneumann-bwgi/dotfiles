@@ -21,7 +21,7 @@ vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files)
 vim.keymap.set("n", "<leader>fo", require("telescope.builtin").oldfiles)
 
 -- find in file
-vim.keymap.set("n", "<leader>ft", require("telescope.builtin").current_buffer_tags)
+vim.keymap.set("n", "<leader>fT", require("telescope.builtin").current_buffer_tags)
 vim.keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep)
 vim.keymap.set("n", "<leader>fG", require("telescope.builtin").current_buffer_fuzzy_find)
 
@@ -36,6 +36,7 @@ vim.keymap.set("n", "z=", require("telescope.builtin").spell_suggest)
 -- lsp
 vim.keymap.set("n", "<leader>fr", require("telescope.builtin").lsp_references)
 vim.keymap.set("n", "<leader>fd", require("telescope.builtin").lsp_definitions)
+vim.keymap.set("n", "<leader>ft", require("telescope.builtin").lsp_dynamic_workspace_symbols)
 vim.keymap.set("n", "<leader>ic", require("telescope.builtin").lsp_incoming_calls)
 vim.keymap.set("n", "<leader>oc", require("telescope.builtin").lsp_outgoing_calls)
 

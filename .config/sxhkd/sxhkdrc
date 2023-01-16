@@ -25,7 +25,8 @@ super + shift + r
     python -m speedread &> /dev/null
 super + y
     clipmenu
-
+super + n
+    bspc query -N | rofi -show window
 # Media keys
 
 XF86AudioMute

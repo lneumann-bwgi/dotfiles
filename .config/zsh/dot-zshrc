@@ -34,6 +34,7 @@ export FZF_DEFAULT_OPTS="
     --bind 'ctrl-/:toggle-preview'"
 
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+export FZF_CTRL_R_OPTS="--preview-window=hidden"
 
 # Load NNN
 [ -f $HOME/.config/nnn/config.sh ] && source $HOME/.config/nnn/config.sh
@@ -54,10 +55,10 @@ export CM_LAUNCHER="dmenu"
 # SETTINGS
 
 # Disable h,j,k,l reapat
-xset -r 43
-xset -r 44
-xset -r 45
-xset -r 46
+# xset -r 43
+# xset -r 44
+# xset -r 45
+# xset -r 46
 
 # Keyboard repeat rate
 xset r rate 180 50
@@ -119,6 +120,15 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
+
+# change fzf bindings
+bindkey '^F' fzf-file-widget
+bindkey '^H' fzf-history-widget
+bindkey '^Z' fzf-cd-widget
+
+bindkey -r '^R'
+bindkey -r '^T'
+bindkey -r '\eC'
 
 # Change in quotes (vim like)
 autoload -U select-quoted

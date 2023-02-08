@@ -22,9 +22,18 @@ source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh #2>/de
 source /usr/share/fzf/completion.zsh
 source /usr/share/fzf/key-bindings.zsh
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_DEFAULT_OPTS="-m --height 60% --layout=reverse --border --preview='bat {} --color=always'"
+export FZF_DEFAULT_OPTS="
+    --multi --border
+    --height 60%
+    --layout=reverse
+    --preview='bat {} --color=always'
+    --bind 'ctrl-d:preview-down'
+    --bind 'ctrl-b:preview-down'
+    --bind 'ctrl-u:preview-up'
+    --bind 'ctrl-f:preview-up'
+    --bind 'ctrl-/:toggle-preview'"
 
-# export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200"
+export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 
 # Load NNN
 [ -f $HOME/.config/nnn/config.sh ] && source $HOME/.config/nnn/config.sh

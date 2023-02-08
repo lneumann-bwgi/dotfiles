@@ -27,20 +27,21 @@ end
 
 require("null-ls").setup({
 	sources = {
-		require("null-ls").builtins.formatting.black,
+		require("null-ls").builtins.diagnostics.ruff,
+		require("null-ls").builtins.diagnostics.sqlfluff.with({
+			extra_args = { "--dialect", "tsql" },
+		}),
 		require("null-ls").builtins.formatting.clang_format,
-		require("null-ls").builtins.formatting.json_tool,
+		require("null-ls").builtins.formatting.cljstyle,
+		require("null-ls").builtins.formatting.csharpier,
 		require("null-ls").builtins.formatting.gofmt,
-		require("null-ls").builtins.formatting.isort,
+		require("null-ls").builtins.formatting.json_tool,
 		require("null-ls").builtins.formatting.prettier,
+		require("null-ls").builtins.formatting.ruff,
 		require("null-ls").builtins.formatting.shfmt,
 		require("null-ls").builtins.formatting.stylua,
-		require("null-ls").builtins.formatting.cljstyle,
-		require("null-ls").builtins.diagnostics.sqlfluff.with({
-			extra_args = { "--dialect", "mysql" }, -- change to your dialect
-		}),
 		require("null-ls").builtins.formatting.sqlfluff.with({
-			extra_args = { "--dialect", "mysql" }, -- change to your dialect
+			extra_args = { "--dialect", "tsql" },
 		}),
 		require("null-ls").builtins.formatting.stylish_haskell,
 	},

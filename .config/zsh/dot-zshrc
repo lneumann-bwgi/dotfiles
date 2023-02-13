@@ -26,12 +26,15 @@ export FZF_DEFAULT_OPTS="
     --multi --border
     --height 60%
     --layout=reverse
+    --prompt='❯ ' --pointer='▶ ' --marker='✓ '
     --preview='bat {} --color=always'
+    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+    --bind 'ctrl-y:execute-silent(echo {+} | xclip -i)'
     --bind 'ctrl-d:preview-down'
     --bind 'ctrl-b:preview-down'
     --bind 'ctrl-u:preview-up'
     --bind 'ctrl-f:preview-up'
-    --bind 'ctrl-/:toggle-preview'"
+    --bind '?:toggle-preview'"
 
 export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
 export FZF_CTRL_R_OPTS="--preview-window=hidden"

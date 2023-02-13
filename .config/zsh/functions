@@ -1,27 +1,21 @@
 #!/bin/sh
 
-getdoi() {
-	if [ -f "$1" ]; then
-		doi=$(pdfinfo "$1" | grep -io "doi:.*") || doi=$(pdftotext "$1" - 2>/dev/null | grep -io "doi:.*" -m 1)
-	else
-		doi="$1"
-	fi
-	echo $doi
-}
-
-getbib() {
-	if [ -f "$1" ]; then
-		doi=$(pdfinfo "$1" | grep -io "doi:.*") || doi=$(pdftotext "$1" - 2>/dev/null | grep -io "doi:.*" -m 1)
-	else
-		doi="$1"
-	fi
-	curl -s "http:/api.crossref.org/works/${doi#"DOI: "}/transform/application/x-bibtex" -w "\\n"
-}
-
 spell() {
 	if [[ "$#" -eq 0 ]]; then
-		cat /usr/share/dict/words | fzf --preview 'dict -d wn {} | fold -w $COLUMNS -s' --height=80% --preview-window=up:60% --layout=default
+		cat /usr/share/dict/words |
+			fzf --preview 'dict -d wn {} | fold -w $COLUMNS -s' --height=80% --preview-window=up:60% --layout=default |
+			xargs dict -d wn | yank
 	else
-		cat /usr/share/dict/words | fzf --query $1 --preview 'dict -d wn {} | fold -w $COLUMNS -s' --height=80% --preview-window=up:60% --layout=default
+		cat /usr/share/dict/words |
+			fzf --query $1 --preview 'dict -d wn {} | fold -w $COLUMNS -s' --height=80% --preview-window=up:60% --layout=default |
+			xargs dict -d wn | yank
 	fi
+}
+
+rgi() {
+	if [ ! "$#" -gt 0 ]; then
+		echo "Need a string to search for!"
+		return 1
+	fi
+	rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }

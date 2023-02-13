@@ -28,7 +28,6 @@ alias la='ls -al'  # all files and dirs
 alias lh='ls -a | egrep "^\."' # only hidden
 alias ll='ls -l'   # long format
 alias lt='ls -aT | bat'  # tree listing
-
 alias l='ls'
 
 # correct typos
@@ -37,11 +36,10 @@ alias pytohn='python'
 alias vu='nvim'
 alias vo='nvim'
 
-# pipenv stuff
-alias ppy='pipenv run python'
-alias ipy='pipenv run ptpython'
-alias tpy='pipenv run ptpython'
-alias flask='pipenv run python -m flask'
+# poetry stuff
+alias ppy='poetry run python'
+alias pty='poetry run ptpython'
+alias flask='poetry run python -m flask'
 
 # git stuff
 alias g='git'

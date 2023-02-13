@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # welcome to the 21th century
 alias cat='bat'
 alias diff='delta'
@@ -6,6 +8,7 @@ alias du='dust'
 alias ls='exa'
 alias vi='nvim'
 alias vim='nvim'
+alias watch='viddy'
 
 # dangerous
 # alias find='fd'
@@ -24,10 +27,11 @@ alias yank='yank -- xsel -b'
 
 # ls options
 alias ls='ls -h --color=always --group-directories-first'
-alias la='ls -al'  # all files and dirs
+alias la='ls -al'              # all files and dirs
 alias lh='ls -a | egrep "^\."' # only hidden
-alias ll='ls -l'   # long format
-alias lt='ls -aT | bat'  # tree listing
+alias ll='ls -l'               # long format
+alias lt='ls -aT | bat'        # tree listing
+
 alias l='ls'
 
 # correct typos
@@ -64,4 +68,4 @@ alias anki="~/Downloads/anki-2.1.35-linux-amd64/bin/anki"
 alias stow_dot="stow -v --no-folding --dotfiles -t ~ -d ~/.dotfiles ."
 
 alias encf="openssl enc -e -aes256 -in"
-alias decf="openssl enc -d -aes256 -in" 
+alias decf="openssl enc -d -aes256 -in"

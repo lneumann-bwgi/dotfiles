@@ -40,7 +40,6 @@ return require("packer").startup(function()
 	-- treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-textobjects")
-	-- use("nvim-treesitter/nvim-treesitter-refactor")
 
 	use("p00f/nvim-ts-rainbow")
 	use("windwp/nvim-ts-autotag")
@@ -59,6 +58,12 @@ return require("packer").startup(function()
 	use("numToStr/Comment.nvim")
 	use("rhysd/clever-f.vim")
 	use("windwp/nvim-autopairs")
+	use({
+		"vonheikemen/fine-cmdline.nvim",
+		requires = {
+			{ "muniftanjim/nui.nvim" },
+		},
+	})
 
 	-- cosmetic
 	use("ellisonleao/gruvbox.nvim")

@@ -50,5 +50,5 @@ fzf-man-widget() {
 			--bind "alt-t:+change-preview(tldr --color=always {1})+change-prompt(ﳁ TLDR > )"
 	zle reset-prompt
 }
-# bindkey '^i' fzf-man-widget */
-# zle -N fzf-man-widget */
+# bindkey '^m' fzf-man-widget
+# zle -N fzf-man-widget

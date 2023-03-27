@@ -9,6 +9,7 @@ alias ls='exa'
 alias vi='nvim'
 alias vim='nvim'
 alias watch='viddy'
+alias tree='et -I'
 
 # dangerous
 # alias find='fd'

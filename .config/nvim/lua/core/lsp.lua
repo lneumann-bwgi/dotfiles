@@ -48,7 +48,7 @@ local servers = {
 	-- "hls",
 	"slangd",
 	"sqlls",
-	"sumneko_lua",
+	"lua_ls",
 	"tsserver",
 	"vimls",
 }

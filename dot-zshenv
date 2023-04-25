@@ -21,3 +21,4 @@ export PIPENV_MAX_DEPTH=10
 
 export GOPATH="$HOME/Documents/go"
 
+export OPENAI_API_KEY="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"

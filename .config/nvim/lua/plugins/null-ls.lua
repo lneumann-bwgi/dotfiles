@@ -34,6 +34,8 @@ require("null-ls").setup({
 		require("null-ls").builtins.formatting.clang_format,
 		require("null-ls").builtins.formatting.cljstyle,
 		require("null-ls").builtins.formatting.csharpier,
+		require("null-ls").builtins.diagnostics.cspell,
+		require("null-ls").builtins.code_actions.cspell,
 		require("null-ls").builtins.formatting.gofmt,
 		require("null-ls").builtins.formatting.json_tool,
 		require("null-ls").builtins.formatting.prettier,

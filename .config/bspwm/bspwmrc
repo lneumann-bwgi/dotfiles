@@ -2,7 +2,7 @@
 
 # WM config
 if xrandr --query | grep 'HDMI2 connected'; then
-	xrandr --output eDP1 --mode 1366x768 --pos 0x0 --rotate normal --output DP1 --off --output DP2 --off --output HDMI1 --off --output HDMI2 --primary --mode 2560x1080 --pos 1366x0 --rotate normal --output VIRTUAL1 --off
+	xrandr --output eDP1 --mode 1366x768 --pos 2560x312 --rotate normal --output DP1 --off --output DP2 --off --output HDMI1 --off --output HDMI2 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 	bspc monitor HDMI2 -d I II III IV V VI VII VIII
 	bspc monitor eDP1 -d IX X
 	bspc wm -O HDMI2 eDP1
@@ -29,7 +29,7 @@ bspc config presel_feedback_color "#81a1c1"
 bspc desktop -f I
 
 # App rules
-bspc rule -a MEGAsync desktop='^10'
+bspc rule -a MEGAsync desktop='^10' state='pseudo_tiled' border=off
 bspc rule -a Alacritty state='pseudo_tiled'
 bspc rule -a Brave state='pseudo_tiled'
 bspc rule -a Firefox state='pseudo_tiled'

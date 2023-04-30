@@ -30,8 +30,8 @@ text-width 80
 color background default default
 color listnormal default default
 color listnormal_unread yellow default bold
-color listfocus default black
-color listfocus_unread yellow black bold
+color listfocus default black bold
+color listfocus_unread red black bold
 color info cyan black
 color article default default
 

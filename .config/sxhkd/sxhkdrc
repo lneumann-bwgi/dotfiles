@@ -2,10 +2,16 @@
 
 super + Return
     alacritty
+super + shift + Return
+    rofi -show calc -modi calc -no-show-match -no-sort
 super + b
     [[ "$(whoami)" == "neumann" ]] && brave || chromium
 super + shift + b
-    nyxt
+    menu-surfraw
+super + ctrl + c
+    rofi-wifi-menu
+super + shift + c
+    rofi-bluetooth
 super + d
 	rofi -modi drun -show-icons -show
 super + shift + d
@@ -111,7 +117,7 @@ super + {_,shift + }Tab
 
 # select windows to focus 
 super + {Escape,grave}
-    bspc query -N | rofi -show window
+	rofi -modi drun -show-icons -show window  
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}

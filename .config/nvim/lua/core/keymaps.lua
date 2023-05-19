@@ -124,7 +124,7 @@ vim.cmd([[
       set wrap linebreak nolist
     endif
   endfunction
-  nnoremap <Leader>w :call ToggleWrap()<CR>
+  nnoremap <Leader>W :call ToggleWrap()<CR>
 ]])
 
 -- SWAPS

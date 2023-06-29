@@ -39,7 +39,8 @@ require("null-ls").setup({
 		require("null-ls").builtins.formatting.gofmt,
 		require("null-ls").builtins.formatting.json_tool,
 		require("null-ls").builtins.formatting.prettier,
-		require("null-ls").builtins.formatting.ruff,
+		require("null-ls").builtins.formatting.black,
+		require("null-ls").builtins.formatting.isort,
 		require("null-ls").builtins.formatting.shfmt,
 		require("null-ls").builtins.formatting.stylua,
 		require("null-ls").builtins.formatting.sqlfluff.with({

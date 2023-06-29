@@ -1,5 +1,5 @@
 -- better performance
-require("impatient")
+vim.loader.enable()
 
 require("plugins.packer")
 

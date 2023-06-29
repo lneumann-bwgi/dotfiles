@@ -11,8 +11,8 @@ export NNN_PLUG="$NNN_PLUG_PREVIEW;$NNN_PLUG_FZF;$NNN_PLUG_MISC;$NNN_PLUG_SHELL"
 
 export NNN_BMS='d:~/Documents;D:~/Downloads/;m:~/MEGA;.:~/.dotfiles'
 
-if [ -f /usr/share/nnn/quitcd/quitcd.bash_zsh ]; then
-    source /usr/share/nnn/quitcd/quitcd.bash_zsh
+if [ -f /usr/share/nnn/quitcd/quitcd.bash_sh_zsh ]; then
+	source /usr/share/nnn/quitcd/quitcd.bash_sh_zsh
 fi
 
 alias ncp="cat ${NNN_SEL:-${XDG_CONFIG_HOME:-$HOME/.config}/nnn/.selection} | tr '\0' '\n'"

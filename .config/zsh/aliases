@@ -65,8 +65,7 @@ alias vtb='nvim -p'
 alias fastvim='nvim -n -u NONE -i NONE -N'
 
 # misc
-alias anki="~/Downloads/anki-2.1.35-linux-amd64/bin/anki"
 alias stow_dot="stow -v --no-folding --dotfiles -t ~ -d ~/.dotfiles ."
-
 alias encf="openssl enc -e -aes256 -in"
 alias decf="openssl enc -d -aes256 -in"
+alias weather="curl wttr.in"

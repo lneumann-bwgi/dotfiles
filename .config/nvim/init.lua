@@ -1,12 +1,10 @@
--- better performance
-vim.loader.enable()
-
-require("plugins.packer")
-
 require("core.settings")
 require("core.keymaps")
 require("core.lsp")
+require("core.autocmds")
 
+require("plugins.packer")
+require("plugins.alpha")
 require("plugins.bufferline")
 require("plugins.comment")
 require("plugins.gitsigns")

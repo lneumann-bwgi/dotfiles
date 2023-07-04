@@ -31,6 +31,9 @@ map({ "n", "v" }, "<leader>S", ":.!bash<CR>")
 -- centers screen
 nmap("<leader>zz", ":NoNeckPain<CR>")
 
+-- tagbar screen
+nmap("<leader>tt", ":TagbarToggle<CR>")
+
 -- dictionaries
 --  TODO: write telescope plugin to do that
 nmap("<leader>we", ":execute '!dict -d wn ' . shellescape(expand('<cword>')) . ' | head -n 40'<CR>")

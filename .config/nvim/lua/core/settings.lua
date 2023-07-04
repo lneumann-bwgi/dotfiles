@@ -1,3 +1,6 @@
+-- enable lua plugins caching
+vim.loader.enable()
+
 local opt = vim.opt
 HOME = os.getenv("HOME")
 
@@ -30,11 +33,15 @@ opt.tabstop = 4
 -- [[ splits ]] --
 opt.splitright = true
 opt.splitbelow = true
+opt.splitkeep = "screen"
 
 -- [[ folds ]] --
 opt.foldmethod = "expr"
 opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevelstart = 99
+
+-- Fix markdown indentation settings
+vim.g.markdown_recommended_style = 0
 
 -- [[ backups ]] --
 opt.autoread = true
@@ -58,7 +65,7 @@ opt.wildignore =
 	".git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc"
 
 -- [[ spelling ]]
-opt.spell = true
+opt.spell = false
 opt.spelllang = { "en_us" }
 
 -- [[ misc ]] --
@@ -77,23 +84,7 @@ opt.virtualedit = "block"
 vim.g.do_filetype_lua = 1
 vim.did_load_filetypes = 0
 
--- [[ AutoCMDs ]] --
-
--- highlight column
-vim.cmd([[
-highlight ColorColumn ctermbg=magenta
-call matchadd('ColorColumn', '\%81v', 100)
-]])
-
--- highlight yanked text
-vim.cmd([[
-augroup LuaHighlight
-    autocmd!
-    au TextYankPost * silent! lua vim.highlight.on_yank({higroup="IncSearch", timeout=500})
-augroup END
-]])
-
--- [[ Performanse ]] --
+-- [[ Performance ]] --
 
 local disabled_built_ins = {
 	"netrw",

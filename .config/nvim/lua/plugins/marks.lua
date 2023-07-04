@@ -1,1 +1,1 @@
-require("marks").setup({})
+require("marks").setup()

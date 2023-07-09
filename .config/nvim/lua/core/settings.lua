@@ -53,7 +53,7 @@ opt.undodir = HOME .. "/.vim/undodir//"
 -- [[ display ]] --
 opt.background = "dark"
 opt.termguicolors = true
-vim.cmd("colorscheme gruvbox")
+vim.cmd("colorscheme nord")
 
 -- [[ clipboard ]] --
 opt.clipboard = "unnamed,unnamedplus"
@@ -71,7 +71,7 @@ opt.spelllang = { "en_us" }
 -- [[ misc ]] --
 opt.path = opt.path + ".,**"
 opt.isfname = opt.isfname - "="
-opt.lazyredraw = true
+opt.lazyredraw = false
 opt.cursorline = true
 opt.updatetime = 100
 opt.hidden = true

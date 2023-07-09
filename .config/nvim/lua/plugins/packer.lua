@@ -60,9 +60,17 @@ return require("packer").startup(function()
 	use("windwp/nvim-autopairs")
 	-- use("gbprod/yanky.nvim")
 	-- use("Olical/conjure")
+	--
+	use({
+		"folke/noice.nvim",
+		requires = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" },
+	})
+
+	-- colorshemes
+	use("ellisonleao/gruvbox.nvim")
+	use("shaunsingh/nord.nvim")
 
 	-- cosmetic
-	use("ellisonleao/gruvbox.nvim")
 	use("shortcuts/no-neck-pain.nvim")
 	use("lukas-reineke/indent-blankline.nvim")
 	use({

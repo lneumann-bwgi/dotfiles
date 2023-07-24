@@ -25,27 +25,31 @@ local on_attach = function(client, bufnr)
 	end
 end
 
-require("null-ls").setup({
+null_ls = require("null-ls")
+
+null_ls.setup({
 	sources = {
-		require("null-ls").builtins.diagnostics.ruff,
-		require("null-ls").builtins.diagnostics.sqlfluff.with({
+		null_ls.builtins.code_actions.gitsigns,
+		null_ls.builtins.code_actions.cspell,
+		null_ls.builtins.diagnostics.cspell,
+		null_ls.builtins.diagnostics.mypy,
+		null_ls.builtins.diagnostics.ruff,
+		null_ls.builtins.diagnostics.sqlfluff.with({
 			extra_args = { "--dialect", "tsql" },
 		}),
-		require("null-ls").builtins.formatting.clang_format,
-		require("null-ls").builtins.formatting.cljstyle,
-		require("null-ls").builtins.formatting.csharpier,
-		require("null-ls").builtins.diagnostics.cspell,
-		require("null-ls").builtins.code_actions.cspell,
-		require("null-ls").builtins.formatting.gofmt,
-		require("null-ls").builtins.formatting.json_tool,
-		require("null-ls").builtins.formatting.prettier,
-		require("null-ls").builtins.formatting.ruff,
-		require("null-ls").builtins.formatting.shfmt,
-		require("null-ls").builtins.formatting.stylua,
-		require("null-ls").builtins.formatting.sqlfluff.with({
+		null_ls.builtins.formatting.clang_format,
+		null_ls.builtins.formatting.cljstyle,
+		null_ls.builtins.formatting.csharpier,
+		null_ls.builtins.formatting.gofmt,
+		null_ls.builtins.formatting.json_tool,
+		null_ls.builtins.formatting.prettier,
+		null_ls.builtins.formatting.ruff,
+		null_ls.builtins.formatting.shfmt,
+		null_ls.builtins.formatting.stylua,
+		null_ls.builtins.formatting.sqlfluff.with({
 			extra_args = { "--dialect", "tsql" },
 		}),
-		require("null-ls").builtins.formatting.stylish_haskell,
+		null_ls.builtins.formatting.stylish_haskell,
 	},
 	on_attach = on_attach,
 })

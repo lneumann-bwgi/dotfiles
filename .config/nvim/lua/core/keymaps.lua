@@ -117,6 +117,10 @@ nmap("ZS", ":w<CR>")
 vmap("<", "<gv")
 vmap(">", ">gv")
 
+-- better parenthesis navigation
+nmap("<Tab>", "%")
+vmap("<Tab>", "%")
+
 -- FUNCTIONS
 
 vim.cmd([[

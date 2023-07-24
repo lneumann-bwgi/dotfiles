@@ -42,7 +42,7 @@ return require("packer").startup(function()
 	-- treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdateSync" })
 	use("nvim-treesitter/nvim-treesitter-textobjects")
-	use("p00f/nvim-ts-rainbow")
+	use("HiPhish/rainbow-delimiters.nvim")
 	use("windwp/nvim-ts-autotag")
 
 	-- telescope

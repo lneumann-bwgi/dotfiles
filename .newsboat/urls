@@ -10,7 +10,6 @@ https://pythonbytes.fm/episodes/rss "aggregators"
 https://this-week-in-neovim.org/rss "aggregators"
 https://golang1.substack.com/feed "aggregators"
 https://cprss.s3.amazonaws.com/golangweekly.com.xml "aggregators"
- 
 # software
 https://julialang.org/feed.xml "~JuliaLang" "software"
 https://neovim.io/news.xml "software"
@@ -33,8 +32,12 @@ https://trickster.dev/index.xml "tech blog"
 https://vimtricks.com/feed/ "tech blog"
 https://iximiuz.com/feed.rss "tech blog"
 https://samwho.dev/rss.xml "tech blog"
+http://www.aaronsw.com/2002/feeds/pgessays.rss "tech blog"
 
 # science
+https://phys.org/rss-feed/breaking/biology-news/molecular-computational/ "science"
+https://phys.org/rss-feed/breaking/chemistry-news/biochemistry/ "science"
+https://www.nature.com/subjects/molecular-dynamics.rss "science"
 https://chemistry-europe.onlinelibrary.wiley.com/feed/15213765/most-cited "~Eur. J. Chem - most cited" "science"
 https://feeds.aps.org/rss/allsuggestions.xml "~PhyRev - editor's suggestions" "science"
 https://feeds.feedburner.com/ProcNatlAcadSciUsaMost-readFull-textArticles?format=xml "~PNAS - most read" "science"

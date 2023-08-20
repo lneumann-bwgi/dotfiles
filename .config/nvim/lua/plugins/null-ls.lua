@@ -37,9 +37,8 @@ null_ls.setup({
 		null_ls.builtins.diagnostics.sqlfluff.with({
 			extra_args = { "--dialect", "tsql" },
 		}),
-		null_ls.builtins.formatting.clang_format,
+		-- null_ls.builtins.formatting.clang_format,
 		null_ls.builtins.formatting.cljstyle,
-		null_ls.builtins.formatting.csharpier,
 		null_ls.builtins.formatting.gofmt,
 		null_ls.builtins.formatting.json_tool,
 		null_ls.builtins.formatting.prettier,
@@ -49,7 +48,6 @@ null_ls.setup({
 		null_ls.builtins.formatting.sqlfluff.with({
 			extra_args = { "--dialect", "tsql" },
 		}),
-		null_ls.builtins.formatting.stylish_haskell,
 	},
 	on_attach = on_attach,
 })

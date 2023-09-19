@@ -1,9 +1,10 @@
+require("plugins.lazy")
+
 require("core.settings")
 require("core.keymaps")
 require("core.lsp")
 require("core.autocmds")
 
-require("plugins.packer")
 require("plugins.alpha")
 require("plugins.bufferline")
 require("plugins.comment")

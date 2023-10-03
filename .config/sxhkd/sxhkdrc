@@ -79,13 +79,13 @@ super + {_,shift + }q
 # layouts/state
 #
 
-# swap last focus node
-super + s
-    bspc node -s last.local
-
 # swap the current node and the biggest window
-super + S
+super + s
     bspc node -s biggest.local
+
+# swap last focus node
+super + S
+    bspc node -s last.local
 
 # toggle between the tiled and monocle layout
 super + m

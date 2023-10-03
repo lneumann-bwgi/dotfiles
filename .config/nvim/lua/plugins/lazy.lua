@@ -48,6 +48,7 @@ plugins = {
 	},
 	{ "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 	-- OTHER PLUGINS
+	"RRethy/vim-illuminate",
 	"akinsho/toggleterm.nvim",
 	"chentoast/marks.nvim",
 	"karb94/neoscroll.nvim",
@@ -59,6 +60,7 @@ plugins = {
 	"rhysd/clever-f.vim",
 	"shortcuts/no-neck-pain.nvim",
 	"windwp/nvim-autopairs",
+	"kdheepak/JuliaFormatter.vim",
 	-- COLORSHEMES
 	{ "ellisonleao/gruvbox.nvim", lazy = false },
 	{ "shaunsingh/nord.nvim", lazy = false },

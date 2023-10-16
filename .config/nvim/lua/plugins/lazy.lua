@@ -53,7 +53,7 @@ plugins = {
 	"chentoast/marks.nvim",
 	"karb94/neoscroll.nvim",
 	"lewis6991/gitsigns.nvim",
-	"lukas-reineke/indent-blankline.nvim",
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	"machakann/vim-sandwich",
 	"numToStr/Comment.nvim",
 	"preservim/tagbar",
@@ -69,8 +69,7 @@ plugins = {
 	{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim" } },
 	{ "goolord/alpha-nvim", dependencies = { "kyazdani42/nvim-web-devicons" } },
 	{ "nvim-lualine/lualine.nvim", dependencies = { "kyazdani42/nvim-web-devicons" } },
-	-- TODO: replace null-ls
-	{ "jose-elias-alvarez/null-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+	{ "nvimtools/none-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 }
 
 require("lazy").setup(plugins, opts)

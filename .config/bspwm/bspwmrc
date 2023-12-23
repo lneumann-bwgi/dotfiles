@@ -35,6 +35,7 @@ bspc rule -a Brave state='pseudo_tiled'
 bspc rule -a Firefox state='pseudo_tiled'
 bspc rule -a Chromium state='pseudo_tiled'
 bspc rule -a Zathura state='tiled'
+bspc rule -a SpeedRead state="pseudo_tiled" border=off
 
 # start daemons
 pgrep -f clipmenud >/dev/null || { clipmenud & }
@@ -42,6 +43,7 @@ pgrep -x picom >/dev/null || { picom --experimental-backends & }
 pgrep -x redshift >/dev/null || { redshift & }
 pgrep -x sxhkd >/dev/null || { sxhkd & }
 pgrep -x unclutter >/dev/null || { unclutter & }
+pgrep -x aw-qt >/dev/null || { aw-qt --no-gui & }
 
 pgrep -x megasync >/dev/null || { megasync & }
 

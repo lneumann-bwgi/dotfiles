@@ -16,19 +16,19 @@ window:
 
 font:
   normal:
-    family: Hack Nerd Font Mono
+    family: Monaspace Neon Var
     style: Regular
 
   bold:
-    family: Hack Nerd Font Mono
+    family: Monaspace Neon ExtraBold
     style: Bold
 
   italic:
-    family: Hack Nerd Font Mono
+    family: Monaspace Neon Light
     style: Italic
 
   bold_italic:
-    family: Hack Nerd Font Mono
+    family: MonaspaceNeon Medium
     style: Bold Italic
 
   size: 12

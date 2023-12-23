@@ -61,6 +61,8 @@ plugins = {
 	"shortcuts/no-neck-pain.nvim",
 	"windwp/nvim-autopairs",
 	"kdheepak/JuliaFormatter.vim",
+	-- LANGUAGE SPECIFIC
+	{ "olexsmir/gopher.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
 	-- COLORSHEMES
 	{ "ellisonleao/gruvbox.nvim", lazy = false },
 	{ "shaunsingh/nord.nvim", lazy = false },

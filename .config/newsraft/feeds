@@ -1,0 +1,61 @@
+@ Aggregators [60]
+https://changelog.com/master/feed 
+https://haskellweekly.news/podcast.rss 
+https://hnrss.org/best 
+https://hnrss.org/bestcomments 
+https://hnrss.org/frontpage 
+https://lobste.rs/rss 
+https://pycoders.com/feed 
+https://pythonbytes.fm/episodes/rss 
+https://golang1.substack.com/feed 
+https://cprss.s3.amazonaws.com/golangweekly.com.xml 
+https://dotfyle.com/this-week-in-neovim/rss.xml 
+
+@ Youtuve [60]
+https://www.youtube.com/feeds/videos.xml?channel_id=UCv_vLHiWVBh_FR9vbeuiY-A
+https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCivA7_KLKWo43tFcCkFvydw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCfsznjef2zGJnrCRQBXqo6Q
+https://www.youtube.com/feeds/videos.xml?channel_id=UCmtyQOKKmrMVaKuRXz02jbQ
+https://www.youtube.com/feeds/videos.xml?channel_id=UCrv269YwJzuZL3dH5PCgxUw
+https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCd3dNckv1Za2coSaHGHl5aA
+https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA
+https://www.youtube.com/feeds/videos.xml?channel_id=UCoxcjq-8xIDTYp3uz647V5A
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtESv1e7ntJaLJYKIO1FoYw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCvBqzzvUBLCs8Y7Axb-jZew
+https://www.youtube.com/feeds/videos.xml?channel_id=UC1LpsuAUaKoMzzJSEt5WImw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtGG8ucQgEJPeUPhJZ4M4jA
+https://www.youtube.com/feeds/videos.xml?channel_id=UCjr2bPAyPV7t35MvcgT3W8Q
+https://www.youtube.com/feeds/videos.xml?channel_id=UC-JWw2juO3Ikj5C9VsNoGIw
+
+@ Software [60]
+https://julialang.org/feed.xml 
+https://neovim.io/news.xml 
+https://archlinux.org/feeds/news/ 
+
+@ Tech Blogs [60]
+https://anarute.com/feed "Ana Rute's Blog"
+https://blog.miguelgrinberg.com/feed "Miguel Grinberg's Blog"
+https://codeinthehole.com/index.xml 
+https://martinheinz.dev/rss/ 
+https://realpython.com/atom.xml 
+https://taniarascia.com/rss.xml  "Tania Rascia's Blog"
+https://thevaluable.dev/index.xml 
+https://treyhunner.com/atom.xml 
+https://vimtricks.com/feed/ 
+https://iximiuz.com/feed.rss 
+https://samwho.dev/rss.xml
+http://www.aaronsw.com/2002/feeds/pgessays.rss 
+
+@ Science Feeds
+https://phys.org/rss-feed/breaking/biology-news/molecular-computational/ 
+https://phys.org/rss-feed/breaking/chemistry-news/biochemistry/ 
+https://www.nature.com/subjects/molecular-dynamics.rss 
+https://chemistry-europe.onlinelibrary.wiley.com/feed/15213765/most-cited 
+https://feeds.feedburner.com/ProcNatlAcadSciUsaMost-readFull-textArticles?format=xml 
+https://feeds.feedburner.com/acs/chreay?format=xml 
+https://pdb101.rcsb.org/motm/rss.xml 
+
+@ Humanities
+https://www.exurbe.com/feed/

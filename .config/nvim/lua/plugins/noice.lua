@@ -15,13 +15,30 @@ require("noice").setup({
 		inc_rename = false, -- enables an input dialog for inc-rename.nvim
 		lsp_doc_border = true, -- add a border to hover docs and signature help
 	},
-	notify = {
-		enable = false,
-		view = "notify",
-	},
-	popupmenu = {
-		enable = false,
-		backend = "nui",
-		kind_icons = {},
-	},
+	-- notify = {
+	-- 	enable = false,
+	-- 	view = "notify",
+	-- },
+	-- messages = {
+	-- 	enable = true,
+	-- },
+	-- popupmenu = {
+	-- 	enable = false,
+	-- 	backend = "nui",
+	-- 	kind_icons = {},
+	-- },
 })
+
+vim.keymap.set({ "n", "i", "s" }, "<c-f>", function()
+	if not require("noice.lsp").scroll(4) then
+		return "<c-f>"
+	end
+end, { silent = true, expr = true })
+
+vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
+	if not require("noice.lsp").scroll(-4) then
+		return "<c-b>"
+	end
+end, { silent = true, expr = true })
+
+vim.keymap.set("n", "<cr>", ":NoiceLast<cr>")

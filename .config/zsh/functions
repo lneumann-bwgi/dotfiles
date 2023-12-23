@@ -83,3 +83,7 @@ n ()
         rm -f "$NNN_TMPFILE" > /dev/null
     }
 }
+
+function topmem() {
+    ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
+}

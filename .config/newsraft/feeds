@@ -28,6 +28,7 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UC1LpsuAUaKoMzzJSEt5WImw
 https://www.youtube.com/feeds/videos.xml?channel_id=UCtGG8ucQgEJPeUPhJZ4M4jA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCjr2bPAyPV7t35MvcgT3W8Q
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-JWw2juO3Ikj5C9VsNoGIw
+https://www.youtube.com/feeds/videos.xml?channel_id=UC2rO9hEjJkjqzktvtj0ggNQ
 
 @ Software [60]
 https://julialang.org/feed.xml 
@@ -48,7 +49,7 @@ https://iximiuz.com/feed.rss
 https://samwho.dev/rss.xml
 http://www.aaronsw.com/2002/feeds/pgessays.rss 
 
-@ Science Feeds
+@ Science Feeds [60]
 https://phys.org/rss-feed/breaking/biology-news/molecular-computational/ 
 https://phys.org/rss-feed/breaking/chemistry-news/biochemistry/ 
 https://www.nature.com/subjects/molecular-dynamics.rss 
@@ -57,5 +58,10 @@ https://feeds.feedburner.com/ProcNatlAcadSciUsaMost-readFull-textArticles?format
 https://feeds.feedburner.com/acs/chreay?format=xml 
 https://pdb101.rcsb.org/motm/rss.xml 
 
-@ Humanities
+@ Humanities [60]
 https://www.exurbe.com/feed/
+
+@ Newsletters [60]
+https://rss.beehiiv.com/feeds/4aF2pGVAEN.xml
+https://kill-the-newsletter.com/feeds/dhjwit0i2ubn78la.xml
+https://kill-the-newsletter.com/feeds/y6ul185knoj582l8.xml

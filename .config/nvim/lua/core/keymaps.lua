@@ -71,8 +71,8 @@ nmap("[t", ":w|:tabprevious<cr>")
 nmap("]b", ":BufferLineCycleNext<cr>")
 nmap("[b", ":BufferLineCyclePrev<cr>")
 
-nmap("]e", "g;")
-nmap("[e", "g,")
+nmap("]u", "g,")
+nmap("[u", "g;")
 
 nmap("]j", "<c-i>")
 nmap("[j", "<c-o>")

@@ -80,6 +80,8 @@ opt.title = true
 opt.ttimeoutlen = 100
 opt.virtualedit = "block"
 
+vim.cmd("set diffopt+=linematch:60")
+
 -- [[ filetype detection ]]
 vim.g.do_filetype_lua = 1
 vim.did_load_filetypes = 0

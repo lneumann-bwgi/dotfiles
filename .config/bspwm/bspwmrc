@@ -35,7 +35,7 @@ bspc rule -a Brave state='pseudo_tiled'
 bspc rule -a Firefox state='pseudo_tiled'
 bspc rule -a Chromium state='pseudo_tiled'
 bspc rule -a Zathura state='tiled'
-bspc rule -a SpeedRead state="pseudo_tiled" border=off
+bspc rule -a SpeedRead state="floating" border=off center=on
 
 # start daemons
 pgrep -f clipmenud >/dev/null || { clipmenud & }

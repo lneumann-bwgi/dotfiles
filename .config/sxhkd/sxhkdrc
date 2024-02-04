@@ -26,10 +26,10 @@ super + p
 super + shift + p
     scrot --focused -e 'mv $f ~/Pictures'
 super + r
+    GoSpeedRead
+super + shift + r
     flite -voice slt --setf duration_stretch=0.8 "$(xclip -o)"
     # tts --pipe_out --text "$(xclip -o)" | mplayer -speed 2 -really-quiet -cache-min 10 -cache 1024 -
-super + shift + r
-    python -m speedread &> /dev/null
 super + y
     clipmenu
 

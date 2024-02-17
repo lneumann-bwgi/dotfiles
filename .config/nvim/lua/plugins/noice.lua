@@ -41,4 +41,4 @@ vim.keymap.set({ "n", "i", "s" }, "<c-b>", function()
 	end
 end, { silent = true, expr = true })
 
-vim.keymap.set("n", "<cr>", ":NoiceLast<cr>")
+vim.keymap.set("n", "<leader><cr>", ":NoiceLast<cr>")

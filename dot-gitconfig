@@ -6,6 +6,7 @@
     pager = delta
 [alias]
     amend = commit --amend --no-edit
+    blame = blame -w -C
     branches = branch -a
     flog = log --follow --
     glog = log --all --decorate --oneline --graph

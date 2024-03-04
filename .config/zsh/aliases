@@ -2,20 +2,16 @@
 
 # welcome to the 21th century
 alias cat='bat'
-alias diff='delta'
 alias df='duf'
+alias diff='delta'
 alias du='dust'
+alias grep='rg'
 alias ls='exa'
+alias top='btop'
+alias tree='et -I'
 alias vi='nvim'
 alias vim='nvim'
 alias watch='viddy'
-alias tree='et -I'
-
-# dangerous
-# alias find='fd'
-# alias cut='choose'
-# alias grep='rg'
-# alias ps='procs'
 
 # safety first
 alias mkdir='mkdir -pv'

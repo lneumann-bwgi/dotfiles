@@ -1,6 +1,6 @@
 set scrolloff 5
 set download-timeout 20
-set color-list-item-important-fg bold red
+set color-list-item-important bold red
 
 bind m exec mpv --speed=2 --no-terminal "%l" &
 bind M exec mpv --no-terminal "%l" &

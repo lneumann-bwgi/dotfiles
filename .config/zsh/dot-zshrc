@@ -69,22 +69,24 @@ export CM_LAUNCHER="dmenu"
 xset r rate 180 50
 
 # History options
-HISTCONTROL=ignoreboth
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=10000000
+SAVEHIST=10000000
+HISTORY_IGNORE="(ls|cd|pwd|exit|cd)*"
 HISTFILE="$ZDOTDIR/.zsh_history"
-export HISTIGNORE="ls:cd:vi:vim:nvim"
-export HISTTIMEFORMAT="%h %d %H:%M:%S "
+HISTTIMEFORMAT="%h %d %H:%M:%S "
 
 # The meaning of these options can be found in man page of `zshoptions`.
-setopt HIST_IGNORE_ALL_DUPS  # do not put duplicated command into history list
-setopt HIST_SAVE_NO_DUPS  # do not save duplicated command
-setopt HIST_REDUCE_BLANKS  # remove unnecessary blanks
-setopt INC_APPEND_HISTORY_TIME  # append command to history file immediately after execution
-setopt EXTENDED_HISTORY  # record command start time
-setopt SHARE_HISTORY # share history between sessions
-setopt APPEND_HISTORY # append to history
-setopt INC_APPEND_HISTORY # adds to histery as cmd are typed
+setopt APPEND_HISTORY        # append to history file (Default)
+setopt EXTENDED_HISTORY      # Write the history file in the ':start:elapsed;command' format.
+setopt HIST_IGNORE_ALL_DUPS  # Delete an old recorded event if a new event is a duplicate.
+setopt HIST_IGNORE_DUPS      # Do not record an event that was just recorded again.
+setopt HIST_IGNORE_SPACE     # Do not record an event starting with a space.
+setopt HIST_NO_STORE         # Don't store history commands
+setopt HIST_REDUCE_BLANKS    # Remove superfluous blanks from each command line being added to the history.
+setopt HIST_SAVE_NO_DUPS     # Do not write a duplicate event to the history file.
+setopt HIST_VERIFY           # Do not execute immediately upon history expansion.
+setopt INC_APPEND_HISTORY    # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY         # Share history between all sessions.
 
 # You don't to type cd all the time
 setopt AUTO_CD

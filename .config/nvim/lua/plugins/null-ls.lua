@@ -1,7 +1,6 @@
 local lsp_formatting = function(bufnr)
 	vim.lsp.buf.format({
 		filter = function(client)
-			-- apply whatever logic you want (in this example, we'll only use null-ls)
 			return client.name == "null-ls"
 		end,
 		bufnr = bufnr,
@@ -25,30 +24,27 @@ local on_attach = function(client, bufnr)
 	end
 end
 
-null_ls = require("null-ls")
+local null_ls = require("null-ls")
 
 null_ls.setup({
-	sources = {
-		null_ls.builtins.code_actions.gitsigns,
-		null_ls.builtins.code_actions.cspell,
-		null_ls.builtins.diagnostics.cspell,
-		null_ls.builtins.diagnostics.flake8,
-		null_ls.builtins.diagnostics.mypy,
-		null_ls.builtins.diagnostics.sqlfluff.with({
-			extra_args = { "--dialect", "tsql" },
-		}),
-		null_ls.builtins.formatting.black,
-		null_ls.builtins.formatting.clang_format,
-		null_ls.builtins.formatting.cljstyle,
-		null_ls.builtins.formatting.gofmt,
-		null_ls.builtins.formatting.isort,
-		null_ls.builtins.formatting.prettier,
-		null_ls.builtins.formatting.shfmt,
-		null_ls.builtins.formatting.stylua,
-		null_ls.builtins.formatting.sqlfluff.with({
-			extra_args = { "--dialect", "tsql" },
-		}),
-		null_ls.builtins.formatting.taplo,
-	},
-	on_attach = on_attach,
+    sources = {
+        -- null_ls.builtins.code_actions.cspell,
+        null_ls.builtins.code_actions.gitsigns,
+        null_ls.builtins.completion.spell,
+        -- null_ls.builtins.diagnostics.cspell,
+        -- null_ls.builtins.diagnostics.flake8,
+        null_ls.builtins.diagnostics.hadolint,
+        null_ls.builtins.diagnostics.mypy,
+        null_ls.builtins.diagnostics.sqlfluff,
+        null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.clang_format,
+        null_ls.builtins.formatting.cljstyle,
+        null_ls.builtins.formatting.gofmt,
+        null_ls.builtins.formatting.isort,
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.formatting.shfmt,
+        null_ls.builtins.formatting.sqlfluff,
+        null_ls.builtins.formatting.stylua,
+        },
+    on_attach = on_attach,
 })

@@ -2,6 +2,11 @@ local action_layout = require("telescope.actions.layout")
 local actions = require("telescope.actions")
 require("telescope").setup({
 	defaults = {
+		layout_config = {
+			horizontal = {
+				preview_cutoff = 0,
+			},
+		},
 		mappings = {
 			n = {
 				["<tab>"] = action_layout.toggle_preview,

@@ -47,6 +47,10 @@ plugins = {
 		},
 	},
 	{ "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+	-- DAP
+	"mfussenegger/nvim-dap",
+	"mfussenegger/nvim-dap-python",
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 	-- OTHER PLUGINS
 	"RRethy/vim-illuminate",
 	"akinsho/toggleterm.nvim",
@@ -60,8 +64,8 @@ plugins = {
 	"rhysd/clever-f.vim",
 	"shortcuts/no-neck-pain.nvim",
 	"windwp/nvim-autopairs",
-	"kdheepak/JuliaFormatter.vim",
 	-- LANGUAGE SPECIFIC
+	{ "kdheepak/JuliaFormatter.vim" },
 	{ "olexsmir/gopher.nvim", dependencies = { "nvim-lua/plenary.nvim", "nvim-treesitter/nvim-treesitter" } },
 	-- COLORSHEMES
 	{ "ellisonleao/gruvbox.nvim", lazy = false },
@@ -72,6 +76,15 @@ plugins = {
 	{ "goolord/alpha-nvim", dependencies = { "kyazdani42/nvim-web-devicons" } },
 	{ "nvim-lualine/lualine.nvim", dependencies = { "kyazdani42/nvim-web-devicons" } },
 	{ "nvimtools/none-ls.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+	-- TEST
+	{
+		"zeioth/garbage-day.nvim",
+		dependencies = "neovim/nvim-lspconfig",
+		event = "VeryLazy",
+		opts = {
+			-- your options here
+		},
+	},
 }
 
 require("lazy").setup(plugins, opts)

@@ -80,6 +80,9 @@ nmap("[j", "<c-o>")
 -- close buffer
 nmap("<leader>x", ":bd<CR>")
 
+-- deplete to void register multiple times
+vmap("<leader>d", '"_d')
+
 -- pasting multiple times
 nmap("gp", '"0p')
 nmap("gP", '"0P')

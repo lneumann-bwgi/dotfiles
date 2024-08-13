@@ -20,6 +20,34 @@ rgi() {
 	rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
 
+fcd() {
+    local searchdir
+
+    if [ -n "$1" ]; then
+        searchdir="$1"
+    else
+        searchdir="$HOME"
+    fi
+
+    # Create a temporary file
+    local tmpfile
+    tmpfile=$(mktemp)
+
+    # Use find and fzf to select a directory
+    find "$searchdir" \( ! -regex '.*/\..*' \) ! -name __pycache__ -type d | fzf > "$tmpfile"
+    local destdir
+    destdir=$(cat "$tmpfile")
+    rm -f "$tmpfile"
+
+    # If no directory is selected, return with an error
+    if [ -z "$destdir" ]; then
+        return 1
+    fi
+
+    # Change to the selected directory
+    cd "$destdir"
+}
+
 fkill() {
 	local pid
 	if [ "$UID" != "0" ]; then
@@ -84,6 +112,6 @@ n ()
     }
 }
 
-function topmem() {
+topmem() {
     ps -eo pid,ppid,cmd,%mem,%cpu --sort=-%mem | head
 }

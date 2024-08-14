@@ -16,6 +16,7 @@
     undo = reset --soft HEAD~1
     wdiff = diff --word-diff
     dft = difftool
+	fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git add --all"
 [credential]
     helper = store
 [delta]

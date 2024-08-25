@@ -7,7 +7,6 @@ require("core.autocmds")
 
 require("plugins.alpha")
 require("plugins.bufferline")
-require("plugins.comment")
 require("plugins.gitsigns")
 require("plugins.gopher")
 require("plugins.indent-blankline")

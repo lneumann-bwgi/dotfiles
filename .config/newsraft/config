@@ -6,3 +6,5 @@ bind m exec mpv --speed=2 --no-terminal "%l" &
 bind M exec mpv --no-terminal "%l" &
 bind f exec feh "%l"
 bind F exec sxiv "%l"
+
+open-in-browser-command firefox "%l"

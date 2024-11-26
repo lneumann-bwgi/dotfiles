@@ -1,4 +1,4 @@
-@ Aggregators [60]
+@ Aggregators < reload-period 30
 https://changelog.com/master/feed 
 https://haskellweekly.news/podcast.rss 
 https://hnrss.org/best 
@@ -12,35 +12,38 @@ https://cprss.s3.amazonaws.com/golangweekly.com.xml
 https://dotfyle.com/this-week-in-neovim/rss.xml 
 https://spectrum.ieee.org/feeds/feed.rss
 
-@ Youtuve [60]
-https://www.youtube.com/feeds/videos.xml?channel_id=UCv_vLHiWVBh_FR9vbeuiY-A
-https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw
-https://www.youtube.com/feeds/videos.xml?channel_id=UCivA7_KLKWo43tFcCkFvydw
-https://www.youtube.com/feeds/videos.xml?channel_id=UCfsznjef2zGJnrCRQBXqo6Q
-https://www.youtube.com/feeds/videos.xml?channel_id=UCmtyQOKKmrMVaKuRXz02jbQ
-https://www.youtube.com/feeds/videos.xml?channel_id=UCrv269YwJzuZL3dH5PCgxUw
-https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw
-https://www.youtube.com/feeds/videos.xml?channel_id=UCd3dNckv1Za2coSaHGHl5aA
-https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA
-https://www.youtube.com/feeds/videos.xml?channel_id=UCoxcjq-8xIDTYp3uz647V5A
-https://www.youtube.com/feeds/videos.xml?channel_id=UCtESv1e7ntJaLJYKIO1FoYw
-https://www.youtube.com/feeds/videos.xml?channel_id=UCvBqzzvUBLCs8Y7Axb-jZew
-https://www.youtube.com/feeds/videos.xml?channel_id=UC1LpsuAUaKoMzzJSEt5WImw
-https://www.youtube.com/feeds/videos.xml?channel_id=UCtGG8ucQgEJPeUPhJZ4M4jA
-https://www.youtube.com/feeds/videos.xml?channel_id=UCjr2bPAyPV7t35MvcgT3W8Q
+@ Youtuve < reload-period 30
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-JWw2juO3Ikj5C9VsNoGIw
+https://www.youtube.com/feeds/videos.xml?channel_id=UC1LpsuAUaKoMzzJSEt5WImw
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2rO9hEjJkjqzktvtj0ggNQ
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2xHMABk_sX2aC14-D7OhIw
+https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw
+https://www.youtube.com/feeds/videos.xml?channel_id=UC9-y-6csu5WGm29I7JiwpnA
+https://www.youtube.com/feeds/videos.xml?channel_id=UCK4AOYSWvdrgtKDEDDB6mMA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCMIgOXM2JEQ2Pv2d0_PVfcg
-https://www.youtube.com/feeds/videos.xml?channel_id=UCgRBRE1DUP2w7HTH9j_L4OQ
+https://www.youtube.com/feeds/videos.xml?channel_id=UCW42h2qDbbX3a9RsQT4pnYQ
 https://www.youtube.com/feeds/videos.xml?channel_id=UCXzw-OdotBUcNA9yhuYQBwA
+https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCd3dNckv1Za2coSaHGHl5aA
+https://www.youtube.com/feeds/videos.xml?channel_id=UCfsznjef2zGJnrCRQBXqo6Q
+https://www.youtube.com/feeds/videos.xml?channel_id=UCgRBRE1DUP2w7HTH9j_L4OQ
+https://www.youtube.com/feeds/videos.xml?channel_id=UCivA7_KLKWo43tFcCkFvydw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCjr2bPAyPV7t35MvcgT3W8Q
+https://www.youtube.com/feeds/videos.xml?channel_id=UCmtyQOKKmrMVaKuRXz02jbQ
+https://www.youtube.com/feeds/videos.xml?channel_id=UCoxcjq-8xIDTYp3uz647V5A
+https://www.youtube.com/feeds/videos.xml?channel_id=UCqBiWcuTF8IaLH7wBqnihsQ
+https://www.youtube.com/feeds/videos.xml?channel_id=UCrv269YwJzuZL3dH5PCgxUw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtESv1e7ntJaLJYKIO1FoYw
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtGG8ucQgEJPeUPhJZ4M4jA
+https://www.youtube.com/feeds/videos.xml?channel_id=UCvBqzzvUBLCs8Y7Axb-jZew
+https://www.youtube.com/feeds/videos.xml?channel_id=UCv_vLHiWVBh_FR9vbeuiY-A
 
-@ Software [60]
+@ Software < reload-period 30
 https://julialang.org/feed.xml 
 https://neovim.io/news.xml 
 https://archlinux.org/feeds/news/ 
 
-@ Tech Blogs [60]
+@ Tech Blogs < reload-period 30
 https://anarute.com/feed "Ana Rute's Blog"
 https://blog.miguelgrinberg.com/feed "Miguel Grinberg's Blog"
 https://codeinthehole.com/index.xml 
@@ -54,20 +57,20 @@ https://iximiuz.com/feed.rss
 https://samwho.dev/rss.xml
 http://www.aaronsw.com/2002/feeds/pgessays.rss 
 
-@ Science Feeds [60]
-https://phys.org/rss-feed/breaking/biology-news/molecular-computational/ 
-https://phys.org/rss-feed/breaking/chemistry-news/biochemistry/ 
-https://www.nature.com/subjects/molecular-dynamics.rss 
+@ Science Feeds < reload-period 30
 https://chemistry-europe.onlinelibrary.wiley.com/feed/15213765/most-cited 
 https://feeds.feedburner.com/ProcNatlAcadSciUsaMost-readFull-textArticles?format=xml 
-https://feeds.feedburner.com/acs/chreay?format=xml 
 https://pdb101.rcsb.org/motm/rss.xml 
+https://phys.org/rss-feed/breaking/biology-news/molecular-computational/ 
+https://phys.org/rss-feed/breaking/chemistry-news/biochemistry/ 
+https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=chreay
+https://www.nature.com/subjects/molecular-dynamics.rss 
 
-@ Humanities [60]
+@ Humanities < reload-period 30
 https://www.exurbe.com/feed/
 https://kill-the-newsletter.com/feeds/pti12p7wwa20mdof2uaq.xml
 
-@ Newsletters [60]
+@ Newsletters < reload-period 30
 https://rss.beehiiv.com/feeds/4aF2pGVAEN.xml
 https://kill-the-newsletter.com/feeds/y6ul185knoj582l8.xml
 https://kill-the-newsletter.com/feeds/qdsrf0mk1lvg3ll8.xml

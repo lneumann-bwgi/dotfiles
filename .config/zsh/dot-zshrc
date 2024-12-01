@@ -101,6 +101,9 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 zmodload zsh/complist
 _comp_options+=(globdots)
 
+# Use fzf for all tab completions (testing: fzf-tab-source aur package)
+source /usr/share/zsh/plugins/fzf-tab-source/fzf-tab.plugin.zsh
+
 # Add completion for delta (probably needed because of a bug)
 compdef _gnu_generic delta
 

@@ -36,9 +36,9 @@ opt.splitbelow = true
 opt.splitkeep = "screen"
 
 -- [[ folds ]] --
-opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
-opt.foldlevelstart = 99
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+opt.foldlevelstart = 2
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

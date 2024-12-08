@@ -28,6 +28,7 @@ export FZF_DEFAULT_OPTS="
     --height 60%
     --layout=reverse
     --multi
+    --preview-window=hidden
     --preview='bat {} --color=always'
     --prompt='❯ ' --pointer='▶ ' --marker='✓ '
     --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
@@ -38,7 +39,7 @@ export FZF_DEFAULT_OPTS="
     --bind 'ctrl-f:preview-up'
     --bind '?:toggle-preview'"
 
-export FZF_ALT_C_OPTS="--preview 'tree -C {}'"
+export FZF_ALT_C_OPTS="--preview 'et -I {}'"
 export FZF_CTRL_R_OPTS="--preview-window=hidden"
 
 # Load NNN

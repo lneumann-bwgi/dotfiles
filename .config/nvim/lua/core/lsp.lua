@@ -10,7 +10,6 @@ require("mason-lspconfig").setup({
 		"pyright",
 		"sqlls",
 		"lua_ls",
-		"tsserver",
 		"vimls",
 	},
 })

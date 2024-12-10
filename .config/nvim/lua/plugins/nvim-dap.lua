@@ -4,7 +4,6 @@ local dap, dapui = require("dap"), require("dapui")
 -- setup
 dapui.setup()
 require("dap-python").setup("python")
-require("gopher.dap").setup()
 
 -- require("nvim-dap-virtual-text").setup {
 -- -- this just tries to mitigate the chance that i leak tokens here. probably won't stop it from happening...

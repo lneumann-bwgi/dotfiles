@@ -1,28 +1,28 @@
 local M = {
-   "nvim-telescope/telescope.nvim", 
-   dependencies = { "nvim-lua/plenary.nvim" },
-   config = function() 
+    "nvim-telescope/telescope.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
         local action_layout = require("telescope.actions.layout")
         local actions = require("telescope.actions")
 
         require("telescope").setup({
-        	defaults = {
-        		layout_config = {
-        			horizontal = {
-        				preview_cutoff = 0,
-        			},
-        		},
-        		mappings = {
-        			n = {
-        				["<tab>"] = action_layout.toggle_preview,
-        			},
-        			i = {
-        				["<tab>"] = action_layout.toggle_preview,
-        				["<C-s>"] = actions.cycle_previewers_next,
-        				["<C-a>"] = actions.cycle_previewers_prev,
-        			},
-        		},
-        	},
+            defaults = {
+                layout_config = {
+                    horizontal = {
+                        preview_cutoff = 0,
+                    },
+                },
+                mappings = {
+                    n = {
+                        ["<tab>"] = action_layout.toggle_preview,
+                    },
+                    i = {
+                        ["<tab>"] = action_layout.toggle_preview,
+                        ["<C-s>"] = actions.cycle_previewers_next,
+                        ["<C-a>"] = actions.cycle_previewers_prev,
+                    },
+                },
+            },
         })
 
         -- find files
@@ -51,6 +51,6 @@ local M = {
         vim.keymap.set("n", "<leader>oc", require("telescope.builtin").lsp_outgoing_calls)
 
         vim.keymap.set("n", "<leader>d", ":Telescope diagnostics bufnr=0<cr>")
-   end
+    end,
 }
 return M

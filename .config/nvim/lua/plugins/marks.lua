@@ -1,7 +1,7 @@
 local M = {
     "chentoast/marks.nvim",
-    config = function() 
+    config = function()
         require("marks").setup()
-    end
+    end,
 }
 return M

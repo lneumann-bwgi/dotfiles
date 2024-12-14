@@ -1,17 +1,16 @@
 local M = {
-	"hrsh7th/nvim-cmp",
-	event = "VeryLazy",
-	dependencies = {
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-cmdline",
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-path",
+    "hrsh7th/nvim-cmp",
+    event = "VeryLazy",
+    dependencies = {
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-cmdline",
+        "hrsh7th/cmp-nvim-lsp",
+        "hrsh7th/cmp-path",
         "hrsh7th/cmp-nvim-lsp-document-symbol",
         "hrsh7th/cmp-nvim-lsp-signature-help",
-		"petertriho/cmp-git",
-	},
+        "petertriho/cmp-git",
+    },
     config = function()
-
         local cmp_status_ok, cmp = pcall(require, "cmp")
         if not cmp_status_ok then
             return
@@ -85,9 +84,9 @@ local M = {
         cmp.setup.cmdline("/", {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources({
-                { name = 'nvim_lsp_document_symbol'},
-                { name = 'buffer' },
-            })
+                { name = "nvim_lsp_document_symbol" },
+                { name = "buffer" },
+            }),
         })
 
         cmp.setup.cmdline(":", {
@@ -97,7 +96,7 @@ local M = {
                 { name = "cmdline" },
             }),
         })
-    end
+    end,
 }
 
 return M

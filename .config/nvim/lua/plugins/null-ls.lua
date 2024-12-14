@@ -24,27 +24,31 @@ local on_attach = function(client, bufnr)
 	end
 end
 
-local null_ls = require("null-ls")
+local M = {
+	"nvimtools/none-ls.nvim",
+	dependencies = { "nvim-lua/plenary.nvim" },
+	config = function()
+		local null_ls = require("null-ls")
+		null_ls.setup({
+			sources = {
+				null_ls.builtins.code_actions.gitsigns,
+				null_ls.builtins.completion.spell,
+				null_ls.builtins.diagnostics.hadolint,
+				null_ls.builtins.diagnostics.mypy,
+				null_ls.builtins.diagnostics.sqlfluff,
+				null_ls.builtins.formatting.black,
+				null_ls.builtins.formatting.clang_format,
+				null_ls.builtins.formatting.cljstyle,
+				null_ls.builtins.formatting.gofmt,
+				null_ls.builtins.formatting.isort,
+				null_ls.builtins.formatting.prettier,
+				null_ls.builtins.formatting.shfmt,
+				null_ls.builtins.formatting.sqlfluff,
+				null_ls.builtins.formatting.stylua,
+			},
+			on_attach = on_attach,
+		})
+	end,
+}
 
-null_ls.setup({
-    sources = {
-        -- null_ls.builtins.code_actions.cspell,
-        null_ls.builtins.code_actions.gitsigns,
-        null_ls.builtins.completion.spell,
-        -- null_ls.builtins.diagnostics.cspell,
-        -- null_ls.builtins.diagnostics.flake8,
-        null_ls.builtins.diagnostics.hadolint,
-        null_ls.builtins.diagnostics.mypy,
-        null_ls.builtins.diagnostics.sqlfluff,
-        null_ls.builtins.formatting.black,
-        null_ls.builtins.formatting.clang_format,
-        null_ls.builtins.formatting.cljstyle,
-        null_ls.builtins.formatting.gofmt,
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.formatting.prettier,
-        null_ls.builtins.formatting.shfmt,
-        null_ls.builtins.formatting.sqlfluff,
-        null_ls.builtins.formatting.stylua,
-        },
-    on_attach = on_attach,
-})
+return M

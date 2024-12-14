@@ -63,10 +63,10 @@ nmap("<left>", "<c-w>>")
 
 -- better navigation
 nmap("]t", ":w|:tabnext<cr>")
-nmap("[t", ":w|:tabprevious<cr>")
+nmap("[t", ":w|:tabprev<cr>")
 
 nmap("]b", ":w|:bnext<cr>")
-nmap("[b", ":w|:bNext<cr>")
+nmap("[b", ":w|:bprev<cr>")
 
 nmap("]c", "g,")
 nmap("[c", "g;")
@@ -75,7 +75,7 @@ nmap("]j", "<c-i>")
 nmap("[j", "<c-o>")
 
 -- close buffer
-nmap("<leader>x", ":bd<CR>")
+nmap("<leader>x", ":bdelete<CR>")
 
 -- deplete to void register multiple times
 vmap("<leader>d", '"_d')
@@ -121,9 +121,7 @@ vmap(">", ">gv")
 nmap("<Tab>", "%")
 vmap("<Tab>", "%")
 
--- SWAPS
-
--- map semicolon to colon (don't use silent)
+-- swap semicolon and colon (don't use silent)
 vim.keymap.set({ "n", "v", "c" }, ";", ":", { noremap = true, silent = false })
 
 -- useless keys

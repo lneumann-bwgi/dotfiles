@@ -12,11 +12,11 @@ local M = {
 		dim = { enabled = false },
 		git = { enabled = false },
 		gitbrowse = { enabled = false },
-		indent = {enabled = true },
+		indent = { enabled = true },
 		input = { enabled = true },
 		lazygit = { enabled = true },
-		notifier = { enabled = true, timeout = 3000 },
-		quickfile = { enabled = true },
+		notifier = { enabled = true, timeout = 5000 },
+		quickfile = { enabled = false },
 		rename = { enabled = false },
 		scope = { enabled = false },
 		scratch = { enabled = false },
@@ -65,7 +65,7 @@ local M = {
 		{
 			"<C-/>",
 			function()
-				Snacks.terminal()
+				Snacks.terminal.toggle()
 			end,
 			desc = "Toggle Terminal",
 		},

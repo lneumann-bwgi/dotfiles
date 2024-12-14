@@ -28,9 +28,6 @@ nmap("<esc>", ":nohlsearch<cr><esc>")
 -- write shell cmd to file
 map({ "n", "v" }, "<leader>S", ":.!bash<CR>")
 
--- centers screen
-nmap("<leader>zz", ":NoNeckPain<CR>")
-
 -- tagbar screen
 nmap("<leader>tt", ":TagbarToggle<CR>")
 
@@ -68,11 +65,11 @@ nmap("<left>", "<c-w>>")
 nmap("]t", ":w|:tabnext<cr>")
 nmap("[t", ":w|:tabprevious<cr>")
 
-nmap("]b", ":BufferLineCycleNext<cr>")
-nmap("[b", ":BufferLineCyclePrev<cr>")
+nmap("]b", ":w|:bnext<cr>")
+nmap("[b", ":w|:bNext<cr>")
 
-nmap("]u", "g,")
-nmap("[u", "g;")
+nmap("]c", "g,")
+nmap("[c", "g;")
 
 nmap("]j", "<c-i>")
 nmap("[j", "<c-o>")
@@ -123,19 +120,6 @@ vmap(">", ">gv")
 -- better parenthesis navigation
 nmap("<Tab>", "%")
 vmap("<Tab>", "%")
-
--- FUNCTIONS
-
-vim.cmd([[
-  function! ToggleWrap()
-    if(&wrap == 1)
-      set nowrap
-    else
-      set wrap linebreak nolist
-    endif
-  endfunction
-  nnoremap <Leader>W :call ToggleWrap()<CR>
-]])
 
 -- SWAPS
 

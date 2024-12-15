@@ -8,8 +8,11 @@ local M = {
         local lint = require("lint")
 
         lint.linters_by_ft = {
+            dockerfile = { "hadolint" },
             markdown = { "vale" },
+            haskell = { "hlint" },
             python = { "mypy", "ruff" },
+            sql = { "sqlfluff" },
         }
 
         local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })

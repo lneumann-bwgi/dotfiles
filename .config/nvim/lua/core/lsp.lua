@@ -2,7 +2,6 @@ require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
         "bashls",
-        "docker-compose-language-service",
         "dockerls",
         "gopls",
         "html",

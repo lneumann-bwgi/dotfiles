@@ -2,14 +2,15 @@ require("mason").setup()
 require("mason-lspconfig").setup({
     ensure_installed = {
         "bashls",
+        "docker-compose-language-service",
         "dockerls",
         "gopls",
         "html",
         "jsonls",
         "julials",
+        "lua_ls",
         "pyright",
         "sqlls",
-        "lua_ls",
         "vimls",
     },
 })
@@ -19,12 +20,6 @@ require("mason-lspconfig").setup_handlers({
         require("lspconfig")[server_name].setup({})
     end,
 })
-
--- Global mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-vim.keymap.set("n", "<space>D", vim.diagnostic.open_float)
--- vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
--- vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 
 local diagnostic_goto = function(next, severity)
     local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev

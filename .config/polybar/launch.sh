@@ -7,9 +7,11 @@ killall -q polybar
 while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 if xrandr --query | grep 'HDMI2 connected'; then
-	polybar monitor &
+  polybar monitor &
+elif xrandr --query | grep 'DP2 connected'; then
+  polybar monitor &
 else
-	polybar laptop &
+  polybar laptop &
 fi
 
 echo "Polybar launched..."

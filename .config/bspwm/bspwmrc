@@ -2,14 +2,20 @@
 
 # WM config
 if xrandr --query | grep 'HDMI2 connected'; then
-	xrandr --output eDP1 --mode 1366x768 --pos 2560x312 --rotate normal --output DP1 --off --output DP2 --off --output HDMI1 --off --output HDMI2 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-	bspc monitor HDMI2 -d I II III IV V VI VII VIII
-	bspc monitor eDP1 -d IX X
-	bspc wm -O HDMI2 eDP1
-	setxkbmap -layout us
+  xrandr --output eDP1 --mode 1366x768 --pos 2560x312 --rotate normal --output DP1 --off --output DP2 --off --output HDMI1 --off --output HDMI2 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
+  bspc monitor HDMI2 -d I II III IV V VI VII VIII
+  bspc monitor eDP1 -d IX X
+  bspc wm -O HDMI2 eDP1
+  setxkbmap -layout us
+elif xrandr --query | grep 'DP2 connected'; then
+  xrandr --output eDP1 --mode 1366x768 --pos 2560x312 --rotate normal --output DP1 --off --output HDMI2 --off --output HDMI1 --off --output DP2 --primary --mode 2560x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
+  bspc monitor DP2 -d I II III IV V VI VII VIII
+  bspc monitor eDP1 -d IX X
+  bspc wm -O DP2 eDP1
+  setxkbmap -layout us
 else
-	bspc monitor eDP1 -d I II III IV V VI VII VIII IX X
-	setxkbmap -model thinkpad -layout br -variant abnt2
+  bspc monitor eDP1 -d I II III IV V VI VII VIII IX X
+  setxkbmap -model thinkpad -layout br -variant abnt2
 fi
 
 bspc config border_width 4
@@ -65,5 +71,5 @@ kill $(jobs -p)
 
 # sometimes the session manager doesn't delete the socket
 for socket_filename in /tmp/bspwm*; do
-	rm "/tmp/$socket_filename"
+  rm "/tmp/$socket_filename"
 done

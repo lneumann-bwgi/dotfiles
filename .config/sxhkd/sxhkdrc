@@ -15,7 +15,7 @@ super + shift + c
 super + d
 	rofi -modi drun -show-icons -show
 super + shift + d
-	rofi -modi drun -show-icons -show window  
+	rofi -modi drun -show-icons -show window
 super + z
     zeal
 super + shift + Z
@@ -56,7 +56,7 @@ XF86MonBrightnessUp
     xbacklight -inc 20
 
 XF86Bluetooth
-    connect_bluetooth.sh >/dev/null 
+    connect_bluetooth.sh >/dev/null
 
 XF86Favorites
     toggle_keybord_layout.sh
@@ -118,9 +118,9 @@ super + {_,shift + }{h,j,k,l}
 super + {_,shift + }Tab
     bspc {desktop,node} -f last
 
-# select windows to focus 
+# select windows to focus
 super + {Escape,grave}
-	rofi -modi drun -show-icons -show window  
+	rofi -modi drun -show-icons -show window
 
 # focus or send to the given desktop
 super + {_,shift + }{1-9,0}

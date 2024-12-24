@@ -44,8 +44,9 @@ alias flask='poetry run python -m flask'
 
 # git stuff
 alias g='git'
+alias gti='git'
 alias gbr='git branch'
-alias gcm='git commit -a -m'
+alias gcm='git commit'
 alias gco='git checkout'
 alias gdf='git diff'
 alias gdt='git difftool'

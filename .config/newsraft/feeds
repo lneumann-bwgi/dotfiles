@@ -1,15 +1,15 @@
 @ Aggregators < reload-period 30
-https://changelog.com/master/feed 
-https://haskellweekly.news/podcast.rss 
-https://hnrss.org/best 
-https://hnrss.org/bestcomments 
-https://hnrss.org/frontpage 
-https://lobste.rs/rss 
-https://pycoders.com/feed 
-https://pythonbytes.fm/episodes/rss 
-https://golang1.substack.com/feed 
-https://cprss.s3.amazonaws.com/golangweekly.com.xml 
-https://dotfyle.com/this-week-in-neovim/rss.xml 
+https://changelog.com/master/feed
+https://cprss.s3.amazonaws.com/golangweekly.com.xml
+https://dotfyle.com/this-week-in-neovim/rss.xml
+https://golang1.substack.com/feed
+https://haskellweekly.news/podcast.rss
+https://hnrss.org/best
+https://hnrss.org/bestcomments
+https://hnrss.org/frontpage
+https://lobste.rs/rss
+https://pycoders.com/feed
+https://pythonbytes.fm/episodes/rss
 https://spectrum.ieee.org/feeds/feed.rss
 
 @ Youtuve < reload-period 30
@@ -39,36 +39,42 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCvBqzzvUBLCs8Y7Axb-jZew
 https://www.youtube.com/feeds/videos.xml?channel_id=UCv_vLHiWVBh_FR9vbeuiY-A
 
 @ Software < reload-period 30
-https://julialang.org/feed.xml 
-https://neovim.io/news.xml 
-https://archlinux.org/feeds/news/ 
+https://archlinux.org/feeds/news
+https://julialang.org/feed.xml
+https://lwn.net/headlines/rss
+https://neovim.io/news.xml
+https://blog.python.org/feeds/posts/default?alt=rss
 
 @ Tech Blogs < reload-period 30
 https://anarute.com/feed "Ana Rute's Blog"
 https://blog.miguelgrinberg.com/feed "Miguel Grinberg's Blog"
-https://codeinthehole.com/index.xml 
-https://martinheinz.dev/rss/ 
-https://realpython.com/atom.xml 
+https://codeinthehole.com/index.xml
+https://martinheinz.dev/rss/
+https://realpython.com/atom.xml
 https://taniarascia.com/rss.xml  "Tania Rascia's Blog"
-https://thevaluable.dev/index.xml 
-https://treyhunner.com/atom.xml 
-https://vimtricks.com/feed/ 
-https://iximiuz.com/feed.rss 
+https://thevaluable.dev/index.xml
+https://treyhunner.com/atom.xml
+https://vimtricks.com/feed/
+https://iximiuz.com/feed.rss
 https://samwho.dev/rss.xml
-http://www.aaronsw.com/2002/feeds/pgessays.rss 
+http://www.aaronsw.com/2002/feeds/pgessays.rss
 
 @ Science Feeds < reload-period 30
-https://chemistry-europe.onlinelibrary.wiley.com/feed/15213765/most-cited 
-https://feeds.feedburner.com/ProcNatlAcadSciUsaMost-readFull-textArticles?format=xml 
-https://pdb101.rcsb.org/motm/rss.xml 
-https://phys.org/rss-feed/breaking/biology-news/molecular-computational/ 
-https://phys.org/rss-feed/breaking/chemistry-news/biochemistry/ 
+https://chemistry-europe.onlinelibrary.wiley.com/feed/15213765/most-cited
+https://feeds.feedburner.com/ProcNatlAcadSciUsaMost-readFull-textArticles?format=xml
+https://pdb101.rcsb.org/motm/rss.xml
+https://phys.org/rss-feed/breaking/biology-news/molecular-computational
+https://phys.org/rss-feed/breaking/chemistry-news/biochemistry
 https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=chreay
-https://www.nature.com/subjects/molecular-dynamics.rss 
+https://www.nature.com/subjects/molecular-dynamics.rss
 
 @ Humanities < reload-period 30
-https://www.exurbe.com/feed/
+https://www.exurbe.com/feed
 https://kill-the-newsletter.com/feeds/pti12p7wwa20mdof2uaq.xml
+
+@ Misc < reload-period 30
+https://linuxblog.io/feed
+https://www.phoronix.com/rss.php
 
 @ Newsletters < reload-period 30
 https://rss.beehiiv.com/feeds/4aF2pGVAEN.xml

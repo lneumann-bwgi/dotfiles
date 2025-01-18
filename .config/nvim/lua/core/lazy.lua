@@ -40,9 +40,7 @@ require("lazy").setup({
       "zeioth/garbage-day.nvim",
       dependencies = "neovim/nvim-lspconfig",
       event = "VeryLazy",
-      opts = {
-        -- your options here
-      },
+      opts = {},
     },
     { dir = "~/work/telescope-dictd.nvim" },
   },

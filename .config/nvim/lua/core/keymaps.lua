@@ -1,21 +1,21 @@
 local function map(mode, shortcut, command)
-    vim.keymap.set(mode, shortcut, command, { noremap = true, silent = true })
+  vim.keymap.set(mode, shortcut, command, { noremap = true, silent = true })
 end
 
 local function nmap(shortcut, command)
-    map("n", shortcut, command)
+  map("n", shortcut, command)
 end
 
 local function vmap(shortcut, command)
-    map("v", shortcut, command)
+  map("v", shortcut, command)
 end
 
 local function imap(shortcut, command)
-    map("i", shortcut, command)
+  map("i", shortcut, command)
 end
 
 local function cmap(shortcut, command)
-    map("c", shortcut, command)
+  map("c", shortcut, command)
 end
 
 -- LEADER MAPPINGS

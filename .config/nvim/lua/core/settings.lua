@@ -53,7 +53,7 @@ opt.undodir = HOME .. "/.vim/undodir//"
 -- [[ display ]] --
 opt.background = "dark"
 opt.termguicolors = true
-vim.cmd("colorscheme nord")
+vim.cmd("colorscheme gruvbox")
 
 -- [[ clipboard ]] --
 opt.clipboard = "unnamed,unnamedplus"
@@ -62,7 +62,7 @@ opt.clipboard = "unnamed,unnamedplus"
 opt.path = opt.path + ".,**"
 opt.wildmenu = true
 opt.wildignore =
-    ".git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc"
+  ".git,.hg,*.o,*.a,*.class,*.mo,*.la,*.so,*.obj,*.swp,*.jpg,*.png,*.xpm,*.gif,.DS_Store,*.aux,*.out,*.toc"
 
 -- [[ spelling ]]
 opt.spell = false
@@ -89,25 +89,25 @@ vim.did_load_filetypes = 0
 -- [[ Performance ]] --
 
 local disabled_built_ins = {
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
-    "gzip",
-    "zip",
-    "zipPlugin",
-    "tar",
-    "tarPlugin",
-    "getscript",
-    "getscriptPlugin",
-    "vimball",
-    "vimballPlugin",
-    "2html_plugin",
-    "logipat",
-    "rrhelper",
-    "spellfile_plugin",
-    "matchit",
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "gzip",
+  "zip",
+  "zipPlugin",
+  "tar",
+  "tarPlugin",
+  "getscript",
+  "getscriptPlugin",
+  "vimball",
+  "vimballPlugin",
+  "2html_plugin",
+  "logipat",
+  "rrhelper",
+  "spellfile_plugin",
+  "matchit",
 }
 for _, plugin in pairs(disabled_built_ins) do
-    vim.g["loaded_" .. plugin] = 1
+  vim.g["loaded_" .. plugin] = 1
 end

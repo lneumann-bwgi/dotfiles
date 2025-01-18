@@ -8,6 +8,8 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 
 if xrandr --query | grep 'HDMI2 connected'; then
   polybar monitor &
+elif xrandr --query | grep 'DP1 connected'; then
+  polybar monitor &
 elif xrandr --query | grep 'DP2 connected'; then
   polybar monitor &
 else

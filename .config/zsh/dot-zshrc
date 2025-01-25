@@ -13,7 +13,7 @@ eval "$(starship init zsh)"
 eval "$(zoxide init zsh)"
 
 # Source direnv
-eval "$(direnv hook zsh)"
+# eval "$(direnv hook zsh)"
 
 # Source autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh #2>/dev/null
@@ -67,11 +67,11 @@ export CM_LAUNCHER="dmenu"
 # xset -r 46
 
 # Keyboard repeat rate
-xset r rate 180 50
+# xset r rate 180 50
 
 # History options
-HISTSIZE=10000000
-SAVEHIST=10000000
+HISTSIZE=1000000000
+SAVEHIST=1000000000
 HISTORY_IGNORE="(ls|cd|pwd|exit|cd)*"
 HISTFILE="$ZDOTDIR/.zsh_history"
 HISTTIMEFORMAT="%h %d %H:%M:%S "
@@ -103,7 +103,7 @@ zmodload zsh/complist
 _comp_options+=(globdots)
 
 # Use fzf for all tab completions (testing: fzf-tab-source aur package)
-source /usr/share/zsh/plugins/fzf-tab-source/fzf-tab.plugin.zsh
+# source /usr/share/zsh/plugins/fzf-tab-source/fzf-tab.plugin.zsh
 
 # Add completion for delta (probably needed because of a bug)
 compdef _gnu_generic delta
@@ -159,4 +159,4 @@ for m in visual viopp; do
     done
 done
 
-setxkbmap -layout us
+# setxkbmap -layout us

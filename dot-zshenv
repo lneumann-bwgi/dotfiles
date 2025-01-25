@@ -24,4 +24,4 @@ export PIPENV_VENV_IN_PROJECT=1
 export PIPENV_MAX_DEPTH=10
 
 export GOPATH="$HOME/.go"
-export PYTHONBREAKPOINT='pdbp.set_trace'
+# export PYTHONBREAKPOINT='pdbp.set_trace'

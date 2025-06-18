@@ -1,0 +1,94 @@
+# This is the configuration file for Ghostty.
+#
+# This template file has been automatically created at the following
+# path since Ghostty couldn't find any existing config files on your system:
+#
+#   /home/neumann/.config/ghostty/config
+#
+# The template does not set any default options, since Ghostty ships
+# with sensible defaults for all options. Users should only need to set
+# options that they want to change from the default.
+#
+# Run `ghostty +show-config --default --docs` to view a list of
+# all available config options and their default values.
+#
+
+# background
+background-blur = true
+background-blur-radius = 100
+background-opacity = 0.8
+
+# misc
+theme = GruvboxDark
+bold-is-bright = true
+gtk-titlebar = false
+cursor-style = block
+
+# font stuff
+font-family = FiraCode Nerd
+font-size = 14
+
+# clipboard
+clipboard-read = allow
+clipboard-write = allow
+copy-on-select = true
+
+# shell integration
+shell-integration = zsh
+shell-integration-features = no-cursor,no-sudo,no-title
+
+# windows settings
+window-padding-balance = true
+window-padding-x = 20,20
+window-padding-y = 10,10
+
+# Keybindings
+keybind = ctrl+minus=decrease_font_size:1
+keybind = ctrl+plus=increase_font_size:1
+
+keybind = alt+b=scroll_page_up
+keybind = alt+f=scroll_page_down
+keybind = alt+u=scroll_page_up
+keybind = alt+d=scroll_page_down
+
+keybind = alt+g=scroll_to_bottom
+keybind = alt+shift+g=scroll_to_top
+
+# Tabs
+keybind = alt+enter=new_tab
+keybind = alt+tab=next_tab
+keybind = alt+shift+tab=previous_tab
+keybind = alt+1=goto_tab:1
+keybind = alt+2=goto_tab:2
+keybind = alt+3=goto_tab:3
+keybind = alt+4=goto_tab:4
+keybind = alt+5=goto_tab:5
+keybind = alt+6=goto_tab:6
+
+# Splits
+keybind = alt+s=new_split:right
+keybind = alt+shift+S=new_split:down
+
+# ctrl  + shift + page_up         jump_to_prompt:-1
+# ctrl  + shift + page_down       jump_to_prompt:1
+# ctrl  + shift + enter           toggle_split_zoom
+#
+# super + ctrl  + left_bracket    goto_split:previous
+# super + ctrl  + right_bracket   goto_split:next
+#
+# ctrl  + alt   + shift + j       write_screen_file:open
+# ctrl  + shift + c               copy_to_clipboard
+# ctrl  + shift + v               paste_from_clipboard
+
+# custom-shader = shaders/galaxy.glsl
+# custom-shader = shaders/bettercrt.glsl
+# custom-shader = shaders/bloom.glsl
+# custom-shader = shaders/drunkard.glsl
+# custom-shader = shaders/glitchy.glsl
+# custom-shader = shaders/glow-rgbsplit-twitchy.glsl
+# custom-shader = shaders/in-game-crt.glsl
+# custom-shader = shaders/matrix-hallway.glsl
+# custom-shader = shaders/retro-terminal.glsl
+# custom-shader = shaders/sin-interference.glsl
+
+# custom-shader-animation = true

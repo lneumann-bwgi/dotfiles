@@ -14,10 +14,20 @@ require("mason-lspconfig").setup({
   },
 })
 
-require("mason-lspconfig").setup_handlers({
+require("mason-lspconfig").setup({
   function(server_name) -- default handler (optional)
     require("lspconfig")[server_name].setup({})
   end,
+})
+
+vim.diagnostic.config({
+  virtual_text = {
+    current_line = true,
+  },
+  virtual_lines = false,
+  -- virtual_lines = {
+  --   current_line = false,
+  -- },
 })
 
 local diagnostic_goto = function(next, severity)

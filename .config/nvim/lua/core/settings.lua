@@ -38,7 +38,7 @@ opt.splitkeep = "screen"
 -- [[ folds ]] --
 vim.o.foldmethod = "expr"
 vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
-opt.foldlevelstart = 2
+opt.foldlevelstart = 10
 
 -- Fix markdown indentation settings
 vim.g.markdown_recommended_style = 0

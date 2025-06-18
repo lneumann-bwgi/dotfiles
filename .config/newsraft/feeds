@@ -44,6 +44,7 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCtGG8ucQgEJPeUPhJZ4M4jA
 https://www.youtube.com/feeds/videos.xml?channel_id=UCvBqzzvUBLCs8Y7Axb-jZew
 https://www.youtube.com/feeds/videos.xml?channel_id=UCv_vLHiWVBh_FR9vbeuiY-A
 https://www.youtube.com/feeds/videos.xml?channel_id=UCz1oFxMrgrQ82-276UCOU9w
+https://www.youtube.com/feeds/videos.xml?channel_id=UCOKSOW5uJHdW7Edz37mvAFw
 
 @ Software < reload-period 30
 https://archlinux.org/feeds/news
@@ -56,14 +57,15 @@ https://blog.python.org/feeds/posts/default?alt=rss
 https://anarute.com/feed "Ana Rute's Blog"
 https://blog.miguelgrinberg.com/feed "Miguel Grinberg's Blog"
 https://codeinthehole.com/index.xml
+https://iximiuz.com/feed.rss
 https://martinheinz.dev/rss/
+https://mathspp.com/blog.rss
 https://realpython.com/atom.xml
+https://samwho.dev/rss.xml
 https://taniarascia.com/rss.xml  "Tania Rascia's Blog"
 https://thevaluable.dev/index.xml
 https://treyhunner.com/atom.xml
 https://vimtricks.com/feed/
-https://iximiuz.com/feed.rss
-https://samwho.dev/rss.xml
 http://www.aaronsw.com/2002/feeds/pgessays.rss
 
 @ Science Feeds < reload-period 30
@@ -78,6 +80,7 @@ https://www.nature.com/subjects/molecular-dynamics.rss
 @ Humanities < reload-period 30
 https://www.exurbe.com/feed
 https://kill-the-newsletter.com/feeds/pti12p7wwa20mdof2uaq.xml
+https://dynomight.net/feed.xml
 
 @ Misc < reload-period 30
 https://linuxblog.io/feed

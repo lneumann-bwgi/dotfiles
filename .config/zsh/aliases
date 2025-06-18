@@ -36,12 +36,7 @@ alias l='ls'
 alias pytohn='python'
 alias vu='nvim'
 alias vo='nvim'
-
-# poetry stuff
-alias py='ptpython --vi'
-alias ppy='poetry run python'
-alias pty='poetry run ptpython'
-alias flask='poetry run python -m flask'
+alias co='cp'
 
 # git stuff
 alias g='git'

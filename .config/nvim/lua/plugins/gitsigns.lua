@@ -5,6 +5,7 @@ local M = {
       preview_config = {
         border = "rounded",
       },
+      current_line_blame = true,
       on_attach = function(bufnr)
         local gitsigns = require("gitsigns")
 
@@ -44,8 +45,7 @@ local M = {
         map("n", "<leader>hu", gitsigns.undo_stage_hunk)
         map("n", "<leader>hR", gitsigns.reset_buffer)
         map("n", "<leader>hp", gitsigns.preview_hunk)
-        map("n", "<leader>hb", gitsigns.toggle_current_line_blame)
-        map("n", "<leader>hB", function()
+        map("n", "<leader>hb", function()
           gitsigns.blame_line({ full = true })
         end)
         map("n", "<leader>hd", gitsigns.diffthis)

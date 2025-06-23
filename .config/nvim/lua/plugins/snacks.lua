@@ -49,13 +49,6 @@ local M = {
       desc = "Notification History",
     },
     {
-      "<leader>gh",
-      function()
-        Snacks.lazygit.log_file()
-      end,
-      desc = "Lazygit Current File History",
-    },
-    {
       "<leader>gg",
       function()
         Snacks.lazygit()

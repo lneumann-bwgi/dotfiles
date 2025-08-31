@@ -1,5 +1,11 @@
 #!/bin/bash
 
+fgt() {
+  git ls-files | fzf --preview 'git diff --color=always -- {-1} | head -100' --height=80% --layout=reverse --border --query="$1" | xargs -r $EDITOR
+}
+zle -N fgt
+bindkey '^G' fgt
+
 spell() {
 	if [[ "$#" -eq 0 ]]; then
 		cat /usr/share/dict/words |
@@ -60,6 +66,8 @@ fkill() {
 		echo $pid | xargs kill -${1:-9}
 	fi
 }
+zle -N fkill
+bindkey '^K' fkill
 
 fman() {
 	batman="man {1} | col -bx | bat --language=man --plain --color always --theme=\"Monokai Extended\""

@@ -1,6 +1,15 @@
 local M = {
   {
-    "CopilotC-Nvim/CopilotChat.nvim",
+    "yetone/avante.nvim",
+    event = "VeryLazy",
+    version = false,
+    opts = {
+      provider = "copilot",
+      copilot = {
+        model = "claude-sonnet-4",
+      },
+    },
+    build = "make",
     dependencies = {
       {
         "zbirenbaum/copilot.lua",
@@ -14,33 +23,30 @@ local M = {
               hide_during_completion = false,
               debounce = 75,
               keymap = {
-                accept = "[]",
+                accept = "<C-y>",
                 accept_word = false,
                 accept_line = false,
-                next = "]]",
-                prev = "[[",
-                dismiss = "][",
+                next = "<C-n>",
+                prev = "<C-p>",
+                dismiss = "<C-e>",
               },
             },
           })
         end,
         lazy = false,
       },
-      { "nvim-lua/plenary.nvim", branch = "master" },
-    },
-    build = "make tiktoken",
-    opts = {},
-    config = function()
-      require("CopilotChat").setup({
-        model = "claude-sonnet-4",
-        mappings = {
-          reset = {
-            normal = "<A-l>",
-            insert = "<A-l>",
-          },
+      "nvim-tree/nvim-web-devicons",
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      {
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
         },
-      })
-    end,
+        ft = { "markdown", "Avante" },
+      },
+    },
   },
 }
 return M

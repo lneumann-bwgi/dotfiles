@@ -90,9 +90,9 @@ vim.did_load_filetypes = 0
 
 local disabled_built_ins = {
   -- "netrw",
-  "netrwPlugin",
-  "netrwSettings",
-  "netrwFileHandlers",
+  -- "netrwPlugin",
+  -- "netrwSettings",
+  -- "netrwFileHandlers",
   "gzip",
   "zip",
   "zipPlugin",

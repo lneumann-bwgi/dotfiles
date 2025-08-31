@@ -22,7 +22,7 @@ local M = {
     scratch = { enabled = false },
     scroll = { enabled = true },
     statuscolumn = { enabled = false },
-    terminal = { enabled = true },
+    terminal = { enabled = false },
     toggle = { enabled = true },
     win = { enabled = false },
     words = { enabled = true },
@@ -49,18 +49,18 @@ local M = {
       desc = "Notification History",
     },
     {
+      "<leader>gh",
+      function()
+        Snacks.lazygit.log_file()
+      end,
+      desc = "Lazygit Current File History",
+    },
+    {
       "<leader>gg",
       function()
         Snacks.lazygit()
       end,
       desc = "Lazygit",
-    },
-    {
-      "<C-/>",
-      function()
-        Snacks.terminal.toggle()
-      end,
-      desc = "Toggle Terminal",
     },
     {
       "]]",

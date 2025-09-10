@@ -5,9 +5,6 @@ local M = {
     version = false,
     opts = {
       provider = "copilot",
-      copilot = {
-        model = "claude-sonnet-4",
-      },
     },
     build = "make",
     dependencies = {

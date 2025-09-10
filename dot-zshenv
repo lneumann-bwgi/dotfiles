@@ -1,6 +1,6 @@
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="/var/lib/flatpak/exports/bin:$PATH"
-export PATH="var/lib/flatpak/exports/share/applications:$PATH"
+export PATH="/var/lib/flatpak/exports/share/applications:$PATH"
 export PATH="$HOME/.go/bin:$PATH"
 
 export CDPATH="$HOME"
@@ -9,7 +9,6 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_STATE_HOME="$HOME/.local/state"
-# export XDG_DATA_DIRS="/var/lib/flatpak/exports/share/applications:$XDG_DATA_DIRS"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/config
@@ -21,8 +20,5 @@ export VISUAL="nvim"
 export PAGER="bat -p"
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
 # export BROWSER=org.mozilla.firefox
-
-export PIPENV_VENV_IN_PROJECT=1
-export PIPENV_MAX_DEPTH=10
 
 export GOPATH="$HOME/.go"

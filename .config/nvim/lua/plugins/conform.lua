@@ -25,7 +25,7 @@ local M = {
           prepend_args = { "-i", "2" },
         },
         sqlfluff = {
-          prepend_args = { "fix", "--force", "--dialect=ansi", "-" },
+          prepend_args = { "fix", "--force", "--dialect=postgres", "-" },
         },
       },
       -- If this is set, Conform will run the formatter on save.

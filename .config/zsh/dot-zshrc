@@ -19,8 +19,7 @@ eval "$(zoxide init zsh)"
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh #2>/dev/null
 
 # fzf settings
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
+source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="
     --border

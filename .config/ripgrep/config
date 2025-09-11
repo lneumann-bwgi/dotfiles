@@ -2,3 +2,7 @@
 --hidden
 --glob
 !.git
+--glob
+!__pycache__/
+--glob
+!.mypy_cache/

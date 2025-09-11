@@ -57,6 +57,9 @@ alias vdf='nvim -d'
 alias vtb='nvim -p'
 alias fastvim='nvim -n -u NONE -i NONE -N'
 
+# python stuff
+alias vd='uvx --with openpyxl --with pyarrow'
+
 # misc
 alias stow-dot="stow --restow -v --no-folding --dotfiles -t ~ -d ~/.dotfiles ."
 alias encf="openssl enc -e -aes256 -in"

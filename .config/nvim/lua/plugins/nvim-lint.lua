@@ -6,7 +6,6 @@ local M = {
   },
   config = function()
     local lint = require("lint")
-
     lint.linters_by_ft = {
       dockerfile = { "hadolint" },
       haskell = { "hlint" },
@@ -14,8 +13,13 @@ local M = {
       sql = { "sqlfluff" },
     }
 
-    local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+    local sqlfluff = require("lint").linters.sqlfluff
+    sqlfluff.args = {
+      "--dialect",
+      "postgres",
+    }
 
+    local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
     vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
       group = lint_augroup,
       callback = function()

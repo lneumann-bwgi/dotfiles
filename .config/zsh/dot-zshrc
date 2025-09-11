@@ -12,15 +12,11 @@ eval "$(starship init zsh)"
 # Source zoxide
 eval "$(zoxide init zsh)"
 
-# Source direnv
-# eval "$(direnv hook zsh)"
-
 # Source autosuggestions
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh #2>/dev/null
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 
 # fzf settings
-source /usr/share/fzf/completion.zsh
-source /usr/share/fzf/key-bindings.zsh
+source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="
     --border
@@ -46,10 +42,10 @@ export FZF_CTRL_R_OPTS="--preview-window=hidden"
 [ -f $HOME/.config/nnn/config.sh ] && source $HOME/.config/nnn/config.sh
 
 # Load syntax-highlighting; should be last.
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh #2>/dev/null
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # Source history completion; should be after zsh-syntax-highlighting
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh #2>/dev/null
+source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh 2>/dev/null
 
 # clipmenu
 export CM_SELECTIONS="clipboard"
@@ -59,15 +55,6 @@ export CM_MAX_CLIPS=10
 export CM_LAUNCHER="dmenu"
 
 # SETTINGS
-
-# Disable h,j,k,l reapat
-# xset -r 43
-# xset -r 44
-# xset -r 45
-# xset -r 46
-
-# Keyboard repeat rate
-# xset r rate 180 50
 
 # History options
 HISTSIZE=1000000000
@@ -166,5 +153,3 @@ for m in visual viopp; do
         bindkey -M $m $c select-bracketed
     done
 done
-
-# setxkbmap -layout us

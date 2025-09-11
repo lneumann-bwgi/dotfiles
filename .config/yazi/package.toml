@@ -1,19 +1,19 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "86d28e4"
+rev = "d7588f6"
 hash = "3996fc74044bc44144b323686f887e1"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "86d28e4"
+rev = "d7588f6"
 hash = "56fdabc96fc1f4d53c96eb884b02a5be"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:git"
-rev = "86d28e4"
-hash = "e01006bfb38951ea89031bd918b20dbb"
+rev = "d7588f6"
+hash = "63b6c222bf2103b3023389dde5e2ecfe"
 
 [[flavor.deps]]
 use = "bennyyip/gruvbox-dark"
-rev = "91fdfa7"
-hash = "f48f510e5505f5d01e79c4f8257ec5cb"
+rev = "e5e1aef"
+hash = "eb88137cf13a796225254344bf6def2c"

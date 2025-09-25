@@ -1,12 +1,6 @@
 local M = {
   {
-    "yetone/avante.nvim",
-    event = "VeryLazy",
-    version = false,
-    opts = {
-      provider = "copilot",
-    },
-    build = "make",
+    "CopilotC-Nvim/CopilotChat.nvim",
     dependencies = {
       {
         "zbirenbaum/copilot.lua",
@@ -32,18 +26,29 @@ local M = {
         end,
         lazy = false,
       },
-      "nvim-tree/nvim-web-devicons",
-      "stevearc/dressing.nvim",
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
+      { "nvim-lua/plenary.nvim", branch = "master" },
       {
         "MeanderingProgrammer/render-markdown.nvim",
         opts = {
-          file_types = { "markdown", "Avante" },
+          file_types = { "markdown" },
         },
-        ft = { "markdown", "Avante" },
+        ft = { "markdown" },
       },
     },
+    build = "make tiktoken",
+    opts = {},
+    config = function()
+      require("CopilotChat").setup({
+        allow_insecure = true,
+        auto_insert_mode = true,
+        mappings = {
+          reset = {
+            normal = "<A-l>",
+            insert = "<A-l>",
+          },
+        },
+      })
+    end,
   },
 }
 return M

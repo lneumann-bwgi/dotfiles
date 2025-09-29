@@ -11,6 +11,8 @@ local M = {
       haskell = { "hlint" },
       python = { "mypy", "ruff" },
       sql = { "sqlfluff" },
+      typescript = { "deno" },
+      typescriptreact = { "deno" },
     }
 
     local sqlfluff = require("lint").linters.sqlfluff

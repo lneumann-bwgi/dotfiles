@@ -41,6 +41,7 @@ local M = {
       require("CopilotChat").setup({
         allow_insecure = true,
         auto_insert_mode = true,
+        sticky = {"#buffers:listed", "#gitdiff:staged", "#diagnostics:current"},
         mappings = {
           reset = {
             normal = "<A-l>",

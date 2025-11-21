@@ -40,12 +40,19 @@ local M = {
     config = function()
       require("CopilotChat").setup({
         allow_insecure = true,
+        auto_fold = true,
         auto_insert_mode = true,
-        sticky = {"#buffers:listed", "#gitdiff:staged", "#diagnostics:current"},
+        chat_autocomplete = false,
+        diff = "block",
+        model = "claude-sonnet-4.5",
         mappings = {
-          reset = {
-            normal = "<A-l>",
-            insert = "<A-l>",
+          reset = { normal = "<A-l>", insert = "<A-l>" },
+          sticky = {
+            "#buffers:listed",
+            "#gitdiff",
+            "#glob:**/*.py",
+            "#glob:**/*.lua",
+            "#selection",
           },
         },
       })

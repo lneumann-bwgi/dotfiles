@@ -7,10 +7,14 @@ local M = {
   config = function()
     local lint = require("lint")
     lint.linters_by_ft = {
+      bash = { "shellcheck" },
       dockerfile = { "hadolint" },
       haskell = { "hlint" },
       python = { "mypy", "ruff" },
+      shell = { "shellcheck" },
       sql = { "sqlfluff" },
+      typescript = { "deno" },
+      typescriptreact = { "deno" },
     }
 
     local sqlfluff = require("lint").linters.sqlfluff

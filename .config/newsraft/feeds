@@ -1,7 +1,6 @@
 @ Aggregators < reload-period 30
 https://changelog.com/master/feed
 https://cprss.s3.amazonaws.com/golangweekly.com.xml
-https://dotfyle.com/this-week-in-neovim/rss.xml
 https://golang1.substack.com/feed
 https://hnrss.org/best
 https://hnrss.org/bestcomments
@@ -19,7 +18,6 @@ https://neovim.io/news.xml
 https://blog.python.org/feeds/posts/default?alt=rss
 
 @ Tech Blogs < reload-period 30
-https://anarute.com/feed "Ana Rute's Blog"
 https://blog.miguelgrinberg.com/feed "Miguel Grinberg's Blog"
 https://codeinthehole.com/index.xml
 https://iximiuz.com/feed.rss

@@ -50,6 +50,7 @@ alias gll='git log --oneline --no-merges'
 alias gpl='git pull'
 alias gps='git push'
 alias gst='git status'
+alias gsw='git switch $(git branches | fzf)'
 
 # vim stuff
 alias vsp='nvim -O'
@@ -58,7 +59,7 @@ alias vtb='nvim -p'
 alias fastvim='nvim -n -u NONE -i NONE -N'
 
 # python stuff
-alias vd='uvx --with openpyxl --with pyarrow'
+alias vd='uvx --with openpyxl --with pyarrow visidata'
 
 # misc
 alias stow-dot="stow --restow -v --no-folding --dotfiles -t ~ -d ~/.dotfiles ."

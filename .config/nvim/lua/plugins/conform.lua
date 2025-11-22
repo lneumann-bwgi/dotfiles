@@ -5,15 +5,20 @@ local M = {
   config = function()
     require("conform").setup({
       formatters_by_ft = {
+        bash = { "shfmt" },
         c = { "clang_format" },
         go = { "goimports", "gofmt" },
+        html = { "prettier" },
         javascript = { "prettier" },
+        javascriptreact = { "prettier" },
         json = { "prettier" },
         lua = { "stylua" },
         python = { "ruff_format" },
         sh = { "shfmt" },
+        shell = { "shfmt" },
         sql = { "sqlfluff" },
-        markdown = { "codespell" },
+        typescript = { "prettier" },
+        typescriptreact = { "prettier" },
         yaml = { "yamlfmt" },
         ["*"] = { "trim_whitespace" },
       },

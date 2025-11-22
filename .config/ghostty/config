@@ -14,7 +14,7 @@
 #
 
 # background
-background-blur = true
+background-blur = false
 background-blur-radius = 100
 background-opacity = 0.8
 
@@ -76,6 +76,8 @@ keybind = alt+d=goto_split:next
 keybind = alt+y=copy_to_clipboard
 keybind = alt+p=paste_from_clipboard
 
+keybind = alt+v=write_scrollback_file:open
+
 # ctrl  + shift + page_up         jump_to_prompt:-1
 # ctrl  + shift + page_down       jump_to_prompt:1
 # ctrl  + shift + enter           toggle_split_zoom
@@ -87,15 +89,39 @@ keybind = alt+p=paste_from_clipboard
 # ctrl  + shift + c               copy_to_clipboard
 # ctrl  + shift + v               paste_from_clipboard
 
-custom-shader = shaders/galaxy.glsl
+keybind = ctrl+p=reload_config
+
+# custom-shader = shaders/animated-gradient-shader.glsl
 # custom-shader = shaders/bettercrt.glsl
 # custom-shader = shaders/bloom.glsl
+# custom-shader = shaders/cineShader-Lava.glsl
+# custom-shader = shaders/crt.glsl
+# custom-shader = shaders/cubes.glsl
+# custom-shader = shaders/cursor_blaze.glsl
+# custom-shader = shaders/dither.glsl
 # custom-shader = shaders/drunkard.glsl
+# custom-shader = shaders/fireworks-rockets.glsl
+# custom-shader = shaders/fireworks.glsl
+# custom-shader = shaders/galaxy.glsl
+# custom-shader = shaders/gears-and-belts.glsl
 # custom-shader = shaders/glitchy.glsl
 # custom-shader = shaders/glow-rgbsplit-twitchy.glsl
+# custom-shader = shaders/gradient-background.glsl
 # custom-shader = shaders/in-game-crt.glsl
+# custom-shader = shaders/inside-the-matrix.glsl
+# custom-shader = shaders/just-snow.glsl
 # custom-shader = shaders/matrix-hallway.glsl
+# custom-shader = shaders/mnoise.glsl
+# custom-shader = shaders/negative.glsl
 # custom-shader = shaders/retro-terminal.glsl
 # custom-shader = shaders/sin-interference.glsl
+# custom-shader = shaders/smoke-and-ghost.glsl
+# custom-shader = shaders/sparks-from-fire.glsl
+# custom-shader = shaders/spotlight.glsl
+# custom-shader = shaders/starfield-colors.glsl
+# custom-shader = shaders/starfield.glsl
+# custom-shader = shaders/tft.glsl
+# custom-shader = shaders/underwater.glsl
+# custom-shader = shaders/water.glsl
 
-# custom-shader-animation = true
+custom-shader-animation = true

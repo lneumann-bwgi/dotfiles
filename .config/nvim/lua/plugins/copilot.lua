@@ -39,7 +39,6 @@ local M = {
     opts = {},
     config = function()
       require("CopilotChat").setup({
-        allow_insecure = true,
         auto_fold = true,
         auto_insert_mode = true,
         chat_autocomplete = false,

@@ -12,6 +12,9 @@ eval "$(starship init zsh)"
 # Source zoxide
 eval "$(zoxide init zsh)"
 
+# Source direnv
+eval "$(direnv hook zsh)"
+
 # Source autosuggestions
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
 
@@ -38,21 +41,11 @@ export FZF_DEFAULT_OPTS="
 export FZF_ALT_C_OPTS="--preview 'et -I {}'"
 export FZF_CTRL_R_OPTS="--preview-window=hidden"
 
-# Load NNN
-[ -f $HOME/.config/nnn/config.sh ] && source $HOME/.config/nnn/config.sh
-
 # Load syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
 
 # Source history completion; should be after zsh-syntax-highlighting
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh 2>/dev/null
-
-# clipmenu
-export CM_SELECTIONS="clipboard"
-export CM_DEBUG=0
-export CM_OUTPUT_CLIP=1
-export CM_MAX_CLIPS=10
-export CM_LAUNCHER="dmenu"
 
 # SETTINGS
 
@@ -69,9 +62,7 @@ setopt EXTENDED_HISTORY      # Write the history file in the ':start:elapsed;com
 setopt HIST_IGNORE_ALL_DUPS  # Delete an old recorded event if a new event is a duplicate.
 setopt HIST_IGNORE_DUPS      # Do not record an event that was just recorded again.
 setopt HIST_IGNORE_SPACE     # Do not record an event starting with a space.
-setopt HIST_NO_STORE         # Don't store history commands
 setopt HIST_REDUCE_BLANKS    # Remove superfluous blanks from each command line being added to the history.
-setopt HIST_SAVE_NO_DUPS     # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY           # Do not execute immediately upon history expansion.
 setopt INC_APPEND_HISTORY    # Write to the history file immediately, not when the shell exits.
 setopt SHARE_HISTORY         # Share history between all sessions.
@@ -96,8 +87,8 @@ _comp_options+=(globdots)
 compdef _gnu_generic delta
 
 # History search
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+bindkey '^[[A' history-substring-search-up # Up arrow
+bindkey '^[[B' history-substring-search-down # Down arrow
 
 # VIM MODE
 
@@ -110,12 +101,39 @@ bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
 
 # Yank to the system clipboard
-function vi-yank-xclip {
-    zle vi-yank
-   echo "$CUTBUFFER" | wl-copy
+__clip_copy() {
+  if command -v wl-copy >/dev/null 2>&1; then
+    wl-copy
+    return 0
+  fi
+
+  if command -v pbcopy >/dev/null 2>&1; then
+    pbcopy
+    return 0
+  fi
+
+  if command -v xclip >/dev/null 2>&1; then
+    xclip -selection clipboard
+    return 0
+  fi
+
+  if command -v xsel >/dev/null 2>&1; then
+    xsel --clipboard --input
+    return 0
+  fi
+
+  return 1
 }
-zle -N vi-yank-xclip
-bindkey -M vicmd 'y' vi-yank-xclip
+
+function vi-yank-to-clipboard() {
+  zle vi-yank
+  print -rn -- "$CUTBUFFER" | __clip_copy || {
+    zle -M "No clipboard tool found (pbcopy/wl-copy/xclip/xsel)."
+  }
+}
+
+zle -N vi-yank-to-clipboard
+bindkey -M vicmd 'y' vi-yank-to-clipboard
 
 # Use vim keys in history search
 bindkey -M vicmd 'k' history-substring-search-up

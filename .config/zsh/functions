@@ -1,58 +1,56 @@
 #!/bin/bash
 
 fgt() {
-  git ls-files | fzf --preview 'git diff --color=always -- {-1} | head -100' --height=80% --layout=reverse --border --query="$1" | xargs -r $EDITOR
+  local mode="all"
+
+  while getopts ":sum" opt; do
+    case $opt in
+    s) mode="staged" ;;
+    u) mode="unstaged" ;;
+    m) mode="modified" ;;
+    *) mode="all" ;;
+    esac
+  done
+  shift $((OPTIND - 1))
+
+  local q="${*:-}"
+  local file cmd preview
+
+  case "$mode" in
+  staged)
+    cmd='git diff --name-only --cached -z'
+    preview='git diff --cached --color=always -- "{}" | sed -n "1,200p"'
+    ;;
+  unstaged)
+    cmd='git diff --name-only -z'
+    preview='git diff --color=always -- "{}" | sed -n "1,200p"'
+    ;;
+  modified)
+    cmd='git diff --name-only -z; git diff --name-only --cached -z'
+    preview='git diff --color=always -- "{}"; git diff --cached --color=always -- "{}" | sed -n "1,200p"'
+    ;;
+  all)
+    cmd='git ls-files -z'
+    preview='git diff --color=always -- "{}" | sed -n "1,200p"'
+    ;;
+  esac
+
+  file="$(
+    eval "$cmd" |
+      tr '\0' '\n' |
+      sort -u |
+      fzf --query "$q" \
+        --height=80% --layout=reverse --border \
+        --preview "$preview"
+  )" || return
+  [ -n "$file" ] || return
+  nvim -- "$file"
 }
-zle -N fgt
-bindkey '^G' fgt
 
-spell() {
-  if [[ "$#" -eq 0 ]]; then
-    cat /usr/share/dict/words |
-      fzf --preview 'dict -d wn {} | fold -w $COLUMNS -s' --height=80% --preview-window=up:60% --layout=default |
-      xargs dict -d wn | yank
-  else
-    cat /usr/share/dict/words |
-      fzf --query $1 --preview 'dict -d wn {} | fold -w $COLUMNS -s' --height=80% --preview-window=up:60% --layout=default |
-      xargs dict -d wn | yank
-  fi
-}
-
-rgi() {
-  if [ ! "$#" -gt 0 ]; then
-    echo "Need a string to search for!"
-    return 1
-  fi
-  rg --files-with-matches --no-messages "$1" | fzf --preview "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
-}
-
-fcd() {
-  local searchdir
-
-  if [ -n "$1" ]; then
-    searchdir="$1"
-  else
-    searchdir="$HOME"
-  fi
-
-  # Create a temporary file
-  local tmpfile
-  tmpfile=$(mktemp)
-
-  # Use find and fzf to select a directory
-  find "$searchdir" \( ! -regex '.*/\..*' \) ! -name __pycache__ -type d | fzf >"$tmpfile"
-  local destdir
-  destdir=$(cat "$tmpfile")
-  rm -f "$tmpfile"
-
-  # If no directory is selected, return with an error
-  if [ -z "$destdir" ]; then
-    return 1
-  fi
-
-  # Change to the selected directory
-  cd "$destdir"
-}
+if [ -n "${ZSH_VERSION-}" ]; then
+  zle -N fgt_modified_widget 'fgt --modified'
+  bindkey '^G' fgt_modified_widget
+fi
 
 fkill() {
   local pid
@@ -61,30 +59,122 @@ fkill() {
   else
     pid=$(ps -ef | sed 1d | fzf -m --preview='' | awk '{print $2}')
   fi
-
   if [ "x$pid" != "x" ]; then
     echo $pid | xargs kill -${1:-9}
   fi
 }
-zle -N fkill
-bindkey '^K' fkill
+
+if [ -n "${ZSH_VERSION-}" ]; then
+  zle -N fkill
+  bindkey '^K' fkill
+fi
 
 fman() {
-  batman="man {1} | col -bx | bat --language=man --plain --color always --theme=\"Monokai Extended\""
   man -k . | sort |
-    awk -v cyan=$(tput setaf 6) -v blue=$(tput setaf 4) -v res=$(tput sgr0) -v bld=$(tput bold) '{ $1=cyan bld $1; $2=res blue;} 1' |
+    sed -E 's/^([^[:space:]]+)\([^)]+\),?/\1/' |
+    awk -v cyan="$(tput setaf 6)" -v blue="$(tput setaf 4)" \
+        -v res="$(tput sgr0)" -v bld="$(tput bold)" \
+        '{ $1=cyan bld $1; $2=res blue } 1' |
     fzf \
-      -q "$1" \
+      -q "${1:-}" \
       --ansi \
       --tiebreak=begin \
       --prompt=' Man > ' \
       --preview-window '50%,rounded,<50(up,85%,border-bottom)' \
-      --preview "${batman}" \
-      --bind "enter:execute(man {1})" \
-      --bind "alt-c:+change-preview(cht.sh {1})+change-prompt(ﯽ Cheat > )" \
-      --bind "alt-m:+change-preview(${batman})+change-prompt( Man > )" \
-      --bind "alt-t:+change-preview(tldr --color=always {1})+change-prompt(ﳁ TLDR > )"
+      --preview "tldr --color=always {1} 2>/dev/null" \
+      --bind 'enter:become(man {1})'
+}
+
+fman-widget() {
+  fman
   zle reset-prompt
+}
+
+if [[ -n ${ZSH_VERSION-} ]]; then
+  zle -N fman-widget
+  bindkey '^N' fman-widget
+fi
+
+spell() {
+  local q="${*:-}"
+  local w words_file clip_cmd
+
+  if [[ -r /usr/share/dict/words ]]; then
+    words_file=/usr/share/dict/words
+  elif [[ -r /usr/dict/words ]]; then
+    words_file=/usr/dict/words
+  else
+    echo "spell: no words file found (/usr/share/dict/words)" >&2
+    return 1
+  fi
+
+  if command -v pbcopy >/dev/null 2>&1; then
+    clip_cmd="pbcopy"
+  elif command -v wl-copy >/dev/null 2>&1; then
+    clip_cmd="wl-copy"
+  elif command -v xclip >/dev/null 2>&1; then
+    clip_cmd="xclip -selection clipboard"
+  elif command -v xsel >/dev/null 2>&1; then
+    clip_cmd="xsel --clipboard --input"
+  else
+    echo "spell: no clipboard tool found (pbcopy/wl-copy/xclip/xsel)" >&2
+    return 1
+  fi
+
+  local preview=':'
+  if command -v dict >/dev/null 2>&1; then
+    preview='sh -c '"'"'dict -d wn "$1" 2>/dev/null | fold -w "${COLUMNS:-80}" -s'"'"' _ {}'
+  else
+    preview='sh -c '"'"'printf "%s\n" "$1"'"'"' _ {}'
+  fi
+
+  w="$(
+    fzf --query "$q" \
+        --height=80% --layout=default --preview-window=up:60% --border \
+        --preview "$preview" \
+        <"$words_file"
+  )" || return
+  [ -n "$w" ] || return
+  printf '%s' "$w" | ${=clip_cmd}
+}
+
+rgi() {
+  if [ ! "$#" -gt 0 ]; then
+    echo "Need a string to search for!"
+    return 1
+  fi
+  rg --files-with-matches --no-messages "$1" |
+    fzf --preview "
+      highlight -O ansi -l {} 2> /dev/null |
+      rg --colors 'match:bg:yellow' \
+         --ignore-case \
+         --pretty \
+         --context 10 '$1' \
+      || rg --ignore-case \
+            --pretty \
+            --context 10 '$1' \
+            {}"
+}
+
+vrg() {
+  local file
+  file="$(rgi "$@")" || return
+  [ -n "$file" ] || return
+  nvim -- "$file"
+}
+
+fcd() {
+  local searchdir destdir
+  searchdir="${1:-$HOME}"
+  destdir=$(
+    fd --type d \
+       --hidden \
+       --exclude .git \
+       --exclude __pycache__ \
+       . "$searchdir" | fzf
+  )
+  [ -z "$destdir" ] && return 1
+  cd "$destdir" || exit
 }
 
 topmem() {
@@ -92,45 +182,63 @@ topmem() {
 }
 
 delete-broken-symlinks() {
-  find . -xtype l -print -exec rm {} +
+  find . -xtype l -print0 | xargs -0 -r rm -v --
 }
 
 y() {
-  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+  local tmp cwd
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
   yazi "$@" --cwd-file="$tmp"
   if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
-    builtin cd -- "$cwd"
+    cd -- "$cwd" || exit
   fi
-  rm -f -- "$tmp"
+  \rm -f -- "$tmp"
 }
 
 json-beautify-inplace() {
-  temp=$(mktemp)
-  printf 'input = %s\n' "$1"
-  printf 'temp  = %s\n' "$temp"
-  \cp -- "$1" "$temp"
-  jq . "$temp" >"$1"
+  local input="$1" tmp
+  [ -n "$input" ] || {
+    echo "usage: json-beautify-inplace <file>" >&2
+    return 2
+  }
+  tmp="$(mktemp)" || return
+  \cp -- "$input" "$tmp" || {
+    \rm -f -- "$tmp"
+    return 1
+  }
+  jq . -- "$tmp" >"${tmp}.out" && mv -- "${tmp}.out" "$input"
+  local rc=$?
+  \rm -f -- "$tmp" "${tmp}.out"
+  return $rc
 }
 
 json-beautify-sort-inplace() {
-  temp=$(mktemp)
-  printf 'input = %s\n' "$1"
-  printf 'temp  = %s\n' "$temp"
-  \cp -- "$1" "$temp"
-  jq -S . "$temp" >"$1"
+  local input="$1" tmp
+  [ -n "$input" ] || {
+    echo "usage: json-beautify-sort-inplace <file>" >&2
+    return 2
+  }
+  tmp="$(mktemp)" || return
+  \cp -- "$input" "$tmp" || {
+    \rm -f -- "$tmp"
+    return 1
+  }
+  jq -S . -- "$tmp" >"${tmp}.out" && mv -- "${tmp}.out" "$input"
+  local rc=$?
+  \rm -f -- "$tmp" "${tmp}.out"
+  return $rc
 }
 
 mkcd() {
-  \mkdir -p "$1"
-  cd "$1"
+  mkdir -p -- "$1" && cd -- "$1" || return
 }
 
 cdtemp() {
-  cd "$(mktemp -d)"
-  chmod -R 0700 .
-  if [[ $# -eq 1 ]]; then
-    \mkdir -p "$1"
-    cd "$1"
-    chmod -R 0700 .
+  local dir
+  dir="$(mktemp -d)" || return
+  chmod 0700 "$dir"
+  cd -- "$dir" || return
+  if [ $# -eq 1 ]; then
+    mkdir -p -- "$1" && cd -- "$1" && chmod 0700 .
   fi
 }

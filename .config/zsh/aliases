@@ -50,7 +50,6 @@ alias gll='git log --oneline --no-merges'
 alias gpl='git pull'
 alias gps='git push'
 alias gst='git status'
-alias gsw='git switch $(git branches | fzf)'
 
 # vim stuff
 alias vsp='nvim -O'
@@ -69,3 +68,4 @@ alias weather="curl wttr.in"
 alias wifi="nmcli dev wifi show-password"
 alias rss="newsraft"
 alias pacman-hist="expac --timefmt='%Y-%m-%d %T' '%l\t%w\t%n' | sort"
+alias hashfiles="fd -t f | sort | xargs -I{} md5sum {}"

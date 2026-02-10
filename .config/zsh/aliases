@@ -50,6 +50,7 @@ alias gll='git log --oneline --no-merges'
 alias gpl='git pull'
 alias gps='git push'
 alias gst='git status'
+alias gsw='git switch'
 
 # vim stuff
 alias vsp='nvim -O'

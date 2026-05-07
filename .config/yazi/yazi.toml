@@ -1,7 +1,3 @@
-# A TOML linter such as https://taplo.tamasfe.dev/ can use this schema to validate your config.
-# If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
-"$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
-
 [mgr]
 ratio = [1, 2, 3]
 sort_by = "natural"
@@ -31,19 +27,19 @@ doc = [
 
 [open]
 prepend_rules = [
-	{ name = "*.pdf", use = "doc" },
-	{ name = "*.dvu", use = "doc" },
-	{ name = "*.epub", use = "doc" },
-	{ name = "*.azw3", use = "doc" },
-	{ name = "*.mobi", use = "doc" },
+	{ url = "*.pdf", use = "doc" },
+	{ url = "*.dvu", use = "doc" },
+	{ url = "*.epub", use = "doc" },
+	{ url = "*.azw3", use = "doc" },
+	{ url = "*.mobi", use = "doc" },
 ]
 
 [[plugin.prepend_fetchers]]
-id = "git"
-name = "*"
-run = "git"
+url   = "*"
+run   = "git"
+group = "git"
 
 [[plugin.prepend_fetchers]]
-id = "git"
-name = "*/"
-run = "git"
+url   = "*/"
+run   = "git"
+group = "git"

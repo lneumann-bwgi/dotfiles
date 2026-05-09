@@ -1,5 +1,5 @@
 [mgr]
-ratio = [1, 2, 3]
+ratio = [1, 2, 4]
 sort_by = "natural"
 sort_sensitive = false
 sort_reverse = false
@@ -14,7 +14,7 @@ max_width = 1000
 max_height = 1500
 cache_dir = ""
 image_filter = "triangle"
-image_quality = 75
+image_quality = 90
 sixel_fraction = 15
 ueberzug_scale = 1
 ueberzug_offset = [0, 0, 0, 0]
@@ -24,6 +24,9 @@ doc = [
 	{ run = 'zathura "$@"', orphan = true, for = "unix" },
 	{ run = 'com.github.johnfactotum.Foliate "$@"', orphan = true, for = "unix" },
 ]
+visidata = [
+	{ run = 'uvx --with openpyxl --with pyarrow visidata "$@"', block = true, for = "unix" },
+]
 
 [open]
 prepend_rules = [
@@ -32,14 +35,38 @@ prepend_rules = [
 	{ url = "*.epub", use = "doc" },
 	{ url = "*.azw3", use = "doc" },
 	{ url = "*.mobi", use = "doc" },
+	{ url = "*.csv", use = "visidata" },
+	{ url = "*.tsv", use = "visidata" },
+	{ url = "*.xlsx", use = "visidata" },
+	{ url = "*.parquet", use = "visidata" },
 ]
 
-[[plugin.prepend_fetchers]]
-url   = "*"
-run   = "git"
-group = "git"
 
-[[plugin.prepend_fetchers]]
-url   = "*/"
-run   = "git"
-group = "git"
+[plugin]
+prepend_previewers = [
+  { url = "*.csv", run = "duckdb" },
+  { url = "*.tsv", run = "duckdb" },
+  { url = "*.json", run = "duckdb" },
+  { url = "*.parquet", run = "duckdb" },
+  { url = "*.txt", run = "duckdb" },
+  { url = "*.xlsx", run = "duckdb" },
+  { url = "*.db", run = "duckdb" },
+  { url = "*.duckdb", run = "duckdb" },
+  { url = "*.md", run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"' },
+  { url = "*/", run = 'piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"' },
+]
+
+prepend_preloaders = [
+  { url = "*.csv", run = "duckdb", multi = false },
+  { url = "*.tsv", run = "duckdb", multi = false },
+  { url = "*.json", run = "duckdb", multi = false },
+  { url = "*.parquet", run = "duckdb", multi = false },
+  { url = "*.txt", run = "duckdb", multi = false },
+  { url = "*.xlsx", run = "duckdb", multi = false }
+]
+
+pretend_fetchers = [
+  { url = "*", run = "git", group = "git" },
+  { url = "*/", run = "git", group = "git" },
+]
+

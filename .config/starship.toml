@@ -19,13 +19,14 @@ $golang\
 $aws\
 $docker_context\
 $direnv\
-$cmd_duration\
 $jobs\
+$fill\
+$cmd_duration\
 $line_break\
 $character"""
 
-# Right-side prompt (rendered after command).
-right_format = """$time"""
+# multi-line input, e.g. unclosed quote).
+continuation_prompt = "[▶▶ ](grey)"
 
 # --- Directory ---
 [directory]
@@ -39,21 +40,23 @@ home_symbol           = "~"
 [cmd_duration]
 min_time           = 2000
 format             = "took [$duration]($style) "
-style              = "yellow"
 show_milliseconds  = false
 
 # --- Character (prompt symbol) ---
 [character]
-success_symbol = "[❮I❯](green)"
-error_symbol   = "[❮I❯](red)"
-vimcmd_symbol  = "[❮N❯](green)"
+success_symbol = "[❯](green)"
+error_symbol   = "[❯](red)"
+vimcmd_symbol  = "[❮](green)"
 
 # --- Time (right prompt) ---
 [time]
 disabled    = false
 format      = "[$time]($style)"
 time_format = "%H:%M"
-style       = "dimmed white"
+
+# --- Fill (pads $format so right side hits edge) ---
+[fill]
+symbol = "·"
 
 # --- Whitelist policy ---
 # Only modules listed in $format / $right_format render.
@@ -207,14 +210,11 @@ disabled = true
 [localip]
 disabled = true
 [hostname]
-ssh_only = true   # only show when SSH'd in
-format   = "[@$hostname]($style) "
-style    = "bold dimmed white"
-
-[username]
-show_always = true
-format      = "[$user]($style) "
+ssh_only = true
 
 [jobs]
 disabled         = false
-
+symbol           = "✦"
+number_threshold = 1
+symbol_threshold = 1
+format           = "[$symbol$number]($style) "

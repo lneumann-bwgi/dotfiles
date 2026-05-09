@@ -2,3 +2,33 @@
 on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
+
+[[mgr.prepend_keymap]]
+on = "H"
+run = "plugin duckdb -1"
+desc = "duckdb: scroll one column left"
+
+[[mgr.prepend_keymap]]
+on = "L"
+run = "plugin duckdb +1"
+desc = "duckdb: scroll one column right"
+
+[[mgr.prepend_keymap]]
+on = ["g", "o"]
+run = "plugin duckdb -open"
+desc = "duckdb: open file in duckdb CLI"
+
+[[mgr.prepend_keymap]]
+on = ["g", "u"]
+run = "plugin duckdb -ui"
+desc = "duckdb: open file in duckdb UI"
+
+[[mgr.prepend_keymap]]
+on = "z"
+run = "plugin zoxide"
+desc = "jump via zoxide"
+
+[[mgr.prepend_keymap]]
+on = ["y", "p"]
+run = "copy path"
+desc = "copy file path"

@@ -1,4 +1,18 @@
--- ~/.config/yazi/init.lua
+-- plugins setups
+require("duckdb"):setup({
+  mode = "standard",
+})
+require("git"):setup({
+  order = 1500,
+})
+require("full-border"):setup({
+  type = ui.Border.ROUNDED,
+})
+require("smart-enter"):setup({
+  open_multi = true,
+})
+
+-- configure linemode
 function Linemode:size_and_mtime()
   local time = math.floor(self._file.cha.mtime or 0)
   if time == 0 then

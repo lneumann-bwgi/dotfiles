@@ -2,8 +2,7 @@
 
 # Original Menu Surfraw: https://github.com/TomboFry/menu-surfraw
 
-export PATH="/var/lib/flatpak/exports/bin:$PATH"
-browser="org.mozilla.firefox"
+browser="firefox"
 
 usage() {
 	echo "Usage: $0 [OPTIONS] [ELVIS [SEARCHTERM]]

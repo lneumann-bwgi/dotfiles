@@ -1,9 +1,10 @@
 local M = {
   "nvim-treesitter/nvim-treesitter",
+  branch = "master",
   event = "VeryLazy",
   build = ":TSUpdate",
   dependencies = {
-    "nvim-treesitter/nvim-treesitter-textobjects",
+    { "nvim-treesitter/nvim-treesitter-textobjects", branch = "master" },
     "windwp/nvim-ts-autotag",
   },
   config = function()

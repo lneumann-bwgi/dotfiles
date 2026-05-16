@@ -1,0 +1,220 @@
+# Starship prompt config
+# Docs: https://starship.rs/config/
+
+# --- Performance ---
+command_timeout = 500   # ms; modules exceeding this show a warning
+scan_timeout    = 30    # ms; per-dir file scan budget for language detection
+add_newline     = true  # blank line between prompts
+
+# --- Format (left prompt) ---
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_state\
+$git_status\
+$python\
+$golang\
+$aws\
+$docker_context\
+$direnv\
+$jobs\
+$fill\
+$cmd_duration\
+$line_break\
+$character"""
+
+# multi-line input, e.g. unclosed quote).
+continuation_prompt = "[▶▶ ](grey)"
+
+# --- Directory ---
+[directory]
+truncation_length     = 4
+truncate_to_repo      = true
+truncation_symbol     = ".../"
+read_only             = " RO"
+home_symbol           = "~"
+
+# --- Command duration ---
+[cmd_duration]
+min_time           = 2000
+format             = "took [$duration]($style) "
+show_milliseconds  = false
+
+# --- Character (prompt symbol) ---
+[character]
+success_symbol = "[❯](green)"
+error_symbol   = "[❯](red)"
+vimcmd_symbol  = "[❮](green)"
+
+# --- Time (right prompt) ---
+[time]
+disabled    = false
+format      = "[$time]($style)"
+time_format = "%H:%M"
+
+# --- Fill (pads $format so right side hits edge) ---
+[fill]
+symbol = "·"
+
+# --- Whitelist policy ---
+# Only modules listed in $format / $right_format render.
+# All others = disabled to stop CWD scans (perf on network FS).
+
+# --- Enabled language modules ---
+[python]
+disabled = false
+[golang]
+disabled = false
+[nodejs]
+disabled = false
+
+# --- Enabled cloud/infra ---
+[docker_context]
+disabled = true
+
+# --- Disabled: package version reader ---
+[package]
+disabled = true
+
+# --- Disabled: language modules ---
+[bun]
+disabled = true
+[deno]
+disabled = true
+[c]
+disabled = true
+[cmake]
+disabled = true
+[cobol]
+disabled = true
+[crystal]
+disabled = true
+[daml]
+disabled = true
+[dart]
+disabled = true
+[dotnet]
+disabled = true
+[elixir]
+disabled = true
+[elm]
+disabled = true
+[erlang]
+disabled = true
+[fennel]
+disabled = true
+[gleam]
+disabled = true
+[gradle]
+disabled = true
+[haskell]
+disabled = true
+[haxe]
+disabled = true
+[helm]
+disabled = true
+[java]
+disabled = true
+[julia]
+disabled = true
+[kotlin]
+disabled = true
+[lua]
+disabled = true
+[mojo]
+disabled = true
+[nim]
+disabled = true
+[ocaml]
+disabled = true
+[odin]
+disabled = true
+[opa]
+disabled = true
+[perl]
+disabled = true
+[php]
+disabled = true
+[purescript]
+disabled = true
+[quarto]
+disabled = true
+[raku]
+disabled = true
+[red]
+disabled = true
+[ruby]
+disabled = true
+[rust]
+disabled = true
+[scala]
+disabled = true
+[solidity]
+disabled = true
+[swift]
+disabled = true
+[typst]
+disabled = true
+[vagrant]
+disabled = true
+[vlang]
+disabled = true
+[xmake]
+disabled = true
+[zig]
+disabled = true
+
+# --- Disabled: build/package tooling ---
+[buf]
+disabled = true
+[meson]
+disabled = true
+
+# --- Disabled: cloud/infra (re-enable per-need) ---
+[aws]
+disabled = true
+[gcloud]
+disabled = true
+[azure]
+disabled = true
+[kubernetes]
+disabled = true
+[openstack]
+disabled = true
+[nix_shell]
+disabled = true
+[pulumi]
+disabled = true
+[terraform]
+disabled = true
+
+# --- Disabled: alt VCS ---
+[fossil_branch]
+disabled = true
+[fossil_metrics]
+disabled = true
+[pijul_channel]
+disabled = true
+
+# --- Disabled: misc system ---
+[battery]
+disabled = false
+[memory_usage]
+disabled = false
+[container]
+disabled = false
+[shlvl]
+disabled = true
+[localip]
+disabled = true
+[hostname]
+ssh_only = true
+
+[jobs]
+disabled         = false
+symbol           = "✦"
+number_threshold = 1
+symbol_threshold = 1
+format           = "[$symbol$number]($style) "

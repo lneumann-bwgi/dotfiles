@@ -1,1 +1,1 @@
-nnoremap <buffer> <Leader>ee :w<CR>:!clang -o temp.out -lm -Wall % && ./temp.out<CR>
+nnoremap <buffer> <Leader>E :w<CR>:!clang -o temp.out -lm -Wall % && ./temp.out<CR>

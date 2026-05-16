@@ -1,1 +1,2 @@
-nnoremap <buffer> <Leader>B obreakpoint()<Esc>
+nnoremap <buffer> <Leader>E :w<CR>:!python %<CR>
+

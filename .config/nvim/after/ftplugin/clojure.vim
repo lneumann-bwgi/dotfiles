@@ -1,1 +1,1 @@
-nnoremap <Leader>e :w<CR>:ConjureEvalFile<CR>
+nnoremap <buffer> <Leader>E :w<CR>:ConjureEvalFile<CR>

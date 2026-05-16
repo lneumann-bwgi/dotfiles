@@ -50,6 +50,7 @@ keybind = ctrl+shift+u=scroll_page_up
 keybind = ctrl+shift+d=scroll_page_down
 
 # Tabs
+keybind = alt+enter=new_tab
 keybind = alt+shift+t=new_tab
 keybind = alt+shift+]=next_tab
 keybind = alt+shift+[=previous_tab

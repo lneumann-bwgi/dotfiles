@@ -77,3 +77,4 @@ alias wifi="nmcli dev wifi show-password"
 alias rss="newsraft"
 alias pacman-hist="expac --timefmt='%Y-%m-%d %T' '%l\t%w\t%n' | sort"
 alias hashfiles="fd -t f | sort | xargs -I{} md5sum {}"
+alias glow='glow --width 128 --pager --style dark'

@@ -1,11 +1,11 @@
 [[plugin.deps]]
 use = "yazi-rs/plugins:full-border"
-rev = "4ffa48f"
-hash = "eff8ff12fa4e5f035a10d8aeeb4c258d"
+rev = "5d5c480"
+hash = "7b625412411be411153886894d9acaf"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:smart-enter"
-rev = "4ffa48f"
+rev = "5d5c480"
 hash = "187cc58ba7ac3befd49c342129e6f1b6"
 
 [[plugin.deps]]
@@ -15,13 +15,18 @@ hash = "87b9233a74325e95011670ed20bbd0d4"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:piper"
-rev = "4ffa48f"
+rev = "5d5c480"
 hash = "384464b6df8cb807425c521f8cd790f3"
 
 [[plugin.deps]]
 use = "yazi-rs/plugins:zoxide"
-rev = "4ffa48f"
+rev = "5d5c480"
 hash = "99aa06d3014798d86001c324468d497f"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "5d5c480"
+hash = "88e56a64b7ce7c4314427452343fef17"
 
 [[flavor.deps]]
 use = "bennyyip/gruvbox-dark"
@@ -30,5 +35,5 @@ hash = "d4c7003ec6dc4efd5d3a050d5c2f2575"
 
 [[flavor.deps]]
 use = "AdithyanA2005/nord"
-rev = "bdf0bd4"
-hash = "816970e00d643d3e8213b430d2148aec"
+rev = "1b1bf78"
+hash = "4dbe11b947f327a0075d16f4a6b55043"

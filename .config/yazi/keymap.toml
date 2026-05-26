@@ -29,6 +29,31 @@ run = "plugin zoxide"
 desc = "jump via zoxide"
 
 [[mgr.prepend_keymap]]
+on = ["y", "y"]
+run = "yank"
+desc = "yank selected files"
+
+[[mgr.prepend_keymap]]
 on = ["y", "p"]
 run = "copy path"
 desc = "copy file path"
+
+[[mgr.prepend_keymap]]
+on = ["y", "d"]
+run = "copy dirname"
+desc = "copy directory path"
+
+[[mgr.prepend_keymap]]
+on = ["y", "f"]
+run = "copy filename"
+desc = "copy filename"
+
+[[mgr.prepend_keymap]]
+on = ["y", "n"]
+run = "copy name_without_ext"
+desc = "copy filename without extension"
+
+[[mgr.prepend_keymap]]
+on = ["y", "u"]
+run = "unyank"
+desc = "cancel yank status"

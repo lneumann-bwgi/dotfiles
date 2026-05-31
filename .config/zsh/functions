@@ -32,7 +32,7 @@ fgt() {
   eval "$cmd" |
     tr '\0' '\n' |
     sort -u |
-    fzf --query "$q" \
+    fzf --query "$q" --multi \
         --height=80% --layout=reverse --border \
         --preview "$preview"
 }
@@ -45,7 +45,7 @@ fgt-widget() {
   [[ -n "$out" ]] || { zle reset-prompt; return 0; }
 
   files=("${(@f)out}")
-  LBUFFER+="${LBUFFER:+ }${(j: :)${(q)files}}"
+  LBUFFER+="${LBUFFER:+ }${(j: :)${(q-)files[@]}}"
   zle reset-prompt
 }
 

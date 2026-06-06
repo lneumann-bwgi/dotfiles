@@ -12,6 +12,28 @@ require("mason-lspconfig").setup({
     "vimls",
   },
 })
+require("mason-tool-installer").setup({
+  ensure_installed = {
+    -- formatters
+    "clang-format",
+    "prettier",
+    "shfmt",
+    "sqlfluff",
+    "stylua",
+    "yamlfmt",
+    -- linters
+    "hadolint",
+    "hlint",
+    "mypy",
+    "ruff",
+    "shellcheck",
+    -- dap
+    "debugpy",
+    "delve",
+  },
+  auto_update = false,
+  run_on_start = true,
+})
 
 -- server-specific overrides (applied before automatic_enable)
 vim.lsp.config("lua_ls", {

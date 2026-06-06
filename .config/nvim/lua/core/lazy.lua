@@ -29,6 +29,7 @@ require("lazy").setup({
     { "neovim/nvim-lspconfig", lazy = false },
     { "williamboman/mason.nvim" },
     { "williamboman/mason-lspconfig.nvim" },
+    { "WhoIsSethDaniel/mason-tool-installer.nvim" },
     -- MISC / SIMPLE SETUP
     { "rhysd/clever-f.vim" },
     -- COLOR SCHEMES

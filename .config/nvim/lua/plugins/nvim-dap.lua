@@ -12,7 +12,7 @@ local M = {
 
     -- setup
     dapui.setup()
-    require("dap-python").setup("python")
+    require("dap-python").setup(vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python")
     require("dap-go").setup()
 
     -- use nvim-dap events to open and close the windows automatically

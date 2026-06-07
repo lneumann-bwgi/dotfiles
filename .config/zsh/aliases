@@ -68,6 +68,9 @@ alias sqlfluff='uvx sqlfluff fix --dialect postgres'
 alias vd='uvx --with openpyxl --with pyarrow visidata'
 alias yt-dlp='uvx yt-dlp'
 
+# ansible
+alias ansible-maintenance="ansible-playbook -i ~/.ansible/inventories/hosts ~/.ansible/roles/maintenance.yml --ask-become-pass"
+
 # misc
 alias stow-dot="stow --restow -v --no-folding --dotfiles -t ~ -d ~/.dotfiles ."
 alias encf="openssl enc -e -aes256 -in"

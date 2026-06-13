@@ -1,127 +1,111 @@
 @ Aggregators < reload-period 30
-https://changelog.com/master/feed
-https://cprss.s3.amazonaws.com/golangweekly.com.xml
-https://golang1.substack.com/feed
 https://hnrss.org/best
 https://hnrss.org/bestcomments
 https://hnrss.org/frontpage
 https://lobste.rs/rss
+
+@ Dev Newsletters < reload-period 30
+https://changelog.com/master/feed
+https://cprss.s3.amazonaws.com/golangweekly.com.xml
 https://pycoders.com/feed
 https://pythonbytes.fm/episodes/rss
 https://spectrum.ieee.org/feeds/feed.rss
+https://this-week-in-rust.org/rss.xml
 
 @ Software < reload-period 30
 https://archlinux.org/feeds/news
+https://blog.python.org/feeds/posts/default?alt=rss
 https://julialang.org/feed.xml
+https://linuxblog.io/feed
 https://lwn.net/headlines/rss
 https://neovim.io/news.xml
-https://blog.python.org/feeds/posts/default?alt=rss
+https://www.phoronix.com/rss.php
 
 @ Tech Blogs < reload-period 30
 https://blog.miguelgrinberg.com/feed "Miguel Grinberg's Blog"
 https://codeinthehole.com/index.xml
+https://danluu.com/atom.xml "Dan Luu"
 https://iximiuz.com/feed.rss
+https://jvns.ca/atom.xml "Julia Evans"
 https://martinheinz.dev/rss/
 https://mathspp.com/blog.rss
 https://realpython.com/atom.xml
 https://samwho.dev/rss.xml
-https://taniarascia.com/rss.xml  "Tania Rascia's Blog"
+https://simonwillison.net/atom/everything/ "Simon Willison"
+https://taniarascia.com/rss.xml "Tania Rascia's Blog"
 https://thevaluable.dev/index.xml
 https://treyhunner.com/atom.xml
 https://vimtricks.com/feed/
-http://www.aaronsw.com/2002/feeds/pgessays.rss
 
-@ Science Feeds < reload-period 30
-https://chemistry-europe.onlinelibrary.wiley.com/feed/15213765/most-cited
+@ Science < reload-period 30
+https://feeds.arstechnica.com/arstechnica/index "Ars Technica"
 https://feeds.feedburner.com/ProcNatlAcadSciUsaMost-readFull-textArticles?format=xml
 https://pdb101.rcsb.org/motm/rss.xml
 https://phys.org/rss-feed/breaking/biology-news/molecular-computational
 https://phys.org/rss-feed/breaking/chemistry-news/biochemistry
-https://pubs.acs.org/action/showFeed?type=axatoc&feed=rss&jc=chreay
 https://www.nature.com/subjects/molecular-dynamics.rss
+https://www.quantamagazine.org/feed/ "Quanta Magazine"
 
 @ Humanities < reload-period 30
-https://www.exurbe.com/feed
-https://kill-the-newsletter.com/feeds/pti12p7wwa20mdof2uaq.xml
+http://www.aaronsw.com/2002/feeds/pgessays.rss "Paul Graham Essays"
 https://dynomight.net/feed.xml
-
-@ Misc < reload-period 30
-https://linuxblog.io/feed
-https://www.phoronix.com/rss.php
+https://www.exurbe.com/feed
 
 @ Newsletters < reload-period 30
-https://rss.beehiiv.com/feeds/4aF2pGVAEN.xml
-https://kill-the-newsletter.com/feeds/y6ul185knoj582l8.xml
-https://kill-the-newsletter.com/feeds/qdsrf0mk1lvg3ll8.xml
-https://kill-the-newsletter.com/feeds/pti12p7wwa20mdof2uaq.xml
 https://kill-the-newsletter.com/feeds/blayfdypxujlhsnsu90y.xml
 https://kill-the-newsletter.com/feeds/dqscibk6yo1b7bskpeg0.xml
+https://kill-the-newsletter.com/feeds/qdsrf0mk1lvg3ll8.xml
+https://kill-the-newsletter.com/feeds/y6ul185knoj582l8.xml
+https://rss.beehiiv.com/feeds/4aF2pGVAEN.xml
 
-@ Youtuve - Brazil < reload-period 30
+@ YouTube - Brazil < reload-period 30
 https://www.youtube.com/feeds/videos.xml?channel_id=UC34RhwFiRdaXbWokrVPnmhw "Quadrinhos na Sarjeta"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC9zqTTVeClpqMQ5CLuJdWtw "Drauzio Varella"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCK4AOYSWvdrgtKDEDDB6mMA "Sao Paulo Nas Alturas"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCOKSOW5uJHdW7Edz37mvAFw "José Kobori"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCW42h2qDbbX3a9RsQT4pnYQ "Paulo Gala"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCZA5PfTBcfhoKWI9rirG43Q "Frederico Krepe"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCwlVKcK99gELXWBIUiacRzw "Cortes da Sarjeta"
 
-@ Youtuve - History < reload-period 30
+@ YouTube - History < reload-period 30
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-JWw2juO3Ikj5C9VsNoGIw "M. Laser History"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC1LpsuAUaKoMzzJSEt5WImw "Asianometry"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2xHMABk_sX2aC14-D7OhIw "Premodernist"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCjr2bPAyPV7t35MvcgT3W8Q "The Hated One"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCqBiWcuTF8IaLH7wBqnihsQ "Toldin Stone"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCtGG8ucQgEJPeUPhJZ4M4jA "Rare Earth"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCv_vLHiWVBh_FR9vbeuiY-A "Historia Civilis"
 
-@ Youtuve - Math < reload-period 30
+@ YouTube - Math < reload-period 30
 https://www.youtube.com/feeds/videos.xml?channel_id=UC3O_3ANkml4_3wSK1yPG5DQ "Spectral Collective"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCEIwxahdLz7bap-VDs9h35A "Steve Mould"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCH-Z8ya93m7_RD02WsCSZYA "Derivando"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCK8XIGR5kRidIw2fWqwyHRA "Reducible - YouTube"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCK8XIGR5kRidIw2fWqwyHRA "Reducible"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCWQ7rdjjB-ujwQl0ErJ01eg "Ben Syversen"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCYO_jab_esuFRV4b17AJtAw "3Blue1Brown"
 https://www.youtube.com/feeds/videos.xml?channel_id=UConVfxXodg78Tzh5nNu85Ew "Welch Labs"
-https://www.youtube.com/feeds/videos.xml?channel_id=UConVfxXodg78Tzh5nNu85Ew "Welch Labs"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCoxcjq-8xIDTYp3uz647V5A "Numberphile"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCpCSAcbqs-sjEVfk_hMfY9w "Zach Star"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCtm_9HCgC16YmA96coY3K0Q "Phanimations"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCzBjutX2PmitNF4avysL-vg "Aleph 0"
 
-@ Youtuve - Misc < reload-period 30
-https://www.youtube.com/feeds/videos.xml?channel_id=UCASM0cgfkJxQ1ICmRilfHLw "Patrick Boyle"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCCKpicnIwBP3VPxBAZWDeNA "Money and Macro"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCDETFHKteb-C_EaXmRKvP4w "Sisyphus 55"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCDXTQ8nWmx_EhZ2v-kp7QxA "Ben Felix"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCDlz9C2bhSW6dcVn_PO5mYw "The Met"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCLLibJTCy3sXjHLVaDimnpQ "ARTEde"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCMIgOXM2JEQ2Pv2d0_PVfcg "DW Deutsch"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCMkybZyI_B-xgkLQo_eCQ_w "American Museum of Natural History"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCTpmmkp1E4nmZqWPS-dl5bg "Quanta Magazine"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCVFZfbBdOZvxmdxp94lx8LA "Nothing New"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCX60pqsaaAPFh2sUZEaNKJA "HGModernism"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCesjlAoEgN_Sz_cKTvKEmmw "Doktor Whatson"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCfsznjef2zGJnrCRQBXqo6Q "Machine Thinking"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCuPgdqQKpq4T4zeqmTelnFg "Kaptain Kristian"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCvpQ-l09fCVxJd3urZbxzHg "The British Museum"
-https://www.youtube.com/feeds/videos.xml?channel_id=UCz1oFxMrgrQ82-276UCOU9w "Atlas Pro"
-
-@ Youtuve - Science < reload-period 30
+@ YouTube - Science < reload-period 30
 https://www.youtube.com/feeds/videos.xml?channel_id=UC-3SbfTPJsL8fJAPKiVqBLg "Deep Look"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC176GAQozKKjhz62H8u9vQQ "Real Science"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC1yNl2E66ZzKApQdRuTQ4tw "Sabine Hossenfelder"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2bkHVIDjXS7sgrgjFtzOXQ "Engineer Guy"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC52kszkc08-acFOuogFl5jw "Tibees"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC6107grRI4m0o2-emgoDnAA "SmarterEveryDay"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC6nSFpj9HTCZ5t-N3Rm3-HA "Vsauce"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCEIwxahdLz7bap-VDs9h35A "Steve Mould"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCFhXFikryT4aFcLkLw2LBLA "NileRed"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCHnyfMqiRRG1u-2MsSQLbXA "Veritasium"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCKzJFdi57J53Vr_BkTfN3uQ "Primer"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCMOqf8ab-42UUQIdVoKwjlQ "Practical Engineering"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCV5vCi3jPJdURZwAOO_FNfQ "The Thought Emporium"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCgRBRE1DUP2w7HTH9j_L4OQ "Medlife Crisis"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCivA7_KLKWo43tFcCkFvydw "Applied Science"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCtESv1e7ntJaLJYKIO1FoYw "Periodic Videos"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtm_9HCgC16YmA96coY3K0Q "Phanimations"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCvBqzzvUBLCs8Y7Axb-jZew "Sixty Symbols"
 
-@ Youtuve - Tech < reload-period 30
+@ YouTube - Tech < reload-period 30
 https://www.youtube.com/feeds/videos.xml?channel_id=UC2rO9hEjJkjqzktvtj0ggNQ "Programming Chaos"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC3azLjQuz9s5qk76KEXaTvA "Sucker Pinch"
 https://www.youtube.com/feeds/videos.xml?channel_id=UC8ENHE5xdFSwx71u3fDH5Xw "ThePrimeagen"
@@ -136,3 +120,40 @@ https://www.youtube.com/feeds/videos.xml?channel_id=UCd3dNckv1Za2coSaHGHl5aA "TJ
 https://www.youtube.com/feeds/videos.xml?channel_id=UCmtyQOKKmrMVaKuRXz02jbQ "Sebastian Lague"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCrqM0Ym_NbK1fqeQG2VIohg "Tsoding Daily"
 https://www.youtube.com/feeds/videos.xml?channel_id=UCrv269YwJzuZL3dH5PCgxUw "CodeParade"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCjr2bPAyPV7t35MvcgT3W8Q "The Hated One"
+
+@ YouTube - Finance < reload-period 30
+https://www.youtube.com/feeds/videos.xml?channel_id=UCASM0cgfkJxQ1ICmRilfHLw "Patrick Boyle"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCCKpicnIwBP3VPxBAZWDeNA "Money and Macro"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCDXTQ8nWmx_EhZ2v-kp7QxA "Ben Felix"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCFCEuCsyWP0YkP3CZ3Mr01Q "Plain Bagel"
+
+@ YouTube - Arts & Culture < reload-period 30
+https://www.youtube.com/feeds/videos.xml?channel_id=UCDlz9C2bhSW6dcVn_PO5mYw "The Met"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCvpQ-l09fCVxJd3urZbxzHg "The British Museum"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCX60pqsaaAPFh2sUZEaNKJA "HGModernism"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCuPgdqQKpq4T4zeqmTelnFg "Kaptain Kristian"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC87WLm0IaVihJbsyrwH01jg "Tiny Epics"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCi7l9chXMljpUft67vw78qw "Sideways"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCePDFpCr78_qmVtpoB1Axaw "Great Art Explained"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCs7nPQIEba0T3tGOWWsZpJQ "Like Stories of Old"
+
+@ YouTube - Misc < reload-period 30
+https://www.youtube.com/feeds/videos.xml?channel_id=UCDETFHKteb-C_EaXmRKvP4w "Sisyphus 55"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCMkybZyI_B-xgkLQo_eCQ_w "American Museum of Natural History"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCTpmmkp1E4nmZqWPS-dl5bg "Quanta Magazine"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCVFZfbBdOZvxmdxp94lx8LA "Nothing New"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCfsznjef2zGJnrCRQBXqo6Q "Machine Thinking"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCz1oFxMrgrQ82-276UCOU9w "Atlas Pro"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCtGG8ucQgEJPeUPhJZ4M4jA "Rare Earth"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCBa659QWEk1AI4Tg--mrJ2A "Tom Scott"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCgNg3vwj3xt7QOrcIDaHdFg "PolyMatter"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCqVEHtQoXHmUCfJ-9smpTSg "Answer in Progress"
+
+@ YouTube - German < reload-period 30
+https://www.youtube.com/feeds/videos.xml?channel_id=UCMIgOXM2JEQ2Pv2d0_PVfcg "DW Deutsch"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCE2hJ9CYR57BYhk3TjGVG6w "Breaking Lab"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCKGMHVipEvuZudhHD05FOYA "Simplicissimus"
+https://www.youtube.com/feeds/videos.xml?channel_id=UC5E9-r42JlymhLPnDv2wHuA "Terra X Lesch & Co"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCLLibJTCy3sXjHLVaDimnpQ "ARTEde"
+https://www.youtube.com/feeds/videos.xml?channel_id=UCesjlAoEgN_Sz_cKTvKEmmw "Doktor Whatson"

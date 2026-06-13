@@ -1,0 +1,111 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
+"""
+Read newsraft feeds, find uncached YouTube videos, call yt-summarize on each.
+"""
+
+import logging
+import logging.handlers
+import re
+import subprocess
+import sys
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
+from urllib.request import urlopen
+from xml.etree import ElementTree as ET
+
+FEEDS_FILE = Path.home() / ".config/newsraft/feeds"
+CACHE_DIR = Path.home() / ".cache/yt-summaries"
+LOG_FILE = CACHE_DIR / "yt-summarize-feeds.log"
+MAX_WORKERS = 2
+
+
+def setup_logging() -> None:
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    file_handler = logging.handlers.RotatingFileHandler(
+        LOG_FILE, maxBytes=1_000_000, backupCount=3
+    )
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(message)s",
+        handlers=[file_handler, logging.StreamHandler(sys.stdout)],
+    )
+
+
+def get_channel_ids(feeds_file: Path) -> list[str]:
+    ids = []
+    for line in feeds_file.read_text().splitlines():
+        m = re.search(r"channel_id=([A-Za-z0-9_-]+)", line)
+        if m:
+            ids.append(m.group(1))
+    return ids
+
+
+def fetch_videos(channel_id: str) -> list[tuple[str, str]]:
+    """Returns [(video_id, title), ...] from YouTube RSS."""
+    url = f"https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+    try:
+        with urlopen(url, timeout=15) as resp:
+            tree = ET.parse(resp)
+    except Exception as e:
+        logging.warning(f"channel {channel_id}: {e}")
+        return []
+
+    ns = {
+        "atom": "http://www.w3.org/2005/Atom",
+        "yt": "http://www.youtube.com/xml/schemas/2015",
+    }
+    videos = []
+    for entry in tree.findall("atom:entry", ns):
+        vid = entry.find("yt:videoId", ns)
+        title = entry.find("atom:title", ns)
+        if vid is not None and title is not None:
+            videos.append((vid.text, title.text))
+    return videos
+
+
+def process(video_id: str, title: str) -> str:
+    if (CACHE_DIR / f"{video_id}.md").exists():
+        return f"skip  {video_id}"
+    url = f"https://www.youtube.com/watch?v={video_id}"
+    result = subprocess.run(["yt-summarize", url], capture_output=True, text=True)
+    if result.stderr.strip():
+        logging.info(f"[{video_id}] {result.stderr.strip()}")
+    if result.returncode == 0:
+        return f"done  {video_id}: {title[:60]}"
+    return f"error {video_id}: {result.stderr.strip()[:80]}"
+
+
+def main() -> None:
+    setup_logging()
+    logging.info("=== summarize feeds start ===")
+
+    channel_ids = get_channel_ids(FEEDS_FILE)
+    logging.info(f"{len(channel_ids)} channels")
+
+    all_videos = []
+    for channel_id in channel_ids:
+        for vid, title in fetch_videos(channel_id):
+            if not (CACHE_DIR / f"{vid}.md").exists():
+                all_videos.append((vid, title))
+
+    logging.info(f"{len(all_videos)} new videos to process")
+    if not all_videos:
+        logging.info("nothing to do")
+        return
+
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
+        futures = {pool.submit(process, vid, title): vid for vid, title in all_videos}
+        for future in as_completed(futures):
+            logging.info(future.result())
+
+    logging.info("=== summarize feeds done ===")
+
+
+if __name__ == "__main__":
+    main()
+# vim: set filetype=python:

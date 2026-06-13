@@ -11,40 +11,40 @@
         "margin-left": 8,
 
         "modules-left": [
-            "hyprland/workspaces"
+            "hyprland/workspaces#laptop"
         ],
 
         "modules-center": [
-            "clock"
+            "clock#laptop"
         ],
 
         "modules-right": [
-            "tray",
-            "wireplumber",
-            "cpu",
-            "memory",
-            "network",
+            "tray#laptop",
+            "wireplumber#laptop",
+            "cpu#laptop",
+            "memory#laptop",
+            "network#laptop",
             "battery"
         ],
 
-        "hyprland/workspaces": {
+        "hyprland/workspaces#laptop": {
             "disable-scroll": true,
             "all-outputs": false,
             "tooltip": false
         },
 
-        "tray": {
+        "tray#laptop": {
             "spacing": 10,
             "tooltip": false
         },
 
-        "clock": {
+        "clock#laptop": {
             "format": "{:%I:%M %p - %a, %d %b %Y}",
             "interval": 60,
             "tooltip": false
         },
 
-        "cpu": {
+        "cpu#laptop": {
             "format": "󰻠 {usage}%",
             "interval": 10,
             "states": {
@@ -52,7 +52,7 @@
             }
         },
 
-        "memory": {
+        "memory#laptop": {
             "format": "󰍛 {percentage}%",
             "interval": 10,
             "states": {
@@ -73,7 +73,7 @@
             "tooltip": false
         },
 
-        "network": {
+        "network#laptop": {
             "format-wifi": "󰤨 {bandwidthDownBits}",
             "format-ethernet": "󰈀 {bandwidthDownBits}",
             "format-disconnected": "󰤭",
@@ -81,7 +81,7 @@
             "tooltip": false
         },
 
-        "wireplumber": {
+        "wireplumber#laptop": {
             "scroll-step": 5,
             "max-volume": 100,
             "format": "󰕾 {volume}%",
@@ -103,39 +103,39 @@
         "margin-left": 8,
 
         "modules-left": [
-            "hyprland/workspaces"
+            "hyprland/workspaces#monitor"
         ],
 
         "modules-center": [
-            "clock"
+            "clock#monitor"
         ],
 
         "modules-right": [
-            "tray",
-            "wireplumber",
-            "cpu",
-            "memory",
-            "network"
+            "tray#monitor",
+            "wireplumber#monitor",
+            "cpu#monitor",
+            "memory#monitor",
+            "network#monitor"
         ],
 
-        "hyprland/workspaces": {
+        "hyprland/workspaces#monitor": {
             "disable-scroll": true,
             "all-outputs": false,
             "tooltip": false
         },
 
-        "tray": {
+        "tray#monitor": {
             "spacing": 10,
             "tooltip": false
         },
 
-        "clock": {
+        "clock#monitor": {
             "format": "{:%I:%M %p - %a, %d %b %Y}",
             "interval": 60,
             "tooltip": false
         },
 
-        "cpu": {
+        "cpu#monitor": {
             "format": "󰻠 {usage}%",
             "interval": 10,
             "states": {
@@ -143,7 +143,7 @@
             }
         },
 
-        "memory": {
+        "memory#monitor": {
             "format": "󰍛 {percentage}%",
             "interval": 10,
             "states": {
@@ -151,7 +151,7 @@
             }
         },
 
-        "network": {
+        "network#monitor": {
             "format-wifi": "󰤨 {bandwidthDownBits}",
             "format-ethernet": "󰈀 {bandwidthDownBits}",
             "format-disconnected": "󰤭",
@@ -159,7 +159,7 @@
             "tooltip": false
         },
 
-        "wireplumber": {
+        "wireplumber#monitor": {
             "scroll-step": 5,
             "max-volume": 100,
             "format": "󰕾 {volume}%",

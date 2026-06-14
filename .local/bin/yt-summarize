@@ -143,7 +143,7 @@ def summarize(video_id: str, title: str, transcript: str) -> Path:
         f"- **Notable**: surprising facts, strong claims, or things worth remembering"
     )
 
-    result = subprocess.run(["claude", "-p", prompt], capture_output=True, text=True)
+    result = subprocess.run(["gemini", "-p", prompt], capture_output=True, text=True)
     if result.returncode != 0:
         raise RuntimeError(f"claude: {result.stderr.strip()}")
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run --script
+#!/usr/bin/env -S uv run --script --refresh-package yt-dlp
 # /// script
 # requires-python = ">=3.11"
 # dependencies = ["yt-dlp"]
@@ -50,14 +50,32 @@ def save_transcript_cache(video_id: str, title: str, transcript: str) -> Path:
     return path
 
 
+def pick_subtitle_lang(info: dict) -> str:
+    auto = info.get("automatic_captions", {})
+    manual = info.get("subtitles", {})
+
+    # Native language: auto-caption keys ending in -orig have no tlang in URL
+    orig_keys = [k for k in auto if k.endswith("-orig")]
+    if orig_keys:
+        return orig_keys[0][:-5]  # strip "-orig" → native lang code
+
+    # Fallback: first auto-caption key without tlang in its URL
+    for lang, fmts in auto.items():
+        url = (fmts[0].get("url") or "") if fmts else ""
+        if "tlang=" not in url:
+            return lang
+
+    available = {**auto, **manual}
+    if not available:
+        raise RuntimeError("no captions available in any language")
+    return min(available.keys(), key=len)
+
+
 def fetch_transcript(url: str) -> tuple[str, str, str]:
     """Download via yt-dlp. Returns (video_id, title, transcript)."""
     with tempfile.TemporaryDirectory() as tmp:
-        common = {
-            "writeautomaticsub": True,
-            "writesubtitles": True,
-            "subtitlesformat": "vtt",
-            "skip_download": True,
+        base = {
+            "format": "bestaudio/best/mhtml",
             "outtmpl": f"{tmp}/%(id)s",
             "quiet": True,
             "no_warnings": True,
@@ -67,40 +85,49 @@ def fetch_transcript(url: str) -> tuple[str, str, str]:
             "cookiesfrombrowser": ("firefox",),
         }
 
+        # Step 1: metadata only — download=False skips format selection entirely
         try:
-            with yt_dlp.YoutubeDL(
-                {**common, "subtitleslangs": ["en", "en-US", "en-GB"]}
-            ) as ydl:
-                info = ydl.extract_info(url, download=True)
-                video_id, title = info["id"], info["title"]
+            with yt_dlp.YoutubeDL(base) as ydl:
+                info = ydl.extract_info(url, download=False)
         except yt_dlp.utils.DownloadError as e:
             raise RuntimeError(str(e)) from e
+
+        video_id, title = info["id"], info["title"]
 
         if (info.get("duration") or 0) <= 60:
             raise RuntimeError("short (<= 60s) — skipping")
 
+        # Step 2: pick native language to avoid auto-translated captions (which 429)
+        try:
+            lang = pick_subtitle_lang(info)
+            langs_to_try = [lang]
+            if lang not in ("en", "en-US", "en-GB"):
+                print(f"[no English captions, using: {lang}]", file=sys.stderr)
+        except RuntimeError:
+            langs_to_try = ["en", "en-US", "en-GB", "de", "fr", "es", "ja", "zh"]
+            print(
+                "[caption metadata empty, trying broad language set]", file=sys.stderr
+            )
+
+        # Step 3: download subtitle only (skip_download suppresses video/audio download)
+        try:
+            with yt_dlp.YoutubeDL(
+                {
+                    **base,
+                    "skip_download": True,
+                    "writeautomaticsub": True,
+                    "writesubtitles": True,
+                    "subtitlesformat": "vtt",
+                    "subtitleslangs": langs_to_try,
+                }
+            ) as ydl:
+                ydl.extract_info(url, download=True)
+        except yt_dlp.utils.DownloadError as e:
+            raise RuntimeError(str(e)) from e
+
         vtt_files = list(Path(tmp).glob("*.vtt"))
-
         if not vtt_files:
-            available = {
-                **info.get("subtitles", {}),
-                **info.get("automatic_captions", {}),
-            }
-            if not available:
-                raise RuntimeError("no captions available in any language")
-
-            lang = min(available.keys(), key=len)
-            print(f"[no English captions, falling back to: {lang}]", file=sys.stderr)
-
-            try:
-                with yt_dlp.YoutubeDL({**common, "subtitleslangs": [lang]}) as ydl:
-                    ydl.extract_info(url, download=True)
-            except yt_dlp.utils.DownloadError as e:
-                raise RuntimeError(str(e)) from e
-
-            vtt_files = list(Path(tmp).glob("*.vtt"))
-            if not vtt_files:
-                raise RuntimeError(f"failed to download captions ({lang})")
+            raise RuntimeError(f"failed to download captions ({langs_to_try})")
 
         return video_id, title, clean_vtt(vtt_files[0].read_text())
 

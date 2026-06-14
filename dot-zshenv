@@ -24,6 +24,6 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="bat -p"
 export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
-export BROWSER=org.mozilla.firefox
+export BROWSER=firefox
 
 export GOPATH="$HOME/.go"

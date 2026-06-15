@@ -1,0 +1,233 @@
+#!/usr/bin/env -S uv run --script --refresh-package yt-dlp
+# /// script
+# requires-python = ">=3.11"
+# dependencies = ["yt-dlp"]
+# ///
+
+"""
+Given a YouTube URL: download transcript, summarize with claude, save to cache.
+Prints the summary path to stdout on success.
+
+Flags:
+  --transcript-only   download and cache transcript only, skip summarization
+"""
+
+import re
+import subprocess
+import sys
+import tempfile
+from pathlib import Path
+
+import yt_dlp
+
+CACHE_DIR = Path.home() / ".cache/yt-summaries"
+TRANSCRIPT_DIR = CACHE_DIR / "transcripts"
+MAX_CHARS = 500_000
+
+# transcript file format: first line is the title, blank line, then transcript text
+TITLE_SEP = "\n\n"
+
+
+def extract_video_id(url: str) -> str | None:
+    m = re.search(r"(?:v=|youtu\.be/|shorts/|embed/)([A-Za-z0-9_-]{11})", url)
+    return m.group(1) if m else None
+
+
+def load_transcript_cache(video_id: str) -> tuple[str, str] | None:
+    """Returns (title, transcript) if cached, else None."""
+    path = TRANSCRIPT_DIR / f"{video_id}.txt"
+    if not path.exists():
+        return None
+    content = path.read_text()
+    title, _, transcript = content.partition(TITLE_SEP)
+    return title, transcript
+
+
+def save_transcript_cache(video_id: str, title: str, transcript: str) -> Path:
+    TRANSCRIPT_DIR.mkdir(parents=True, exist_ok=True)
+    path = TRANSCRIPT_DIR / f"{video_id}.txt"
+    path.write_text(f"{title}{TITLE_SEP}{transcript}")
+    return path
+
+
+def pick_subtitle_lang(info: dict) -> str:
+    auto = info.get("automatic_captions", {})
+    manual = info.get("subtitles", {})
+
+    # Native language: auto-caption keys ending in -orig have no tlang in URL
+    orig_keys = [k for k in auto if k.endswith("-orig")]
+    if orig_keys:
+        return orig_keys[0][:-5]  # strip "-orig" → native lang code
+
+    # Fallback: first auto-caption key without tlang in its URL
+    for lang, fmts in auto.items():
+        url = (fmts[0].get("url") or "") if fmts else ""
+        if "tlang=" not in url:
+            return lang
+
+    available = {**auto, **manual}
+    if not available:
+        raise RuntimeError("no captions available in any language")
+    return min(available.keys(), key=len)
+
+
+def fetch_transcript(url: str) -> tuple[str, str, str]:
+    """Download via yt-dlp. Returns (video_id, title, transcript)."""
+    with tempfile.TemporaryDirectory() as tmp:
+        base = {
+            "format": "bestaudio/best/mhtml",
+            "outtmpl": f"{tmp}/%(id)s",
+            "quiet": True,
+            "no_warnings": True,
+            "retries": 5,
+            "sleep_interval_subtitles": 2,
+            "retry_sleep_functions": {"http": lambda n: 2**n},
+            "cookiesfrombrowser": ("firefox",),
+        }
+
+        # Step 1: metadata only — download=False skips format selection entirely
+        try:
+            with yt_dlp.YoutubeDL(base) as ydl:
+                info = ydl.extract_info(url, download=False)
+        except yt_dlp.utils.DownloadError as e:
+            raise RuntimeError(str(e)) from e
+
+        video_id, title = info["id"], info["title"]
+
+        if (info.get("duration") or 0) <= 60:
+            raise RuntimeError("short (<= 60s) — skipping")
+
+        # Step 2: pick native language to avoid auto-translated captions (which 429)
+        try:
+            lang = pick_subtitle_lang(info)
+            langs_to_try = [lang]
+            if lang not in ("en", "en-US", "en-GB"):
+                print(f"[no English captions, using: {lang}]", file=sys.stderr)
+        except RuntimeError:
+            langs_to_try = ["en", "en-US", "en-GB", "de", "fr", "es", "ja", "zh"]
+            print(
+                "[caption metadata empty, trying broad language set]", file=sys.stderr
+            )
+
+        # Step 3: download subtitle only (skip_download suppresses video/audio download)
+        try:
+            with yt_dlp.YoutubeDL(
+                {
+                    **base,
+                    "skip_download": True,
+                    "writeautomaticsub": True,
+                    "writesubtitles": True,
+                    "subtitlesformat": "vtt",
+                    "subtitleslangs": langs_to_try,
+                }
+            ) as ydl:
+                ydl.extract_info(url, download=True)
+        except yt_dlp.utils.DownloadError as e:
+            raise RuntimeError(str(e)) from e
+
+        vtt_files = list(Path(tmp).glob("*.vtt"))
+        if not vtt_files:
+            raise RuntimeError(f"failed to download captions ({langs_to_try})")
+
+        return video_id, title, clean_vtt(vtt_files[0].read_text())
+
+
+def clean_vtt(content: str) -> str:
+    lines = []
+    for line in content.splitlines():
+        line = line.strip()
+        if not line or "-->" in line or line.isdigit():
+            continue
+        if line.startswith(("WEBVTT", "Kind:", "Language:")):
+            continue
+        line = re.sub(r"<\d+:\d+:\d+\.\d+>", "", line)
+        line = re.sub(r"<[^>]+>", "", line).strip()
+        if line:
+            lines.append(line)
+
+    deduped = []
+    for i, line in enumerate(lines):
+        if i + 1 < len(lines) and lines[i + 1].startswith(line):
+            continue
+        if deduped and line == deduped[-1]:
+            continue
+        deduped.append(line)
+
+    return " ".join(deduped)
+
+
+def summarize(video_id: str, title: str, transcript: str) -> Path:
+    if len(transcript) > MAX_CHARS:
+        transcript = transcript[:MAX_CHARS] + "\n[transcript truncated]"
+
+    prompt = (
+        f"Summarize this YouTube video transcript. Respond in English regardless of transcript language.\n\n"
+        f"Title: {title}\n\n"
+        f"Transcript:\n{transcript}\n\n"
+        f"Write a concise summary in markdown:\n"
+        f"- **TL;DR**: 2-3 sentence overview\n"
+        f"- **Key Points**: bullet list of main ideas\n"
+        f"- **Notable**: surprising facts, strong claims, or things worth remembering"
+    )
+
+    result = subprocess.run(["gemini", "-p", prompt], capture_output=True, text=True)
+    if result.returncode != 0:
+        raise RuntimeError(f"claude: {result.stderr.strip()}")
+
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    summary_path = CACHE_DIR / f"{video_id}.md"
+    summary_path.write_text(f"# {title}\n\n{result.stdout.strip()}\n")
+    return summary_path
+
+
+def main() -> None:
+    args = sys.argv[1:]
+    transcript_only = "--transcript-only" in args
+    urls = [a for a in args if not a.startswith("--")]
+
+    if not urls:
+        print("usage: yt-summarize [--transcript-only] <youtube-url>", file=sys.stderr)
+        sys.exit(1)
+
+    url = urls[0]
+
+    # check transcript cache first — avoids yt-dlp if already downloaded
+    video_id = extract_video_id(url)
+    cached = load_transcript_cache(video_id) if video_id else None
+
+    if cached:
+        title, transcript = cached
+        print(f"[transcript cache hit: {video_id}]", file=sys.stderr)
+    else:
+        try:
+            video_id, title, transcript = fetch_transcript(url)
+        except RuntimeError as e:
+            print(f"error: {e}", file=sys.stderr)
+            sys.exit(1)
+
+        if not transcript.strip():
+            print("error: transcript empty after cleaning", file=sys.stderr)
+            sys.exit(1)
+
+        transcript_path = save_transcript_cache(video_id, title, transcript)
+
+        if transcript_only:
+            print(transcript_path)
+            return
+
+    if transcript_only:
+        print(TRANSCRIPT_DIR / f"{video_id}.txt")
+        return
+
+    try:
+        summary_path = summarize(video_id, title, transcript)
+    except RuntimeError as e:
+        print(f"error: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    print(summary_path)
+
+
+if __name__ == "__main__":
+    main()
+# vim: set filetype=python:

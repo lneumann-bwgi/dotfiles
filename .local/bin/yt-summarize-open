@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Open a video summary: serve from cache if available, else compute first.
+set -euo pipefail
+
+url="$1"
+cache_dir="$HOME/.cache/yt-summaries"
+
+# only handle YouTube URLs
+if [[ "$url" != *youtube.com* && "$url" != *youtu.be* ]]; then
+  exit 0
+fi
+
+open_summary() {
+  if command -v glow &>/dev/null; then
+    glow -p "$1"
+  elif command -v bat &>/dev/null; then
+    bat --language=md "$1"
+  else
+    less "$1"
+  fi
+}
+
+video_id=$(echo "$url" | grep -oP '(?:v=|youtu\.be/|shorts/)([A-Za-z0-9_-]{11})' |
+  grep -oP '[A-Za-z0-9_-]{11}' | head -1)
+
+if [[ -n "$video_id" && -f "$cache_dir/${video_id}.md" ]]; then
+  open_summary "$cache_dir/${video_id}.md"
+else
+  summary_path=$(yt-summarize "$url") || exit 1
+  open_summary "$summary_path"
+fi

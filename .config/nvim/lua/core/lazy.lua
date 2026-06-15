@@ -35,6 +35,7 @@ require("lazy").setup({
     -- COLOR SCHEMES
     { "ellisonleao/gruvbox.nvim", lazy = false },
     { "shaunsingh/nord.nvim", lazy = false },
+    { "rebelot/kanagawa.nvim", lazy = false },
     -- PERFORMANCE
     {
       "zeioth/garbage-day.nvim",
@@ -49,7 +50,6 @@ require("lazy").setup({
       opts = {},
       cmd = { "Typr", "TyprStats" },
     },
-    -- { dir = "~/work/telescope-dictd.nvim" },
   },
 
   -- automatically check for plugin updates

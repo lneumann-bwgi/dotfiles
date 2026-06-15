@@ -49,7 +49,7 @@ opt.undodir = HOME .. "/.vim/undodir//"
 
 -- [[ display ]] --
 opt.background = "dark"
-vim.cmd("colorscheme nord")
+vim.cmd("colorscheme kanagawa-wave")
 
 -- [[ clipboard ]] --
 opt.clipboard = "unnamed,unnamedplus"

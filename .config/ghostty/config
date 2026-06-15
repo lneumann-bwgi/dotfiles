@@ -19,12 +19,12 @@ background-blur-radius = 100
 background-opacity = 1.0
 
 # misc
-theme = Nord
+theme = Kanagawa Wave
 bold-is-bright = true
 cursor-style = block
 
 # font stuff
-font-family = FiraCode Nerd
+font-family = FiraCode Nerd Font
 font-size = 16
 
 # clipboard
@@ -93,7 +93,7 @@ keybind = ctrl+shift+s=write_scrollback_file:copy
 # custom-shader = shaders/cineShader-Lava.glsl
 # custom-shader = shaders/crt.glsl
 # custom-shader = shaders/cubes.glsl
-# custom-shader = shaders/cursor_blaze.glsl
+custom-shader = shaders/cursor_blaze.glsl
 # custom-shader = shaders/dither.glsl
 # custom-shader = shaders/drunkard.glsl
 # custom-shader = shaders/fireworks-rockets.glsl

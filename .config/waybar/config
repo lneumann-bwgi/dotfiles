@@ -1,89 +1,172 @@
-{
-    "layer": "top",
-    "spacing": 0,
-    "height": 0,
+[
+    {
+        "output": "eDP-1",
+        "layer": "top",
+        "spacing": 0,
+        "height": 0,
 
-    "margin-top": 8,
-    "margin-right": 8,
-    "margin-bottom": 0,
-    "margin-left": 8,
+        "margin-top": 8,
+        "margin-right": 8,
+        "margin-bottom": 0,
+        "margin-left": 8,
 
-    "modules-left": [
-        "hyprland/workspaces"
-    ],
+        "modules-left": [
+            "hyprland/workspaces#laptop"
+        ],
 
-    "modules-center": [
-        "clock"
-    ],
+        "modules-center": [
+            "clock#laptop"
+        ],
 
-    "modules-right": [
-        "tray",
-        "wireplumber",
-        "cpu",
-        "memory",
-        "network",
-        "battery"
-    ],
+        "modules-right": [
+            "tray#laptop",
+            "wireplumber#laptop",
+            "cpu#laptop",
+            "memory#laptop",
+            "network#laptop",
+            "battery"
+        ],
 
-    "hyprland/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "tooltip": false
-    },
-
-    "tray": {
-        "spacing": 10,
-        "tooltip": false
-    },
-
-    "clock": {
-        "format": "{:%I:%M %p - %a, %d %b %Y}",
-        "tooltip": false
-    },
-
-    "cpu": {
-        "format": "cpu {usage}%",
-        "interval": 10,
-
-        "states": {
-            "critical": 90
-        }
-    },
-
-    "memory": {
-        "format": "mem {percentage}%",
-        "interval": 10,
-
-        "states": {
-            "critical": 80
-        }
-    },
-
-    "battery": {
-        "format": "bat {capacity}%",
-        "interval": 60,
-        "states": {
-            "warning": 20,
-            "critical": 10
+        "hyprland/workspaces#laptop": {
+            "disable-scroll": true,
+            "all-outputs": false,
+            "tooltip": false
         },
-        "tooltip": false
-    },
 
-    "network": {
-        "format-wifi" : "wifi {bandwidthDownBits}",
-        "format-ethernet": "enth {bandwidthDownBits}",
-        "format-disconnected" : "no network",
-        "interval": 30,
-        "tooltip": false
-    },
+        "tray#laptop": {
+            "spacing": 10,
+            "tooltip": false
+        },
 
-    "wireplumber": {
-        "scroll-step": 5,
-        "max-volume": 150,
-        "format": "vol {volume}%",
-        "format-bluetooth": "vol {volume}%",
-        "nospacing": 1,
-        "on-click": "pavucontrol",
-        "tooltip": false
+        "clock#laptop": {
+            "format": "{:%I:%M %p - %a, %d %b %Y}",
+            "interval": 60,
+            "tooltip": false
+        },
+
+        "cpu#laptop": {
+            "format": "󰻠 {usage}%",
+            "interval": 10,
+            "states": {
+                "critical": 90
+            }
+        },
+
+        "memory#laptop": {
+            "format": "󰍛 {percentage}%",
+            "interval": 10,
+            "states": {
+                "critical": 80
+            }
+        },
+
+        "battery": {
+            "bat": "BAT0",
+            "format": "󰁹 {capacity}%",
+            "format-charging": "󰂄 {capacity}%",
+            "format-plugged": "󰁹 {capacity}%",
+            "interval": 60,
+            "states": {
+                "warning": 20,
+                "critical": 10
+            },
+            "tooltip": false
+        },
+
+        "network#laptop": {
+            "format-wifi": "󰤨 {bandwidthDownBits}",
+            "format-ethernet": "󰈀 {bandwidthDownBits}",
+            "format-disconnected": "󰤭",
+            "interval": 30,
+            "tooltip": false
+        },
+
+        "wireplumber#laptop": {
+            "scroll-step": 5,
+            "max-volume": 100,
+            "format": "󰕾 {volume}%",
+            "format-muted": "󰖁",
+            "format-bluetooth": "󰕾 {volume}%",
+            "on-click": "pavucontrol",
+            "tooltip": false
+        }
+    },
+    {
+        "output": "DP-2",
+        "layer": "top",
+        "spacing": 0,
+        "height": 0,
+
+        "margin-top": 8,
+        "margin-right": 8,
+        "margin-bottom": 0,
+        "margin-left": 8,
+
+        "modules-left": [
+            "hyprland/workspaces#monitor"
+        ],
+
+        "modules-center": [
+            "clock#monitor"
+        ],
+
+        "modules-right": [
+            "tray#monitor",
+            "wireplumber#monitor",
+            "cpu#monitor",
+            "memory#monitor",
+            "network#monitor"
+        ],
+
+        "hyprland/workspaces#monitor": {
+            "disable-scroll": true,
+            "all-outputs": false,
+            "tooltip": false
+        },
+
+        "tray#monitor": {
+            "spacing": 10,
+            "tooltip": false
+        },
+
+        "clock#monitor": {
+            "format": "{:%I:%M %p - %a, %d %b %Y}",
+            "interval": 60,
+            "tooltip": false
+        },
+
+        "cpu#monitor": {
+            "format": "󰻠 {usage}%",
+            "interval": 10,
+            "states": {
+                "critical": 90
+            }
+        },
+
+        "memory#monitor": {
+            "format": "󰍛 {percentage}%",
+            "interval": 10,
+            "states": {
+                "critical": 80
+            }
+        },
+
+        "network#monitor": {
+            "format-wifi": "󰤨 {bandwidthDownBits}",
+            "format-ethernet": "󰈀 {bandwidthDownBits}",
+            "format-disconnected": "󰤭",
+            "interval": 30,
+            "tooltip": false
+        },
+
+        "wireplumber#monitor": {
+            "scroll-step": 5,
+            "max-volume": 100,
+            "format": "󰕾 {volume}%",
+            "format-muted": "󰖁",
+            "format-bluetooth": "󰕾 {volume}%",
+            "on-click": "pavucontrol",
+            "tooltip": false
+        }
     }
-}
+]

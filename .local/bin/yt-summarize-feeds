@@ -87,17 +87,13 @@ def main() -> None:
     channel_ids = get_channel_ids(FEEDS_FILE)
     logging.info(f"{len(channel_ids)} channels")
 
-    all_videos = []
-    for channel_id in channel_ids:
-        for vid, title in fetch_videos(channel_id):
-            if not (CACHE_DIR / f"{vid}.md").exists():
-                all_videos.append((vid, title))
+    all_videos = [
+        (vid, title)
+        for channel_id in channel_ids
+        for vid, title in fetch_videos(channel_id)
+    ]
 
     logging.info(f"{len(all_videos)} new videos to process")
-    if not all_videos:
-        logging.info("nothing to do")
-        return
-
     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as pool:
         futures = {pool.submit(process, vid, title): vid for vid, title in all_videos}
         for future in as_completed(futures):

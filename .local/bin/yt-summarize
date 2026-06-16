@@ -5,7 +5,7 @@
 # ///
 
 """
-Given a YouTube URL: download transcript, summarize with claude, save to cache.
+Given a YouTube URL: download transcript, summarize with an LLM, save to cache.
 Prints the summary path to stdout on success.
 
 Flags:
@@ -22,7 +22,8 @@ import yt_dlp
 
 CACHE_DIR = Path.home() / ".cache/yt-summaries"
 TRANSCRIPT_DIR = CACHE_DIR / "transcripts"
-MAX_CHARS = 500_000
+MAX_CHARS = 600_000
+TRANSCRIPT_SKIPPED = "__skipped__"
 
 # transcript file format: first line is the title, blank line, then transcript text
 TITLE_SEP = "\n\n"
@@ -92,10 +93,11 @@ def fetch_transcript(url: str) -> tuple[str, str, str]:
         except yt_dlp.utils.DownloadError as e:
             raise RuntimeError(str(e)) from e
 
-        video_id, title = info["id"], info["title"]
+        video_id, title = str(info["id"]), str(info["title"])
 
+        # Shorts skipped — write stub summary instead
         if (info.get("duration") or 0) <= 60:
-            raise RuntimeError("short (<= 60s) — skipping")
+            return video_id, title, TRANSCRIPT_SKIPPED
 
         # Step 2: pick native language to avoid auto-translated captions (which 429)
         try:
@@ -160,6 +162,12 @@ def summarize(video_id: str, title: str, transcript: str) -> Path:
     if len(transcript) > MAX_CHARS:
         transcript = transcript[:MAX_CHARS] + "\n[transcript truncated]"
 
+    if transcript == TRANSCRIPT_SKIPPED:
+        CACHE_DIR.mkdir(parents=True, exist_ok=True)
+        summary_path = CACHE_DIR / f"{video_id}.md"
+        summary_path.write_text(f"# {title}\n\nYoutube Short -- Skipped\n")
+        return summary_path
+
     prompt = (
         f"Summarize this YouTube video transcript. Respond in English regardless of transcript language.\n\n"
         f"Title: {title}\n\n"
@@ -172,7 +180,7 @@ def summarize(video_id: str, title: str, transcript: str) -> Path:
 
     result = subprocess.run(["gemini", "-p", prompt], capture_output=True, text=True)
     if result.returncode != 0:
-        raise RuntimeError(f"claude: {result.stderr.strip()}")
+        raise RuntimeError(f"gemini: {result.stderr.strip()}")
 
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
     summary_path = CACHE_DIR / f"{video_id}.md"

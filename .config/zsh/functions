@@ -206,10 +206,7 @@ rgi() {
 }
 
 vrg() {
-  local file
-  file="$(rgi "$@")" || return
-  [ -n "$file" ] || return
-  nvim -- "$file"
+  local out; out=$(rgi "$@") && [ -n "$out" ] && nvim -- "${(@f)out}"
 }
 
 fcd() {

@@ -1,8 +1,5 @@
 # Load local overrides (PATH, machine-specific setup)
-[ -f $ZDOTDIR/local ] && source $ZDOTDIR/local
-
-# Load colors (for plugins)
-autoload -U colors && colors
+[[ -r $ZDOTDIR/local ]] && source $ZDOTDIR/local
 
 # Source starship
 eval "$(starship init zsh)"
@@ -67,7 +64,10 @@ setopt AUTO_CD
 stty -ixon
 
 # Basic tab complete
-autoload -Uz compinit; compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
+fpath=($ZDOTDIR/completions $fpath)
+autoload -Uz compinit
+
+compinit -d "$XDG_CACHE_HOME/zsh/zcompdump"
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zmodload zsh/complist
@@ -76,12 +76,9 @@ _comp_options+=(globdots)
 # Use fzf for all tab completions (testing: fzf-tab-source aur package)
 # source /usr/share/zsh/plugins/fzf-tab-source/fzf-tab.plugin.zsh
 
-# Add completion for delta (probably needed because of a bug)
-compdef _gnu_generic delta
-
 # Load aliases and shortcuts (must be after compinit)
-[ -f $ZDOTDIR/functions ] && source $ZDOTDIR/functions
-[ -f $ZDOTDIR/aliases ] && source $ZDOTDIR/aliases
+[[ -r $ZDOTDIR/functions ]] && source $ZDOTDIR/functions
+[[ -r $ZDOTDIR/aliases ]] && source $ZDOTDIR/aliases
 
 # History search
 bindkey '^[[A' history-substring-search-up # Up arrow
@@ -168,3 +165,4 @@ for m in visual viopp; do
         bindkey -M $m $c select-bracketed
     done
 done
+

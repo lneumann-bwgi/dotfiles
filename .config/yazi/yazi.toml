@@ -21,6 +21,7 @@ ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 doc = [
+    { run = 'open "$@"', desc = "Open in default app", orphan = true, for = "macos" },
 	{ run = 'zathura "$@"', orphan = true, for = "unix" },
 	{ run = 'com.github.johnfactotum.Foliate "$@"', orphan = true, for = "unix" },
 ]

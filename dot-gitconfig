@@ -12,13 +12,13 @@
     branches = branch -a
     flog = log --follow --
     glog = log --all --decorate --oneline --graph
-    last = log =1 HEAD --stat
+    last = log -1 HEAD --stat
     stashes = stash list
     tags = tag -n --list
     undo = reset --soft HEAD~1
     wdiff = diff --word-diff
     dft = difftool
-	fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git add --all"
+    fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m --preview 'git diff {}' --preview-window=top:10:wrap | xargs -0 -t -o git add --all"
     who = shortlog -sn --no-merges HEAD
     monthly = !git log --since='1 year ago' --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
     fixes = !git log --name-only --format='' --diff-filter=AM --since='1 year ago' -i -E --grep='(bugfix|hotfix)' | sort | uniq -c | sort -nr | head -20
@@ -31,8 +31,6 @@
     verbose = true
 [credential]
     helper = store
-[commit]
-    verbose = true
 [delta]
     line-numbers = true
     navigate = true
@@ -51,17 +49,17 @@
     prune = true
     pruneTags = true
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [interactive]
     diffFilter = delta --color-only
 [merge]
     conflictstyle = zdiff3
     tool = nvimdiff
 [mergetool]
-  prompt = false
-  keepBackup = false
+    prompt = false
+    keepBackup = false
 [mergetool "nvimdiff"]
-  layout = "LOCAL,BASE,REMOTE / MERGED"
+    layout = "LOCAL,BASE,REMOTE / MERGED"
 [pager]
     difftool = true
 [pull]

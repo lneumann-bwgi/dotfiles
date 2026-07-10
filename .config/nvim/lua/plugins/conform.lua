@@ -49,7 +49,6 @@ local M = {
       -- Conform will notify you when no formatters are available for the buffer
       notify_no_formatters = true,
     })
-
   end,
 }
 return M

@@ -20,13 +20,17 @@ require("mason-tool-installer").setup({
     "shfmt",
     "sqlfluff",
     "stylua",
+    "taplo",
     "yamlfmt",
     -- linters
+    "golangci-lint",
     "hadolint",
     "hlint",
+    "markdownlint",
     "mypy",
     "ruff",
     "shellcheck",
+    "yamllint",
     -- dap
     "debugpy",
     "delve",

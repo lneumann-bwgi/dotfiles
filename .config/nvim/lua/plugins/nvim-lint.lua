@@ -9,12 +9,15 @@ local M = {
     lint.linters_by_ft = {
       bash = { "shellcheck" },
       dockerfile = { "hadolint" },
+      go = { "golangcilint" },
       haskell = { "hlint" },
+      markdown = { "markdownlint" },
       python = { "mypy", "ruff" },
       shell = { "shellcheck" },
       sql = { "sqlfluff" },
       typescript = { "deno" },
       typescriptreact = { "deno" },
+      yaml = { "yamllint" },
     }
 
     local sqlfluff = require("lint").linters.sqlfluff

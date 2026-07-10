@@ -1,6 +1,7 @@
 local parsers = {
-  "bash", "c", "clojure", "go", "haskell", "html", "javascript", "json",
-  "julia", "lua", "python", "vim", "markdown", "markdown_inline", "regex",
+  "bash", "c", "clojure", "diff", "dockerfile", "gitcommit", "gitignore", "go",
+  "haskell", "html", "javascript", "json", "julia", "lua", "markdown",
+  "markdown_inline", "python", "regex", "sql", "toml", "vim", "yaml",
 }
 
 local M = {

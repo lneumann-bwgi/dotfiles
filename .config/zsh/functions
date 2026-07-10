@@ -128,7 +128,7 @@ bindkey '^N' fman-widget
 
 spell() {
   local q="${*:-}"
-  local w words_file
+  local w src_file words_file
 
   if [[ -r /usr/share/dict/words ]]; then
     words_file=/usr/share/dict/words
@@ -139,19 +139,42 @@ spell() {
     return 1
   fi
 
-  local preview='curl -s --max-time 3 "dict://dict.org/d:{}:wn" 2>/dev/null | sed -E "/^[0-9]{3} /d;/^\.$/d" | rg --passthru --color=always "\{[^}]+\}"'
+  src_file=$(mktemp -t "spell-src.XXXXXX") || return
+  echo wn > "$src_file"
 
-  w="$(
-    fzf --query "$q" --ansi \
+  # preview: $1=word, $2=state file → prints definition + current source label
+  local preview='src=$(cat "$2"); curl -s --max-time 3 "dict://dict.org/d:$1:$src" 2>/dev/null | tr -d "\r" | sed -E "/^[0-9][0-9][0-9] /d;/^\.$/d" | rg --passthru --color=always "\x7b[^\x7d]+\x7d"; printf "\n── %s ──\n" "$src"'
+
+  # cycle: rotate source in $1 (state file). wn → thes → gcide → foldoc → jargon → pt → es → de → wn
+  local cycle='s=$(cat "$1"); case "$s" in
+    wn) n=moby-thesaurus ;;
+    moby-thesaurus) n=gcide ;;
+    gcide) n=foldoc ;;
+    foldoc) n=jargon ;;
+    jargon) n=fd-eng-por ;;
+    fd-eng-por) n=fd-eng-spa ;;
+    fd-eng-spa) n=fd-eng-deu ;;
+    *) n=wn ;;
+  esac
+  echo "$n" > "$1"'
+
+  w=$(fzf --query "$q" --ansi \
         --height=80% --layout=default --preview-window=up:60%:wrap --border \
-        --preview "$preview" \
-        <"$words_file"
-  )" || return
-  [[ -n $w ]] || return
-  printf '%s' "$w" | __clip_copy || {
-    echo "spell: no clipboard tool found" >&2
-    return 1
-  }
+        --header 'C-n = cycle source (WN → Thes → GCIDE → Foldoc → Jargon → PT → ES → DE)' \
+        --preview "sh -c ${(qq)preview} _ {} $src_file" \
+        --bind "ctrl-n:execute-silent(sh -c ${(qq)cycle} _ $src_file)+refresh-preview" \
+        <"$words_file")
+  local rc=$?
+
+  # print current-source definition to stdout
+  [[ $rc -eq 0 && -n $w ]] && sh -c "$preview" _ "$w" "$src_file"
+
+  \rm -f -- "$src_file"
+
+  [[ $rc -ne 0 || -z $w ]] && return
+
+  # copy selected word to clipboard
+  printf '%s' "$w" | __clip_copy 2>/dev/null
 }
 
 rgi() {

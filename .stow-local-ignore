@@ -1,0 +1,3 @@
+# Patterns relative to this directory. See `man stow` § LOCAL-IGNORE.
+^/README\..*
+^/\.stow-local-ignore$

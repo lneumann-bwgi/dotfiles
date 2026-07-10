@@ -1,9 +1,11 @@
 local M = {
   "folke/which-key.nvim",
   event = "VeryLazy",
+  dependencies = { "echasnovski/mini.icons" },
   opts = {
     preset = "helix",
     spec = {
+      { "<leader>a", group = "AI/Claude Code" },
       { "<leader>f", group = "find/picker" },
       { "<leader>g", group = "git" },
       { "<leader>h", group = "git hunks" },

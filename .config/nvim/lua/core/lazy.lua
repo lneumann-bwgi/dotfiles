@@ -33,9 +33,9 @@ require("lazy").setup({
     -- MISC / SIMPLE SETUP
     { "rhysd/clever-f.vim" },
     -- COLOR SCHEMES
-    { "ellisonleao/gruvbox.nvim", lazy = false },
-    { "shaunsingh/nord.nvim", lazy = false },
-    { "rebelot/kanagawa.nvim", lazy = false },
+    { "ellisonleao/gruvbox.nvim", lazy = true },
+    { "shaunsingh/nord.nvim", lazy = true },
+    { "rebelot/kanagawa.nvim", lazy = false, priority = 1000 },
     -- PERFORMANCE
     {
       "zeioth/garbage-day.nvim",

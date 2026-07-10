@@ -1,6 +1,12 @@
 # Load local overrides (PATH, machine-specific setup)
 [[ -r $ZDOTDIR/local ]] && source $ZDOTDIR/local
 
+# Homebrew on macOS
+[[ -x $HOME/homebrew/bin/brew ]] && eval "$($HOME/homebrew/bin/brew shellenv)"
+
+# Source first readable candidate (brew on macOS, /usr/share on Linux)
+_src() { local f; for f in "$@"; do [[ -r $f ]] && { source $f; return } done }
+
 # SETTINGS
 
 # History options
@@ -77,7 +83,8 @@ export FZF_ALT_C_OPTS="--preview 'et -I {}'"
 export FZF_CTRL_R_OPTS="--preview-window=hidden"
 
 # Source autosuggestions
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 2>/dev/null
+_src $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+     /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # VIM MODE — must precede main-keymap binds (`bindkey -v` swaps main → viins)
 bindkey -v
@@ -129,10 +136,12 @@ autoload -U select-bracketed
 zle -N select-bracketed
 
 # SYNTAX HIGHLIGHTING — after all `zle -N` (it wraps every registered widget)
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
+_src $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+     /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # HISTORY SUBSTRING SEARCH — after syntax-highlighting per its docs
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh 2>/dev/null
+_src $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh \
+     /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # KEYBINDINGS — plugin widgets are now all loaded
 

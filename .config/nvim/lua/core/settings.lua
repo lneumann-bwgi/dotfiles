@@ -45,7 +45,7 @@ opt.autoread = true
 opt.swapfile = false
 opt.backup = false
 opt.undofile = true
-opt.undodir = HOME .. "/.vim/undodir//"
+opt.undodir = vim.fn.stdpath("state") .. "/undo//"
 
 -- [[ display ]] --
 opt.background = "dark"

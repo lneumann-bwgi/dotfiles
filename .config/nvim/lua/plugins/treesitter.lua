@@ -33,8 +33,7 @@ local M = {
     "windwp/nvim-ts-autotag",
   },
   config = function()
-    require("nvim-treesitter").setup()
-    require("nvim-treesitter").install(parsers)
+    require("nvim-treesitter").setup({ ensure_installed = parsers })
 
     require("nvim-treesitter-textobjects").setup({
       select = {

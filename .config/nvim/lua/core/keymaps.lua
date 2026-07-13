@@ -42,43 +42,8 @@ nmap("<esc>", ":nohlsearch<cr><esc>")
 -- write shell cmd to file
 map({ "n", "v" }, "<leader>S", ":.!bash<CR>")
 
--- dictionary lookups via dict.org DICT protocol
-local function dict_lookup(source)
-  local word = vim.fn.expand("<cword>")
-  if word == "" then
-    return
-  end
-  local cmd = string.format(
-    "curl -s --max-time 3 'dict://dict.org/d:%s:%s' 2>/dev/null | tr -d '\\r' | sed -E '/^[0-9][0-9][0-9] /d;/^\\.$/d'",
-    word,
-    source
-  )
-  local out = vim.fn.systemlist({ "sh", "-c", cmd })
-  if #out == 0 or (#out == 1 and out[1] == "") then
-    vim.notify("no definition found for '" .. word .. "' in " .. source, vim.log.levels.INFO)
-    return
-  end
-  vim.cmd("botright 15new")
-  vim.bo.buftype = "nofile"
-  vim.bo.bufhidden = "wipe"
-  vim.bo.swapfile = false
-  vim.api.nvim_buf_set_lines(0, 0, -1, false, out)
-  vim.bo.modifiable = false
-  vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = 0, silent = true })
-end
-
-nmap("<leader>we", function()
-  dict_lookup("wn")
-end)
-nmap("<leader>wt", function()
-  dict_lookup("moby-thesaurus")
-end)
-nmap("<leader>wp", function()
-  dict_lookup("fd-por-eng")
-end)
-nmap("<leader>wd", function()
-  dict_lookup("fd-deu-eng")
-end)
+-- dictionary / thesaurus lookups via snacks-lexicon (dict.org DICT protocol)
+-- keymaps are defined in lua/plugins/lexicon.lua and loaded lazily
 
 -- MAJOR MAPPINGS
 

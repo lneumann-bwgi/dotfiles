@@ -217,11 +217,7 @@ def main() -> None:
             print("error: transcript empty after cleaning", file=sys.stderr)
             sys.exit(1)
 
-        transcript_path = save_transcript_cache(video_id, title, transcript)
-
-        if transcript_only:
-            print(transcript_path)
-            return
+        save_transcript_cache(video_id, title, transcript)
 
     if transcript_only:
         print(TRANSCRIPT_DIR / f"{video_id}.txt")

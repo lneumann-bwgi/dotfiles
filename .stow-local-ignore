@@ -1,7 +1,34 @@
 # Patterns relative to this directory. See `man stow` § LOCAL-IGNORE.
+# NOTE: presence of this file REPLACES stow's default ignore list, so
+# defaults must be re-declared here.
+
+# stow defaults
+RCS
+.+,v
+CVS
+\.\#.+
+\.cvsignore
+\.svn
+_darcs
+\.hg
+\.git
+\.gitignore
+\.gitmodules
+\.bzr
+\.bzrignore
+^\.perlmodstate
+\.pyc$
+~$
+\.dpkg-(dist|new|old|bak)$
+^\.DS_Store$
+^\._.+
+^Thumbs\.db$
+\#.*\#$
+
+# repo-local
 ^/README\..*
+^/LICENSE$
 ^/\.stow-local-ignore$
 ^/\.pre-commit-config\.yaml$
 ^/\.github$
 ^/stylua\.toml$
-^/LICENSE$

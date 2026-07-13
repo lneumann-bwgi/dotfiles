@@ -1,0 +1,39 @@
+name: lint
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+
+jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ludeeus/action-shellcheck@master
+        with:
+          scandir: "."
+          ignore_paths: >-
+            .git
+            .config/nvim
+
+  stow-dry-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install stow
+        run: sudo apt-get update && sudo apt-get install -y stow
+      - name: stow --no --verbose
+        run: |
+          mkdir -p "$HOME/stow-target"
+          stow --dir="$PWD" --target="$HOME/stow-target" --no --verbose=2 --dotfiles .
+
+  stylua:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: JohnnyMorganz/stylua-action@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: latest
+          args: --check .config/nvim

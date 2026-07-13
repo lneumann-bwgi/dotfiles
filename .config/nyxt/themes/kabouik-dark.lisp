@@ -14,7 +14,7 @@
 
 (define-configuration window
   ((status-formatter #'my-format-status)))
-  
+
 ;configuration window
 (define-configuration window
   ((message-buffer-style
@@ -101,7 +101,7 @@
         :background "black")))
     :documentation "The style of highlighted boxes, e.g. link hints.")))
 
-;Styling status buffer 
+;Styling status buffer
 (define-configuration status-buffer
   ((style (str:concat
            %slot-default%

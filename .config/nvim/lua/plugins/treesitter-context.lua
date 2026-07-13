@@ -7,7 +7,13 @@ local M = {
     mode = "cursor",
   },
   keys = {
-    { "[x", function() require("treesitter-context").go_to_context(vim.v.count1) end, desc = "Jump to context" },
+    {
+      "[x",
+      function()
+        require("treesitter-context").go_to_context(vim.v.count1)
+      end,
+      desc = "Jump to context",
+    },
   },
 }
 return M

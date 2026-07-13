@@ -43,4 +43,3 @@ if [[ -z "$searchterm" ]]; then
 fi
 
 surfraw "$elvis" -browser=$browser "$searchterm"
-

@@ -1,0 +1,29 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-added-large-files
+      - id: check-yaml
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.11.0.1
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/JohnnyMorganz/StyLua
+    rev: v2.5.2
+    hooks:
+      - id: stylua
+        files: \.lua$
+
+  - repo: local
+    hooks:
+      - id: stow-dry-run
+        name: stow --no dry run
+        entry: bash -c 'mkdir -p /tmp/stow-target && stow --dir="$PWD" --target=/tmp/stow-target --no --verbose=1 --dotfiles .'
+        language: system
+        pass_filenames: false
+        stages: [pre-push]

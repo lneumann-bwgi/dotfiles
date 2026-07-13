@@ -1,3 +1,7 @@
 # Patterns relative to this directory. See `man stow` § LOCAL-IGNORE.
 ^/README\..*
 ^/\.stow-local-ignore$
+^/\.pre-commit-config\.yaml$
+^/\.github$
+^/stylua\.toml$
+^/LICENSE$

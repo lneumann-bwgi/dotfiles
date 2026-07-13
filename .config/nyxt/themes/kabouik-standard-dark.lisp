@@ -1,5 +1,5 @@
 (in-package #:nyxt-user)
-  
+
 ;;configuration window
 (define-configuration window
   ((message-buffer-style
@@ -11,7 +11,7 @@
          :font-size "10px"
          :background-color "#292d3e"
          :color "#bfc7e5")))))))
-    
+
 ;prompt buffer
 (define-configuration prompt-buffer
   ((style (str:concat
@@ -138,4 +138,3 @@
                :color "#bfc7e5")
               (".tab:hover"
                :color "#bfc7e5")))))))
-

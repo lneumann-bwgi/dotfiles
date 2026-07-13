@@ -1,5 +1,5 @@
 (in-package #:nyxt-user)
-  
+
 ;configuration window
 (define-configuration window
   ((message-buffer-style
@@ -90,7 +90,7 @@
         :background "white")))
     :documentation "The style of highlighted boxes, e.g. link hints.")))
 
-;Styling status buffer 
+;Styling status buffer
 (define-configuration status-buffer
   ((style (str:concat
            %slot-default%

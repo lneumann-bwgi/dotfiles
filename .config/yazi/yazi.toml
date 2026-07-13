@@ -70,4 +70,3 @@ pretend_fetchers = [
   { url = "*", run = "git", group = "git" },
   { url = "*/", run = "git", group = "git" },
 ]
-

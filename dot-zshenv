@@ -21,8 +21,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 [[ -d "$XDG_CACHE_HOME/zsh" ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
 export RIPGREP_CONFIG_PATH=$XDG_CONFIG_HOME/ripgrep/config
 
-export CM_LAUNCHER='rofi'
-
 export EDITOR="nvim"
 export VISUAL="nvim"
 export PAGER="bat -p"

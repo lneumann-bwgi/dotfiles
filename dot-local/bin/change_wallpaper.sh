@@ -10,6 +10,8 @@ until pgrep -x hyprpaper &>/dev/null; do
 done
 sleep 1
 
+last_wallpaper=""
+
 while true; do
   HOUR=$(date +%-H)
 
@@ -33,13 +35,18 @@ while true; do
 
   FULL_PATH="$WALLPAPER_DIR/$WALLPAPER"
 
-  if [ -f "$FULL_PATH" ]; then
-    while IFS= read -r monitor; do
-      hyprctl hyprpaper wallpaper "$monitor,$FULL_PATH" || true
-    done < <(hyprctl monitors -j | jq -r '.[].name')
-  else
-    echo "Error: $FULL_PATH not found."
+  if [ "$WALLPAPER" != "$last_wallpaper" ]; then
+    if [ -f "$FULL_PATH" ]; then
+      while IFS= read -r monitor; do
+        hyprctl hyprpaper wallpaper "$monitor,$FULL_PATH" || true
+      done < <(hyprctl monitors -j | jq -r '.[].name')
+      last_wallpaper="$WALLPAPER"
+    else
+      echo "Error: $FULL_PATH not found."
+    fi
   fi
 
-  sleep 10m
+  # Sleep until top of next hour (bucket boundary aligns to hour).
+  now=$(date +%s)
+  sleep $((3600 - now % 3600))
 done

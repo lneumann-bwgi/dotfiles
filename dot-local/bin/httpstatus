@@ -14,6 +14,7 @@ statuses="100 Continue
 206 Partial Content
 207 Multi-Status
 208 Already Reported
+226 IM Used
 300 Multiple Choices
 301 Moved Permanently
 302 Found
@@ -21,6 +22,7 @@ statuses="100 Continue
 304 Not Modified
 305 Use Proxy
 307 Temporary Redirect
+308 Permanent Redirect
 400 Bad Request
 401 Unauthorized
 402 Payment Required
@@ -41,15 +43,17 @@ statuses="100 Continue
 417 Expectation Failed
 418 I'm a teapot
 420 Blaze it
+421 Misdirected Request
 422 Unprocessable Entity
 423 Locked
 424 Failed Dependency
-425 No code
+425 Too Early
 426 Upgrade Required
 428 Precondition Required
 429 Too Many Requests
 431 Request Header Fields Too Large
 449 Retry with
+451 Unavailable For Legal Reasons
 500 Internal Server Error
 501 Not Implemented
 502 Bad Gateway

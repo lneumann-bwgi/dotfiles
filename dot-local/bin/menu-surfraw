@@ -24,12 +24,16 @@ case $1 in
 "-h" | "--help") usage ;;
 esac
 
-if [[ -n $(command -v wofi) ]]; then
-	menu="$(command -v wofi) --dmenu"
-else
-	echo "Wofi not found, exiting."
-	exit
+if ! command -v surfraw >/dev/null; then
+	echo "surfraw not found, exiting." >&2
+	exit 1
 fi
+
+if ! command -v wofi >/dev/null; then
+	echo "wofi not found, exiting." >&2
+	exit 1
+fi
+menu="wofi --dmenu"
 
 elvis="$1"
 searchterm="${*:2}"
@@ -42,4 +46,6 @@ if [[ -z "$searchterm" ]]; then
 	searchterm=$(echo "" | $menu -p "$elvis ")
 fi
 
-surfraw "$elvis" -browser=$browser "$searchterm"
+[[ -z "$elvis" || -z "$searchterm" ]] && exit 0
+
+surfraw "$elvis" -browser="$browser" "$searchterm"

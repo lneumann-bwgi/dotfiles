@@ -20,8 +20,7 @@ open_summary() {
   fi
 }
 
-video_id=$(echo "$url" | rg -oP '(?:v=|youtu\.be/|shorts/)([A-Za-z0-9_-]{11})' |
-  rg -oP '[A-Za-z0-9_-]{11}' | head -1)
+video_id=$(echo "$url" | rg -oP '(?:v=|youtu\.be/|shorts/)\K[A-Za-z0-9_-]{11}' | head -1)
 
 if [[ -n "$video_id" && -f "$cache_dir/${video_id}.md" ]]; then
   open_summary "$cache_dir/${video_id}.md"

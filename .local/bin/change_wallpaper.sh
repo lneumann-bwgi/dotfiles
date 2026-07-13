@@ -3,7 +3,6 @@
 set -euo pipefail
 
 WALLPAPER_DIR="$HOME/.wallpapers"
-MONITORS=("DP-2" "eDP-1")
 
 # Wait for hyprpaper to be ready
 until pgrep -x hyprpaper &>/dev/null; do
@@ -35,9 +34,9 @@ while true; do
   FULL_PATH="$WALLPAPER_DIR/$WALLPAPER"
 
   if [ -f "$FULL_PATH" ]; then
-    for monitor in "${MONITORS[@]}"; do
-      hyprctl hyprpaper wallpaper "$monitor,$FULL_PATH"
-    done
+    while IFS= read -r monitor; do
+      hyprctl hyprpaper wallpaper "$monitor,$FULL_PATH" || true
+    done < <(hyprctl monitors -j | jq -r '.[].name')
   else
     echo "Error: $FULL_PATH not found."
   fi

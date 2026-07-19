@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env sh
 
 # welcome to the 21th century
 alias cat='bat'
@@ -19,9 +19,6 @@ alias mkdir='mkdir -pv'
 alias mv='mv -iv'
 alias rm='rm -v'
 alias cp='cp -iv'
-
-# reject tradition, embrace modernity
-alias copilot='copilot --yolo'
 
 # ls options
 alias la='ls -al'              # all files and dirs
@@ -70,7 +67,8 @@ alias vd='uvx --with openpyxl --with pyarrow visidata'
 alias yt-dlp='uvx yt-dlp'
 
 # ansible
-alias ansible-maintenance="ansible-playbook -i ~/.ansible/inventories/hosts ~/.ansible/roles/maintenance.yml --ask-become-pass"
+alias ansible-maintenance="ansible-playbook -K -i ~/.ansible/inventories/hosts ~/.ansible/playbooks/maintenance.yml"
+alias ansible-maintenance-server="ansible-playbook -i ~/.ansible/inventories/hosts ~/.ansible/playbooks/maintenance.yml -l homeserver -K"
 
 # misc
 alias stow-dot="stow --restow -v --no-folding --dotfiles -t ~ -d ~/.dotfiles ."

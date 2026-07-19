@@ -21,19 +21,24 @@ alias rm='rm -v'
 alias cp='cp -iv'
 
 # ls options
-alias la='ls -al'              # all files and dirs
-alias lh='ls -a | rg "^\."'    # only hidden
-alias ll='ls -l'               # long format
-alias lt='ls -aT | bat'        # tree listing
+alias la='ls -al'           # all files and dirs
+alias lh='ls -a | rg "^\."' # only hidden
+alias ll='ls -l'            # long format
+alias lt='ls -aT | bat'     # tree listing
 alias lu='ll -tU | tail -r'
 
 alias l='ls'
 
 # correct typos
 alias pytohn='python'
+alias pyhton='python'
+alias pythno='python'
 alias vu='nvim'
 alias vo='nvim'
 alias co='cp'
+alias sl='ls'
+alias mkidr='mkdir'
+alias mkdri='mkdir'
 
 # git stuff
 alias g='git'

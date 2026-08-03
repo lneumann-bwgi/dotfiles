@@ -1,0 +1,231 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# ---------------------------------------------------------------------------
+# wt — git worktree helper
+#
+# Usage:
+#   wt <branch> [base]   Create a worktree + branch, optionally from <base>
+#   wt rm <branch>       Remove a worktree and delete its branch
+#   wt ls                List all worktrees
+#   wt -h                Show this help
+# ---------------------------------------------------------------------------
+
+RESET='\033[0m'
+BOLD='\033[1m'
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+DIM='\033[2m'
+
+info() { echo -e "${CYAN}▸${RESET} $*" >&2; }
+success() { echo -e "${GREEN}✓${RESET} $*" >&2; }
+die() {
+  echo -e "${RED}✗${RESET} $*" >&2
+  exit 1
+}
+
+usage() {
+  echo -e "${BOLD}wt${RESET} — git worktree helper"
+  echo ""
+  echo -e "  ${BOLD}wt <branch> [base]${RESET}   Create worktree; new branch from base if missing,"
+  echo -e "                       check out existing local branch, or track origin/<branch>."
+  echo -e "                       Branch prefix required: ${BOLD}feature/ hotfix/ bugfix/ release/ chore/${RESET}"
+  echo -e "                       Worktree dir uses <repo-name>-<name after the prefix>"
+  echo -e "  ${BOLD}wt cd <branch>${RESET}       Drop into an existing worktree (interactive shell)"
+  echo -e "  ${BOLD}wt path <branch>${RESET}     Print worktree path (use: cd \$(wt path <branch>))"
+  echo -e "  ${BOLD}wt rm <branch>${RESET}       Remove worktree and delete its local branch"
+  echo -e "  ${BOLD}wt ls${RESET}                List all worktrees"
+  echo -e "  ${BOLD}wt -h${RESET}                Show this help"
+}
+
+# ---------------------------------------------------------------------------
+# Guards
+# ---------------------------------------------------------------------------
+
+require_git_repo() {
+  git rev-parse --show-toplevel &>/dev/null ||
+    die "Not inside a git repository."
+}
+
+# Main repo root, even when run from inside a linked worktree.
+repo_root() {
+  dirname "$(git rev-parse --path-format=absolute --git-common-dir)"
+}
+
+require_prefix() {
+  case "$1" in
+    feature/* | hotfix/* | bugfix/* | release/* | chore/*) ;;
+    *) die "Branch '$1' missing required prefix: feature/ hotfix/ bugfix/ release/ chore/" ;;
+  esac
+}
+
+worktree_dir_for_branch() {
+  local root="$1"
+  local branch="$2"
+  local dir_name="${branch#*/}"
+  dir_name="${dir_name//[\/\\]/-}"
+  local origin_dir
+  origin_dir="$(basename "$root")"
+
+  echo "$(dirname "$root")/$origin_dir-$dir_name"
+}
+
+# ---------------------------------------------------------------------------
+# Subcommands
+# ---------------------------------------------------------------------------
+
+cmd_list() {
+  git worktree list
+}
+
+cmd_path() {
+  local branch="${1:-}"
+  [[ -z "$branch" ]] && die "Usage: wt path <branch>"
+  local worktree_dir
+  worktree_dir="$(git worktree list --porcelain | awk -v ref="refs/heads/$branch" '
+    $1 == "worktree" { sub(/^worktree /, ""); path = $0 }
+    $1 == "branch" && $2 == ref { print path; exit }')"
+  [[ -n "$worktree_dir" ]] || die "No worktree checked out for branch: $branch"
+  echo "$worktree_dir"
+}
+
+cmd_cd() {
+  local worktree_dir
+  worktree_dir="$(cmd_path "$@")"
+  cd "$worktree_dir"
+  exec "${SHELL:-bash}" -i
+}
+
+cmd_remove() {
+  local branch="${1:-}"
+  [[ -z "$branch" ]] && die "Usage: wt rm <branch>"
+
+  require_prefix "$branch"
+
+  local worktree_dir
+  worktree_dir="$(cmd_path "$branch")"
+
+  info "Removing worktree $worktree_dir"
+  git worktree remove --force "$worktree_dir"
+
+  if git show-ref --verify --quiet "refs/heads/$branch"; then
+    info "Deleting branch $branch"
+    git branch -d "$branch" 2>/dev/null ||
+      git branch -D "$branch" # force-delete if not merged
+  fi
+
+  success "Done. Remaining worktrees:"
+  git worktree list
+}
+
+cmd_create() {
+  local branch="${1:-}"
+  local base="${2:-$(git rev-parse --abbrev-ref HEAD)}"
+
+  [[ -z "$branch" ]] && die "Usage: wt <branch> [base]"
+
+  require_prefix "$branch"
+
+  local root
+  root="$(repo_root)"
+  local worktree_dir
+  worktree_dir="$(worktree_dir_for_branch "$root" "$branch")"
+
+  # Pre-flight checks
+  [[ -d "$worktree_dir" ]] &&
+    die "Directory already exists: $worktree_dir"
+
+  # Refresh remote refs so we can detect teammate-pushed branches.
+  if git remote get-url origin &>/dev/null; then
+    info "Fetching origin"
+    git fetch origin --quiet || info "Fetch failed; continuing with local refs"
+  fi
+
+  local local_exists=0 remote_exists=0
+  git show-ref --verify --quiet "refs/heads/$branch" && local_exists=1
+  git show-ref --verify --quiet "refs/remotes/origin/$branch" && remote_exists=1
+
+  if [[ $local_exists -eq 0 && $remote_exists -eq 0 ]]; then
+    # Truly new branch — resolve base (local branch, tag, SHA, or remote-only branch).
+    if ! git rev-parse --verify --quiet "$base^{commit}" >/dev/null; then
+      if git rev-parse --verify --quiet "origin/$base^{commit}" >/dev/null; then
+        base="origin/$base"
+      else
+        die "Base '$base' not found."
+      fi
+    fi
+  fi
+
+  if [[ $local_exists -eq 1 ]]; then
+    info "Checking out existing local branch ${BOLD}$branch${RESET} into ${BOLD}$worktree_dir${RESET}"
+    git worktree add "$worktree_dir" "$branch"
+  elif [[ $remote_exists -eq 1 ]]; then
+    info "Tracking ${BOLD}origin/$branch${RESET} as ${BOLD}$branch${RESET} in ${BOLD}$worktree_dir${RESET}"
+    git worktree add --track -b "$branch" "$worktree_dir" "origin/$branch"
+  else
+    info "Creating worktree ${BOLD}$worktree_dir${RESET} from ${BOLD}$base${RESET}"
+    git worktree add -b "$branch" "$worktree_dir" "$base"
+  fi
+
+  # Copy config files
+  local files=(.env .envrc .pre-commit-config.yaml .tool-versions .nvmrc)
+  for f in "${files[@]}"; do
+    if [[ -f "$root/$f" ]]; then
+      cp "$root/$f" "$worktree_dir/$f"
+      info "Copied $f"
+    fi
+  done
+  # direnv
+  if command -v direnv &>/dev/null && [[ -f "$worktree_dir/.envrc" ]]; then
+    info "Running direnv allow"
+    (cd "$worktree_dir" && direnv allow)
+  fi
+
+  # pre-commit hooks (via prek)
+  if command -v prek &>/dev/null && [[ -f "$worktree_dir/.pre-commit-config.yaml" ]]; then
+    info "Running prek install"
+    (cd "$worktree_dir" && prek install)
+  fi
+
+  echo ""
+  success "Worktree ready: ${BOLD}$worktree_dir${RESET}"
+  echo -e "${DIM}Tip: to remove later — wt rm $branch${RESET}"
+  echo ""
+  git worktree list
+
+  # Drop user into the new worktree when run interactively.
+  # Skip when piped/scripted (no tty) or when WT_NO_CD=1, so callers can
+  # capture output or chain commands.
+  if [[ -t 1 && -z "${WT_NO_CD:-}" ]]; then
+    cd "$worktree_dir"
+    exec "${SHELL:-bash}" -i
+  else
+    echo "$worktree_dir"
+  fi
+}
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
+
+case "${1:-}" in
+-h | --help)
+  usage
+  exit 0
+  ;;
+"")
+  usage
+  exit 1
+  ;;
+esac
+
+require_git_repo
+
+case "$1" in
+ls | list) cmd_list ;;
+rm | remove) cmd_remove "${2:-}" ;;
+cd) cmd_cd "${2:-}" ;;
+path) cmd_path "${2:-}" ;;
+*) cmd_create "$1" "${2:-}" ;;
+esac

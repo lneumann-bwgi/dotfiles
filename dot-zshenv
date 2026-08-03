@@ -8,7 +8,7 @@ if [[ "$(uname -s)" == "Linux" ]]; then
   export XDG_DATA_DIRS="/var/lib/flatpak/exports/share/applications:$XDG_DATA_DIRS"
 fi
 
-export CDPATH="$HOME"
+export CDPATH=".:$HOME"
 
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"

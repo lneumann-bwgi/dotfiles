@@ -1,0 +1,2 @@
+# Per-machine local overrides (not synced across PCs)
+*.local.md

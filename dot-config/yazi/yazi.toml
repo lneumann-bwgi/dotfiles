@@ -21,25 +21,25 @@ ueberzug_offset = [0, 0, 0, 0]
 
 [opener]
 doc = [
-    { run = 'open "$@"', desc = "Open in default app", orphan = true, for = "macos" },
-	{ run = 'zathura "$@"', orphan = true, for = "unix" },
-	{ run = 'com.github.johnfactotum.Foliate "$@"', orphan = true, for = "unix" },
+  { run = 'open "$@"', desc = "Open in default app", orphan = true, for = "macos" },
+  { run = 'zathura "$@"', orphan = true, for = "unix" },
+  { run = 'com.github.johnfactotum.Foliate "$@"', orphan = true, for = "unix" },
 ]
 visidata = [
-	{ run = 'uvx --with openpyxl --with pyarrow visidata "$@"', block = true, for = "unix" },
+  { run = 'uvx --with openpyxl --with pyarrow visidata "$@"', block = true, for = "unix" },
 ]
 
 [open]
 prepend_rules = [
-	{ url = "*.pdf", use = "doc" },
-	{ url = "*.dvu", use = "doc" },
-	{ url = "*.epub", use = "doc" },
-	{ url = "*.azw3", use = "doc" },
-	{ url = "*.mobi", use = "doc" },
-	{ url = "*.csv", use = "visidata" },
-	{ url = "*.tsv", use = "visidata" },
-	{ url = "*.xlsx", use = "visidata" },
-	{ url = "*.parquet", use = "visidata" },
+  { url = "*.pdf", use = "doc" },
+  { url = "*.dvu", use = "doc" },
+  { url = "*.epub", use = "doc" },
+  { url = "*.azw3", use = "doc" },
+  { url = "*.mobi", use = "doc" },
+  { url = "*.csv", use = "visidata" },
+  { url = "*.tsv", use = "visidata" },
+  { url = "*.xlsx", use = "visidata" },
+  { url = "*.parquet", use = "visidata" },
 ]
 
 
@@ -47,7 +47,7 @@ prepend_rules = [
 prepend_previewers = [
   { url = "*.csv", run = "duckdb" },
   { url = "*.tsv", run = "duckdb" },
-  { url = "*.json", run = "duckdb" },
+  { url = "*.json", run = 'piper -- CLICOLOR_FORCE=1 jq -C . "$1"' },
   { url = "*.parquet", run = "duckdb" },
   { url = "*.txt", run = "duckdb" },
   { url = "*.xlsx", run = "duckdb" },
@@ -60,10 +60,9 @@ prepend_previewers = [
 prepend_preloaders = [
   { url = "*.csv", run = "duckdb", multi = false },
   { url = "*.tsv", run = "duckdb", multi = false },
-  { url = "*.json", run = "duckdb", multi = false },
   { url = "*.parquet", run = "duckdb", multi = false },
   { url = "*.txt", run = "duckdb", multi = false },
-  { url = "*.xlsx", run = "duckdb", multi = false }
+  { url = "*.xlsx", run = "duckdb", multi = false },
 ]
 
 pretend_fetchers = [

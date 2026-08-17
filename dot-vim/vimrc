@@ -104,7 +104,7 @@
   set cmdheight=1           " number of screen lines to use for the command-line
   set cursorline            " highlight the screen line of the cursor
   set hidden                " buffer is not unloaded when it is abandoned
-  set laststatus=2          " alwyas show status line
+  set laststatus=2          " always show status line
   set noshowmode            " insert, replace or visual mode do not put a message on the last line.
   set pastetoggle=<F2>      " better past behavior when needed
   set ruler                 " show the line and column number of the cursor position,
@@ -126,7 +126,7 @@
   set showmatch
   set smartcase
 
-  " Speling
+  " Spelling
   set nospell
   set complete+=kspell
 

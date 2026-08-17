@@ -32,4 +32,5 @@ _darcs
 ^/\.pre-commit-config\.yaml$
 ^/\.github$
 ^/stylua\.toml$
+^/\.typos\.toml$
 ^/agents$

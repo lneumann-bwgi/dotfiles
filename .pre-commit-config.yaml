@@ -22,6 +22,15 @@ repos:
       - id: stylua
         files: \.lua$
 
+  - repo: https://github.com/crate-ci/typos
+    rev: v1.49.0
+    hooks:
+      - id: typos
+      - id: typos
+        alias: typos-commit-msg
+        name: typos commit message
+        stages: [commit-msg]
+
   - repo: local
     hooks:
       - id: stow-dry-run

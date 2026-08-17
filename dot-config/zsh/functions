@@ -145,7 +145,7 @@ spell() {
   # preview: $1=word, $2=state file → prints definition + current source label
   local preview='src=$(cat "$2"); curl -s --max-time 3 "dict://dict.org/d:$1:$src" 2>/dev/null | tr -d "\r" | sed -E "/^[0-9][0-9][0-9] /d;/^\.$/d" | rg --passthru --color=always "\x7b[^\x7d]+\x7d"; printf "\n── %s ──\n" "$src"'
 
-  # cycle: rotate source in $1 (state file). wn → thes → gcide → foldoc → jargon → pt → es → de → wn
+  # cycle: rotate source in $1 (state file). wn → moby-thesaurus → gcide → foldoc → jargon → pt → es → de → wn
   local cycle='s=$(cat "$1"); case "$s" in
     wn) n=moby-thesaurus ;;
     moby-thesaurus) n=gcide ;;
@@ -160,7 +160,7 @@ spell() {
 
   w=$(fzf --query "$q" --ansi \
         --height=80% --layout=default --preview-window=up:60%:wrap --border \
-        --header 'C-n = cycle source (WN → Thes → GCIDE → Foldoc → Jargon → PT → ES → DE)' \
+        --header 'C-n = cycle source (WN → Moby-Thesaurus → GCIDE → Foldoc → Jargon → PT → ES → DE)' \
         --preview "sh -c ${(qq)preview} _ {} $src_file" \
         --bind "ctrl-n:execute-silent(sh -c ${(qq)cycle} _ $src_file)+refresh-preview" \
         <"$words_file")

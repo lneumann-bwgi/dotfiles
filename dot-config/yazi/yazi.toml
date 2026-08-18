@@ -65,7 +65,7 @@ prepend_preloaders = [
   { url = "*.xlsx", run = "duckdb", multi = false },
 ]
 
-pretend_fetchers = [
+prepend_fetchers = [
   { url = "*", run = "git", group = "git" },
   { url = "*/", run = "git", group = "git" },
 ]

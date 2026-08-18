@@ -28,9 +28,11 @@ _darcs
 # repo-local
 ^/README\..*
 ^/LICENSE$
-^/\.stow-local-ignore$
-^/\.pre-commit-config\.yaml$
+\.mypy_cache
+\.rumdl_cache
 ^/\.github$
-^/stylua\.toml$
+^/\.pre-commit-config\.yaml$
+^/\.stow-local-ignore$
 ^/\.typos\.toml$
 ^/agents$
+^/stylua\.toml$

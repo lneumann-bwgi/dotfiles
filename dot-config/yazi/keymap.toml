@@ -29,6 +29,11 @@ run = "plugin zoxide"
 desc = "jump via zoxide"
 
 [[mgr.prepend_keymap]]
+on = ["g", "g"]
+run = "shell 'lazygit' --block"
+desc = "Open lazygit"
+
+[[mgr.prepend_keymap]]
 on = ["y", "y"]
 run = "yank"
 desc = "yank selected files"

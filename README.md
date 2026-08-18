@@ -18,17 +18,46 @@ stow-dot
 - `--dotfiles`: `dot-zshrc` -> `~/.zshrc`.
 - `--no-folding`: link files, not whole dirs; keep runtime state out.
 
-## Runtime deps
+## Software in use
 
-Not all required, but many aliases/functions assume them.
+Human inventory from these dotfiles, `agents/skills` prose, and current
+Homebrew state. Not every item is required on every host; transitive Homebrew
+libraries are omitted.
 
-- Core: `zsh`, `git`, `stow`, `curl`
-- Shell tooling: `starship`, `zoxide`, `direnv`, `fzf`, `fd`, `ripgrep`, `bat`,
-  `eza`, `delta`, `dust`, `duf`, `btop`, `btm`, `viddy`, `erd`
-- Editors: `neovim`, `vim` fallback
-- Terminal: `ghostty`
-- Python: `uv` / `uvx`
-- Linux-only: `hyprland`, `waybar`, `mako`, `wofi`, `yazi`
+- Core: `zsh`, `bash`, `git`, `stow`, `curl`, `brew`, `flatpak`
+- Shell: `starship`, `zoxide`, `direnv`, `fzf`, `zsh-autosuggestions`,
+  `zsh-history-substring-search`, `zsh-syntax-highlighting`
+- CLI replacements/viewers: `bat`, `eza`, `erdtree`, `ripgrep`, `fd`,
+  `git-delta`, `difftastic`, `dust`, `duf`, `btop`, `bottom`, `viddy`,
+  `glow`, `tealdeer`, `tree`
+- Data/docs: `duckdb`, `jq`, `yq`, `qsv`, `visidata`, `chafa`, `poppler`,
+  `zathura`, `Foliate`
+- Editors/terminal: `neovim`, `vim`, `ptpython`, `ghostty`
+- Dev tools: `uv`, `prek`, `shellcheck`, `sqlfluff`, `typos-cli`,
+  `tree-sitter-cli`, `ast-grep`, `sd`, `semgrep`, `tokei`, `hyperfine`,
+  `just`
+- Languages/runtimes: `go`, `node@22`, `pnpm`, `rust`, `lua`, `luarocks`,
+  `python@3.13`, `python@3.14`, `ruby`
+- Containers/infra: `docker`, `docker-buildx`, `docker-compose`, `colima`,
+  `lazydocker`, `kubernetes-cli`, `k9s`, `helm`, `argocd`, `astro`,
+  `awscli`
+- Git tools: `gh`, `lazygit`, `git-cliff`, `git-filter-repo`
+- Agent skill guidance: `pre-commit`, `shfmt`, `ruff`, `mypy`, `pyright`, `ty`,
+  `pytest`, `pytest-cov`, `pip-audit`, `deptry`, `vulture`, `pydantic`,
+  `typer`, `rich`, `click`, `golangci-lint`, `govulncheck`, `gofumpt`, `cobra`,
+  `viper`, `pflag`, `bubbletea`, `bubbles`, `lipgloss`, `huh`, `gum`, `pgx`,
+  `modernc.org/sqlite`, `testify`, `go-cmp`, `goldie`
+- Linux desktop: `hyprland`, `hyprctl`, `hyprpaper`, `hyprsunset`, `waybar`,
+  `mako`, `wofi`, `yazi`, `dolphin`, `nm-applet`, `wireplumber`, `wpctl`,
+  `brightnessctl`, `playerctl`, `grim`, `slurp`, `cliphist`, `wl-copy`,
+  `wl-paste`
+- Apps/media: `firefox`, `newsraft`, `mpv`, `feh`, `sxiv`, `surfraw`,
+  `yt-dlp`, `ollama`, `opencode`
+- Local casks: `1password-cli`, `basictex`, `claude`, `claude-code`,
+  `ghostty`, `maccy`, `miniconda`, `windows-app`
+- Other requested Brew formulae: `automake`, `buf`, `ctags`, `gping`, `libpq`,
+  `libtool`, `lnav`, `make`, `pixi`, `pup`, `rtk`, `rumdl`, `sevenzip`,
+  `socat`, `spark`, `wget`, `youplot`, `zip`
 
 ## Layout
 

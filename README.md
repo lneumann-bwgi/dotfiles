@@ -1,7 +1,6 @@
 # dotfiles
 
-Personal config. Neovim + zsh + ghostty. macOS-primary, Linux (Arch/Hyprland)
-fallback.
+Personal config: neovim, zsh and ghostty. macOS-primary, Linux (Arch/Hyprland) fallback.
 
 ## Install
 
@@ -11,14 +10,13 @@ Requires `stow` and `git`.
 git clone <this repo> ~/.dotfiles
 cd ~/.dotfiles
 stow --restow -v --no-folding --dotfiles -t ~ -d ~/.dotfiles .
-# or the alias defined in .config/zsh/aliases:
+
+# after first install
 stow-dot
 ```
 
-`--dotfiles` renames `dot-*` in the repo to `.*` in `$HOME`
-(`dot-zshrc` → `~/.zshrc`). `--no-folding` symlinks individual files instead
-of whole directories, so runtime state (e.g. `~/.config/zsh/.zsh_history`)
-does not leak into the repo.
+- `--dotfiles`: `dot-zshrc` -> `~/.zshrc`.
+- `--no-folding`: link files, not whole dirs; keep runtime state out.
 
 ## Runtime deps
 
@@ -27,38 +25,38 @@ Not all required, but many aliases/functions assume them.
 - Core: `zsh`, `git`, `stow`, `curl`
 - Shell tooling: `starship`, `zoxide`, `direnv`, `fzf`, `fd`, `ripgrep`, `bat`,
   `eza`, `delta`, `dust`, `duf`, `btop`, `btm`, `viddy`, `erd`
-- Editors: `neovim` (main), plain `vim` (fallback rescue only)
+- Editors: `neovim`, `vim` fallback
 - Terminal: `ghostty`
-- Python: `uv` (aliases use `uvx` for one-shot invocations)
+- Python: `uv` / `uvx`
 - Linux-only: `hyprland`, `waybar`, `mako`, `wofi`, `yazi`
 
 ## Layout
 
-- `.config/`       XDG-based configs (`nvim`, `zsh`, `ghostty`, `newsraft`, …)
-- `.local/bin/`    scripts on `$PATH`
-- `.vim/`         legacy vim config, kept for rescue on machines without nvim
-- `dot-bashrc`    → `~/.bashrc` (rescue fallback)
-- `dot-gitconfig` → `~/.gitconfig`
-- `dot-zshenv`    → `~/.zshenv` (loads `ZDOTDIR=~/.config/zsh`)
-- `dot-ssh/`      → `~/.ssh/` (not currently populated)
+- `dot-config/` -> `~/.config/`: `nvim`, `zsh`, `ghostty`, `newsraft`
+- `dot-local/bin/` -> `~/.local/bin/`: scripts
+- `dot-vim/` -> `~/.vim/`: rescue vim config
+- `dot-bashrc` -> `~/.bashrc`: rescue shell fallback
+- `dot-gitconfig` -> `~/.gitconfig`
+- `dot-zshenv` -> `~/.zshenv`: sets `ZDOTDIR=~/.config/zsh`
+- `dot-ssh/` -> `~/.ssh/`: empty placeholder
+- `agents/`: agent rules and local skills
 
-## Machine-specific overrides
+## Local overrides
 
-`.config/zsh/local` (gitignored) — sourced first by `dot-zshrc`. Put:
+`~/.config/zsh/local` is gitignored and sourced first. Put machine-only state
+there:
 
 - PATH prepends for machine-only tools
-- Corporate certs (`SSL_CERT_FILE`, `CURL_CA_BUNDLE`, …)
-- Secrets (1Password Connect token, cloud API tokens)
-- Work-only aliases
+- corporate certs (`SSL_CERT_FILE`, `CURL_CA_BUNDLE`)
+- secrets
 
 Never commit this file.
 
-## Files not stowed
+## Stow ignores
 
-Excluded via `.stow-local-ignore`:
+`.stow-local-ignore` excludes:
 
 - `README.md`
 - `.stow-local-ignore` itself
 
-Git-related paths (`.git/`, `.gitignore`) are excluded by stow's built-in
-defaults.
+Stow already ignores `.git/` and `.gitignore`.

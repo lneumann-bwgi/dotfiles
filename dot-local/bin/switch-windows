@@ -1,0 +1,15 @@
+#!/bin/bash
+set -Eeuo pipefail
+
+# Pick a window via wofi, focus it. Grouped by workspace, sorted by focus history.
+# Tabs in titles are stripped so `cut -f1` reliably yields the address.
+sel=$(hyprctl -j clients |
+  jq -r 'sort_by(.workspace.id, .focusHistoryID)[] |
+    "\(.address)\tws \(.workspace.id) \(.class) — \((.title // "") | gsub("\t";" "))"' |
+  wofi --dmenu |
+  cut -f1) || exit 0
+
+# Guard against injection: addresses are 0x + hex.
+[[ "$sel" =~ ^0x[0-9a-fA-F]+$ ]] || exit 0
+
+hyprctl dispatch "hl.dsp.focus({window=\"address:$sel\"})"

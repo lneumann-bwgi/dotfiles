@@ -1,10 +1,16 @@
 #!/bin/bash
+set -Eeuo pipefail
 
-# This script is used to switch to a workspace on the current monitor using wofi
+# Pick a workspace via wofi, move it to the current monitor, focus it.
+# Hyprland >= 0.5x parses dispatch args through Lua, so old C-style
+# `focusworkspaceoncurrentmonitor <id>` no longer works — use hl.dsp.*.
+sel=$(hyprctl -j workspaces |
+  jq -r 'sort_by(.id)[] | "\(.id)\t[\(.monitor)] ws \(.id) — \(.windows) win"' |
+  wofi --dmenu |
+  cut -f1) || exit 0
 
-# It uses hyprctl to get the list of workspaces and then uses wofi to display the list of workspaces
-workspaces=$(hyprctl clients | awk 'BEGIN {count=0} /^Window .*$/ {print count " |   " $0; count++}')
-# Get the index of the selected workspace
-workspace_idx=$(echo "$workspaces" | wofi --dmenu | awk '{print $1}')
-# Switch to the selected workspace
-hyprctl dispatch focusworkspaceoncurrentmonitor "$(hyprctl -j clients | jq -r ".[$workspace_idx] | .workspace.id")"
+# Guard against injection: workspace ids are always integers.
+[[ "$sel" =~ ^[0-9]+$ ]] || exit 0
+
+hyprctl dispatch "hl.dsp.workspace.move({workspace=$sel, monitor=\"current\"})"
+hyprctl dispatch "hl.dsp.focus({workspace=$sel})"

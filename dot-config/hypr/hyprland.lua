@@ -167,13 +167,6 @@ hl.config({
   },
 })
 
-hl.curve("almostLinear", { type = "bezier", points = { { 0.5, 0.5 }, { 0.75, 1 } } })
-hl.curve("easy", { type = "spring", mass = 1, stiffness = 238.1191, dampening = 24.21279333 })
-
-hl.animation({ leaf = "global", enabled = true, speed = 7, bezier = "default" })
-hl.animation({ leaf = "windows", enabled = true, speed = 4.79, spring = "easy" })
-hl.animation({ leaf = "workspaces", enabled = true, speed = 1.94, bezier = "almostLinear", style = "fade" })
-
 ---------------------
 ---- KEYBINDINGS ----
 ---------------------
@@ -191,8 +184,8 @@ hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(clipMenu))
 hl.bind(mainMod .. " + P", hl.dsp.exec_cmd(screenshot))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(speedRead))
 
-hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("hyprctl dispatch fullscreen")) -- ponytail: fallback
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd("hyprctl dispatch swapnext")) -- ponytail: fallback
+hl.bind(mainMod .. " + S", hl.dsp.window.swap({ next = true }))
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", action = "toggle" }))
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.pseudo())
 
 -- Move focus

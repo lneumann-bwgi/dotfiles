@@ -1,6 +1,3 @@
--- Hyprland Lua config, migrated from hyprland.conf
--- Wiki: https://wiki.hypr.land/Configuring/Start/
-
 ------------------
 ---- MONITORS ----
 ------------------

@@ -29,8 +29,6 @@
     ui = auto
 [commit]
     verbose = true
-[credential]
-    helper = store
 [delta]
     line-numbers = true
     navigate = true
@@ -74,3 +72,5 @@
     updateRefs = true
 [tag]
     sort = version:refname
+[url "git@github.com:"]
+    insteadOf = https://github.com/

@@ -3,3 +3,8 @@ Host homeserver
     User neumann
     Port 3141
     IdentityFile ~/.ssh/ansible
+
+Host github.com
+    User git
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes

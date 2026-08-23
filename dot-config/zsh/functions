@@ -60,15 +60,44 @@ gsw() {
   git switch "$branch"
 }
 
+gsw-widget() {
+  _is_in_git_repo || { zle reset-prompt; return 0; }
+  zle -I
+  gsw
+  zle reset-prompt
+}
+zle -N gsw-widget
+
 fgst() {
   _is_in_git_repo || return 1
-  local selection
+  local selection preview_cmd
+  # first 3 chars = status codes; rest = path (may contain " -> " for renames)
+  preview_cmd='
+    f=$(printf "%s" {} | cut -c4- | sed "s/.* -> //")
+    if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
+      git diff --color=always -- "$f"
+      git diff --color=always --cached -- "$f"
+    else
+      bat --color=always --style=numbers "$f" 2>/dev/null || cat -- "$f"
+    fi'
   selection=$(git -c color.status=always status --short |
-    fzf --height 40% -m --ansi --nth 2..,.. \
-        --preview 'git diff --color=always {2}' \
+    fzf --height 80% -m --ansi --nth 2..,.. \
+        --preview "$preview_cmd" \
         --preview-window right:60%) || return 0
-  echo "$selection" | awk '{print $2}'
+  # strip status codes, resolve renames → clean paths
+  echo "$selection" | sed -E 's/^...//; s/.* -> //'
 }
+
+fgst-widget() {
+  _is_in_git_repo || { zle reset-prompt; return 0; }
+  local out
+  out="$(fgst)" || { zle reset-prompt; return 0; }
+  [[ -n $out ]] || { zle reset-prompt; return 0; }
+  local -a files=("${(@f)out}")
+  LBUFFER+="${LBUFFER:+ }${(j: :)${(q-)files[@]}}"
+  zle reset-prompt
+}
+zle -N fgst-widget
 
 fgtg() {
   _is_in_git_repo || return 1
@@ -97,7 +126,13 @@ fkill() {
   fi
   [[ -n $pid ]] && kill "-${1:-9}" ${=pid}
 }
-zle -N fkill
+
+fkill-widget() {
+  zle -I
+  fkill
+  zle reset-prompt
+}
+zle -N fkill-widget
 
 fman() {
   man -k . | sort |
@@ -120,11 +155,6 @@ fman-widget() {
   zle reset-prompt
 }
 zle -N fman-widget
-
-# widget-mode binds for the three fzf pickers above
-bindkey '^G' fgt-widget
-bindkey '^K' fkill
-bindkey '^N' fman-widget
 
 spell() {
   local q="${*:-}"
@@ -210,7 +240,7 @@ fcd() {
        . "$searchdir" | fzf
   )
   [[ -z $destdir ]] && return 1
-  cd "$destdir" || exit
+  cd "$destdir" || return 1
 }
 
 topmem() {
@@ -226,7 +256,7 @@ y() {
   tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
   yazi "$@" --cwd-file="$tmp"
   if cwd="$(command cat -- "$tmp")" && [[ -n $cwd && $cwd != $PWD ]]; then
-    cd -- "$cwd" || exit
+    cd -- "$cwd" || return 1
   fi
   \rm -f -- "$tmp"
 }

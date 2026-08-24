@@ -21,13 +21,11 @@ alias rm='rm -v'
 alias cp='cp -iv'
 
 # ls options
-alias la='ls -al'           # all files and dirs
-alias lh='ls -a | rg "^\."' # only hidden
-alias ll='ls -l'            # long format
-alias lt='ls -aT | bat'     # tree listing
-alias lu='ll -tU | tail -r'
-
-alias l='ls'
+alias la='ls -al'                                      # all files and dirs
+alias lh='ls -ald .*'                                  # only hidden
+alias ll='ls -l'                                       # long format
+alias lt='eza -aT --color=always | bat --color=always' # tree listing
+alias lu='ls -l -s modified -r'                        # oldest first
 
 # correct typos
 alias pytohn='python'
@@ -60,7 +58,6 @@ alias vtb='nvim -p'
 alias fastvim='nvim -n -u NONE -i NONE -N'
 
 # python stuff
-alias black='uvx ruff format'
 alias git-sim='uvx git-sim'
 alias isort='uvx ruff check --select I,RUF022 --fix'
 alias ppy='uvx ptpython --with pandas'
@@ -83,5 +80,5 @@ alias weather="curl wttr.in"
 alias wifi="nmcli dev wifi show-password"
 alias rss="newsraft"
 alias pacman-hist="expac --timefmt='%Y-%m-%d %T' '%l\t%w\t%n' | sort"
-alias hashfiles="fd -t f | sort | xargs -I{} md5sum {}"
+alias hashfiles='fd -t f -0 | xargs -0 -P 0 md5sum | sort -k2'
 alias glow='glow --width 128 --pager --style dark'

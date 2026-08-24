@@ -1,47 +1,56 @@
-# Load local overrides (PATH, machine-specific setup)
+#-------------------------------------------------------------------------------
+# LOCAL OVERRIDES  (PATH, machine-specific setup)
+#-------------------------------------------------------------------------------
 [[ -r $ZDOTDIR/local ]] && source $ZDOTDIR/local
 
-# Homebrew on macOS
+#-------------------------------------------------------------------------------
+# HOMEBREW  (macOS only)
+#-------------------------------------------------------------------------------
 [[ -x $HOME/homebrew/bin/brew ]] && eval "$($HOME/homebrew/bin/brew shellenv)"
 
-# Source first readable candidate (brew on macOS, /usr/share on Linux)
+#-------------------------------------------------------------------------------
+# HELPERS
+#-------------------------------------------------------------------------------
+# Source first readable candidate (brew on macOS, /usr/share on Linux).
 _src() { local f; for f in "$@"; do [[ -r $f ]] && { source $f; return } done }
 
-# SETTINGS
+#-------------------------------------------------------------------------------
+# HISTORY
+#-------------------------------------------------------------------------------
 
-# History options
 HISTSIZE=1000000000
 SAVEHIST=1000000000
 HISTORY_IGNORE="(ls|cd|pwd|exit)(| *)"
 HISTFILE="$XDG_STATE_HOME/zsh/history"
 
-# The meaning of these options can be found in man page of `zshoptions`.
-setopt EXTENDED_HISTORY      # Write the history file in the ':start:elapsed;command' format.
-setopt HIST_IGNORE_DUPS      # Do not record an event that was just recorded again.
-setopt HIST_IGNORE_SPACE     # Do not record an event starting with a space.
-setopt HIST_REDUCE_BLANKS    # Remove superfluous blanks from each command line being added to the history.
-setopt HIST_SAVE_NO_DUPS     # Do not write duplicate entries to the history file.
-setopt HIST_VERIFY           # Do not execute immediately upon history expansion.
-setopt INC_APPEND_HISTORY    # Write to the history file immediately, not when the shell exits.
+setopt EXTENDED_HISTORY      # ':start:elapsed;command' format
+setopt HIST_IGNORE_DUPS      # skip immediate repeats
+setopt HIST_IGNORE_SPACE     # skip entries starting with space
+setopt HIST_REDUCE_BLANKS    # trim superfluous whitespace
+setopt HIST_SAVE_NO_DUPS     # dedup on save
+setopt HIST_VERIFY           # confirm before running history expansion
+setopt INC_APPEND_HISTORY    # append per command, not on exit
 
-# You don't to type cd all the time
-setopt AUTO_CD
+#-------------------------------------------------------------------------------
+# SHELL OPTIONS
+#-------------------------------------------------------------------------------
 
-# Disable Ctrl-S Ctrl-Q
-stty -ixon
+setopt AUTO_CD               # bare dir name = cd
+stty -ixon                   # free Ctrl-S / Ctrl-Q
 
+#-------------------------------------------------------------------------------
 # COMPLETIONS
+#-------------------------------------------------------------------------------
 
-# Basic tab complete
 fpath=($ZDOTDIR/completions $fpath)
 autoload -Uz compinit
 
-# Cache compinit: skip insecure-dir scan if zcompdump is <24h old (~100ms saved per shell)
+# Cache compinit: skip insecure-dir scan if zcompdump is <24h old (~100ms saved).
 _zdump=$XDG_CACHE_HOME/zsh/zcompdump
 if [[ -n $_zdump(#qNmh+24) ]]; then
-  compinit -d $_zdump # stale (>24h) → full security check
+  compinit -d $_zdump         # stale (>24h) → full security check
 else
-  compinit -C -d $_zdump # fresh → skip insecure-dir scan
+  compinit -C -d $_zdump      # fresh → skip insecure-dir scan
 fi
 unset _zdump
 
@@ -50,18 +59,17 @@ zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 
 zmodload zsh/complist
 _comp_options+=(globdots)
 
-# PROMPT + TOOL HOOKS
+#-------------------------------------------------------------------------------
+# VIM MODE  (must precede any tool init that binds keys)
+#-------------------------------------------------------------------------------
 
-# Source starship
-eval "$(starship init zsh)"
+bindkey -v
+export KEYTIMEOUT=1
 
-# Source zoxide
-eval "$(zoxide init zsh)"
+#-------------------------------------------------------------------------------
+# FZF
+#-------------------------------------------------------------------------------
 
-# Source direnv
-eval "$(direnv hook zsh)"
-
-# fzf settings
 source <(fzf --zsh)
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="
@@ -73,7 +81,7 @@ export FZF_DEFAULT_OPTS="
     --preview-window=hidden
     --preview='bat {} --color=always'
     --prompt='❯ ' --pointer='▶ ' --marker='✓ '
-    --bind 'ctrl-e:execute(echo {+} | xargs -o nvim)'
+    --bind 'ctrl-e:become(nvim {+})'
     --bind 'ctrl-y:execute-silent(echo {+} | pbcopy 2>/dev/null || wl-copy 2>/dev/null || xclip -i 2>/dev/null)'
     --bind 'ctrl-d:preview-down'
     --bind 'ctrl-u:preview-up'
@@ -82,21 +90,33 @@ export FZF_DEFAULT_OPTS="
 export FZF_ALT_C_OPTS="--preview 'et -I {}'"
 export FZF_CTRL_R_OPTS="--preview-window=hidden"
 
-# Source autosuggestions
+#-------------------------------------------------------------------------------
+# PLUGINS — autosuggestions  (syntax-highlighting loads later, after widgets)
+#-------------------------------------------------------------------------------
+
 _src $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
      /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# VIM MODE — must precede main-keymap binds (`bindkey -v` swaps main → viins)
-bindkey -v
-export KEYTIMEOUT=1
+#-------------------------------------------------------------------------------
+# PROMPT + TOOL HOOKS
+#-------------------------------------------------------------------------------
 
-# Load aliases and shortcuts (after compinit and `bindkey -v`)
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
+eval "$(direnv hook zsh)"
+eval "$(atuin init zsh)"
+
+#-------------------------------------------------------------------------------
+# ALIASES + FUNCTIONS
+#-------------------------------------------------------------------------------
+
 [[ -r $ZDOTDIR/functions ]] && source $ZDOTDIR/functions
-[[ -r $ZDOTDIR/aliases ]] && source $ZDOTDIR/aliases
+[[ -r $ZDOTDIR/aliases ]]   && source $ZDOTDIR/aliases
 
-# WIDGETS
+#-------------------------------------------------------------------------------
+# WIDGETS — clipboard yank
+#-------------------------------------------------------------------------------
 
-# Yank to the system clipboard
 __clip_copy() {
   if command -v wl-copy >/dev/null 2>&1; then
     wl-copy
@@ -129,63 +149,100 @@ function vi-yank-to-clipboard() {
 }
 zle -N vi-yank-to-clipboard
 
+#-------------------------------------------------------------------------------
+# WIDGETS — vim text objects
+#-------------------------------------------------------------------------------
+
 autoload -U select-quoted
 zle -N select-quoted
 
 autoload -U select-bracketed
 zle -N select-bracketed
 
-# SYNTAX HIGHLIGHTING — after all `zle -N` (it wraps every registered widget)
+#-------------------------------------------------------------------------------
+# SYNTAX HIGHLIGHTING  (must be after all `zle -N` — it wraps every widget)
+#-------------------------------------------------------------------------------
+
 _src $HOMEBREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
      /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-# HISTORY SUBSTRING SEARCH — after syntax-highlighting per its docs
+#-------------------------------------------------------------------------------
+# HISTORY SUBSTRING SEARCH  (must be after syntax-highlighting, per its docs)
+#-------------------------------------------------------------------------------
+
 _src $HOMEBREW_PREFIX/share/zsh-history-substring-search/zsh-history-substring-search.zsh \
      /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# KEYBINDINGS — plugin widgets are now all loaded
+#-------------------------------------------------------------------------------
+# KEYBINDINGS — vim motions
+#-------------------------------------------------------------------------------
 
-# History search
-bindkey '^[[A' history-substring-search-up # Up arrow
-bindkey '^[[B' history-substring-search-down # Down arrow
-
-# H and L with vim like behavior
 bindkey -M vicmd 'H' beginning-of-line
 bindkey -M vicmd 'L' end-of-line
 
-# Clipboard yank (normal + visual)
 bindkey -M vicmd 'y' vi-yank-to-clipboard
 bindkey -M visual 'y' vi-yank-to-clipboard
 
-# Use vim keys in history search
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
+#-------------------------------------------------------------------------------
+# KEYBINDINGS — history (atuin)
+#-------------------------------------------------------------------------------
 
-# Use vim keys in tab complete menu
+bindkey -M vicmd 'k' atuin-up-search-vicmd
+bindkey -M vicmd 'j' atuin-down-search-vicmd
+
+#-------------------------------------------------------------------------------
+# KEYBINDINGS — completion menu (vim keys)
+#-------------------------------------------------------------------------------
+
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
 
-# change fzf bindings
-bindkey '^F' fzf-file-widget
-bindkey '^H' fzf-history-widget
-bindkey '^Z' fzf-cd-widget # override default suspend binding
+#-------------------------------------------------------------------------------
+# KEYBINDINGS — widgets  (all Ctrl-<letter>, mnemonic)
+#-------------------------------------------------------------------------------
+# ^R  Recall     — atuin (default from init)
+# ^F  File       — fzf-file
+# ^O  Open dir   — fzf-cd            (overrides accept-line-and-down-history)
+# ^G  Git files  — fgt-widget        (from functions/)
+# ^S  Status     — fgst-widget       (from functions/;  ^S free via stty -ixon)
+# ^B  Branch     — gsw-widget        (from functions/;  overrides backward-char)
+# ^K  Kill       — fkill             (from functions/)
+# ^E  Explain    — fman-widget       (from functions/;  overrides end-of-line)
 
-bindkey -r '^R'
+bindkey '^F' fzf-file-widget
+bindkey '^O' fzf-cd-widget
+bindkey '^G' fgt-widget
+bindkey '^S' fgst-widget
+bindkey '^B' gsw-widget
+bindkey '^K' fkill-widget
+bindkey '^E' fman-widget
+
+# scrub old fzf defaults
 bindkey -r '^T'
 bindkey -r '\eC'
 
-# Change in quotes (vim like)
+#-------------------------------------------------------------------------------
+# KEYBINDINGS — vim text-object binds  (must be after select-quoted / bracketed)
+#-------------------------------------------------------------------------------
+
+# ci', ca", vi`, ...
 for m in visual viopp; do
     for c in {a,i}{\',\",\`}; do
         bindkey -M $m $c select-quoted
     done
 done
 
-# ci{, ci(, di{ etc..
+# ci{, ci(, di{, ...
 for m in visual viopp; do
     for c in {a,i}${(s..)^:-"()[]{}<>"}; do
         bindkey -M $m $c select-bracketed
     done
 done
+
+#-------------------------------------------------------------------------------
+# CLEANUP
+#-------------------------------------------------------------------------------
+
+unfunction _src

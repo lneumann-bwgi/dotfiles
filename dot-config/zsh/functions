@@ -1,9 +1,13 @@
 #!/usr/bin/env zsh
 
+# HELPERS
 _is_in_git_repo() {
   git rev-parse HEAD > /dev/null 2>&1
 }
 
+# GIT — pickers
+
+# fgt — pick files (staged / unstaged / modified / all)
 fgt() {
   _is_in_git_repo || return 1
 
@@ -41,6 +45,59 @@ fgt-widget() {
 }
 zle -N fgt-widget
 
+# fgst — pick from `git status`
+fgst() {
+  _is_in_git_repo || return 1
+  local selection preview_cmd
+  # first 3 chars = status codes; rest = path (may contain " -> " for renames)
+  preview_cmd='
+    f=$(printf "%s" {} | cut -c4- | sed "s/.* -> //")
+    if git ls-files --error-unmatch "$f" >/dev/null 2>&1; then
+      git diff --color=always -- "$f"
+      git diff --color=always --cached -- "$f"
+    else
+      bat --color=always --style=numbers "$f" 2>/dev/null || cat -- "$f"
+    fi'
+  selection=$(git -c color.status=always status --short |
+    fzf --height 80% -m --ansi --nth 2..,.. \
+        --preview "$preview_cmd" \
+        --preview-window right:60%) || return 0
+  # strip status codes, resolve renames → clean paths
+  echo "$selection" | sed -E 's/^...//; s/.* -> //'
+}
+
+fgst-widget() {
+  _is_in_git_repo || { zle reset-prompt; return 0; }
+  local out
+  out="$(fgst)" || { zle reset-prompt; return 0; }
+  [[ -n $out ]] || { zle reset-prompt; return 0; }
+  local -a files=("${(@f)out}")
+  LBUFFER+="${LBUFFER:+ }${(j: :)${(q-)files[@]}}"
+  zle reset-prompt
+}
+zle -N fgst-widget
+
+# fgll — pick a commit hash from `git log`
+fgll() {
+  _is_in_git_repo || return 1
+  local selection
+  selection=$(git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph |
+    fzf --height 40% --ansi --no-sort --reverse --multi \
+        --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | head -1 | xargs git show --color=always' \
+        --preview-window right:60%) || return 0
+  echo "$selection" | grep -o '[a-f0-9]\{7,\}'
+}
+
+# fgtg — pick a git tag
+fgtg() {
+  _is_in_git_repo || return 1
+  git tag --sort -version:refname |
+    fzf --height 40% --multi \
+        --preview 'git show --color=always {} | head -50' \
+        --preview-window right:60%
+}
+
+# gsw — switch branch (fuzzy pick unless master/develop)
 gsw() {
   _is_in_git_repo || return 1
 
@@ -60,34 +117,17 @@ gsw() {
   git switch "$branch"
 }
 
-fgst() {
-  _is_in_git_repo || return 1
-  local selection
-  selection=$(git -c color.status=always status --short |
-    fzf --height 40% -m --ansi --nth 2..,.. \
-        --preview 'git diff --color=always {2}' \
-        --preview-window right:60%) || return 0
-  echo "$selection" | awk '{print $2}'
+gsw-widget() {
+  _is_in_git_repo || { zle reset-prompt; return 0; }
+  zle -I
+  gsw
+  zle reset-prompt
 }
+zle -N gsw-widget
 
-fgtg() {
-  _is_in_git_repo || return 1
-  git tag --sort -version:refname |
-    fzf --height 40% --multi \
-        --preview 'git show --color=always {} | head -50' \
-        --preview-window right:60%
-}
+# PROCESS
 
-fgll() {
-  _is_in_git_repo || return 1
-  local selection
-  selection=$(git log --date=short --format="%C(green)%C(bold)%cd %C(auto)%h%d %s (%an)" --graph |
-    fzf --height 40% --ansi --no-sort --reverse --multi \
-        --preview 'grep -o "[a-f0-9]\{7,\}" <<< {} | head -1 | xargs git show --color=always' \
-        --preview-window right:60%) || return 0
-  echo "$selection" | grep -o '[a-f0-9]\{7,\}'
-}
-
+# fkill — pick + kill process (default SIGKILL, override: fkill 15)
 fkill() {
   local pid
   if [[ $UID != 0 ]]; then
@@ -97,8 +137,22 @@ fkill() {
   fi
   [[ -n $pid ]] && kill "-${1:-9}" ${=pid}
 }
-zle -N fkill
 
+fkill-widget() {
+  zle -I
+  fkill
+  zle reset-prompt
+}
+zle -N fkill-widget
+
+# topmem — top RSS consumers
+topmem() {
+  ps -eo pid,ppid,rss,%mem,%cpu,command -m | head
+}
+
+# SEARCH / DOCS
+
+# fman — fuzzy man/tldr picker (Enter → `man <cmd>`)
 fman() {
   man -k . | sort |
     sed -E 's/^([^[:space:]]+)\([^)]+\),?/\1/' |
@@ -116,16 +170,13 @@ fman() {
 }
 
 fman-widget() {
+  zle -I
   fman
   zle reset-prompt
 }
 zle -N fman-widget
 
-# widget-mode binds for the three fzf pickers above
-bindkey '^G' fgt-widget
-bindkey '^K' fkill
-bindkey '^N' fman-widget
-
+# spell — dict.org lookup, C-n cycles source, selection → clipboard
 spell() {
   local q="${*:-}"
   local w src_file words_file
@@ -177,6 +228,7 @@ spell() {
   printf '%s' "$w" | __clip_copy 2>/dev/null
 }
 
+# rgi — grep for STRING, pick from matching files with hit-preview
 rgi() {
   if [[ $# -eq 0 ]]; then
     echo "Need a string to search for!"
@@ -195,10 +247,14 @@ rgi() {
             {}"
 }
 
+# vrg — rgi → open selected files in nvim
 vrg() {
   local out; out=$(rgi "$@") && [[ -n $out ]] && nvim -- "${(@f)out}"
 }
 
+# NAVIGATION
+
+# fcd — fuzzy directory jump (default root: $HOME)
 fcd() {
   local searchdir destdir
   searchdir="${1:-$HOME}"
@@ -210,45 +266,15 @@ fcd() {
        . "$searchdir" | fzf
   )
   [[ -z $destdir ]] && return 1
-  cd "$destdir" || exit
+  cd "$destdir" || return 1
 }
 
-topmem() {
-  ps -eo pid,ppid,rss,%mem,%cpu,command -m | head
-}
-
-delete-broken-symlinks() {
-  find . -type l ! -exec test -e {} \; -exec rm -v {} +
-}
-
-y() {
-  local tmp cwd
-  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
-  yazi "$@" --cwd-file="$tmp"
-  if cwd="$(command cat -- "$tmp")" && [[ -n $cwd && $cwd != $PWD ]]; then
-    cd -- "$cwd" || exit
-  fi
-  \rm -f -- "$tmp"
-}
-
-json-beautify-inplace() {
-  local input="$1" tmp
-  [[ -n $input ]] || { echo "usage: json-beautify-inplace <file>" >&2; return 2; }
-  tmp="$(mktemp)" || return
-  jq . -- "$input" > "$tmp" && \mv -- "$tmp" "$input" || { \rm -f -- "$tmp"; return 1; }
-}
-
-json-beautify-sort-inplace() {
-  local input="$1" tmp
-  [[ -n $input ]] || { echo "usage: json-beautify-sort-inplace <file>" >&2; return 2; }
-  tmp="$(mktemp)" || return
-  jq -S . -- "$input" > "$tmp" && \mv -- "$tmp" "$input" || { \rm -f -- "$tmp"; return 1; }
-}
-
+# mkcd — mkdir -p + cd
 mkcd() {
   mkdir -p -- "$1" && cd -- "$1" || return
 }
 
+# cdtemp — cd into a fresh mktemp -d (0700), optional subdir
 cdtemp() {
   local dir
   dir="$(mktemp -d)" || return
@@ -257,4 +283,38 @@ cdtemp() {
   if [[ $# -eq 1 ]]; then
     mkdir -p -- "$1" && cd -- "$1" && chmod 0700 .
   fi
+}
+
+# y — yazi with cwd-hop on exit
+y() {
+  local tmp cwd
+  tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(command cat -- "$tmp")" && [[ -n $cwd && $cwd != $PWD ]]; then
+    cd -- "$cwd" || return 1
+  fi
+  \rm -f -- "$tmp"
+}
+
+# FILES / MAINTENANCE
+
+# delete-broken-symlinks — recursively rm dangling symlinks under CWD
+delete-broken-symlinks() {
+  find . -type l ! -exec test -e {} \; -exec rm -v {} +
+}
+
+# json-beautify-inplace — pretty-print JSON, atomic rewrite
+json-beautify-inplace() {
+  local input="$1" tmp
+  [[ -n $input ]] || { echo "usage: json-beautify-inplace <file>" >&2; return 2; }
+  tmp="$(mktemp)" || return
+  jq . -- "$input" > "$tmp" && \mv -- "$tmp" "$input" || { \rm -f -- "$tmp"; return 1; }
+}
+
+# json-beautify-sort-inplace — pretty-print JSON with sorted keys
+json-beautify-sort-inplace() {
+  local input="$1" tmp
+  [[ -n $input ]] || { echo "usage: json-beautify-sort-inplace <file>" >&2; return 2; }
+  tmp="$(mktemp)" || return
+  jq -S . -- "$input" > "$tmp" && \mv -- "$tmp" "$input" || { \rm -f -- "$tmp"; return 1; }
 }

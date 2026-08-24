@@ -70,7 +70,8 @@
 - Inspect YAML/TOML with `yq '.path.to.field' file.yaml`; never text tools.
 - Use `gh` for GitHub API calls; never `curl github.com`.
 - Prefer JSON output (`--json`, `--jq`, `--format json`) over scraping human tables.
-- Search code with `rg` or `rg --files`; search paths with `fd`.
+- If a repo has `.codegraph/`, use `codegraph explore` before `rg`/`sed`/`nl` for code understanding, symbols, callers, and data flow.
+- Search exact text with `rg` or `rg --files`; search paths with `fd`.
 - Use NUL-safe filename pipelines: `fd -0 ... | xargs -0 ...` or `rg -l -0 ... | xargs -0 ...`.
 - Replace text in known files with `sd -F 'old' 'new' file...`; discover targets with `rg -F -l -0 'old' | xargs -0 sd -F 'old' 'new'`.
 - Rewrite code structurally with `ast-grep run -p 'foo($A)' -r 'bar($A)' -l py -U`.

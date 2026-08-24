@@ -64,8 +64,8 @@ repo_root() {
 
 require_prefix() {
   case "$1" in
-    feature/* | feat/* | hotfix/* | bugfix/* | fix/* | release/* | chore/* | ai/* | claude/* | copilot/* | cursor/* | codex/*) ;;
-    *) die "Branch '$1' missing required prefix: feature/ hotfix/ bugfix/ release/ chore/ ai/ claude/ copilot/ cursor/ codex/" 2 ;;
+  feature/* | feat/* | hotfix/* | bugfix/* | fix/* | release/* | chore/* | ai/* | claude/* | copilot/* | cursor/* | codex/*) ;;
+  *) die "Branch '$1' missing required prefix: feature/ hotfix/ bugfix/ release/ chore/ ai/ claude/ copilot/ cursor/ codex/" 2 ;;
   esac
   local desc="${1#*/}"
   [[ "$desc" =~ ^[a-z0-9]+(-[a-z0-9]+)*$ ]] ||
@@ -285,23 +285,23 @@ cmd_create() {
 # ---------------------------------------------------------------------------
 
 case "${1:-}" in
-  -h | --help)
-    usage
-    exit 0
-    ;;
-  "")
-    usage
-    exit 2
-    ;;
+-h | --help)
+  usage
+  exit 0
+  ;;
+"")
+  usage
+  exit 2
+  ;;
 esac
 
 require_git_repo
 
 case "$1" in
-  ls | list) cmd_list ;;
-  rm | remove) cmd_remove "${2:-}" ;;
-  cd) cmd_cd "${2:-}" ;;
-  path) cmd_path "${2:-}" ;;
-  cleanup) cmd_cleanup ;;
-  *) cmd_create "$1" "${2:-}" ;;
+ls | list) cmd_list ;;
+rm | remove) cmd_remove "${2:-}" ;;
+cd) cmd_cd "${2:-}" ;;
+path) cmd_path "${2:-}" ;;
+cleanup) cmd_cleanup ;;
+*) cmd_create "$1" "${2:-}" ;;
 esac

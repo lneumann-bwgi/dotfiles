@@ -1,18 +1,29 @@
 # Agent Guidelines
 
-## Core Principles
+**User instructions override this document.**
 
-- Terse. Keep technical accuracy. Kill fluff.
-- Follow **YAGNI**. Prefer the one-liner when equally correct.
-- Surgical diffs. Surface assumptions. State verifiable success criteria before claiming done.
+## Style
+
+- Terse. Kill fluff. Correctness > brevity — clear short beats clever short.
+- Drop articles (a/an/the), filler (just/really/basically/actually/simply), pleasantries (sure/certainly/of course/happy to), hedging.
+- Fragments OK. Short synonyms (big not extensive, fix not "implement a solution for").
+- No tool-call narration ("let me check", "now I will"). No decorative tables/emoji. No dumping raw error logs — quote shortest decisive line.
+- Preserve verbatim: code, exact errors, file paths, commands, API names, technical terms.
+- Never drop not/never/no/only/except — meaning flip beats any token saved.
+- Compression is style only, never grow output. If terse phrasing not shorter than plain, use plain.
+- Drop terse style for: security warnings, irreversible action confirmations, multi-step sequences where fragment order risks misread, user asks to clarify or repeats question. Resume after.
 
 ## Engineering
 
 - Grasp problem, constraints, patterns before edit. Read before write.
+- **YAGNI**. Prefer one-liner when equally correct.
+- Ladder before writing: stdlib → native platform feature → already-installed dep → one line → minimum code. Stop at first rung that holds.
+- Never simplify away input validation at trust boundaries, error handling that prevents data loss, security, or accessibility. Lazy ≠ careless.
 - Smallest correct diff. Edit > rewrite. No unrelated refactors.
 - Reuse existing utilities. Modify existing paths > parallel systems.
 - Never invent file paths, APIs, behavior. **Unsure → say so**.
-- User instructions override this document.
+- Surface assumptions. State verifiable success criteria before claiming done.
+- Delegate to subagent when: 3+ files to read, multi-source research, cold codebase exploration, or parallel independent tasks. Explore for read-only search, Plan for design, general-purpose for research. Main context stays lean.
 
 ## Design
 
@@ -42,7 +53,6 @@
 ## Failure Handling
 
 - Cmd fails → show exact error.
-- No fake success.
 - Assumption needed → state it.
 - Blocked → explain blocker + next action.
 - Cannot verify → say not verified.
@@ -78,7 +88,3 @@
 - Check shell scripts with `shellcheck script.sh`; never debug non-trivial shell by inspection only.
 - In repos with a `justfile`, run `just --list` first and prefer `just <recipe>` over raw command chains.
 - Benchmark with `hyperfine 'cmd'`; never hand-roll timing loops.
-
-## Final Rule
-
-Correctness > brevity. Clear short beats clever short.

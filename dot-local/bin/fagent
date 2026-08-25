@@ -7,7 +7,7 @@ IFS=$'\n\t'
 
 # fuzzy-pick a Claude Code / Codex session (any project), resume on enter
 
-PROG=$(basename "$0")
+PROG=${0##*/}
 readonly PROG
 
 trap 'printf "%s: failed at line %s\n" "$PROG" "$LINENO" >&2' ERR
@@ -23,12 +23,16 @@ SELF=$(command -v "$PROG" || printf '%s\n' "$0")
 readonly SELF
 
 usage() {
-  cat <<EOF
-usage: $PROG
+  printf 'usage: %s\n\n' "$PROG"
+  printf '%s\n' 'Fuzzy-pick a Claude Code / Codex session (any project) and resume it.'
+  printf '%s\n' 'No flags; run with no arguments and use fzf to select.'
+}
 
-Fuzzy-pick a Claude Code / Codex session (any project) and resume it.
-No flags; run with no arguments and use fzf to select.
-EOF
+need() {
+  command -v "$1" >/dev/null 2>&1 || {
+    printf '%s: missing dependency: %s\n' "$PROG" "$1" >&2
+    exit 1
+  }
 }
 
 if [[ "${1:-}" == "-h" || "${1:-}" == "--help" ]]; then
@@ -52,6 +56,8 @@ if [[ "${1:-}" == "--preview" ]]; then
     exit 2
     ;;
   esac
+
+  need jq
 
   case "$src" in
   claude)
@@ -82,6 +88,8 @@ if [[ $# -gt 0 ]]; then
   exit 2
 fi
 
+need jq
+
 # --- session index, cached by file mtime -----------------------------------
 # Codex alone is ~600 sessions / 500MB of jsonl; re-parsing everything on
 # every launch was the slow part. Cache extracted records per source file,
@@ -95,8 +103,8 @@ mkdir -p "$CACHE_DIR"
 
 extract_claude() {
   for f in "$@"; do
-    jq -n -c --arg src claude --arg path "$f" '
-      [inputs] as $lines
+    jq -R -n -c --arg src claude --arg path "$f" '
+      [inputs | fromjson?] as $lines
       | ($lines | map(select(.cwd)) | last.cwd) as $cwd
       | ($lines | map(select(.timestamp)) | last.timestamp) as $ts
       | ($lines | map(select(.type=="ai-title")) | last.aiTitle) as $title0
@@ -104,14 +112,14 @@ extract_claude() {
       | ($lines | map(select(.sessionId)) | first.sessionId) as $sid
       | select($ts != null)
       | {source:$src, ts:$ts, cwd:($cwd // "?"), title:($title0 // $firstmsg // "(untitled)"), sessionId:$sid, path:$path}
-    ' "$f" 2>/dev/null
+    ' "$f" 2>/dev/null || true
   done
 }
 
 extract_codex() {
   [[ $# -eq 0 ]] && return 0
-  jq -n -c '
-    reduce inputs as $l (
+  jq -R -n -c '
+    reduce (inputs | fromjson?) as $l (
       {};
       ($l | input_filename) as $f
       | .[$f].ts = ($l.timestamp // .[$f].ts)
@@ -130,6 +138,7 @@ extract_codex() {
 }
 
 file_manifest() {
+  need stat
   case "$(uname -s)" in
   Darwin) stat -f '%m%t%N' "$@" ;;
   Linux) stat -c $'%Y\t%n' "$@" ;;
@@ -146,8 +155,16 @@ codex_files=("$HOME"/.codex/sessions/*/*/*/*.jsonl)
 shopt -u nullglob
 all_files=("${claude_files[@]}" "${codex_files[@]}")
 
+[[ ${#all_files[@]} -gt 0 ]] && need fzf
+
 old_cache="{}"
-[[ -f "$CACHE_FILE" ]] && old_cache=$(<"$CACHE_FILE")
+if [[ -f "$CACHE_FILE" ]]; then
+  if jq -e 'type == "object"' "$CACHE_FILE" >/dev/null 2>&1; then
+    old_cache=$(<"$CACHE_FILE")
+  else
+    printf '%s: ignoring corrupt cache: %s\n' "$PROG" "$CACHE_FILE" >&2
+  fi
+fi
 
 if [[ ${#all_files[@]} -eq 0 ]]; then
   manifest_json="[]"
@@ -212,8 +229,14 @@ fi
 IFS=$'\t' read -r _ _ _ _ sid _ src proj <<< "$sel"
 
 case "$src" in
-claude) cmd=(claude -r "$sid") ;;
-codex) cmd=(codex resume "$sid") ;;
+claude)
+  need claude
+  cmd=(claude -r "$sid")
+  ;;
+codex)
+  need codex
+  cmd=(codex resume "$sid")
+  ;;
 *)
   printf '%s: unknown source: %s\n' "$PROG" "$src" >&2
   exit 2

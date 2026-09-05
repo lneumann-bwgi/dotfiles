@@ -69,9 +69,7 @@ hl.on("hyprland.start", function()
   hl.exec_cmd("aw-qt")
 end)
 
--- Reload waybar on any monitor add so new output gets a bar.
 hl.on("monitor.added", function(monitor)
-  hl.exec_cmd("pkill -SIGUSR2 waybar")
   hl.exec_cmd("notify-send 'Monitor connected: " .. monitor.name .. "'")
 end)
 

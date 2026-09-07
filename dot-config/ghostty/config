@@ -15,7 +15,6 @@
 
 # background
 background-blur = false
-background-blur-radius = 100
 background-opacity = 1.0
 
 # misc

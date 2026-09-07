@@ -11,12 +11,17 @@ set -euo pipefail
 #   wt -h                Show this help
 # ---------------------------------------------------------------------------
 
-RESET='\033[0m'
-BOLD='\033[1m'
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-CYAN='\033[0;36m'
-DIM='\033[2m'
+# Colors only when stderr is a TTY and NO_COLOR is unset — agents pipe this.
+if [[ -t 2 && -z "${NO_COLOR:-}" ]]; then
+  RESET=$'\033[0m'
+  BOLD=$'\033[1m'
+  RED=$'\033[0;31m'
+  GREEN=$'\033[0;32m'
+  CYAN=$'\033[0;36m'
+  DIM=$'\033[2m'
+else
+  RESET='' BOLD='' RED='' GREEN='' CYAN='' DIM=''
+fi
 
 info() { echo -e "${CYAN}▸${RESET} $*" >&2; }
 success() { echo -e "${GREEN}✓${RESET} $*" >&2; }
@@ -188,16 +193,13 @@ cmd_create() {
     (cd "$worktree_dir" && prek install)
   fi
 
-  echo ""
   success "Worktree ready: ${BOLD}$worktree_dir${RESET}"
-  echo -e "${DIM}Tip: to remove later — wt rm $branch${RESET}"
-  echo ""
-  git worktree list
 
-  # Drop user into the new worktree when run interactively.
-  # Skip when piped/scripted (no tty) or when WT_NO_CD=1, so callers can
-  # capture output or chain commands.
+  # Interactive: pretty output + drop into new worktree.
+  # Piped/WT_NO_CD: stdout is just the path so callers can `path=$(wt …)`.
   if [[ -t 1 && -z "${WT_NO_CD:-}" ]]; then
+    printf '%b\n\n' "${DIM}Tip: to remove later — wt rm $branch${RESET}"
+    git worktree list
     cd "$worktree_dir"
     exec "${SHELL:-bash}" -i
   else

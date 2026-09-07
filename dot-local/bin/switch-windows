@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -Eeuo pipefail
 
 # Pick a window via wofi, focus it. Grouped by workspace, sorted by focus history.

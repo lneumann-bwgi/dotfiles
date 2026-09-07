@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -Eeuo pipefail
 
 # Pick a workspace via wofi, move it to the current monitor, focus it.

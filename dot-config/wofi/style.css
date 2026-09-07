@@ -1,39 +1,45 @@
+/* Kanagawa Wave */
+
 window {
-margin: 0px;
-border: 1px solid #4c566a;
-background-color: #2e3440;
+    margin: 0px;
+    border: 2px solid #363646;
+    background-color: #1F1F28;
+    border-radius: 10px;
+    font-family: "FiraCode Nerd Font";
 }
 
 #input {
-margin: 5px;
-border: none;
-color: #d8dee9;
-background-color: #3b4252;
+    margin: 5px;
+    border: 1px solid #363646;
+    color: #DCD7BA;
+    background-color: #2A2A37;
+    border-radius: 8px;
+    padding: 4px 8px;
 }
 
-#inner-box {
-margin: 5px;
-border: none;
-background-color: #2e3440;
-}
-
+#inner-box,
 #outer-box {
-margin: 5px;
-border: none;
-background-color: #2e3440;
+    margin: 5px;
+    border: none;
+    background-color: #1F1F28;
 }
 
 #scroll {
-margin: 0px;
-border: none;
+    margin: 0px;
+    border: none;
 }
 
 #text {
-margin: 5px;
-border: none;
-color: #d8dee9;
+    margin: 5px;
+    border: none;
+    color: #DCD7BA;
 }
 
 #entry:selected {
-background-color: #3b4252;
+    background-color: #7E9CD8;
+    border-radius: 6px;
+}
+
+#entry:selected #text {
+    color: #1F1F28;
 }

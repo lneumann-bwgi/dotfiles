@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Open a video summary: serve from cache if available, else compute first.
-set -euo pipefail
+set -Eeuo pipefail
 
-url="$1"
+url="${1:?usage: $(basename "$0") <youtube-url>}"
 cache_dir="$HOME/.cache/yt-summaries"
 
 # only handle YouTube URLs

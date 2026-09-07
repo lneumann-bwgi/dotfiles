@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
+set -Eeuo pipefail
 
 WALLPAPER_DIR="$HOME/.wallpapers"
 
@@ -42,7 +42,7 @@ while true; do
       done < <(hyprctl monitors -j | jq -r '.[].name')
       last_wallpaper="$WALLPAPER"
     else
-      echo "Error: $FULL_PATH not found."
+      echo "Error: $FULL_PATH not found." >&2
     fi
   fi
 

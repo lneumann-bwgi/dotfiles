@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+# texshow — render LaTeX formula to terminal via chafa.
+set -Eeuo pipefail
+
+usage() {
+  cat >&2 <<'EOF'
+usage: texshow '<latex>'
+       echo '<latex>' | texshow
+
+Render a LaTeX formula to the terminal via pdflatex + chafa.
+Wrap math in $...$ or \[...\]. Preamble loads amsmath, amssymb, amsfonts.
+Single-quote the arg so the shell doesn't eat backslashes.
+
+examples:
+  texshow '$E=mc^2$'
+  texshow '\[ \int_0^\infty e^{-x^2}\,dx = \tfrac{\sqrt{\pi}}{2} \]'
+  echo '$\sum_{i=1}^n i = n(n+1)/2$' | texshow
+EOF
+}
+
+case ${1:-} in
+  -h | --help) usage; exit 0 ;;
+esac
+
+if [[ $# -gt 0 ]]; then
+  snip=$*
+elif [[ ! -t 0 ]]; then
+  snip=$(cat)
+else
+  usage
+  exit 2
+fi
+
+work=$(mktemp -d -t texshow.XXXXXX)
+trap 'rm -rf "$work"' EXIT
+
+cat >"$work/f.tex" <<EOF
+\documentclass[preview,border=4pt]{standalone}
+\usepackage{amsmath,amssymb,amsfonts}
+\begin{document}
+$snip
+\end{document}
+EOF
+
+pdflatex -interaction=nonstopmode -halt-on-error -no-shell-escape \
+  -output-directory "$work" "$work/f.tex" >"$work/log" 2>&1 || {
+    grep -m3 -E '^(!|l\.[0-9]+)' "$work/log" >&2 || cat "$work/log" >&2
+    exit 1
+  }
+
+pdftoppm -r 300 "$work/f.pdf" "$work/f" -png >/dev/null
+chafa -- "$work/f-1.png"

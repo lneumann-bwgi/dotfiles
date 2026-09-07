@@ -60,7 +60,7 @@ hl.on("hyprland.start", function()
   -- Wallpaper daemon (reads ~/.config/hypr/hyprpaper.conf)
   hl.exec_cmd("hyprpaper")
   -- Time-of-day wallpaper rotation (waits for hyprpaper, enumerates monitors)
-  hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/change_wallpaper.sh")
+  hl.exec_cmd(os.getenv("HOME") .. "/.local/bin/change-wallpaper")
   -- Blue-light filter, 5500K color temp
   hl.exec_cmd("hyprsunset -t 5500")
   -- Clipboard history watcher (feeds SUPER+Y menu)
@@ -102,8 +102,9 @@ hl.config({
     gaps_out = 10,
     border_size = 1,
     col = {
-      active_border = { colors = { "rgba(88c0d0ee)", "rgba(81a1c1ee)" }, angle = 45 },
-      inactive_border = "rgba(4c566aaa)",
+      -- Kanagawa Wave: crystalBlue → springBlue gradient, sumiInk4 inactive
+      active_border = { colors = { "rgba(7E9CD8ee)", "rgba(7FB4CAee)" }, angle = 45 },
+      inactive_border = "rgba(54546Daa)",
     },
     resize_on_border = true,
     allow_tearing = false,

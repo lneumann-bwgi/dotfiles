@@ -2,6 +2,8 @@
 
 # Original Menu Surfraw: https://github.com/TomboFry/menu-surfraw
 
+set -Eeuo pipefail
+
 browser="firefox"
 
 usage() {
@@ -20,7 +22,7 @@ SEARCHTERM:
 	exit
 }
 
-case $1 in
+case ${1:-} in
 "-h" | "--help") usage ;;
 esac
 
@@ -33,17 +35,17 @@ if ! command -v wofi >/dev/null; then
 	echo "wofi not found, exiting." >&2
 	exit 1
 fi
-menu="wofi --dmenu"
+menu=(wofi --dmenu)
 
-elvis="$1"
+elvis="${1:-}"
 searchterm="${*:2}"
 
 if [[ -z "$elvis" ]]; then
-	elvis=$(surfraw -elvi | awk -F'-' '{print $1}' | sed '/:/d' | awk '{$1=$1};1' | $menu -p "web: ")
+	elvis=$(surfraw -elvi | awk -F'-' '{print $1}' | sed '/:/d' | awk '{$1=$1};1' | "${menu[@]}" -p "web: ")
 fi
 
 if [[ -z "$searchterm" ]]; then
-	searchterm=$(echo "" | $menu -p "$elvis ")
+	searchterm=$(echo "" | "${menu[@]}" -p "$elvis ")
 fi
 
 [[ -z "$elvis" || -z "$searchterm" ]] && exit 0

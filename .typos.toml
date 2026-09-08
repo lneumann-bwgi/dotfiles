@@ -17,4 +17,6 @@ extend-ignore-re = [
   '''"ARTEde"''',
   # macOS release name.
   '''Big Sur''',
+  # Hex/RGBA color literals (rgba(...), #RRGGBB[AA], 0xRRGGBB[AA]) — hex tokens like "Daa"/"dead"/"face" aren't typos.
+  '''(?:rgba?\(|#|0x)[0-9A-Fa-f]{6,8}\b''',
 ]

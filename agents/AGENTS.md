@@ -62,6 +62,22 @@
 - NEVER add `Co-Authored-By: Claude ...` or "generated with Claude" trailers.
 - No attribution footers, no emoji, no marketing.
 
+## Git Worktrees
+
+- Isolate branch work in a worktree via `wt`. Never `git checkout` in the repo root — it is the shared hub other worktrees and agents read.
+- `wt` supersedes generic worktree helpers/skills. Never call `git worktree add|remove` directly; `wt` owns dir naming, config copying, hook install, removal guards.
+- Run `wt` from anywhere inside the repo — it resolves the main root itself, including from another worktree.
+- Create: `WT_NO_CD=1 wt <prefix>/<slug>` — prints the new path. Always set `WT_NO_CD=1`; on a TTY `wt` otherwise execs an interactive shell and blocks.
+- Agent work uses `ai/`, `claude/`, `codex/` prefix. Slug must be lowercase-hyphenated (`a-z0-9-`).
+- Base comes from prefix: `hotfix/` and `release/` fork `origin/<default>`, everything else `origin/develop` when it exists. Pass explicit base only when the task names one; never pass current HEAD.
+- Dir is `<repo>-<slug>` beside the repo root. Read it with `wt path <branch>`; never construct it. List with `wt ls`.
+- Work only inside own worktree. Never edit another worktree or the hub.
+- Remove: `wt rm <branch>`. Refuses on uncommitted changes, or commits neither integrated nor pushed. `wt rm --force` deletes the dir irrecoverably — ask user first, every time.
+- `wt cleanup` fetches, then interactively removes integrated worktrees. User's call — never run unasked.
+- `wt` rejects uppercase/underscore slugs, so it cannot check out ticket-style remote branches (`hotfix/TPDEV-243-match-fx-option`). Ask before falling back to raw `git worktree add`.
+- New worktree gets `.env .envrc .pre-commit-config.yaml .tool-versions .nvmrc` copied from root, plus `codegraph init` when the root is indexed. Run `codegraph sync` in the worktree after edits, before `codegraph explore` — nothing else syncs it.
+- `sync_repositories` refreshes every repo's default branch and index. Maintenance, network-heavy — never run unasked.
+
 ## Testing
 
 - Test changed behavior first.

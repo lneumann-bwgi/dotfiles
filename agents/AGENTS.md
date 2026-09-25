@@ -68,7 +68,7 @@
 - `wt` supersedes generic worktree helpers/skills. Never call `git worktree add|remove` directly; `wt` owns dir naming, config copying, hook install, removal guards.
 - Run `wt` from anywhere inside the repo — it resolves the main root itself, including from another worktree.
 - Create: `WT_NO_CD=1 wt <prefix>/<slug>` — prints the new path. Always set `WT_NO_CD=1`; on a TTY `wt` otherwise execs an interactive shell and blocks.
-- Agent work uses `ai/`, `claude/`, `codex/` prefix. Slug must be lowercase-hyphenated (`a-z0-9-`).
+- Slug must be lowercase-hyphenated (`a-z0-9-`).
 - Base comes from prefix: `hotfix/` and `release/` fork `origin/<default>`, everything else `origin/develop` when it exists. Pass explicit base only when the task names one; never pass current HEAD.
 - Dir is `<repo>-<slug>` beside the repo root. Read it with `wt path <branch>`; never construct it. List with `wt ls`.
 - Work only inside own worktree. Never edit another worktree or the hub.

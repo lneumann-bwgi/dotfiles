@@ -318,3 +318,13 @@ json-beautify-sort-inplace() {
   tmp="$(mktemp)" || return
   jq -S . -- "$input" > "$tmp" && \mv -- "$tmp" "$input" || { \rm -f -- "$tmp"; return 1; }
 }
+
+# MARKDOWN
+
+# glow — render markdown; width follows the terminal (cap 128), pager when tty
+glow() {
+  local w=${COLUMNS:-$(tput cols 2>/dev/null || echo 80)}
+  local -a opts=(--width $w --style dark)
+  [[ -t 1 ]] && opts+=(--pager)
+  command glow "${opts[@]}" "$@"
+}

@@ -21,7 +21,6 @@
 - Reuse existing utilities. Modify existing paths > parallel systems.
 - Never invent file paths, APIs, behavior. **Unsure → say so**.
 - State verifiable success criteria before claiming done.
-- Delegate to subagent when: 3+ unknown locations to search, multi-source research, cold codebase exploration, or parallel independent tasks. Prefer read-only agents for search, planner agents for design, general agents for research. Main context stays lean.
 
 ## Design
 
@@ -70,6 +69,7 @@
 - Create: `WT_NO_CD=1 wt <prefix>/<slug>` — prints the new path. Always set `WT_NO_CD=1`; on a TTY `wt` otherwise execs an interactive shell and blocks.
 - Slug must be lowercase-hyphenated (`a-z0-9-`).
 - Base comes from prefix: `hotfix/` and `release/` fork `origin/<default>`, everything else `origin/develop` when it exists. Pass explicit base only when the task names one; never pass current HEAD.
+- Ask the user which prefix to use when the task doesn't name or imply one.
 - Dir is `<repo>-<slug>` beside the repo root. Read it with `wt path <branch>`; never construct it. List with `wt ls`.
 - Work only inside own worktree. Never edit another worktree or the hub.
 - Remove: `wt rm <branch>`. Refuses on uncommitted changes, or commits neither integrated nor pushed. `wt rm --force` deletes the dir irrecoverably — ask user first, every time.

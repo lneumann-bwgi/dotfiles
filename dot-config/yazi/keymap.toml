@@ -29,7 +29,7 @@ run = "plugin zoxide"
 desc = "jump via zoxide"
 
 [[mgr.prepend_keymap]]
-on = ["g", "g"]
+on = ["g", "i"]
 run = "shell 'lazygit' --block"
 desc = "Open lazygit"
 

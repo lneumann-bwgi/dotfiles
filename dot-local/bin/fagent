@@ -174,8 +174,13 @@ else
   ')
 fi
 
-mapfile -t changed_files < <(jq -n -r --argjson manifest "$manifest_json" --argjson cache "$old_cache" '
-  $manifest[] | select(.mtime != ($cache[.path].mtime // "")) | .path
+# JSON goes in via --slurpfile + process substitution, not --argjson: the
+# cache outgrows ARG_MAX ("Argument list too long")
+mapfile -t changed_files < <(jq -n -r \
+  --slurpfile manifest <(printf '%s' "$manifest_json") \
+  --slurpfile cache <(printf '%s' "$old_cache") '
+  $cache[0] as $cache
+  | $manifest[0][] | select(.mtime != ($cache[.path].mtime // "")) | .path
 ')
 
 changed_claude=() changed_codex=()
@@ -189,10 +194,11 @@ done
 new_records=$( { extract_claude "${changed_claude[@]}"; extract_codex "${changed_codex[@]}"; } | jq -s '.')
 
 cache=$(jq -n \
-  --argjson manifest "$manifest_json" \
-  --argjson old "$old_cache" \
-  --argjson new "$new_records" '
-  ($manifest | map({(.path): .mtime}) | add // {}) as $mtimes
+  --slurpfile manifest <(printf '%s' "$manifest_json") \
+  --slurpfile old <(printf '%s' "$old_cache") \
+  --slurpfile new <(printf '%s' "$new_records") '
+  $manifest[0] as $manifest | $old[0] as $old | $new[0] as $new
+  | ($manifest | map({(.path): .mtime}) | add // {}) as $mtimes
   | ($new | map({(.path): {mtime: $mtimes[.path], record: .}}) | add // {}) as $newcache
   | ($manifest | map({(.path): true}) | add // {}) as $live
   | ($old + $newcache) | with_entries(select($live[.key]))

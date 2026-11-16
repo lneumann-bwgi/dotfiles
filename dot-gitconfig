@@ -75,3 +75,5 @@
     sort = version:refname
 [url "git@github.com:"]
     insteadOf = https://github.com/
+[url "git@ssh.bitbucket.org:"]
+	insteadOf = git@bitbucket.org:
